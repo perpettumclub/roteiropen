@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <defs>
+    <!-- Gradient for text like in the reference -->
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD93D"/>
+      <stop offset="50%" style="stop-color:#FF8FA3"/>
+      <stop offset="100%" style="stop-color:#C9F4AA"/>
+    </linearGradient>
+    <!-- Giraffe spots pattern -->
+    <pattern id="giraffeSpots" patternUnits="userSpaceOnUse" width="20" height="20">
+      <rect width="20" height="20" fill="#FFD93D"/>
+      <ellipse cx="10" cy="10" rx="6" ry="5" fill="#C17817" transform="rotate(15 10 10)"/>
+    </pattern>
+  </defs>
+  
+  <!-- GIRAFFE HEAD -->
+  <g id="giraffe-head">
+    <!-- Neck -->
+    <path d="M55 140 Q50 110 60 80 L85 80 Q95 110 90 140 Z" 
+          fill="#FFD93D" stroke="#1a1a1a" stroke-width="3.5"/>
+    <!-- Neck spots -->
+    <ellipse cx="65" cy="100" rx="8" ry="6" fill="#C17817" transform="rotate(-10 65 100)"/>
+    <ellipse cx="78" cy="115" rx="6" ry="5" fill="#C17817" transform="rotate(20 78 115)"/>
+    <ellipse cx="62" cy="125" rx="5" ry="4" fill="#C17817"/>
+    
+    <!-- Head main shape -->
+    <ellipse cx="72" cy="55" rx="38" ry="32" fill="#FFD93D" stroke="#1a1a1a" stroke-width="3.5"/>
+    
+    <!-- Head spots -->
+    <ellipse cx="55" cy="45" rx="8" ry="6" fill="#C17817" transform="rotate(-15 55 45)"/>
+    <ellipse cx="90" cy="50" rx="7" ry="5" fill="#C17817" transform="rotate(25 90 50)"/>
+    <ellipse cx="70" cy="35" rx="6" ry="4" fill="#C17817"/>
+    
+    <!-- Ossicones (horns) -->
+    <g id="ossicones">
+      <!-- Left ossicone -->
+      <line x1="52" y1="30" x2="48" y2="12" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="52" y1="30" x2="48" y2="12" stroke="#FFD93D" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="48" cy="10" r="6" fill="#C17817" stroke="#1a1a1a" stroke-width="2.5"/>
+      
+      <!-- Right ossicone -->
+      <line x1="92" y1="30" x2="96" y2="12" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="92" y1="30" x2="96" y2="12" stroke="#FFD93D" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="96" cy="10" r="6" fill="#C17817" stroke="#1a1a1a" stroke-width="2.5"/>
+    </g>
+    
+    <!-- Ears -->
+    <ellipse cx="35" cy="40" rx="12" ry="8" fill="#FFD93D" stroke="#1a1a1a" stroke-width="3" transform="rotate(-30 35 40)"/>
+    <ellipse cx="35" cy="40" rx="6" ry="4" fill="#FFB6C1" transform="rotate(-30 35 40)"/>
+    <ellipse cx="109" cy="40" rx="12" ry="8" fill="#FFD93D" stroke="#1a1a1a" stroke-width="3" transform="rotate(30 109 40)"/>
+    <ellipse cx="109" cy="40" rx="6" ry="4" fill="#FFB6C1" transform="rotate(30 109 40)"/>
+    
+    <!-- Eyes -->
+    <g id="eyes">
+      <!-- Left eye -->
+      <ellipse cx="55" cy="55" rx="10" ry="12" fill="white" stroke="#1a1a1a" stroke-width="2.5"/>
+      <ellipse cx="57" cy="56" rx="5" ry="6" fill="#1a1a1a"/>
+      <circle cx="59" cy="53" r="2" fill="white"/>
+      
+      <!-- Right eye -->
+      <ellipse cx="89" cy="55" rx="10" ry="12" fill="white" stroke="#1a1a1a" stroke-width="2.5"/>
+      <ellipse cx="91" cy="56" rx="5" ry="6" fill="#1a1a1a"/>
+      <circle cx="93" cy="53" r="2" fill="white"/>
+    </g>
+    
+    <!-- Snout/Muzzle -->
+    <ellipse cx="72" cy="75" rx="18" ry="12" fill="#FFEAA7" stroke="#1a1a1a" stroke-width="2.5"/>
+    
+    <!-- Nostrils -->
+    <ellipse cx="65" cy="73" rx="3" ry="2" fill="#1a1a1a"/>
+    <ellipse cx="79" cy="73" rx="3" ry="2" fill="#1a1a1a"/>
+    
+    <!-- Smile -->
+    <path d="M60 80 Q72 88 84 80" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round"/>
+    
+    <!-- Eyebrows (playful) -->
+    <path d="M48 42 Q55 38 62 42" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+    <path d="M82 42 Q89 38 96 42" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  
+  <!-- HOOKY TEXT - Chunky hand-drawn style -->
+  <g id="hooky-text" transform="translate(130, 45)">
+    <!-- H -->
+    <g transform="translate(0, 0)">
+      <text x="0" y="80" font-family="Arial Black, sans-serif" font-size="72" font-weight="900" 
+            stroke="#1a1a1a" stroke-width="6" fill="url(#textGradient)"
+            style="paint-order: stroke fill;">H</text>
+    </g>
+    
+    <!-- O -->
+    <g transform="translate(48, 3) rotate(-3)">
+      <text x="0" y="77" font-family="Arial Black, sans-serif" font-size="72" font-weight="900" 
+            stroke="#1a1a1a" stroke-width="6" fill="url(#textGradient)"
+            style="paint-order: stroke fill;">O</text>
+    </g>
+    
+    <!-- O -->
+    <g transform="translate(100, -2) rotate(2)">
+      <text x="0" y="82" font-family="Arial Black, sans-serif" font-size="72" font-weight="900" 
+            stroke="#1a1a1a" stroke-width="6" fill="url(#textGradient)"
+            style="paint-order: stroke fill;">O</text>
+    </g>
+    
+    <!-- K -->
+    <g transform="translate(152, 4) rotate(-2)">
+      <text x="0" y="76" font-family="Arial Black, sans-serif" font-size="72" font-weight="900" 
+            stroke="#1a1a1a" stroke-width="6" fill="url(#textGradient)"
+            style="paint-order: stroke fill;">K</text>
+    </g>
+    
+    <!-- Y -->
+    <g transform="translate(200, -1) rotate(4)">
+      <text x="0" y="81" font-family="Arial Black, sans-serif" font-size="72" font-weight="900" 
+            stroke="#1a1a1a" stroke-width="6" fill="url(#textGradient)"
+            style="paint-order: stroke fill;">Y</text>
+    </g>
+  </g>
+  
+  <!-- Decorative elements -->
+  <circle cx="355" cy="35" r="8" fill="#FF8FA3" stroke="#1a1a1a" stroke-width="2"/>
+  <circle cx="375" cy="55" r="5" fill="#C9F4AA" stroke="#1a1a1a" stroke-width="2"/>
+  <circle cx="340" cy="145" r="6" fill="#FFD93D" stroke="#1a1a1a" stroke-width="2"/>
+</svg>

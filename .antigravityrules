@@ -1,0 +1,133 @@
+# Hooky - Antigravity Rules
+# Contexto permanente para o agente AI
+
+## 🎯 Sobre o Projeto
+Hooky é uma ferramenta de IA que transforma áudio/voz em roteiros virais para Reels, TikTok e Shorts.
+O usuário grava sua ideia falando naturalmente, e a IA gera um roteiro completo com hook, desenvolvimento e CTA.
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- **Framework**: React 19 + TypeScript
+- **Build**: Vite 7
+- **Styling**: Vanilla CSS (NÃO usar TailwindCSS)
+- **Animações**: Framer Motion
+- **Ícones**: lucide-react
+- **Audio**: Web Audio API + MediaRecorder
+
+### Backend
+- **Database**: Supabase (PostgreSQL + Auth + Storage)
+- **AI**: OpenAI (Whisper para transcrição, GPT-4o-mini para roteiros)
+
+### State Management
+- React Context (AuthContext, UserContext)
+- localStorage para persistência
+
+---
+
+## 📁 Estrutura de Pastas
+
+```
+src/
+├── components/          # Componentes React (.tsx)
+│   ├── auth/            # Telas de autenticação
+│   └── *.tsx            # Componentes principais
+├── context/             # React Contexts
+├── hooks/               # Custom hooks (useAudioRecorder, etc.)
+├── lib/                 # Configurações (supabase client)
+├── services/            # API calls
+├── assets/              # Imagens, ícones
+├── utils/               # Funções utilitárias
+├── types.ts             # TypeScript types globais
+├── App.tsx              # Componente principal + roteamento
+├── App.css              # Estilos do App
+└── index.css            # CSS global + variáveis
+```
+
+---
+
+## ✅ Padrões de Código
+
+### Componentes
+- Functional components com TypeScript
+- Props sempre tipadas com interface
+- Export named (não default): `export const Component: React.FC<Props>`
+- Um componente por arquivo
+
+### Naming
+- Componentes: PascalCase (`AudioRecorder.tsx`)
+- Hooks: camelCase com prefixo "use" (`useAudioRecorder.ts`)
+- Contexts: PascalCase com sufixo "Context" (`AuthContext.tsx`)
+- CSS classes: kebab-case (`audio-recorder`)
+- Variáveis CSS: prefixo `--` (`--dark`, `--success`)
+
+### Styling
+- CSS inline com objetos para estilos dinâmicos
+- Variáveis CSS em `index.css` para cores/tokens
+- Framer Motion para todas as animações
+- Sempre usar `var(--nome)` para cores
+
+### Animações
+- Usar motion.div, motion.button, etc.
+- AnimatePresence para transições de entrada/saída
+- Padrões: initial → animate → exit
+- whileHover e whileTap para interações
+
+---
+
+## ❌ O QUE NÃO FAZER
+
+1. **NÃO usar TailwindCSS** - projeto usa Vanilla CSS
+2. **NÃO criar abstrações desnecessárias** - código repetido é OK
+3. **NÃO usar class components** - apenas functional
+4. **NÃO hardcodar cores** - usar variáveis CSS
+5. **NÃO esquecer types** - TypeScript strict
+6. **NÃO criar arquivos em português** - nomes de arquivos em inglês
+7. **NÃO usar export default** - preferir named exports
+8. **NÃO instalar dependências sem perguntar**
+
+---
+
+## 🎨 Design System
+
+### Cores (variáveis CSS)
+- `--dark`: Cor principal de texto
+- `--success`: Verde para ações positivas  
+- `--gradient-btn`: Gradiente para botões principais
+- `--shadow-sm`, `--shadow-colored`: Sombras
+
+### Tipografia
+- `--font-display`: Fonte para títulos/números grandes
+
+### Componentes UI
+- Botões redondos com gradiente e sombra colorida
+- Cards com glassmorphism (backdrop-filter: blur)
+- Animações suaves de entrada (spring)
+
+---
+
+## 🔧 Comandos Úteis
+
+```bash
+npm run dev      # Inicia dev server
+npm run build    # Build de produção
+npm run lint     # ESLint
+```
+
+---
+
+## 📝 User Flow Principal
+
+```
+Landing → Quiz (8 perguntas) → Gravador → [Remix YouTube?] → Processing → Resultado → Dashboard
+```
+
+---
+
+## 🌐 Idioma
+
+- **UI/UX**: Português brasileiro
+- **Código**: Inglês (variáveis, funções, componentes)
+- **Comentários**: Podem ser em português
