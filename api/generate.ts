@@ -68,6 +68,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
+    // Check if API key is configured
+    if (!process.env.OPENAI_API_KEY) {
+        console.error('OPENAI_API_KEY environment variable is not set');
+        return res.status(500).json({
+            error: 'OpenAI API key not configured on server',
+            hint: 'Add OPENAI_API_KEY to Vercel Environment Variables'
+        });
+    }
+
     try {
         const { transcription, youtubeReferences } = req.body;
 
