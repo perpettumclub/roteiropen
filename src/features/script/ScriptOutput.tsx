@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Copy, Check, Download, RefreshCw, Share2, LayoutDashboard, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { ViralScript } from '../../types';
+import { TypewriterText } from '../../shared/components/TypewriterText';
 
 interface ScriptOutputProps {
     script: ViralScript;
@@ -205,7 +206,7 @@ hookr.ai`.trim();
                                 color: 'var(--dark)'
                             }}
                         >
-                            {currentHook.text}
+                            <TypewriterText text={currentHook.text} speed={20} />
                         </motion.div>
                     </AnimatePresence>
                 </div>
@@ -222,7 +223,7 @@ hookr.ai`.trim();
                         fontSize: '1.1rem', lineHeight: 1.7, color: 'var(--dark)', opacity: 0.9,
                         paddingLeft: '1rem', borderLeft: '2px solid #e67e22'
                     }}>
-                        {script.conflito}
+                        <TypewriterText text={script.conflito} delay={1000} speed={15} />
                     </div>
                 </div>
 

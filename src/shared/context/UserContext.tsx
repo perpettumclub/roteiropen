@@ -53,6 +53,9 @@ interface UserState {
 
     // Shares count
     sharesCount: number;
+
+    // Notification State
+    newlyEarnedBadge: string | null;
 }
 
 interface UserContextType extends UserState {
@@ -68,6 +71,7 @@ interface UserContextType extends UserState {
     incrementShares: () => void;
     startChallenge: (challenge: WeeklyChallenge) => void;
     resetUser: () => void;
+    clearNewBadge: () => void;
 }
 
 const DEFAULT_STATE: UserState = {
@@ -88,6 +92,7 @@ const DEFAULT_STATE: UserState = {
     badges: [],
     isPremium: false,
     sharesCount: 0,
+    newlyEarnedBadge: null
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -198,6 +203,29 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             },
             badges: newBadges
         }));
+
+        // --- SECRET BADGES LOGIC ---
+        // 1. Secret Owl: Create between 00:00 and 05:00
+        const currentHour = new Date().getHours();
+        if (currentHour >= 0 && currentHour < 5) {
+            addBadge('secret_owl');
+        }
+
+        // 2. Secret Seer: Create on the 1st of the month
+        if (new Date().getDate() === 1) {
+            addBadge('secret_seer');
+        }
+
+        // 3. Secret Lightning: 3 scripts in 1 hour
+        // Get scripts created in the last hour
+        const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+        const recentScripts = [newScript, ...state.scripts].filter(s =>
+            new Date(s.createdAt) > oneHourAgo
+        );
+
+        if (recentScripts.length >= 3) {
+            addBadge('secret_lightning');
+        }
     };
 
     const deleteScript = (id: string) => {
@@ -267,20 +295,42 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         if (!state.badges.includes(badge)) {
             setState(prev => ({
                 ...prev,
-                badges: [...prev.badges, badge]
+                badges: [...prev.badges, badge],
+                newlyEarnedBadge: badge // Trigger notification
             }));
         }
     };
 
-    const upgradeToPremium = () => {
+    const clearNewBadge = () => {
         setState(prev => ({
             ...prev,
-            isPremium: true,
-            freeScriptsRemaining: 999,
-            badges: prev.badges.includes('premium_member')
-                ? prev.badges
-                : [...prev.badges, 'premium_member']
+            newlyEarnedBadge: null
         }));
+    };
+
+    const upgradeToPremium = async () => {
+        try {
+            // In a real app, we would get the email from the auth session
+            const { init_point } = await import('../services').then(m => m.initiateCheckout('user@example.com'));
+
+            // Redirect to Mercado Pago
+            if (init_point) {
+                window.location.href = init_point;
+            }
+        } catch (error) {
+            console.error('Failed to start premium upgrade:', error);
+            alert('Não foi possível iniciar o pagamento. Tente novamente.');
+        }
+
+        // For testing/mock purposes (REMOVE IN PROD if fully integrated):
+        // setState(prev => ({
+        //     ...prev,
+        //     isPremium: true,
+        //     freeScriptsRemaining: 999,
+        //     badges: prev.badges.includes('premium_member') 
+        //         ? prev.badges 
+        //         : [...prev.badges, 'premium_member']
+        // }));
     };
 
     const setWeeklyGoal = (goal: number) => {
@@ -334,7 +384,8 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             setWeeklyGoal,
             incrementShares,
             startChallenge,
-            resetUser
+            resetUser,
+            clearNewBadge
         }}>
             {children}
         </UserContext.Provider>
@@ -389,4 +440,9 @@ export const BADGES: { [key: string]: { emoji: string; title: string; descriptio
     // Challenges
     challenge_complete: { emoji: '🎖️', title: 'Desafiante', description: 'Completou um desafio', color: '#8B5CF6' },
     challenge_master: { emoji: '🏅', title: 'Mestre', description: 'Completou 5 desafios', color: '#FFD700' },
+
+    // Secret Badges (Hidden)
+    secret_owl: { emoji: '🦉', title: 'Coruja Noturna', description: 'Criou um roteiro na madrugada (00h-05h)', color: '#4B5563' },
+    secret_lightning: { emoji: '⚡', title: 'Relâmpago', description: 'Criou 3 roteiros em menos de 1 hora', color: '#F59E0B' },
+    secret_seer: { emoji: '🔮', title: 'Vidente', description: 'Criou um roteiro no dia 1º do mês', color: '#8B5CF6' },
 };

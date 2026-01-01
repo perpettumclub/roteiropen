@@ -50,7 +50,13 @@ export const useAudioRecorder = () => {
             setRecordingTime(0);
 
             timerRef.current = window.setInterval(() => {
-                setRecordingTime(prev => prev + 1);
+                setRecordingTime(prev => {
+                    if (prev >= 180) { // Limit: 3 minutes (180s)
+                        stopRecording();
+                        return prev;
+                    }
+                    return prev + 1;
+                });
             }, 1000);
 
         } catch (err: any) {

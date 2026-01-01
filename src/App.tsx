@@ -20,7 +20,8 @@ import {
   useUser,
   processAudioToScript,
   transcribeAudio,
-  extractProblemSolution
+  extractProblemSolution,
+  BadgeNotification
 } from './shared';
 
 import type { ViralScript } from './types';
@@ -56,6 +57,8 @@ function AppContent() {
   } = useUser();
 
   const { user, loading: authLoading } = useAuth();
+
+
 
   // Check auth and streak on mount
   useEffect(() => {
@@ -255,6 +258,12 @@ function AppContent() {
 
       {/* Background FX */}
       <div className="bg-noise" />
+      <div className="blob" style={{ top: '-10%', left: '-10%', width: '500px', height: '500px', background: '#FFEFBA' }} />
+      <div className="blob" style={{ bottom: '-10%', right: '-10%', width: '500px', height: '500px', background: '#FFE66D', animationDelay: '2s' }} />
+      <div className="blob" style={{ top: '40%', left: '40%', width: '300px', height: '300px', background: '#FF6B6B', opacity: 0.1, animationDelay: '4s' }} />
+
+      {/* Global Notifications */}
+      <BadgeNotification />
       <div className="blob" style={{ top: '-10%', left: '-10%', width: '500px', height: '500px', background: '#FFEFBA' }} />
       <div className="blob" style={{ bottom: '-10%', right: '-10%', width: '500px', height: '500px', background: '#FFE66D', animationDelay: '2s' }} />
       <div className="blob" style={{ top: '40%', left: '40%', width: '300px', height: '300px', background: '#FF6B6B', opacity: 0.1, animationDelay: '4s' }} />
@@ -651,7 +660,7 @@ function AppContent() {
           />
         )}
       </AnimatePresence>
-    </div>
+    </div >
   );
 }
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Users, Heart, BarChart3, Plus, Flame, Target, ArrowLeft, Upload, X } from 'lucide-react';
+import { Users, Heart, BarChart3, Plus, Flame, Target, ArrowLeft, Upload, X, Loader2 } from 'lucide-react';
+import { analyzeProfileImage } from '../../shared';
 
 interface MetricEntry {
     date: string;
@@ -28,9 +29,15 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({ onBack }) => {
     const [screenshots, setScreenshots] = useState<Screenshot[]>([]);
     const [showAddModal, setShowAddModal] = useState(false);
     const [showUploadModal, setShowUploadModal] = useState(false);
+
+    // Form state
     const [newFollowers, setNewFollowers] = useState('');
     const [newLikes, setNewLikes] = useState('');
     const [newComments, setNewComments] = useState('');
+
+    // AI Analysis state
+    const [isAnalyzing, setIsAnalyzing] = useState(false);
+
     const profileInputRef = useRef<HTMLInputElement>(null);
     const insightsInputRef = useRef<HTMLInputElement>(null);
 
@@ -65,9 +72,13 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({ onBack }) => {
         const file = event.target.files?.[0];
         if (!file) return;
 
+        setIsAnalyzing(true);
+
         const reader = new FileReader();
-        reader.onloadend = () => {
+        reader.onloadend = async () => {
             const base64String = reader.result as string;
+
+            // 1. Save screenshot immediately
             const newScreenshot: Screenshot = {
                 id: Date.now().toString(),
                 type,
@@ -75,12 +86,36 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({ onBack }) => {
                 date: new Date().toISOString()
             };
             saveScreenshot(newScreenshot);
-            setShowUploadModal(false);
+
+            // 2. Analyze with AI
+            try {
+                const metrics = await analyzeProfileImage(base64String);
+
+                if (metrics.followers) {
+                    setNewFollowers(metrics.followers.toString());
+                }
+                if (metrics.avgLikes) {
+                    setNewLikes(metrics.avgLikes.toString());
+                }
+                if (metrics.avgComments) {
+                    setNewComments(metrics.avgComments.toString());
+                }
+
+                setShowUploadModal(false);
+                setShowAddModal(true);
+            } catch (error) {
+                console.error('Failed to analyze image:', error);
+                // Still close upload modal if error, user can manually enter
+                setShowUploadModal(false);
+                setShowAddModal(true);
+            } finally {
+                setIsAnalyzing(false);
+            }
         };
         reader.readAsDataURL(file);
     };
 
-    // Save to localStorage
+    // Save metrics to localStorage
     const saveMetrics = (data: MetricEntry[]) => {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
         setMetrics(data);
@@ -533,67 +568,87 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({ onBack }) => {
                                 Registre prints do seu perfil e insights para acompanhar visualmente sua evolução.
                             </p>
 
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                <motion.button
-                                    onClick={() => profileInputRef.current?.click()}
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    style={{
-                                        width: '100%',
-                                        padding: '1rem',
-                                        background: 'white',
-                                        border: '2px solid rgba(0,0,0,0.05)',
-                                        borderRadius: '16px',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        gap: '1rem',
-                                        cursor: 'pointer'
-                                    }}
-                                >
-                                    <div style={{
-                                        padding: '0.75rem',
-                                        background: '#fff0e5',
-                                        borderRadius: '12px',
-                                        color: '#ff8e53'
-                                    }}>
-                                        <Users size={24} />
-                                    </div>
-                                    <div style={{ textAlign: 'left' }}>
-                                        <div style={{ fontWeight: 600, color: 'var(--dark)' }}>Print do Perfil</div>
-                                        <div style={{ fontSize: '0.8rem', color: 'var(--gray)' }}>Número de seguidores</div>
-                                    </div>
-                                </motion.button>
+                            {isAnalyzing ? (
+                                <div style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    padding: '2rem',
+                                    gap: '1rem'
+                                }}>
+                                    <motion.div
+                                        animate={{ rotate: 360 }}
+                                        transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                                    >
+                                        <Loader2 size={40} color="var(--primary)" />
+                                    </motion.div>
+                                    <p style={{ color: 'var(--gray)', fontSize: '0.9rem' }}>
+                                        🤖 Analisando imagem...
+                                    </p>
+                                </div>
+                            ) : (
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                    <motion.button
+                                        onClick={() => profileInputRef.current?.click()}
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        style={{
+                                            width: '100%',
+                                            padding: '1rem',
+                                            background: 'white',
+                                            border: '2px solid rgba(0,0,0,0.05)',
+                                            borderRadius: '16px',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: '1rem',
+                                            cursor: 'pointer'
+                                        }}
+                                    >
+                                        <div style={{
+                                            padding: '0.75rem',
+                                            background: '#fff0e5',
+                                            borderRadius: '12px',
+                                            color: '#ff8e53'
+                                        }}>
+                                            <Users size={24} />
+                                        </div>
+                                        <div style={{ textAlign: 'left' }}>
+                                            <div style={{ fontWeight: 600, color: 'var(--dark)' }}>Print do Perfil</div>
+                                            <div style={{ fontSize: '0.8rem', color: 'var(--gray)' }}>Número de seguidores</div>
+                                        </div>
+                                    </motion.button>
 
-                                <motion.button
-                                    onClick={() => insightsInputRef.current?.click()}
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    style={{
-                                        width: '100%',
-                                        padding: '1rem',
-                                        background: 'white',
-                                        border: '2px solid rgba(0,0,0,0.05)',
-                                        borderRadius: '16px',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        gap: '1rem',
-                                        cursor: 'pointer'
-                                    }}
-                                >
-                                    <div style={{
-                                        padding: '0.75rem',
-                                        background: '#e5f9f0',
-                                        borderRadius: '12px',
-                                        color: '#10b981'
-                                    }}>
-                                        <BarChart3 size={24} />
-                                    </div>
-                                    <div style={{ textAlign: 'left' }}>
-                                        <div style={{ fontWeight: 600, color: 'var(--dark)' }}>Print dos Insights</div>
-                                        <div style={{ fontSize: '0.8rem', color: 'var(--gray)' }}>Alcance e engajamento</div>
-                                    </div>
-                                </motion.button>
-                            </div>
+                                    <motion.button
+                                        onClick={() => insightsInputRef.current?.click()}
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        style={{
+                                            width: '100%',
+                                            padding: '1rem',
+                                            background: 'white',
+                                            border: '2px solid rgba(0,0,0,0.05)',
+                                            borderRadius: '16px',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: '1rem',
+                                            cursor: 'pointer'
+                                        }}
+                                    >
+                                        <div style={{
+                                            padding: '0.75rem',
+                                            background: '#e5f9f0',
+                                            borderRadius: '12px',
+                                            color: '#10b981'
+                                        }}>
+                                            <BarChart3 size={24} />
+                                        </div>
+                                        <div style={{ textAlign: 'left' }}>
+                                            <div style={{ fontWeight: 600, color: 'var(--dark)' }}>Print dos Insights</div>
+                                            <div style={{ fontSize: '0.8rem', color: 'var(--gray)' }}>Alcance e engajamento</div>
+                                        </div>
+                                    </motion.button>
+                                </div>
+                            )}
 
                             <button
                                 onClick={() => setShowUploadModal(false)}
@@ -754,15 +809,20 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({ onBack }) => {
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
                                     style={{
-                                        flex: 1,
-                                        padding: '0.75rem',
-                                        borderRadius: '12px',
-                                        border: 'none',
+                                        flex: 2,
                                         background: 'var(--gradient-btn)',
                                         color: 'white',
+                                        border: 'none',
+                                        padding: '0.75rem',
+                                        borderRadius: '12px',
                                         fontSize: '0.95rem',
                                         fontWeight: 600,
-                                        cursor: 'pointer'
+                                        cursor: 'pointer',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        gap: '0.5rem',
+                                        boxShadow: 'var(--shadow-colored)'
                                     }}
                                 >
                                     Salvar

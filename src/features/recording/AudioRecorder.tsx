@@ -1,7 +1,6 @@
-
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mic, RotateCcw, ArrowRight } from 'lucide-react';
+import { Mic, RotateCcw, ArrowRight, Upload, FileAudio } from 'lucide-react';
 import { useAudioRecorder } from '../../hooks/useAudioRecorder';
 import { AudioVisualizer } from './AudioVisualizer';
 
@@ -20,6 +19,9 @@ export const AudioRecorder: React.FC<AudioRecorderProps> = ({ onAudioCaptured })
         resetRecording
     } = useAudioRecorder();
 
+    const [isDragActive, setIsDragActive] = useState(false);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
     // Format time as MM:SS
     const formatTime = (seconds: number) => {
         const mins = Math.floor(seconds / 60);
@@ -33,8 +35,106 @@ export const AudioRecorder: React.FC<AudioRecorderProps> = ({ onAudioCaptured })
         }
     };
 
+    // --- Drag & Drop Handlers ---
+    const handleDrag = (e: React.DragEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.type === 'dragenter' || e.type === 'dragover') {
+            setIsDragActive(true);
+        } else if (e.type === 'dragleave') {
+            setIsDragActive(false);
+        }
+    };
+
+    const handleDrop = (e: React.DragEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsDragActive(false);
+
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+            handleFile(e.dataTransfer.files[0]);
+        }
+    };
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            handleFile(e.target.files[0]);
+        }
+    };
+
+    const handleFile = (file: File) => {
+        // Validate type
+        if (!file.type.startsWith('audio/')) {
+            alert('Por favor, envie apenas arquivos de áudio (.mp3, .wav, .m4a, etc).');
+            return;
+        }
+
+        // Validate size (approx 25MB limit for ~5-10 mins high quality)
+        if (file.size > 25 * 1024 * 1024) {
+            alert('Arquivo muito grande. O limite é 25MB.');
+            return;
+        }
+
+        // Send directly to processing
+        onAudioCaptured(file);
+    };
+
     return (
-        <div className="audio-recorder" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative', width: '100%' }}>
+        <div
+            className="audio-recorder"
+            onDragEnter={handleDrag}
+            onDragLeave={handleDrag}
+            onDragOver={handleDrag}
+            onDrop={handleDrop}
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                position: 'relative',
+                width: '100%',
+                // Drag visual feedback
+                outline: isDragActive ? '4px dashed var(--primary)' : 'none',
+                outlineOffset: '20px',
+                borderRadius: '20px',
+                transition: 'all 0.2s'
+            }}
+        >
+            {/* Hidden Input for Click Upload */}
+            <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                accept="audio/*"
+                style={{ display: 'none' }}
+            />
+
+            {/* Drag Overlay */}
+            <AnimatePresence>
+                {isDragActive && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        style={{
+                            position: 'absolute',
+                            top: -20, left: -20, right: -20, bottom: -20,
+                            background: 'rgba(255,255,255,0.9)',
+                            zIndex: 100,
+                            borderRadius: '20px',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '1rem',
+                            pointerEvents: 'none',
+                            backdropFilter: 'blur(5px)'
+                        }}
+                    >
+                        <Upload size={48} color="var(--primary)" />
+                        <h3 style={{ color: 'var(--dark)' }}>Solte seu áudio aqui!</h3>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             {/* Timer Display */}
             <AnimatePresence mode="wait">
@@ -69,12 +169,6 @@ export const AudioRecorder: React.FC<AudioRecorderProps> = ({ onAudioCaptured })
                         </div>
                     </motion.div>
                 ) : (
-                    // Show Placeholder or smaller timer when paused/done? Or just nothing/big timer
-                    // PRD shows "00:45 / 02:00" in ASCII.
-                    // For now, let's keep the big timer if we are in a 'paused' state (captured but not processed)?
-                    // But here 'isRecording' is false AND audioBlob might be present.
-                    // If audioBlob is present, we show controls.
-
                     audioBlob ? (
                         <motion.div
                             key="timer-done"
@@ -99,7 +193,7 @@ export const AudioRecorder: React.FC<AudioRecorderProps> = ({ onAudioCaptured })
             {/* Main Action Button */}
             <div className="controls" style={{ position: 'relative', zIndex: 10 }}>
 
-                {/* Pulsing Glow (Optional - kept for background ambiance) */}
+                {/* Pulsing Glow */}
                 {isRecording && (
                     <motion.div
                         style={{
@@ -125,7 +219,19 @@ export const AudioRecorder: React.FC<AudioRecorderProps> = ({ onAudioCaptured })
                         whileHover={{ scale: 1.1, filter: 'brightness(1.1)' }}
                         whileTap={{ scale: 0.9 }}
                         initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
+                        animate={{
+                            scale: [1, 1.05, 1],
+                            boxShadow: [
+                                '0 10px 20px rgba(255,107,107,0.3)',
+                                '0 15px 30px rgba(255,107,107,0.5)',
+                                '0 10px 20px rgba(255,107,107,0.3)'
+                            ]
+                        }}
+                        transition={{
+                            duration: 3,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                        }}
                         style={{
                             width: '120px',
                             height: '120px',
@@ -143,7 +249,7 @@ export const AudioRecorder: React.FC<AudioRecorderProps> = ({ onAudioCaptured })
                         <Mic size={48} color="white" />
                     </motion.button>
                 ) : isRecording ? (
-                    // Stop Button - CSS-based square stop icon
+                    // Stop Button
                     <motion.button
                         onClick={stopRecording}
                         whileHover={{ scale: 1.1 }}
@@ -162,7 +268,6 @@ export const AudioRecorder: React.FC<AudioRecorderProps> = ({ onAudioCaptured })
                             backdropFilter: 'blur(4px)'
                         }}
                     >
-                        {/* Stop square icon */}
                         <div style={{
                             width: '36px',
                             height: '36px',
@@ -221,18 +326,49 @@ export const AudioRecorder: React.FC<AudioRecorderProps> = ({ onAudioCaptured })
                 )}
             </div>
 
-            <p style={{
+            <div style={{
                 marginTop: '2rem',
                 color: 'var(--dark)',
                 opacity: 0.6,
                 fontSize: '1.1rem',
                 fontWeight: 500,
-                minHeight: '1.5rem' // Prevent layout jump
+                minHeight: '1.5rem',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '0.5rem'
             }}>
-                {!isRecording && !audioBlob ? "Toque no microfone para começar" : ""}
-                {isRecording ? "Fale naturalmente..." : ""}
-                {audioBlob ? "Áudio capturado!" : ""}
-            </p>
+                <span>
+                    {!isRecording && !audioBlob ? "Toque no microfone para comear" : ""}
+                    {isRecording ? "Fale naturalmente..." : ""}
+                    {audioBlob ? "Áudio capturado!" : ""}
+                </span>
+
+                {/* Upload Option - Only show when idle */}
+                {!isRecording && !audioBlob && (
+                    <motion.button
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 0.8 }}
+                        whileHover={{ opacity: 1, scale: 1.05 }}
+                        onClick={() => fileInputRef.current?.click()}
+                        style={{
+                            border: 'none',
+                            color: 'var(--primary)',
+                            fontSize: '0.9rem',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.5rem',
+                            marginTop: '0.5rem',
+                            padding: '0.5rem 1rem',
+                            borderRadius: '20px',
+                            background: 'rgba(255, 107, 107, 0.1)'
+                        }}
+                    >
+                        <FileAudio size={16} /> ou envie um arquivo de áudio
+                    </motion.button>
+                )}
+            </div>
         </div>
     );
 };

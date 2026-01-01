@@ -31,3 +31,21 @@ export {
     type PipelineResult,
     type ProgressCallback
 } from './pipeline';
+
+// Vision & AI Analysis Service
+export {
+    analyzeProfileImage,
+    type ExtractedMetrics
+} from './vision';
+
+// Challenge Generator Service
+export {
+    generateDailyChallenge,
+    type DailyChallengePrompt
+} from './challengeGenerator';
+
+// Payment Service
+export {
+    initiateCheckout,
+    type CheckoutResponse
+} from './payment';
