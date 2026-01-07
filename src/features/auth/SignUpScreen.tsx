@@ -4,7 +4,7 @@ import { Eye, EyeOff } from 'lucide-react';
 import { useAuth } from './AuthContext';
 
 interface SignUpScreenProps {
-    onSuccess: () => void;
+    onSuccess: (email?: string) => void;
     onSwitchToLogin: () => void;
 }
 
@@ -16,7 +16,7 @@ export function SignUpScreen({ onSuccess, onSwitchToLogin }: SignUpScreenProps) 
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
-    const { signUp, signInWithGoogle } = useAuth();
+    const { signUp, signInWithGoogle, sendVerificationCode } = useAuth();
 
     const handleGoogleSignUp = async () => {
         setError(null);
@@ -51,7 +51,15 @@ export function SignUpScreen({ onSuccess, onSwitchToLogin }: SignUpScreenProps) 
                 : error.message);
             setLoading(false);
         } else {
-            onSuccess();
+            // Send verification code after successful signup
+            const { error: codeError } = await sendVerificationCode(email);
+            if (codeError) {
+                setError('Erro ao enviar código de verificação. Tente novamente.');
+                setLoading(false);
+                return;
+            }
+            // Pass email to trigger verification flow
+            onSuccess(email);
         }
     };
 

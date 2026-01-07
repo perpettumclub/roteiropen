@@ -10,7 +10,7 @@ import { Paywall } from './features/billing';
 import { Dashboard, ScriptLibrary, ProgressScreen } from './features/dashboard';
 import { YouTubeLinkInput } from './features/remix';
 import { ShareScreen } from './features/share';
-import { LoginScreen, SignUpScreen, ForgotPasswordScreen, AuthProvider, useAuth } from './features/auth';
+import { LoginScreen, SignUpScreen, ForgotPasswordScreen, EmailVerificationScreen, AuthProvider, useAuth } from './features/auth';
 
 // Shared imports (now includes services)
 import {
@@ -26,7 +26,7 @@ import {
 
 import type { ViralScript } from './types';
 
-type AppState = 'idle' | 'onboarding' | 'quiz' | 'paywall' | 'login' | 'signup' | 'forgotpassword' | 'dashboard' | 'library' | 'progress' | 'recording' | 'transcribing' | 'confirm' | 'remix' | 'processing' | 'result' | 'share' | 'error';
+type AppState = 'idle' | 'onboarding' | 'quiz' | 'paywall' | 'login' | 'signup' | 'emailverification' | 'forgotpassword' | 'dashboard' | 'library' | 'progress' | 'recording' | 'transcribing' | 'confirm' | 'remix' | 'processing' | 'result' | 'share' | 'error';
 
 function AppContent() {
   const [state, setState] = useState<AppState>('idle');
@@ -43,6 +43,9 @@ function AppContent() {
   const [confirmedProblem, setConfirmedProblem] = useState<string>('');
   const [confirmedSolution, setConfirmedSolution] = useState<string>('');
 
+  // Email verification state
+  const [pendingVerificationEmail, setPendingVerificationEmail] = useState<string>('');
+
   const {
     hasCompletedQuiz,
     freeScriptsRemaining,
@@ -56,7 +59,7 @@ function AppContent() {
     upgradeToPremium
   } = useUser();
 
-  const { user, loading: authLoading } = useAuth();
+  const { user, loading: authLoading, sendVerificationCode, verifyEmailCode } = useAuth();
 
 
 
@@ -340,8 +343,34 @@ function AppContent() {
             style={{ zIndex: 1, display: 'flex', justifyContent: 'center', width: '100%' }}
           >
             <SignUpScreen
-              onSuccess={handleAuthSuccess}
+              onSuccess={(email?: string) => {
+                if (email) {
+                  setPendingVerificationEmail(email);
+                  setState('emailverification');
+                } else {
+                  handleAuthSuccess();
+                }
+              }}
               onSwitchToLogin={() => setState('login')}
+            />
+          </motion.div>
+        )}
+
+        {/* EMAIL VERIFICATION STATE */}
+        {state === 'emailverification' && (
+          <motion.div
+            key="emailverification"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            style={{ zIndex: 1, display: 'flex', justifyContent: 'center', width: '100%' }}
+          >
+            <EmailVerificationScreen
+              email={pendingVerificationEmail}
+              onVerified={handleAuthSuccess}
+              onResendCode={() => sendVerificationCode(pendingVerificationEmail)}
+              onVerifyCode={(code: string) => verifyEmailCode(pendingVerificationEmail, code)}
+              onBack={() => setState('signup')}
             />
           </motion.div>
         )}

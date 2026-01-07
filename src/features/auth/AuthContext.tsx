@@ -12,6 +12,8 @@ interface AuthContextType {
     signInWithGoogle: () => Promise<{ error: Error | null }>;
     resetPassword: (email: string) => Promise<{ error: Error | null }>;
     resendConfirmationEmail: (email: string) => Promise<{ error: Error | null }>;
+    sendVerificationCode: (email: string) => Promise<{ error: Error | null }>;
+    verifyEmailCode: (email: string, code: string) => Promise<{ error: Error | null }>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -120,6 +122,42 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         return { error: error as Error | null };
     };
 
+    const sendVerificationCode = async (email: string) => {
+        try {
+            const response = await supabase.functions.invoke('send-verification-code', {
+                body: { email },
+            });
+            if (response.error) {
+                return { error: new Error(response.error.message) };
+            }
+            if (response.data?.error) {
+                return { error: new Error(response.data.error) };
+            }
+            return { error: null };
+        } catch (err) {
+            return { error: err as Error };
+        }
+    };
+
+    const verifyEmailCode = async (email: string, code: string) => {
+        try {
+            const response = await supabase.functions.invoke('verify-email-code', {
+                body: { email, code },
+            });
+            if (response.error) {
+                return { error: new Error(response.error.message) };
+            }
+            if (response.data?.error) {
+                return { error: new Error(response.data.error) };
+            }
+            // Refresh session after verification
+            await supabase.auth.refreshSession();
+            return { error: null };
+        } catch (err) {
+            return { error: err as Error };
+        }
+    };
+
     return (
         <AuthContext.Provider value={{
             user,
@@ -131,6 +169,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             signInWithGoogle,
             resetPassword,
             resendConfirmationEmail,
+            sendVerificationCode,
+            verifyEmailCode,
         }}>
             {children}
         </AuthContext.Provider>
