@@ -1,3 +1,4 @@
+// LoginScreen with OAuth - v2.0.0 - Last updated: Jan 6, 2026
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff } from 'lucide-react';
