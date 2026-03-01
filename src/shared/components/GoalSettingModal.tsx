@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Target, Calendar, Bell, X, Save, Check } from 'lucide-react';
 import { useUser } from '../context/UserContext';
-import { DateRangePicker } from './DateRangePicker'; // We might only need a single date picker, but using standard inputs for now
+// We might only need a single date picker, but using standard inputs for now
 
 interface GoalSettingModalProps {
     isOpen: boolean;

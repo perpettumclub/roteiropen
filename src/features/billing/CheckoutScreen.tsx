@@ -9,7 +9,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Shield, CreditCard, AlertCircle, User, Check, Zap, ExternalLink } from 'lucide-react';
+import { Shield, CreditCard, AlertCircle, Check, Zap, ExternalLink } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
 interface CheckoutScreenProps {
@@ -20,8 +20,6 @@ interface CheckoutScreenProps {
 }
 
 export const CheckoutScreen: React.FC<CheckoutScreenProps> = ({
-    onSuccess,
-    onError,
     planPrice = 49.90,
     planName = 'Anual'
 }) => {

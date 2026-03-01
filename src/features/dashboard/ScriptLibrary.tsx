@@ -18,8 +18,8 @@ export const ScriptLibrary: React.FC<ScriptLibraryProps> = ({ onBack }) => {
     const filteredScripts = scripts.filter(s => {
         const hookText = s.script.hooks?.[s.script.selectedHookIndex || 0]?.text || '';
         const matchesSearch = hookText.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            s.script.conflito.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            s.script.solucao.toLowerCase().includes(searchQuery.toLowerCase());
+            s.script.contexto.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            s.script.plano.toLowerCase().includes(searchQuery.toLowerCase());
         const matchesFilter = filter === 'all' || s.isFavorite;
         return matchesSearch && matchesFilter;
     });
@@ -33,14 +33,14 @@ export const ScriptLibrary: React.FC<ScriptLibraryProps> = ({ onBack }) => {
         const text = `${hookEmoji} HOOK (${hookType}):
 ${hookText}
 
-📖 CONFLITO:
-${script.script.conflito}
+📖 CONTEXTO:
+${script.script.contexto}
 
-💥 CLÍMAX:
-${script.script.climax}
+💥 RUPTURA:
+${script.script.ruptura}
 
-💡 SOLUÇÃO:
-${script.script.solucao}
+💡 PLANO:
+${script.script.plano}
 
 🎬 CTA:
 ${script.script.cta}`;
@@ -241,7 +241,7 @@ ${script.script.cta}`;
                                     marginBottom: '1rem',
                                     lineHeight: 1.5
                                 }}>
-                                    {saved.script.conflito?.substring(0, 100)}...
+                                    {saved.script.contexto?.substring(0, 100)}...
                                 </div>
 
                                 {/* Actions */}

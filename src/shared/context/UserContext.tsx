@@ -233,7 +233,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         });
 
         // Listener para mudanças de auth
-        const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+        const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
             if (session?.user) {
                 checkSubscription(session.user.id);
                 fetchScripts(session.user.id);
@@ -490,7 +490,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
     const fetchBadges = async (userId: string) => {
         try {
-            const { data: badgeRows, error } = await supabase
+            const { data: badgeRows, error: _error } = await supabase
                 .from('progress_badges')
                 .select('badge_slug') // Use badge_slug column
                 .eq('user_id', userId);
@@ -623,7 +623,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
         try {
             // 1. Check for Lifetime Access (Tier) in Profiles
-            const { data: profileData, error: profileError } = await supabase
+            const { data: profileData, error: _profileError } = await supabase
                 .from('profiles')
                 .select('tier')
                 .eq('id', userId)
@@ -982,36 +982,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
     // --- BADGES PERSISTENTES (SUPABASE) ---
 
-    const fetchBadgesWithDetails = async () => {
-        try {
-            const { data: { session } } = await supabase.auth.getSession();
-            if (!session?.user) return [];
 
-            const { data, error } = await supabase
-                .from('progress_badges')
-                .select('badge_slug, badge_name, earned_at')
-                .eq('user_id', session.user.id)
-                .order('earned_at', { ascending: false });
-
-            if (error && error.code !== 'PGRST116') {
-                console.error('Error fetching badges:', error);
-                return [];
-            }
-
-            const badgeSlugs = data?.map(b => b.badge_slug) || [];
-
-            // Update state with badges from Supabase
-            setState(prev => ({
-                ...prev,
-                badges: badgeSlugs
-            }));
-
-            return data || [];
-        } catch (error) {
-            console.error('Error fetching badges:', error);
-            return [];
-        }
-    };
 
     const awardBadge = async (badgeSlug: string, badgeName: string, badgeDescription?: string) => {
         try {

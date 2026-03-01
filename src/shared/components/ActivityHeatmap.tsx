@@ -52,7 +52,7 @@ export const ActivityHeatmap: React.FC<ActivityHeatmapProps> = ({ postingLog }) 
     const weeks: Date[][] = [];
     let currentWeek: Date[] = [];
 
-    allDays.forEach((day, index) => {
+    allDays.forEach((day) => {
         const dayOfWeek = getDay(day); // 0 = Sunday
 
         // Start new week on Sunday (or first day)

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Calendar as CalendarIcon, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { Calendar as CalendarIcon, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface DateRangePickerProps {
@@ -101,28 +101,9 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({ startDate, end
         }
     };
 
-    const isSelected = (day: number) => {
-        const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
-        const check = date.setHours(0, 0, 0, 0);
 
-        // If selecting, show start
-        if (selectingStart && selectingStart.setHours(0, 0, 0, 0) === check) return true;
 
-        // If not selecting, show current range
-        if (!selectingStart) {
-            return check >= startDate.setHours(0, 0, 0, 0) && check <= endDate.setHours(0, 0, 0, 0);
-        }
 
-        return false;
-    };
-
-    const isInRangePreview = (day: number) => {
-        if (!selectingStart) return false;
-
-        const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
-        // Can't easily preview range on hover without more state, simplified for now
-        return false;
-    };
 
     // Render Calendar Content
     const renderCalendarContent = () => {
@@ -130,7 +111,7 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({ startDate, end
             const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
             const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
             const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
-            const padding = Array.from({ length: firstDay }, (_, i) => null);
+            const padding = Array.from({ length: firstDay }, () => null);
 
             return (
                 <div style={{ padding: '1rem' }}>

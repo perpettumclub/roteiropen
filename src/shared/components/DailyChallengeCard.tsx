@@ -37,7 +37,7 @@ export const DailyChallengeCard: React.FC = () => {
                 const fallback = {
                     title: "Desafio Criativo",
                     description: "Crie um vídeo rápido testando um novo ângulo.",
-                    difficulty: "Fácil"
+                    difficulty: "Fácil" as const
                 };
                 setChallenge(fallback);
             }

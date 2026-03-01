@@ -8,7 +8,7 @@ interface GrowthCardProps {
     onClose?: () => void;
 }
 
-export const GrowthCard: React.FC<GrowthCardProps> = ({ onClose }) => {
+export const GrowthCard: React.FC<GrowthCardProps> = () => {
     const {
         fetchGoal,
         fetchLatestMetric,
@@ -17,10 +17,10 @@ export const GrowthCard: React.FC<GrowthCardProps> = ({ onClose }) => {
     } = useUser() as any;
 
     const [isGenerating, setIsGenerating] = useState(false);
-    const [timeframe, setTimeframe] = useState('30 dias'); // Just visual for now, or could calculate growth
+
     const [followerGoal, setFollowerGoal] = useState<any>(null);
     const [currentFollowers, setCurrentFollowers] = useState(0);
-    const [followerGrowth, setFollowerGrowth] = useState(0); // This would need historical data to be real
+
     const [totalPostingDays, setTotalPostingDays] = useState(0); // Total unique days posted
     const cardRef = useRef<HTMLDivElement>(null);
 

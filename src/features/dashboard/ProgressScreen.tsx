@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Users, Heart, BarChart3, Plus, Flame, Target, ArrowLeft, Upload, X, Loader2, Calendar } from 'lucide-react';
+import { Users, Heart, BarChart3, Flame, Target, ArrowLeft, Upload, Loader2 } from 'lucide-react';
 import { analyzeProfileImage } from '../../shared';
 import { useUser } from '../../shared/context/UserContext';
-import { ResponsiveContainer, LineChart, Line, AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
+import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 import { supabase } from '../../lib/supabase';
 import { DateRangePicker } from '../../shared/components/DateRangePicker';
 import { GoalSettingModal } from '../../shared/components/GoalSettingModal';
@@ -37,25 +37,18 @@ interface MetricEntry {
     avgComments: number;
 }
 
-interface Screenshot {
-    id: string;
-    type: 'profile' | 'insights';
-    imageData: string;
-    date: string;
-}
+
 
 interface ProgressScreenProps {
     onBack: () => void;
 }
 
-const STORAGE_KEY = 'hooky_progress_data';
-const SCREENSHOTS_KEY = 'hooky_screenshots';
+
 
 export const ProgressScreen: React.FC<ProgressScreenProps> = ({ onBack }) => {
-    const { fetchMetrics, saveMetric, fetchGoal, saveGoal, user, growthGoal, checkProgressBadges, fetchGoalHistory, badges } = useUser() as any; // Cast for new methods
+    const { fetchMetrics, saveMetric, fetchGoal, saveGoal, user, growthGoal, checkProgressBadges, fetchGoalHistory } = useUser() as any; // Cast for new methods
 
     const [metrics, setMetrics] = useState<MetricEntry[]>([]);
-    const [screenshots, setScreenshots] = useState<Screenshot[]>([]);
     const [showAddModal, setShowAddModal] = useState(false);
 
     // Responsive state
@@ -121,7 +114,6 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({ onBack }) => {
         if (user?.id) {
             loadMetrics();
             loadGoal();
-            loadScreenshots(); // New
             loadGoalHistory(); // Load goal history timeline
         }
     }, [user, startDate, endDate]);
@@ -182,50 +174,7 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({ onBack }) => {
     };
 
 
-    const loadScreenshots = async () => {
-        try {
-            const { data, error } = await supabase
-                .from('user_screenshots')
-                .select('*')
-                .order('created_at', { ascending: false });
 
-            if (error) throw error;
-
-            if (data) {
-                const mapped = data.map((s: any) => ({ // any: Supabase scripts row not typed
-                    id: s.id,
-                    type: s.type,
-                    imageData: s.image_url, // Using URL now
-                    date: s.captured_at
-                }));
-                setScreenshots(mapped);
-            }
-        } catch (error) {
-            console.error('Error loading screenshots:', error);
-        }
-    };
-
-    const deleteScreenshot = async (id: string, e: React.MouseEvent) => {
-        e.stopPropagation();
-
-        // Optimistic update
-        const previous = [...screenshots];
-        setScreenshots(prev => prev.filter(s => s.id !== id));
-
-        try {
-            // Get path to delete from storage
-            const { data: meta } = await supabase.from('user_screenshots').select('image_path').eq('id', id).single();
-
-            if (meta?.image_path) {
-                await supabase.storage.from('progress-photos').remove([meta.image_path]);
-            }
-
-            await supabase.from('user_screenshots').delete().eq('id', id);
-        } catch (error) {
-            console.error('Error deleting screenshot:', error);
-            setScreenshots(previous); // Revert
-        }
-    };
 
 
     const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>, type: 'profile' | 'insights') => {
@@ -262,7 +211,7 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({ onBack }) => {
             .getPublicUrl(fileName);
 
         // 3. Save DB Record
-        const { data: metaData } = await supabase
+        await supabase
             .from('user_screenshots')
             .insert({
                 user_id: user.id,
@@ -274,15 +223,8 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({ onBack }) => {
             .select()
             .single();
 
-        // 4. Update Gallery State
-        if (metaData) {
-            setScreenshots(prev => [{
-                id: metaData.id,
-                type: metaData.type as 'profile' | 'insights',
-                imageData: metaData.image_url,
-                date: metaData.captured_at
-            }, ...prev]);
-        }
+        // 4. Update Gallery State (Removed)
+
 
         // 5. Build Base64 for AI
         const base64 = await new Promise<string>((resolve) => {
@@ -415,85 +357,7 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({ onBack }) => {
         }
     };
 
-    const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>, type: 'profile' | 'insights') => {
-        const file = event.target.files?.[0];
-        if (!file || !user?.id) return;
 
-        setIsAnalyzing(true);
-
-        try {
-            // 1. Upload to Storage
-            const fileExt = file.name.split('.').pop();
-            const fileName = `${user.id}/${Date.now()}.${fileExt}`;
-            const filePath = `${fileName}`;
-
-            const { error: uploadError } = await supabase.storage
-                .from('progress-photos')
-                .upload(filePath, file);
-
-            if (uploadError) throw uploadError;
-
-
-            // 2. Get Public URL
-            const { data: { publicUrl } } = supabase.storage
-                .from('progress-photos')
-                .getPublicUrl(filePath);
-
-            // Preview is already handled by profilePreviewUrl/insightsPreviewUrl state
-
-
-            // 3. Save Metadata
-            const { data: metaData, error: dbError } = await supabase
-                .from('user_screenshots')
-                .insert({
-                    user_id: user.id,
-                    image_url: publicUrl,
-                    image_path: filePath,
-                    type,
-                    captured_at: new Date().toISOString()
-                })
-                .select()
-                .single();
-
-            if (dbError) throw dbError;
-
-            // 4. Update UI
-            if (metaData) {
-                const newScreenshot: Screenshot = {
-                    id: metaData.id,
-                    type: metaData.type as 'profile' | 'insights',
-                    imageData: metaData.image_url,
-                    date: metaData.captured_at
-                };
-                setScreenshots(prev => [newScreenshot, ...prev]);
-            }
-
-            // 5. Analyze with AI (keeping existing logic but using URL/Base64 if needed)
-            // For analysis we might still need base64 or pass URL if API supports it.
-            // Let's assume we read file to base64 just for analysis like before
-            const reader = new FileReader();
-            reader.onloadend = async () => {
-                const base64String = reader.result as string;
-                try {
-                    const metrics = await analyzeProfileImage(base64String);
-                    if (metrics.followers) setNewFollowers(metrics.followers.toString());
-                    if (metrics.avgLikes) setNewLikes(metrics.avgLikes.toString());
-                    if (metrics.avgComments) setNewComments(metrics.avgComments.toString());
-                } catch (e) {
-                    console.error('Analysis failed', e);
-                }
-                setShowUploadModal(false);
-                setShowAddModal(true);
-                setIsAnalyzing(false);
-            };
-            reader.readAsDataURL(file);
-
-        } catch (error) {
-            console.error('Failed to upload/analyze image:', error);
-            setIsAnalyzing(false);
-            setShowUploadModal(false);
-        }
-    };
 
     const handleAddEntry = async () => {
         if (!newFollowers) {
@@ -1000,12 +864,7 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({ onBack }) => {
                 </motion.div>
             )}
 
-            {/* Screenshots Gallery - HIDDEN (Background Only) */}
-            {/* 
-            {screenshots.length > 0 && (
-                ...
-            )} 
-            */}
+
 
             {/* Hidden Inputs Updated Handlers */}
             <input

@@ -11,7 +11,7 @@ interface StreakDisplayProps {
 }
 
 export const StreakDisplay: React.FC<StreakDisplayProps> = ({
-    currentStreak,
+
     scriptsRemaining,
     isPremium,
     subscriptionStatus,

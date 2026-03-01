@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, TrendingUp, Users, ChevronRight, ArrowRight, Zap } from 'lucide-react';
+import { Sparkles, Users, ChevronRight, Zap } from 'lucide-react';
 import { useGlobalStats } from '../../shared/hooks/useGlobalStats';
 
 interface OnboardingScreenProps {
