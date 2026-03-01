@@ -59,7 +59,7 @@ export const useAudioRecorder = () => {
                 });
             }, 1000);
 
-        } catch (err: any) {
+        } catch (err: any) { // any: MediaDevices API throws DOMException, not typed as Error
             setError(err.message || 'Error accessing microphone');
             console.error('Error accessing microphone:', err);
         }

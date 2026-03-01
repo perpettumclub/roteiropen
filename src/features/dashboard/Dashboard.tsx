@@ -123,7 +123,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onCreateNew, onViewLibrary
             }
 
             // Convert ALL timestamps to Brasilia dates
-            const allBrasiliaDates: string[] = postings.map((p: any) => toBrasiliaDate(p.posted_at));
+            const allBrasiliaDates: string[] = postings.map((p: any) => toBrasiliaDate(p.posted_at)); // any: posting row from user_postings not typed
             const uniqueDates = new Set(allBrasiliaDates);
 
 

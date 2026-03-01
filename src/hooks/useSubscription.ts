@@ -51,7 +51,7 @@ export const useSubscription = (): UseSubscriptionReturn => {
             } else {
                 setSubscription(null);
             }
-        } catch (err: any) {
+        } catch (err: any) { // any: error type unknown, need .message access
             console.error('Error fetching subscription:', err);
             setError(err.message || 'Erro ao buscar assinatura');
 

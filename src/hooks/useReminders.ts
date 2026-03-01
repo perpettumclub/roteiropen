@@ -35,7 +35,7 @@ export const useReminders = () => {
             if (parsed.length > 0) {
                 // Assuming sorted or finding max
                 // Screenshots structure: { date: isoString, ... }
-                const dates = parsed.map((s: any) => new Date(s.date).getTime());
+                const dates = parsed.map((s: any) => new Date(s.date).getTime()); // any: reminder row schema not typed
                 lastDate = new Date(Math.max(...dates));
             }
         }

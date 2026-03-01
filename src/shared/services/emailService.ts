@@ -22,7 +22,7 @@ interface SendEmailParams {
         meta?: number;
         percentMeta?: number;
         faltam?: number;
-        [key: string]: any;
+        [key: string]: any; // any: email template params vary per template type
     };
 }
 
@@ -58,7 +58,7 @@ export async function sendProgressEmail(params: SendEmailParams): Promise<SendEm
 
         return data as SendEmailResult;
 
-    } catch (error: any) {
+    } catch (error: any) { // any: Supabase function invocation error not typed
         console.error('[Email] Unexpected error:', error);
         return { success: false, error: error.message };
     }

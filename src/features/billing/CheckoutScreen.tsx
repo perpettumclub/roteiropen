@@ -69,7 +69,7 @@ export const CheckoutScreen: React.FC<CheckoutScreenProps> = ({
                 throw new Error('Não foi possível gerar o link de pagamento.');
             }
 
-        } catch (err: any) {
+        } catch (err: any) { // any: payment gateway errors not typed as Error
             console.error('Checkout error:', err);
             setError(err.message || 'Erro ao iniciar pagamento. Tente novamente.');
         } finally {

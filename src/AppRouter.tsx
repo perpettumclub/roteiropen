@@ -26,7 +26,7 @@ import { ChallengeVSL } from './pages/ChallengeVSL';
 import { StreakDisplay, BadgeNotification, useUser } from './shared';
 import { useSubscription } from './hooks/useSubscription';
 
-import { PLAN_PRICE_BRL } from './shared/constants';
+import { PLAN_PRICE_BRL, ROUTES } from './shared/constants';
 
 // --- Guards ---
 
@@ -160,27 +160,27 @@ export const AppRouter = () => {
             <Route element={<PublicLayout />}>
                 <Route path="/oferta" element={<SalesPaywallPage />} />
 
-                <Route path="/login" element={<LoginScreen onSuccess={() => {
+                <Route path={ROUTES.LOGIN} element={<LoginScreen onSuccess={() => {
                     // Login = usuário EXISTENTE, NÃO precisa ir pro checkout
                     localStorage.removeItem('hooky_pending_checkout');
-                    window.location.href = '/app/gravar';
-                }} onForgotPassword={() => window.location.href = '/esqueci-senha'} />} />
+                    window.location.href = ROUTES.RECORDER;
+                }} onForgotPassword={() => window.location.href = ROUTES.FORGOT_PASSWORD} />} />
 
-                <Route path="/signup" element={<SignUpScreen onSuccess={() => {
-                    if (localStorage.getItem('hooky_pending_checkout')) window.location.href = '/checkout';
-                    else window.location.href = '/app/gravar';
+                <Route path={ROUTES.SIGNUP} element={<SignUpScreen onSuccess={() => {
+                    if (localStorage.getItem('hooky_pending_checkout')) window.location.href = ROUTES.CHECKOUT;
+                    else window.location.href = ROUTES.RECORDER;
                 }} />} />
 
 
 
-                <Route path="/esqueci-senha" element={<ForgotPasswordScreen onBack={() => window.location.href = '/login'} />} />
+                <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPasswordScreen onBack={() => window.location.href = ROUTES.LOGIN} />} />
 
                 <Route path="/onboarding" element={<OnboardingPage />} />
                 <Route path="/quiz" element={<QuizPage />} />
 
-                <Route path="/checkout" element={<CheckoutScreen onSuccess={() => {
+                <Route path={ROUTES.CHECKOUT} element={<CheckoutScreen onSuccess={() => {
                     localStorage.removeItem('hooky_pending_checkout');
-                    window.location.href = '/app/gravar';
+                    window.location.href = ROUTES.RECORDER;
                 }} onError={console.error} planPrice={PLAN_PRICE_BRL} planName="Anual" />} />
             </Route>
 
@@ -188,7 +188,7 @@ export const AppRouter = () => {
 
             {/* Protected App Routes */}
             <Route element={<RequireAuth />}>
-                <Route path="/paywall" element={<Paywall onUpgrade={() => window.location.href = '/checkout'} onClose={() => window.location.href = '/dashboard'} />} />
+                <Route path={ROUTES.PAYWALL} element={<Paywall onUpgrade={() => window.location.href = ROUTES.CHECKOUT} onClose={() => window.location.href = ROUTES.DASHBOARD} />} />
 
                 <Route element={<AppLayout />}>
                     <Route element={<RequireSubscription />}>
@@ -203,13 +203,13 @@ export const AppRouter = () => {
                             <div className="glass-card" style={{ padding: '2rem', textAlign: 'center' }}>
                                 <h2>Erro</h2>
                                 <p>Algo deu errado.</p>
-                                <button onClick={() => window.location.href = '/app/gravar'} className="btn-primary">Tentar Novamente</button>
+                                <button onClick={() => window.location.href = ROUTES.RECORDER} className="btn-primary">Tentar Novamente</button>
                             </div>
                         } />
 
-                        <Route path="/dashboard" element={<Dashboard onCreateNew={() => window.location.href = '/app/gravar'} onViewLibrary={() => window.location.href = '/biblioteca'} onViewProgress={() => window.location.href = '/progresso'} />} />
-                        <Route path="/biblioteca" element={<ScriptLibrary onBack={() => window.location.href = '/dashboard'} />} />
-                        <Route path="/progresso" element={<ProgressScreen onBack={() => window.location.href = '/dashboard'} />} />
+                        <Route path={ROUTES.DASHBOARD} element={<Dashboard onCreateNew={() => window.location.href = ROUTES.RECORDER} onViewLibrary={() => window.location.href = ROUTES.LIBRARY} onViewProgress={() => window.location.href = ROUTES.PROGRESS} />} />
+                        <Route path={ROUTES.LIBRARY} element={<ScriptLibrary onBack={() => window.location.href = ROUTES.DASHBOARD} />} />
+                        <Route path={ROUTES.PROGRESS} element={<ProgressScreen onBack={() => window.location.href = ROUTES.DASHBOARD} />} />
                     </Route>
                 </Route>
 

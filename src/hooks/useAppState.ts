@@ -226,7 +226,7 @@ export function useAppState(): AppStateData & AppStateActions {
             setConfirmedSolution(solution);
 
             setState('confirm');
-        } catch (err: any) {
+        } catch (err: any) { // any: error type unknown, need .message access
             console.error('Transcription error:', err);
             setError(err.message || 'Erro ao transcrever o áudio.');
             setState('error');
@@ -287,7 +287,7 @@ export function useAppState(): AppStateData & AppStateActions {
             setScript(viralScript);
             setCapturedAudio(null);
             setState('result');
-        } catch (err: any) {
+        } catch (err: any) { // any: error type unknown, need .message access
             console.error('API Error:', err);
             setError(err.message || 'Algo deu errado. Tente novamente.');
             setState('error');

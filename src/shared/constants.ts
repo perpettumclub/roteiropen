@@ -103,3 +103,31 @@ export const STORAGE_KEYS = {
     PENDING_CHECKOUT: 'hooky_pending_checkout',
     PENDING_LOGIN: 'hooky_pending_login',
 } as const;
+
+// =============================================================================
+// ROUTE PATHS
+// =============================================================================
+
+export const ROUTES = {
+    HOME: '/',
+    LOGIN: '/login',
+    SIGNUP: '/signup',
+    FORGOT_PASSWORD: '/esqueci-senha',
+    ONBOARDING: '/onboarding',
+    QUIZ: '/quiz',
+    OFFER: '/oferta',
+    CHECKOUT: '/checkout',
+    PAYWALL: '/paywall',
+    CHALLENGE: '/desafio',
+    RECORDER: '/app/gravar',
+    PROCESSING: '/app/processando-audio',
+    CONFIRM: '/app/confirmar',
+    REMIX: '/app/remix',
+    GENERATING: '/app/gerando-script',
+    RESULT: '/app/resultado',
+    SHARE: '/app/compartilhar',
+    ERROR: '/app/erro',
+    DASHBOARD: '/dashboard',
+    LIBRARY: '/biblioteca',
+    PROGRESS: '/progresso',
+} as const;

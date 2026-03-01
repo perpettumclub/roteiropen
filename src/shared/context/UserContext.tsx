@@ -20,8 +20,8 @@ export interface WeeklyChallenge {
 
 interface UserState {
     // Auth
-    session: any;
-    user: any; // Add user property
+    session: any; // any: Supabase Auth session type is complex and varies by auth method
+    user: any; // any: Supabase User type varies based on provider metadata
 
     // Quiz data
     hasCompletedQuiz: boolean;
@@ -288,7 +288,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
                 const newActivityLog: { [date: string]: number } = {};
 
                 // Tipagem frouxa para evitar erros de build com campos novos vs antigos
-                const loadedScripts = scripts.map((item: any) => {
+                const loadedScripts = scripts.map((item: any) => { // any: Supabase row type not generated for this table
                     // FIX: Converter data UTC do banco para data LOCAL "yyyy-mm-dd"
                     // Isso garante que bate com o ActivityHeatmap que usa hora local
                     const dateObj = new Date(item.created_at);
@@ -496,7 +496,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
                 .eq('user_id', userId);
 
             if (badgeRows) {
-                const badgeSlugs = badgeRows.map((b: any) => b.badge_slug);
+                const badgeSlugs = badgeRows.map((b: any) => b.badge_slug); // any: badge row schema not typed
                 setState(prev => ({
                     ...prev,
                     badges: badgeSlugs
@@ -859,7 +859,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         }
     };
 
-    const saveDailyChallenge = async (challenge: any, dateStr: string) => {
+    const saveDailyChallenge = async (challenge: any, dateStr: string) => { // any: challenge shape defined by AI prompt, not typed yet
         try {
             const { data: { session } } = await supabase.auth.getSession();
             if (!session?.user) return;

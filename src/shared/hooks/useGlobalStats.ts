@@ -41,7 +41,7 @@ export const useGlobalStats = (): GlobalStats => {
 
                 let uniqueUsers = 0;
                 if (usersData && !usersError) {
-                    const uniqueUserIds = new Set(usersData.map((r: any) => r.user_id));
+                    const uniqueUserIds = new Set(usersData.map((r: any) => r.user_id)); // any: Supabase aggregation row not typed
                     uniqueUsers = uniqueUserIds.size;
                 }
 

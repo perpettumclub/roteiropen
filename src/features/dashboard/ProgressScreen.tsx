@@ -141,7 +141,7 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({ onBack }) => {
         const data = await fetchMetrics(user.id, startStr, endStr);
 
 
-        const mapped = data.map((m: any) => ({
+        const mapped = data.map((m: any) => ({ // any: Supabase metrics row not typed
             date: m.date,
             followers: m.followers || m.seguidores || 0,
             seguidores: m.seguidores || m.followers,
@@ -192,7 +192,7 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({ onBack }) => {
             if (error) throw error;
 
             if (data) {
-                const mapped = data.map((s: any) => ({
+                const mapped = data.map((s: any) => ({ // any: Supabase scripts row not typed
                     id: s.id,
                     type: s.type,
                     imageData: s.image_url, // Using URL now
@@ -303,7 +303,7 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({ onBack }) => {
         setIsAnalyzing(true);
 
         try {
-            let extractedData: any = {};
+            let extractedData: any = {}; // any: dynamic shape varies by AI response format
             const uploads = [];
 
 
@@ -909,7 +909,7 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({ onBack }) => {
                             borderRadius: '2px'
                         }} />
 
-                        {goalHistory.map((goal: any, index: number) => {
+                        {goalHistory.map((goal: any, index: number) => { // any: goal row schema not typed
                             const achievedDate = new Date(goal.achieved_at);
                             const formattedDate = achievedDate.toLocaleDateString('pt-BR', {
                                 day: '2-digit',

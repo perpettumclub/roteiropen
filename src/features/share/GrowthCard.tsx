@@ -62,7 +62,7 @@ export const GrowthCard: React.FC<GrowthCardProps> = ({ onClose }) => {
                 if (postings && postings.length > 0) {
                     // Count unique Brasilia dates
                     const uniqueDates = new Set<string>();
-                    postings.forEach((p: any) => {
+                    postings.forEach((p: any) => { // any: posting row from frequency_scripts not typed
                         const brasiliaDate = new Date(p.posted_at).toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' });
                         uniqueDates.add(brasiliaDate);
                     });

@@ -43,7 +43,7 @@ export const ScriptProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     const [youtubeLinks, setYoutubeLinksState] = useState<string[]>([]);
     const [script, setScript] = useState<ViralScript | null>(null);
     const [error, setError] = useState<string | null>(null);
-    
+
     // Loading states
     const [isProcessing, setIsProcessing] = useState(false);
     const [isTranscribing, setIsTranscribing] = useState(false);
@@ -74,7 +74,7 @@ export const ScriptProvider: React.FC<{ children: ReactNode }> = ({ children }) 
             const { problem, solution } = await extractProblemSolution(transcribedText);
             setConfirmedProblem(problem);
             setConfirmedSolution(solution);
-        } catch (err: any) {
+        } catch (err: any) { // any: API/transcription errors not typed as Error
             console.error('Transcription error:', err);
             setError(err.message || 'Erro ao transcrever o áudio.');
             throw err; // Re-throw to allow UI to handle navigation if needed
@@ -108,7 +108,7 @@ export const ScriptProvider: React.FC<{ children: ReactNode }> = ({ children }) 
             // (Copied strictly from App.tsx logic)
             const viralScript: ViralScript = {
                 hooks: result.script.hooks,
-                selectedHookIndex: 0, 
+                selectedHookIndex: 0,
                 contexto: result.script.conflito,
                 conceito: result.script.climax,
                 ruptura: result.script.storytelling || '',
@@ -139,10 +139,10 @@ export const ScriptProvider: React.FC<{ children: ReactNode }> = ({ children }) 
             // Clean up audio after successful generation to save memory? 
             // App.tsx did setCapturedAudio(null) here, but we might want to keep it if user goes "back".
             // For now, let's keep strict parity with App.tsx behavior.
-            setCapturedAudioState(null); 
-            
+            setCapturedAudioState(null);
+
             return true;
-        } catch (err: any) {
+        } catch (err: any) { // any: API/transcription errors not typed as Error
             console.error('API Error:', err);
             setError(err.message || 'Algo deu errado. Tente novamente.');
             return false;

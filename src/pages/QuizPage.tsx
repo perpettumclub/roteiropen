@@ -6,7 +6,7 @@ export const QuizPage = () => {
     const navigate = useNavigate();
     const { completeQuiz } = useUser();
 
-    const handleComplete = (profile: any) => {
+    const handleComplete = (profile: any) => { // any: quiz profile shape defined by QuizFunnel, needs interface extraction
         completeQuiz(profile);
         navigate('/oferta');
     };
