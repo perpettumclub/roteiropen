@@ -187,7 +187,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                     </motion.div>
                 )}
 
-                {/* Step 1: Social Proof / Testimonials */}
+                {/* Step 1: Como Funciona — 3 passos */}
                 {step === 1 && (
                     <motion.div
                         key="step1"
@@ -196,91 +196,91 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                         exit={{ opacity: 0, y: -20 }}
                         style={{ textAlign: 'center', maxWidth: '400px' }}
                     >
-                        {/* === MINI VSL PAGE === */}
                         <div style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            gap: '0.5rem',
-                            marginBottom: '1rem'
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            gap: '0.5rem', marginBottom: '1rem'
                         }}>
                             <Zap size={24} color="var(--primary)" />
                             <span style={{
-                                fontSize: '0.8rem',
-                                fontWeight: 700,
-                                color: 'var(--primary)',
-                                textTransform: 'uppercase',
-                                letterSpacing: '0.1em'
+                                fontSize: '0.8rem', fontWeight: 700, color: 'var(--primary)',
+                                textTransform: 'uppercase', letterSpacing: '0.1em'
                             }}>
                                 Como Funciona
                             </span>
                         </div>
 
                         <h2 style={{
-                            fontSize: '1.8rem',
-                            fontFamily: 'var(--font-display)',
-                            marginBottom: '0.5rem',
-                            color: 'var(--dark)'
+                            fontSize: '1.8rem', fontFamily: 'var(--font-display)',
+                            marginBottom: '0.5rem', color: 'var(--dark)'
                         }}>
                             Sua ideia vira roteiro viral em 3 passos
                         </h2>
 
                         <p style={{
-                            fontSize: '0.95rem',
-                            color: 'var(--gray)',
-                            marginBottom: '2rem',
-                            lineHeight: 1.6
+                            fontSize: '0.95rem', color: 'var(--gray)', marginBottom: '2rem', lineHeight: 1.6
                         }}>
-                            Sem horas editando. Sem bloqueio criativo. Apenas fale e a IA faz o resto.
+                            Sem horas editando. Sem bloqueio criativo.
                         </p>
 
-                        {/* VSL Embed Area - formato Stories (9:16) */}
-                        <div style={{
-                            background: 'linear-gradient(135deg, rgba(255,107,107,0.08) 0%, rgba(255,230,109,0.08) 100%)',
-                            borderRadius: '20px',
-                            padding: '1.5rem',
-                            marginBottom: '2rem',
-                            border: '1px solid rgba(255,107,107,0.15)'
-                        }}>
-                            <div style={{
-                                fontSize: '0.85rem',
-                                color: 'var(--primary)',
-                                fontWeight: 600,
-                                marginBottom: '0.5rem'
-                            }}>
-                                🎬 Assista em 30 segundos
-                            </div>
-                            {/* 
-                                TODO: Substituir por embed de vídeo real (Loom, YouTube, etc.)
-                                Exemplo: <iframe src="https://www.loom.com/embed/..." ... />
-                            */}
-                            <div style={{
-                                width: '100%',
-                                aspectRatio: '9/16',
-                                borderRadius: '12px',
-                                background: 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                cursor: 'pointer',
-                                position: 'relative',
-                                overflow: 'hidden'
-                            }}>
-                                <div style={{
-                                    width: '60px',
-                                    height: '60px',
-                                    borderRadius: '50%',
-                                    background: 'rgba(255,255,255,0.9)',
+                        {/* 3 Steps */}
+                        {[
+                            {
+                                emoji: '🎙️',
+                                title: 'Fale sua ideia',
+                                desc: 'Grave um áudio de até 5 minutos explicando o que você quer falar'
+                            },
+                            {
+                                emoji: '⚡',
+                                title: 'A IA processa',
+                                desc: 'Transcrição automática e geração de roteiro otimizado para viral'
+                            },
+                            {
+                                emoji: '🚀',
+                                title: 'Poste e cresça',
+                                desc: 'Copie o roteiro pronto e publique. Consistência que vira audiência'
+                            }
+                        ].map((s, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: i * 0.15 }}
+                                style={{
                                     display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    fontSize: '1.5rem',
-                                    boxShadow: '0 4px 20px rgba(0,0,0,0.2)'
+                                    alignItems: 'flex-start',
+                                    gap: '1rem',
+                                    background: 'white',
+                                    borderRadius: '16px',
+                                    padding: '1rem 1.25rem',
+                                    marginBottom: '0.75rem',
+                                    boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+                                    border: '1px solid rgba(0,0,0,0.05)',
+                                    textAlign: 'left'
+                                }}
+                            >
+                                <div style={{
+                                    fontSize: '1.75rem',
+                                    lineHeight: 1,
+                                    minWidth: '40px',
+                                    paddingTop: '2px'
                                 }}>
-                                    ▶️
+                                    {s.emoji}
                                 </div>
-                            </div>
-                        </div>
+                                <div>
+                                    <div style={{
+                                        fontWeight: 700,
+                                        color: 'var(--dark)',
+                                        fontSize: '0.95rem',
+                                        marginBottom: '0.2rem'
+                                    }}>
+                                        {i + 1}. {s.title}
+                                    </div>
+                                    <div style={{ fontSize: '0.85rem', color: 'var(--gray)', lineHeight: 1.4 }}>
+                                        {s.desc}
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ))}
 
                         <motion.button
                             onClick={handleContinue}
@@ -299,13 +299,15 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                gap: '0.5rem'
+                                gap: '0.5rem',
+                                marginTop: '1rem'
                             }}
                         >
                             Quero começar <ChevronRight size={20} />
                         </motion.button>
                     </motion.div>
                 )}
+
 
                 {/* Step 2: Join Community */}
                 {step === 2 && (
