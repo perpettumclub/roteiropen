@@ -227,7 +227,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                             {
                                 emoji: '🎙️',
                                 title: 'Fale sua ideia',
-                                desc: 'Grave um áudio de até 5 minutos explicando o que você quer falar'
+                                desc: 'Grave sua ideia como se estivesse mandando um áudio no WhatsApp'
                             },
                             {
                                 emoji: '⚡',
@@ -237,7 +237,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                             {
                                 emoji: '🚀',
                                 title: 'Poste e cresça',
-                                desc: 'Copie o roteiro pronto e publique. Consistência que vira audiência'
+                                desc: 'Copie o roteiro pronto e publique. Acompanhe seu progresso no app'
                             }
                         ].map((s, i) => (
                             <motion.div
@@ -300,7 +300,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 gap: '0.5rem',
-                                marginTop: '1rem'
+                                marginTop: '2rem'
                             }}
                         >
                             Quero começar <ChevronRight size={20} />
