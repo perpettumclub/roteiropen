@@ -1,0 +1,3503 @@
+00:00
+Fala Devs! Seja bem-vindo a mais uma aula aqui no RocketSeed Plus.
+
+00:9.76
+Meu nome é João Bibiano e na aula de hoje eu vou trazer um tema sensacional,
+
+00:13.92
+que não é muito comum, que é como internacionalizar as nossas aplicações,
+
+00:18.66
+os nossos sites, tornando ele disponível em várias línguas,
+
+00:22.4
+inglês, português, francês, espanhol, o idioma que você quiser,
+
+00:26.76
+e garantir que a sua aplicação possa ser acessada por outros países facilmente.
+
+00:31.66
+Por que é um tema especial? Porque não é algo que a gente vê todos os dias,
+
+00:35.24
+a gente está no ecossistema principalmente do Brasil, em que não é tão comum você ter esse requisito de tornar o seu site traduzível, mas como eu estou aqui hoje em Lisboa, participo desse ecossistema
+
+00:46.64
+em que você tem países muito conectados e você tem esse requisito de tornar tudo acessível,
+
+00:52.1
+eu vou ensinar para vocês como fazer isso, tá?
+
+00:54.88
+E o conceito que eu vou trazer hoje, a gente vai trazer com o Next, mas pode ser aplicado a qualquer aplicação,
+
+01:0.7999999999999972
+single page application e tudo mais, o importante aqui é você entender o conceito e eu vou introduzir o tema com tranquilidade
+
+01:8.420000000000002
+para você entender desde o início como a gente traduz um website da melhor maneira possível, beleza?
+
+01:15.5
+Vamos então para a nossa pauta que eu já preparei aqui para a gente falar hoje. Então, o tema aqui da nossa aula vai ser
+
+01:28.72
+hoje. Então, o tema aqui da nossa aula vai ser internacionalização no React com i18n e Next.js, ok?
+
+01:35.22
+Essa é a minha aula número 12 aqui no Rocketseat Plus, então fique à vontade aí para assistir as outras caso você tenha interesse. A gente vai falar, tá bom, do que é o i18n, né, e como usar ele com o Next.
+
+01:42.58
+Fique tranquilo se esse nome não é comum para você.
+
+01:45.519999999999996
+Beleza?
+
+01:46.22
+Vamos aqui para a rápida apresentação.
+
+01:48.7
+Meu nome é João Bibiano, eu sou formado em análise e desenvolvimento de sistemas,
+
+01:52.7
+mais de 7 anos trabalhando com software profissionalmente, tá bom?
+
+01:57.519999999999996
+Hoje, sou software engineer na Apple Market,
+
+02:0.3400000000000034
+e se você também quiser acompanhar o conteúdo que eu produzo na internet,
+
+02:4.260000000000005
+fique à vontade para me seguir no Instagram, no YouTube e você vai ser muito bem-vindo lá, ok?
+
+02:9.740000000000009
+Então, apresentações feitas, provavelmente você já me conhece assistindo as outras aulas.
+
+02:14.560000000000002
+Bora para o que interessa, tá bom?
+
+02:17.460000000000008
+Vamos lá, vamos começar aqui então entendendo como os sistemas web são traduzidos, tá? E para fazer isso, eu quero abrir aqui junto com vocês o site do i18n, tá?
+
+02:32.08000000000001
+Primeiro, explicar, né? O que é o i18n?
+
+02:35.81999999999999
+Vou até abrir aqui a wiki.
+
+02:38.08000000000001
+A gente tem...
+
+02:39.620000000000005
+É uma abreviação, basicamente, para Internationalization and Localization, tá bom?
+
+02:46
+Então, a abreviação disso daqui normalmente é chamada aqui de I18N, tá bom?
+
+02:52.379999999999995
+E aqui inclusive diz por que o nome é assim, né?
+
+02:55.44
+Onde os 18 representam o número de letras entre o primeiro I e o N do Internationalization.
+
+03:2.460000000000008
+É simplesmente o nome que a gente dá.
+
+03:2.4799999999999898
+primeiro I e o N do Internationalization.
+
+03:4.1200000000000045
+É simplesmente o nome que a gente dá. E
+
+03:5.680000000000007
+o I18N também
+
+03:7.719999999999999
+é o que a gente vai procurar
+
+03:9.759999999999991
+quando quiser encontrar bibliotecas,
+
+03:12.340000000000003
+tá bom? E uma das
+
+03:14.180000000000007
+mais comuns aqui é essa,
+
+03:16.319999999999993
+que é o I18N
+
+03:17.599999999999994
+Next, ou I18 Next,
+
+03:20.039999999999992
+tá bom? E como vocês podem
+
+03:22.060000000000002
+ver, ela é usada
+
+03:23.900000000000006
+em todo o ecossistema.
+
+03:25.460000000000008
+A gente usa ela em Electron, iOS, no Android, React Native, Flutter.
+
+03:30.539999999999992
+Ela tem wrappers diferentes, então pode ser que o nome dela que você esteja vendo aí,
+
+03:35.66
+da biblioteca que você esteja usando, não seja este nome.
+
+03:39.34
+Mas normalmente ele está wrapped aqui também por essa biblioteca.
+
+03:44.44
+E só para a gente introduzir deixa eu ver
+
+03:48.16
+aqui na pauta tal o que eu anotei que foi nem space arquivos de jason vamos entender aqui
+
+03:53.25999999999999
+basicamente num lugar em start como ela funciona tá tão basicamente pessoal como a gente começa a
+
+04:0.9799999999999898
+traduzir nossos sistemas a gente precisa ter as chaves traduzidas.
+
+04:5.97999999999999
+Ou seja, imagina aí que no teu website você tenha, digamos, a palavra welcome, bem-vindo, em português.
+
+04:13.439999999999998
+Você vai ter lá uma palavra, uma chave que é uma key, que é comum para todas as línguas.
+
+04:20.420000000000016
+Pode ser welcome. Normalmente a gente usa a palavra em inglês como uma chave.
+
+04:24.180000000000007
+Então vai ser welcome.
+
+04:25.600000000000023
+E depois você vai mapear welcome para diferentes línguas.
+
+04:29.899999999999977
+Então welcome em português vai ser bem-vindo.
+
+04:33.75999999999999
+Welcome em espanhol vai ser...
+
+04:36.660000000000025
+Não sei, não sei que espanhol.
+
+04:39.5
+Mas vamos traduzir aqui.
+
+04:41.74000000000001
+Então welcome para espanhol, bien-v aqui. Então, welcome para Spanish.
+
+04:46.10000000000002
+Bienvindo.
+
+04:46.69999999999999
+Ok.
+
+04:47.31999999999999
+Boa.
+
+04:50.80000000000001
+E, por exemplo, se eu quisesse traduzir isso para French.
+
+04:53.120000000000005
+French.
+
+04:54.139999999999986
+Que é francês.
+
+04:56.39999999999998
+É bienvenue.
+
+04:59.660000000000025
+Desculpem aí que eu não sei nem francês nem espanhol. Mas a gente vai ter uma chave sempre e a gente vai apontar para diferentes idiomas, tá bom?
+
+05:6.1200000000000045
+Então, quis essa introdução para a gente começar a entender como que a biblioteca funciona, tá?
+
+05:10.779999999999973
+A gente não vai instalá-la diretamente, a gente vai instalar um wrapper com o next aqui.
+
+05:15.800000000000011
+Mas uma coisa que eu quero mostrar para vocês é isso aqui, ó.
+
+05:19.079999999999984
+Olha que legal.
+
+05:20.560000000000002
+A gente tem os resources, que é as nossas traduções, tá?
+
+05:22.04000000000002
+que legal. A gente tem os resources que é as nossas traduções,
+
+05:24.360000000000014
+tá? E aí, vamos
+
+05:26
+supor que em inglês
+
+05:27.860000000000014
+a minha aqui
+
+05:29.54000000000002
+vai ser o quê? Hello
+
+05:31.74000000000001
+World, tá bom?
+
+05:33.95999999999998
+E aí se eu quisesse adicionar em português?
+
+05:35.81999999999999
+Eu adicionaria um pt,
+
+05:37.879999999999995
+né? Onde aqui seria
+
+05:40.18000000000001
+Olá Mundo.
+
+05:41.620000000000005
+E assim por diante, tá bom?
+
+05:43.56
+Vamos ver aqui
+
+05:44.95999999999998
+o que mais temos
+
+05:46.30000000000001
+Pra mostrar
+
+05:47.360000000000014
+Eu acho que pra cá
+
+05:48.75999999999999
+Não tem mais nada de interessante
+
+05:51.81999999999999
+E depois a gente vai ter coisas mais avançadas
+
+05:54.75999999999999
+Que a gente vai abordar também
+
+05:55.920000000000016
+Que por exemplo, interpolation
+
+05:57.620000000000005
+Como que a gente passa uma variável
+
+06:0.18000000000000682
+Pra dentro dessa nossa tradução
+
+06:1.8799999999999955
+Como que a gente trabalha
+
+06:3.8799999999999955
+Olha que legal, com plurals A gente pode ter um item Que é nossa tradução, né? Como que a gente trabalha, olha que legal, com plurals, né?
+
+06:6.4599999999999795
+A gente pode ter um item, que é uma tradução,
+
+06:9.339999999999975
+dois, que é outra, ou dois ou mais, ou zero.
+
+06:13.399999999999977
+Então, é exatamente isso o caso do plurals aqui, tá bom?
+
+06:18.160000000000025
+Mas não se preocupem que a gente vai ter um exemplo bem massa para isso.
+
+06:20.899999999999977
+Só quis introduzir basicamente como que funciona.
+
+06:24.180000000000007
+E por que eu coloquei aqui namespaces?
+
+06:26.54000000000002
+porque normalmente
+
+06:27.54000000000002
+a gente costuma separar
+
+06:29.579999999999984
+esse JSON com essas traduções
+
+06:32.60000000000002
+por
+
+06:34.01999999999998
+digamos, departamentos
+
+06:36.51999999999998
+ou por componentes
+
+06:38.18000000000001
+o que você quiser
+
+06:39.18000000000001
+às vezes no teu website você vai ter a homepage
+
+06:42.06
+então você pode ter um namespace chamado
+
+06:44.22000000000003
+home, depois você vai ter a página de, então você pode ter um namespace chamado Home.
+
+06:49.5
+Depois você vai ter a página de contatos, então você pode chamar de Contact.
+
+06:57.39999999999998
+Depois você vai ter coisas comuns a todas, como por exemplo, o nome do usuário. Então, usuário seja bem-vindo.
+
+06:59.620000000000005
+Isso você tem que traduzir em todas as telas do sistema.
+
+07:2.7799999999999727
+Então você pode ter, por exemplo, um common namespace
+
+07:6.079999999999984
+e o intuito principal do
+
+07:8.04000000000002
+namespace é basicamente agrupar
+
+07:10.279999999999973
+as traduções
+
+07:11.439999999999998
+para que quando você tiver que baixar
+
+07:14.019999999999982
+esse JSON do servidor, você baixe ele
+
+07:15.819999999999993
+mais leve, não tem um arquivo gigantesco
+
+07:18.480000000000018
+e bem comum
+
+07:20.220000000000027
+usar JSON para armazenar traduções
+
+07:22.399999999999977
+você pode ter um back-end
+
+07:24.379999999999995
+que armazena suas traduções você pode ter um becky em que armazena suas
+
+07:25.639999999999986
+traduções e depois front-end só baixo mas é muito comum a gente usar Jason tá bom e como que a gente
+
+07:32.60000000000002
+faz então para obter automaticamente o idioma do usuário vamos abrir aqui o next.js
+
+07:39.620000000000005
+internacionalization e se você colocar no você vai cair nessa página Advanced Features
+
+07:46.5
+Internationalization Routing
+
+07:48.60000000000002
+ou rota internacionalizada
+
+07:51.06
+e você pode ver aqui
+
+07:53.06
+que o Next já tem
+
+07:55.19999999999999
+suporte
+
+07:56.120000000000005
+built-in, ou seja, nele mesmo
+
+07:59.39999999999998
+desde a versão 10 do Next
+
+08:1.5600000000000023
+a gente está na 12 atualmente
+
+08:03
+então o Next facilita pra nós
+
+08:6.139999999999986
+essa adoção, tanto
+
+08:08
+dele gerenciar pra nós
+
+08:9.920000000000016
+qual é o idioma do usuário logado
+
+08:11.759999999999991
+bem como a gente
+
+08:13.620000000000005
+colocar quais idiomas
+
+08:15.740000000000009
+o nosso site está disponível, pra que ele
+
+08:17.899999999999977
+possa fazer esse build, tá bom?
+
+08:20.160000000000025
+então a gente vai ver aqui
+
+08:21.30000000000001
+que
+
+08:22.160000000000025
+a gente vai ter uma configuração do Next,
+
+08:27.100000000000023
+que a gente vai passar quais loqueios o nosso site está disponível.
+
+08:30.45999999999998
+Então, aqui você pode ver que ele tem até especificação.
+
+08:33.639999999999986
+A gente pode ter português de Portugal, português do Brasil,
+
+08:36.799999999999955
+inglês dos Estados Unidos, inglês da Inglaterra e assim por diante.
+
+08:41.360000000000014
+Outra coisa legal aqui é que ele também suporta configuração por domínios.
+
+08:45.60000000000002
+Então imagina que um domínio você quer que aponte para uma língua,
+
+08:49.200000000000045
+outro domínio para outra.
+
+08:50.65999999999997
+Porque se você não sabe, o .com.br é um domínio do Brasil.
+
+08:55.940000000000055
+Você tem .pt, que é de Portugal, .nl, que é de Netherlands, se eu não me engano,
+
+09:2.6000000000000227
+.fr, da França.
+
+09:6.740000000000009
+Então os domínios são localizados também.
+
+09:10.159999999999968
+Então, você pode ter o teu site em vários domínios, comprar vários domínios.
+
+09:14.740000000000009
+E depois, quando a pessoa acessar aquele site, você aponta para o idioma específico.
+
+09:21.059999999999945
+A gente não vai usar isso aqui hoje, porque é uma complexidade que não ensina nada, basicamente.
+
+09:23.279999999999973
+Mas é bom você saber que isso existe, tá bom? Outra coisa aqui que é legal ver
+
+09:25.799999999999955
+é
+
+09:26.41999999999996
+o subpath routing, que é o que a gente vai
+
+09:30.019999999999982
+usar, tá? Que é basicamente
+
+09:31.700000000000045
+a gente ter na URL qual é
+
+09:33.940000000000055
+o idioma que a gente quer. Então, por exemplo,
+
+09:36.25999999999999
+se você quer acessar home
+
+09:37.60000000000002
+em português, vai ser
+
+09:39.799999999999955
+home, vai ser pt
+
+09:41.879999999999995
+barra home ou
+
+09:43.51999999999998
+en barra home ou en barra home
+
+09:45.940000000000055
+e assim por diante
+
+09:47.58000000000004
+então o loqueio vai ficar no subpath routing
+
+09:51.559999999999945
+o Next já disse isso bem legal para nós
+
+09:53.460000000000036
+e vamos ver aqui
+
+09:56.39999999999998
+isso que eu queria trazer para vocês também
+
+09:58.879999999999995
+automatic location detection
+
+10:01
+basicamente o Next consegue saber qual é o loqueio do usuário, por quê?
+
+10:7.019999999999982
+porque os browsers, por padrão
+
+10:8.759999999999991
+mandam um header
+
+10:10.700000000000045
+um user preference
+
+10:12.519999999999982
+na verdade, chamado Accept Language
+
+10:14.860000000000014
+esse Accept Language
+
+10:16.399999999999977
+é default, é universal
+
+10:18.41999999999996
+então, o teu browser vai enviar
+
+10:20.720000000000027
+em qual idioma você escolheu que ele estivesse
+
+10:22.840000000000032
+e, consequentemente
+
+10:24.460000000000036
+o site vai conseguir
+
+10:25.519999999999982
+obter essa informação, tá bom?
+
+10:28.08000000000004
+E isso vai chegar pra nós no Next
+
+10:29.67999999999995
+e vai ser alimentado ali no i18.
+
+10:32.84000000000003
+E eu acho que pra já
+
+10:33.98000000000002
+é isso que eu queria mostrar
+
+10:35.860000000000014
+pra vocês aqui da documentação, tá?
+
+10:38
+O Next vai nos dar isso
+
+10:39.860000000000014
+porque tá nos headers que o browser manda
+
+10:42.10000000000002
+e vamos
+
+10:44.08000000000004
+só falar aqui
+
+10:45.58000000000004
+API de internacionalização, já falamos dela
+
+10:48.059999999999945
+e vamos falar da
+
+10:49.91999999999996
+biblioteca enfim que nós vamos usar
+
+10:52.08000000000004
+que é um rep daquela que eu mostrei
+
+10:53.98000000000002
+mais cedo para vocês, que é o
+
+10:55.74000000000001
+next e 18 next
+
+10:57.65999999999997
+vou colocar aqui no google
+
+10:59.75999999999999
+e a gente
+
+11:2.3799999999999955
+pode ver aqui no github
+
+11:3.740000000000009
+é popular, tem aqui quase 4 mil estrelas, e é umaerencia como colocar o conteúdo da tradução.
+
+11:27.82000000000005
+O Next não faz isso, ele só cuida das rotas, te dá qual que é o logado, mas você vai ter que achar uma biblioteca
+
+11:34.58000000000004
+ou fazer manualmente essa tradução, tá bom? Então ele diz aqui, para complementar isso, o Next e 18nNext
+
+11:41.539999999999964
+Next e 18n-next prover a
+
+11:43.77999999999997
+funcionalidade restante. Gerenciamento
+
+11:45.89999999999998
+de tradução, de conteúdo,
+
+11:48
+componentes, hooks e aquilo que
+
+11:49.89999999999998
+a gente precisa no React. Então a gente vai usar
+
+11:51.960000000000036
+essa biblioteca pra conseguir
+
+11:54.15999999999997
+gerenciar o nosso projeto.
+
+11:55.82000000000005
+E olha que legal. Por padrão ele dá uma
+
+11:57.77999999999997
+estrutura bem massa aqui pra nós
+
+11:59.75999999999999
+organizarmos as nossas traduções.
+
+12:2.659999999999968
+Na pasta public
+
+12:3.6200000000000045
+a gente vai ter uma pasta local.
+
+12:5.67999999999995
+Depois, a gente vai ter en ou de, que aqui, se não me engano, é alemão.
+
+12:11.480000000000018
+E vamos ter lá os nossos jasons.
+
+12:13.779999999999973
+Então, se a gente quisesse ter, por exemplo, um common para português,
+
+12:16.559999999999945
+a gente colocaria um pt, uma pastinha pt,
+
+12:19.91999999999996
+e dentro um common.json.
+
+12:21.82000000000005
+A gente já vai fazer isso e vai ficar mais claro para vocês.
+
+12:25.960000000000036
+Eu dentro um common.json a gente já vai fazer isso e vai ficar mais claro pra vocês eu acho que é isso, vamos começar
+
+12:27.91999999999996
+aqui a nossa aplicação
+
+12:29.24000000000001
+vamos só fazer o check
+
+12:31.91999999999996
+aqui e falar dos requisitos, rapidamente
+
+12:34.200000000000045
+npmu yarn, tá bom
+
+12:36.039999999999964
+você precisa ter isso instalado na sua máquina
+
+12:37.75999999999999
+caso você não queira instalar
+
+12:39.84000000000003
+ou não consiga ou algo do tipo
+
+12:41.620000000000005
+você pode usar ali o code sandbox
+
+12:43.74000000000001
+eu não sei se o CodeSandbox
+
+12:46.32000000000005
+já suporta o Next, talvez suporte,
+
+12:48.89999999999998
+mas tem como você
+
+12:50.22000000000003
+fazer isso online, tá bom?
+
+12:52.440000000000055
+E aí, um editor de texto,
+
+12:54.27999999999997
+Visual Studio Code ou outro editor,
+
+12:56.17999999999995
+tá bom? O que você preferir.
+
+12:58.639999999999986
+Muito bem, então,
+
+12:59.460000000000036
+a hora chegou,
+
+13:1.9400000000000546
+né? Hora de codar.
+
+13:3.17999999999995
+Vamos lá, então, estartar a nossa aplicação, pessoal.
+
+13:7.340000000000032
+Eu vou abrir aqui o meu terminal, tá?
+
+13:9.919999999999959
+Vou dar um zoom aqui.
+
+13:11.600000000000023
+E aqui eu vou acessar CD Projects, Rocketseat.
+
+13:17.720000000000027
+Aqui vai ser a 012, exatamente.
+
+13:22.25999999999999
+E aqui dentro, dessa pastinha minha minha Pode ser a pasta que você quiser
+
+13:25.74000000000001
+Eu vou criar uma aplicação next
+
+13:27.440000000000055
+Então vai ser um yarn create
+
+13:30.200000000000045
+Next app
+
+13:32.32000000000005
+Tá bom?
+
+13:34.200000000000045
+Hoje é esse comandinho aqui
+
+13:36.67999999999995
+Que a gente usa
+
+13:37.34000000000003
+Yarn create next app typescript
+
+13:39.860000000000014
+Eu vou usar typescript
+
+13:41.440000000000055
+Porque sim
+
+13:42.67999999999995
+Mas fique a vontade aí caso você não
+
+13:45.82000000000005
+queira usar vou dar um enter ele vai criar a aplicação e vai já pedir ó qual que é o nome
+
+13:51.34000000000003
+do projeto né eu vou dar aqui o nome de projeto next e 18n tá bom deu o nome que você quiser
+
+14:04
+e vamos esperar aqui instalação das dependências
+
+14:14
+Ok, então projeto criado, vamos aqui abrir no VS Code a nossa aplicação Next e 18n, muito bem, vamos aqui dar um zoom, mover isso aqui para o lado
+
+14:21
+esquerdo, que eu acho que vai ficar mais fácil para vocês enxergarem e é isso
+
+14:26.480000000000018
+né então vamos começar aqui a configuração do e 18n next primeira coisa que a gente tem que fazer
+
+14:34.879999999999995
+é instalar essa dependência então vou abrir aqui uma terminal instal Muito bem. O próximo passo aqui que ele pede
+
+14:45.960000000000036
+é o quê? É criar
+
+14:47.960000000000036
+aquela estrutura
+
+14:50.200000000000045
+de pastas que eu disse pra vocês.
+
+14:52.120000000000005
+Então, vamos aqui na public
+
+14:53.879999999999995
+criar uma pastinha chamada
+
+14:55.39999999999998
+Locales, tá bom?
+
+14:57.74000000000001
+E, deixa eu ver, se mais um zoom
+
+14:59.75999999999999
+talvez ajude, talvez.
+
+15:2.159999999999968
+E aqui dentro de Locales, eu vou colocar
+
+15:3.9400000000000546
+agora as pastas que eu quero ter
+
+15:5.82000000000005
+os idiomas
+
+15:8.700000000000045
+então vamos pra já colocar
+
+15:10.019999999999982
+português e inglês, tá bom?
+
+15:12.059999999999945
+então eu vou colocar aqui PT
+
+15:13.159999999999968
+e vou colocar outra aqui
+
+15:15.659999999999968
+EN, e aí mais uma vez
+
+15:18.299999999999955
+caso você quisesse outros idiomas
+
+15:19.82000000000005
+você ia criar suas pastinhas
+
+15:21.659999999999968
+e pra já, vamos criar um namespace
+
+15:24.120000000000005
+aqui chamado common,
+
+15:25.659999999999968
+que vai ser comum a todas as páginas.
+
+15:28.120000000000005
+Ou melhor, vamos criar aqui um chamado home,
+
+15:31.620000000000005
+pra gente usar na homepage.
+
+15:33.200000000000045
+Beleza?
+
+15:34.27999999999997
+home.json
+
+15:35.440000000000055
+E pra já, vamos colocar aqui,
+
+15:39.360000000000014
+abrir um JSON,
+
+15:40.940000000000055
+colocar aqui uma key,
+
+15:44.639999999999986
+e aqui eu vou colocar
+
+15:45.799999999999955
+home page
+
+15:47.879999999999995
+tá bom? E eu vou fazer
+
+15:49.960000000000036
+a mesma coisa, ó, vou copiar
+
+15:52.120000000000005
+esse arquivo e vou colá-lo
+
+15:54.059999999999945
+dentro da apt, tá bom?
+
+15:55.940000000000055
+Só que na apt, como que vai ser
+
+15:58.10000000000002
+isso? Página
+
+16:0.20000000000004547
+inicial, olha que
+
+16:2.159999999999968
+legal, é assim que vai
+
+16:3.3799999999999955
+dando a tradução.
+
+16:6.6200000000000045
+É assim que a tradução vai acontecer.
+
+16:7.759999999999991
+Muito bem.
+
+16:9.799999999999955
+Já criei aqui os meus loqueios.
+
+16:14.600000000000023
+E agora ele pede para nós aqui criarmos um arquivinho de configuração.
+
+16:15.039999999999964
+Está bem?
+
+16:17.860000000000014
+Então vamos copiar isso aqui.
+
+16:20
+Na raiz do projeto.
+
+16:22
+Criar um next.
+
+16:23
+Traço.
+
+16:24.100000000000023
+E 18 next.
+
+16:25.620000000000005
+.config.js com esse conteúdo
+
+16:28.32000000000005
+aqui pessoal
+
+16:29.019999999999982
+muito bem, e aqui
+
+16:31.899999999999977
+ele está dizendo coisas importantes
+
+16:34.460000000000036
+qual que é o padrão do nosso site
+
+16:36.74000000000001
+eu vou deixar aqui
+
+16:38.32000000000005
+que o padrão é
+
+16:39.559999999999945
+pt e quais são os
+
+16:42.25999999999999
+loqueios, quais os loqueios
+
+16:44.25999999999999
+que nós vamos suportar, né? Então vai ser
+
+16:46.360000000000014
+EN e aqui ao invés de
+
+16:48.10000000000002
+alemão vai ser PT.
+
+16:50.17999999999995
+Ótimo. Depois
+
+16:52.15999999999997
+a gente tem que importar essa configuração
+
+16:54.440000000000055
+que a gente criou pra dentro do
+
+16:56.24000000000001
+next, tá bom? Então eu vou importar
+
+16:58.39999999999998
+isso aqui, ó, essa linha
+
+17:0.03999999999996362
+aqui no next
+
+17:2.1399999999999864
+config.js
+
+17:3.7000000000000455
+importo ele aqui
+
+17:6.180000000000064
+e passo esse objeto aqui
+
+17:8.539999999999964
+i18n
+
+17:9.759999999999991
+sensacional
+
+17:11.1400000000001
+depois a gente tem que fazer mais uma coisinha
+
+17:14.799999999999955
+que é
+
+17:15.279999999999973
+passar aqui uma funçãozinha lá no nosso
+
+17:18.819999999999936
+app pra ele injetar no contexto
+
+17:20.5
+configurações da biblioteca
+
+17:22.940000000000055
+então eu vou
+
+17:24.779999999999973
+copiar só isso aqui
+
+17:26.11999999999989
+só o nome da função mesmo
+
+17:28.24000000000001
+vou aqui em pages
+
+17:30.279999999999973
+app
+
+17:31.480000000000018
+e olha lá, vou
+
+17:33.559999999999945
+abraçar aqui o myapp
+
+17:35.680000000000064
+com isso, tá bem?
+
+17:37.460000000000036
+e vou vir aqui e ó
+
+17:39.33999999999992
+import app with translation
+
+17:43.92000000000007
+from tal, deixa eu ver se o import é isso mesmo
+
+17:46.460000000000036
+É, ótimo
+
+17:47.74000000000001
+Então agora ele já vai injetar um provider aqui pra nós
+
+17:51.27999999999997
+E depois, olha lá
+
+17:53.3599999999999
+A gente precisa agora fazer uma coisa que é do next específica, tá?
+
+17:57.98000000000002
+Que é invocar uma função lá no get static props, tá bom?
+
+18:4.099999999999909
+Que é uma função que é executada sempre
+
+18:6.1400000000001
+que o Next vai fazer build ou
+
+18:08
+carregar a página. Por que, pessoal?
+
+18:10.579999999999927
+Porque o Next, ele compila
+
+18:12.400000000000091
+as nossas páginas, né, no momento do
+
+18:14.220000000000027
+build e também depois
+
+18:16.1400000000001
+à medida que eu acesso a um demand.
+
+18:18.200000000000045
+Pra isso, eu preciso carregar as traduções
+
+18:20.59999999999991
+lá no backend
+
+18:21.940000000000055
+pra que o backend tenha essas traduções.
+
+18:24.660000000000082
+Pra isso, olha lá
+
+18:25.920000000000073
+ele já me dá aqui uma função
+
+18:28.519999999999982
+pra isso, pessoal
+
+18:29.8599999999999
+import service site translations
+
+18:32.25999999999999
+e eu passo
+
+18:34
+ela aqui dentro, ó, pra nossa
+
+18:36.07999999999993
+get static props, legal, né
+
+18:38.180000000000064
+então o que eu vou fazer, eu vou
+
+18:39.819999999999936
+copiar esse trecho de código
+
+18:41.72000000000003
+vou lá na minha página home
+
+18:43.90000000000009
+que é essa daqui
+
+18:46.09999999999991
+index.ts
+
+18:47.440000000000055
+tá bom? e vou colar
+
+18:49.98000000000002
+isso aqui, ó
+
+18:50.92000000000007
+pronto, pronto
+
+18:53.77999999999997
+aqui ele já
+
+18:56.059999999999945
+tá carregando o namespace pra mim
+
+18:57.799999999999955
+pra já, eu só preciso do namespace
+
+19:0.09999999999990905
+home, e não preciso
+
+19:1.900000000000091
+desse outro namespace que eu
+
+19:3.6800000000000637
+nem sei que existe, né?
+
+19:6.279999999999973
+E agora
+
+19:7.759999999999991
+eu acho que já estamos prontos pra começar
+
+19:9.839999999999918
+a usar as traduções, tá bem?
+
+19:12.420000000000073
+Vamos só ver aqui.
+
+19:14.519999999999982
+Yeah, acho que é isso.
+
+19:15.779999999999973
+Estamos prontos. Então, a partir de agora
+
+19:17.480000000000018
+a gente já tá livre pra começar a usar as traduções.
+
+19:20.75999999999999
+Pra já, eu vou
+
+19:21.799999999999955
+só limpar aqui a nossa página, pessoal.
+
+19:27.440000000000055
+Eu vou tirar todo esse main aqui Que eu não vou usar, também não quero esse footer
+
+19:29.920000000000073
+Tá bem?
+
+19:31.38000000000011
+Acho que eu vou tirar o zoom aqui
+
+19:32.66000000000008
+Acho que vai ficar melhor pra enxergar
+
+19:34.07999999999993
+Não preciso desse image
+
+19:36.559999999999945
+Não preciso desse styles que veio aqui, tá bom?
+
+19:40.319999999999936
+Ó
+
+19:40.539999999999964
+Não vou precisar disso pra já
+
+19:42.700000000000045
+E beleza, ótimo
+
+19:44.83999999999992
+Então, fizemos a configuração
+
+19:47.40000000000009
+Configuração feita
+
+19:48.90000000000009
+Como que a gente traduz agora um texto?
+
+19:51.88000000000011
+Vamos entender como que a gente faria pra traduzir
+
+19:54.799999999999955
+Caso a gente não tivesse toda essa coisa
+
+19:59.98000000000002
+Eu conseguiria aqui importar o router lá do next
+
+20:4.3599999999999
+Do hook
+
+20:6.099999999999909
+UseRouter
+
+20:6.980000000000018
+Eu vou importar ele aqui
+
+20:9.420000000000073
+E o que eu faria pessoal
+
+20:12.160000000000082
+Olha só
+
+20:13.400000000000091
+Imagina que eu tivesse aqui um h1
+
+20:15.460000000000036
+Eu faria o seguinte
+
+20:17.539999999999964
+Router.locale
+
+20:20.079999999999927
+É igual a igual pt
+
+20:21.920000000000073
+Se sim
+
+20:23.940000000000055
+Coloca um olá na página Se sim Coloca um olá na página
+
+20:26.160000000000082
+Se não, coloca um hello
+
+20:28.559999999999945
+Olha só que coisa
+
+20:30.74000000000001
+É
+
+20:31.799999999999955
+Ficaria um
+
+20:34.940000000000055
+Ternário e se a gente tivesse
+
+20:36.40000000000009
+Outros idiomas, a gente teria que criar uma função
+
+20:38.5
+Ficaria uma coisa louca
+
+20:39.5
+Vamos ver como isso fica na página
+
+20:41.01999999999998
+Vamos abrir o nosso projeto, vou dar um yarn dev
+
+20:44.059999999999945
+Abriu aqui na página. Vamos abrir o nosso projeto, vou dar um yarn dev abriu aqui na página 3000
+
+20:45.819999999999936
+vamos abrir aqui
+
+20:47.09999999999991
+e ele está
+
+20:49.940000000000055
+dizendo que o Apple If Translation is not defined
+
+20:52.319999999999936
+por quê?
+
+21:0.7999999999999545
+não sei pessoal
+
+21:1.9600000000000364
+deixa eu dar um yarn de novo aqui
+
+21:3.7999999999999545
+ok, está instaladas as dependências.
+
+21:6.8599999999999
+Yarn deve.
+
+21:10.61999999999989
+Deixa eu ver o que eu fiz de errado aqui.
+
+21:15.400000000000091
+App with translation, blá blá blá.
+
+21:18.88000000000011
+Page props.
+
+21:22
+Que coisa.
+
+21:28.88000000000011
+Ótima pergunta Ótima questão isso aqui
+
+21:30.839999999999918
+Não sei porque está dando esse problema
+
+21:33.3599999999999
+Deixa eu ver aqui
+
+21:35.83999999999992
+Vamos fazer o seguinte
+
+21:39.1400000000001
+Eu vou copiar novamente
+
+21:40.5
+O exemplo dele aqui
+
+21:43.319999999999936
+Vamos ver se isso corrige.
+
+21:48.66000000000008
+Ok, aqui ele não está com TypeScript, né?
+
+21:56.01999999999998
+Ok.
+
+21:58.59999999999991
+Algo mudou.
+
+22:2.5399999999999636
+Não sei o que foi.
+
+22:7.099999999999909
+Ah, eu acho que é outro erro, pessoal
+
+22:9.319999999999936
+na verdade ele está dizendo que
+
+22:11.420000000000073
+o default namespace
+
+22:13.220000000000027
+não foi encontrado
+
+22:15.079999999999927
+hum, ok
+
+22:17.24000000000001
+então ele espera que tenha um
+
+22:19.019999999999982
+common namespace, vamos ver aqui
+
+22:21.460000000000036
+ok Vamos ver aqui Ok
+
+22:25.1400000000001
+Será que lá embaixo
+
+22:34.299999999999955
+Ok, aqui eu estou pedindo home
+
+22:37.98000000000002
+Ah, está aqui pessoal
+
+22:44
+Ele realmente precisa
+
+22:46.66000000000008
+De um common
+
+22:48.25999999999999
+Será que eu consigo alterar isso?
+
+22:50.200000000000045
+Se eu não conseguir alterar eu vou criar um common
+
+22:52.07999999999993
+E tá tudo bem
+
+22:53.3599999999999
+Será que eu consigo aqui passar
+
+22:57.33999999999992
+Coisas
+
+22:58.61999999999989
+Default, namespace
+
+23:1.8800000000001091
+Home Default, namespace Home É pessoal
+
+23:11.819999999999936
+Não tá dando, tá?
+
+23:13.980000000000018
+Então vamos criar um common aqui só pra ele parar de encher o saco
+
+23:16.8599999999999
+Eu também acho
+
+23:18.25999999999999
+Que a gente ia precisar desse common depois
+
+23:20.40000000000009
+Como eu disse pra vocês
+
+23:21.61999999999989
+Vamos ter bastante coisa
+
+23:23.940000000000055
+Que pode ser comum
+
+23:25.079999999999927
+vou criar aqui um JSON vazio
+
+23:27.40000000000009
+e outro
+
+23:29.960000000000036
+JSON vazio, vou parar a aplicação
+
+23:31.980000000000018
+startar lá novamente e
+
+23:34.01999999999998
+ok
+
+23:35.57999999999993
+tá funcionando, né
+
+23:37.48000000000002
+então vamos
+
+23:38.960000000000036
+voltar ao raciocínio onde a gente parou
+
+23:41.51999999999998
+basicamente a gente tem
+
+23:43.98000000000002
+aqui um if, né, que vê se o loqueio é
+
+23:46.960000000000036
+PT mostro lá se não mostra Hello então ó n mostra Hello se eu alterar aqui para PT Olá né já
+
+23:56.1400000000001
+funcionou e o router já tem aqui a location esperada mas concordam que isso daqui é horrível
+
+24:2.019999999999982
+né não tenho condições de ficar fazendo isso em todo momento. Então, é por isso
+
+24:5.920000000000073
+que a gente vai ter aqui um const
+
+24:8.200000000000045
+t, tá?
+
+24:10.980000000000018
+de useTranslation
+
+24:12.779999999999973
+esse useTranslation
+
+24:13.88000000000011
+vem lá do next e 18 next
+
+24:16.160000000000082
+O que é t, pessoal?
+
+24:18.1400000000001
+É translate, tá?
+
+24:20.299999999999955
+Então a gente pode aqui
+
+24:22.059999999999945
+ao invés de fazer isso que a gente fez
+
+24:23.700000000000045
+invocar o t, que é uma função, e passar aqui qual chave a gente quer que ele traduza.
+
+24:30
+Então olha, no namespace home, quem que eu tenho aqui de chaves?
+
+24:34.92000000000007
+Eu tenho key, então traduza para mim key.
+
+24:39.799999999999955
+O que a gente está dizendo com isso?
+
+24:45.960000000000036
+que a gente está dizendo com isso? Automaticamente ele vai entender em qual idioma o usuário está e vai traduzir para nós aqui para qualquer que seja esse idioma. Legal, né? Então,
+
+24:51.8599999999999
+olha lá. Aqui era a página inicial e se eu passar aqui para EN, olha lá, Home Page.
+
+25:0.40000000000009095
+Sensacional, né? Já está resolvido aqui o nosso problema então vamos começar aqui, deixar essa página mais civilizada
+
+25:7.6400000000001
+então vamos criar um título para ela
+
+25:9.400000000000091
+vamos colocar aqui title
+
+25:11.700000000000045
+vamos colocar aqui também uma description
+
+25:14.660000000000082
+essa description pode ser por exemplo
+
+25:17.59999999999991
+o Copilot está me dando aqui, this is the homepage
+
+25:21.779999999999973
+ok, pode ser
+
+25:23.09999999999991
+e vamos copiar isso daqui, colar
+
+25:25.90000000000009
+na home do pt
+
+25:27.700000000000045
+e aí a gente vai traduzir
+
+25:30.039999999999964
+página
+
+25:31.59999999999991
+inicial
+
+25:32.66000000000008
+essa
+
+25:35.61999999999989
+é a página
+
+25:36.960000000000036
+inicial
+
+25:38.75999999999999
+boa, então
+
+25:40.77999999999997
+lembrando que, se eu não me engano, ele não
+
+25:43.819999999999936
+atualiza automaticamente, tá?
+
+25:45.559999999999945
+Eu preciso parar e startar, porque esse JSON é carregado na hora que eu starto a aplicação aqui, tá bem?
+
+25:52.11999999999989
+E aí, aqui eu vou colocar o title nesse H1 e vou criar aqui um H3, que vai ser a description, acho que foi isso que eu coloquei.
+
+26:3.900000000000091
+E, tcharam, inglês
+
+26:6.339999999999918
+Português
+
+26:7.880000000000109
+Perfeito
+
+26:9.819999999999936
+Já tá funcionando, né
+
+26:11.180000000000064
+Então, vamos fazer o seguinte
+
+26:13.1400000000001
+Vamos criar uma segunda página aqui
+
+26:15.160000000000082
+Só pra gente conseguir navegar
+
+26:17.920000000000073
+E eu mostrar pra vocês como que a gente navega
+
+26:20.079999999999927
+Tá bom? Então eu vou criar aqui uma página
+
+26:22.11999999999989
+Chamada
+
+26:22.720000000000027
+Contact, eu vou até duplicar esse index
+
+26:26.24000000000001
+dupliquei
+
+26:27.940000000000055
+vou renomear ele pra contact
+
+26:29.40000000000009
+aqui eu vou chamar ele de
+
+26:31.88000000000011
+contact
+
+26:33.38000000000011
+tá bem? Aqui embaixo também
+
+26:36.299999999999955
+contact
+
+26:37.40000000000009
+e
+
+26:38.88000000000011
+aqui eu vou ter
+
+26:42.059999999999945
+outro namespace, né? Que não vai ser esse
+
+26:44.25999999999999
+e aqui também, ó, lá no lado do servidor eu carregar o contact.
+
+26:49.299999999999955
+Aqui, pessoal, o loqueio tá reclamando que ele não sabe qual que é esse tipo, tá,
+
+26:53
+mas eu tenho como tipar isso aqui.
+
+26:54.75999999999999
+Vamos converter isso aqui pra uma lambda, uma arrow function, tá,
+
+27:1.4400000000000546
+só pra gente conseguir pôr o tipo aqui de maneira mais bonitinha.
+
+27:2.2200000000000273
+function, tá? Só pra gente conseguir pôr o tipo aqui de maneira
+
+27:3.839999999999918
+mais bonitinha. E aqui
+
+27:6.2000000000000455
+do next
+
+27:7.099999999999909
+a gente pode importar
+
+27:10.059999999999945
+o get
+
+27:12.180000000000064
+static
+
+27:13.3599999999999
+static props
+
+27:17.819999999999936
+que é uma tipagem, né?
+
+27:23.90000000000009
+E aqui eu digo que é uma função assíncrona. Agora ele já sabe que é uma tipagem, né? E aqui eu digo que é uma função assíncrona.
+
+27:27.720000000000027
+Agora, ele já sabe que é uma string.
+
+27:30.09999999999991
+Ele só está reclamando aqui que talvez pode vir undefined.
+
+27:33.61999999999989
+Se vier undefined, não vai vir undefined.
+
+27:36.799999999999955
+Então, eu vou forçar aqui, né?
+
+27:39.059999999999945
+Ele entender que isso nunca pode ser undefined.
+
+27:41.960000000000036
+Agora que eu já fiz isso, eu posso copiar isso de forma mais bonita só pro meu index
+
+27:45.90000000000009
+pra lá ficar bem também
+
+27:47.3599999999999
+ó, importar tipagem
+
+27:50.25999999999999
+e
+
+27:52
+ótimo, já não temos aqui
+
+27:53.57999999999993
+rush typescript, beleza pessoal
+
+27:55.77999999999997
+e aqui vai ser rom
+
+27:57.57999999999993
+ótimo, então ambas as páginas
+
+28:0.31999999999993634
+aqui já estão traduzindo
+
+28:1.5599999999999454
+tem só uma coisinha aqui, antes de eu
+
+28:4.039999999999964
+criar aquela página que eu quero acertar com vocês que é o title aquele title que fica no browser né posso mostrar
+
+28:11.400000000000091
+para vocês aqui ó ó isso aqui ele tem que ser dinâmico também e tem que ser traduzível porque
+
+28:17.40000000000009
+se na hora que eu compartilhar o link está e tu vai aparecer outra coisa então eu posso, olha que massa, colocar o title aqui, tá bem?
+
+28:26.660000000000082
+E aí, olha o que vai acontecer.
+
+28:28.11999999999989
+O title agora, quando eu estou em português, fica esse.
+
+28:31.440000000000055
+E quando eu estou em inglês, olha lá, fica em inglês.
+
+28:35.16000000000008
+Isso é legal porque imagina que você compartilha isso no WhatsApp ou no Telegram.
+
+28:38.960000000000036
+Ele vai gerar aquele preview, né?
+
+28:40.819999999999936
+E aquele preview vai ser gerado com base no usuário que está vendo.
+
+28:47.01999999999998
+preview né e aquele preview vai ser gerado com base no usuário que tá vendo porque é o que o browser né o cliente por exemplo no WhatsApp vai fazer vai pegar língua do utilizador e vai pedir
+
+28:55.299999999999955
+para o next o preview com aquela linguagem ótimo fizemos isso aqui vamos fazer lá na página de contato também.
+
+29:9.200000000000045
+Ótimo.
+
+29:11.5
+Então, já estamos prontos aqui, né? Vamos então agora criar um namespace para a nossa página nova.
+
+29:16.059999999999945
+Aqui a gente vai ter, além da home, a contact, tá bom?
+
+29:22.220000000000027
+E o title aqui. Da contact.
+
+29:25.420000000000073
+Vai ser.
+
+29:26.8599999999999
+Contact.
+
+29:28.980000000000018
+Não vou ter descrição.
+
+29:32.48000000000002
+Vou colocar só um title aqui nela mesmo.
+
+29:34.01999999999998
+Duplicar.
+
+29:35.200000000000045
+Colar no PT.
+
+29:36.460000000000036
+E.
+
+29:37.960000000000036
+Contato.
+
+29:39.01999999999998
+Muito bem.
+
+29:41.33999999999992
+Vamos parar aqui no nosso servidor. Para ele carregar essas traduções novas.
+
+29:44.24000000000001
+Ótimo.
+
+29:46.539999999999964
+Vamos carregar aqui. Tudo funcionando. E aí vamos colocar aqui no servidor para ele carregar essas traduções novas ótimo vamos carregar aqui tudo funcionando e vamos colocar aqui ó barra contact pronto estamos lá na nossa página a
+
+29:53.8599999999999
+gente não tem descrição né vamos apagar essa descrição aqui que a gente não vai ter na página
+
+29:58.42000000000007
+de contato e ótimo reparem uma coisa, isso é legal entender
+
+30:5.039999999999964
+Tá vendo aqui que tem o en?
+
+30:07
+É esse en que tá definindo qual que é o idioma
+
+30:9.460000000000036
+Da nossa página, tá?
+
+30:11.1400000000001
+E se eu tirar o en, o que que acontece?
+
+30:14.1400000000001
+Olha lá
+
+30:14.559999999999945
+O next entende, né?
+
+30:17.160000000000082
+Qual que é o default
+
+30:18.660000000000082
+Idioma, a gente deixou que era português
+
+30:20.5
+E basicamente quando não tem nada
+
+30:22.519999999999982
+Ele vai pro default e funciona perfeitamente e a mesma coisa para o home aqui http pronto pro home o home que ele
+
+30:33.25999999999999
+mandou com EN no final mas eu acho que é porque está pegando alguma coisa aqui do
+
+30:38.3599999999999
+meu browser http ok EN deixa eu colocar pt
+
+30:45.8599999999999
+sim, é algum autocomplete
+
+30:48.319999999999936
+que ele fez, mas tá funcionando
+
+30:49.940000000000055
+perfeitamente, vamos então
+
+30:52.01999999999998
+pra não ter que ficar colocando na url
+
+30:53.88000000000011
+colocar um link aqui pra gente ir
+
+30:56.16000000000008
+lá pro contact, beleza
+
+30:57.819999999999936
+então, como que eu vou fazer isso
+
+31:0.01999999999998181
+e isso aqui é legal, né
+
+31:1.5599999999999454
+eu vou colocar aqui um link
+
+31:2.9600000000000364
+lá do next legal, né? Eu vou colocar aqui um link Lá do next link, né?
+
+31:9.720000000000027
+E vou colocar aqui um A
+
+31:11.099999999999909
+Vou colocar um A porque depois eu posso estilizar ele, né?
+
+31:16.480000000000018
+E aqui, vou colocar aqui contact
+
+31:18.88000000000011
+O href vai ser barra contact
+
+31:22.440000000000055
+E pronto, né?
+
+31:24.59999999999991
+Só que, olha aqui
+
+31:26.220000000000027
+contact tá
+
+31:27.88000000000011
+em inglês, ou seja
+
+31:29.6400000000001
+para tudo que você
+
+31:32.07999999999993
+renderiza na tua tela, tu tem que ter
+
+31:33.819999999999936
+uma tradução, então na página
+
+31:36.16000000000008
+home, eu tenho que ter
+
+31:38.059999999999945
+aqui uma key chamada
+
+31:39.90000000000009
+contact link, tá?
+
+31:42.16000000000008
+um nome expressivo
+
+31:43.27999999999997
+e aqui vai ser contact ou go to contact por exemplo e lá
+
+31:54.27999999999997
+em português vai ser ir para contato tá bom e aqui mais uma vez Eu estou a dizer a tradução, preciso dar um restart Aqui no server
+
+32:5.559999999999945
+Ok, ele ainda não traduziu
+
+32:11.279999999999973
+Por quê? Porque eu acho que eu coloquei a chave
+
+32:13
+Errada, tá? Vamos lá, conferir
+
+32:15.079999999999927
+Indexed
+
+32:17.079999999999927
+Claro, não chamei a tradução
+
+32:18.539999999999964
+Então aqui vai ser
+
+32:20.279999999999973
+Chamar a tradução com a chave
+
+32:22.75999999999999
+Contact link
+
+32:23.819999999999936
+E pronto.
+
+32:25.420000000000073
+Em português aparece ir para contato.
+
+32:28.019999999999982
+E em inglês, go to contact.
+
+32:30.3599999999999
+E a hora que eu clico, sensacional.
+
+32:33.07999999999993
+E o mais legal, ele respeita o idioma do momento.
+
+32:35.88000000000011
+Imagina, vou voltar aqui, vou colocar em português.
+
+32:39.09999999999991
+E vou colocar ir para contato.
+
+32:41.74000000000001
+Pronto, ele respeita o idioma.
+
+32:43.92000000000007
+Ótimo, pessoal.
+
+32:46.200000000000045
+Está sensacional isso aqui.
+
+32:49.059999999999945
+Vamos começar a fazer coisas aqui mais dinâmicas.
+
+32:49.92000000000007
+Como, por exemplo. E se a gente quisesse ter lá no nosso header uma language switcher.
+
+32:59.16000000000008
+Um alterador de linguagem.
+
+33:1.5799999999999272
+Quando eu quiser clicar em PT, ele vai para português e inglês, né?
+
+33:6.319999999999936
+Vamos fazer isso então.
+
+33:7.440000000000055
+Vamos criar aqui na raiz do projeto uma pastinha chamada components.
+
+33:14.460000000000036
+E dentro da pastinha components, eu vou criar um carinha chamado header.tsx.
+
+33:20.24000000000001
+Olha que legal.
+
+33:21.980000000000018
+Então, export const header.
+
+33:26.519999999999982
+Vai ser um componente comum, tá bom
+
+33:27.61999999999989
+e aqui eu vou retornar o que? uma div
+
+33:30.440000000000055
+e eu vou ter
+
+33:32.11999999999989
+deixa eu pensar aqui
+
+33:34
+dois botões, tá, o primeiro botão
+
+33:36.51999999999998
+vai ser um link pra home
+
+33:37.90000000000009
+é tipo aquele go to home
+
+33:40.74000000000001
+eu tô em outra página, eu quero ir pra home
+
+33:42.3599999999999
+e lá do outro lado
+
+33:43.90000000000009
+desse nosso header, a gente pode ter a alteração de linguagem.
+
+33:48.72000000000003
+Ou seja, eu vou ter aqui, por exemplo, Home, de um lado, né?
+
+33:55.16000000000008
+E lá no final, eu vou ter, por exemplo, PTEN, pra poder clicar, né?
+
+34:2.4400000000000546
+para poder clicar, né?
+
+34:2.519999999999982
+Isso aqui é minha página, muito bem.
+
+34:4.6400000000001
+Isso aqui é minha página, muito bem.
+
+34:7.839999999999918
+E aí, uma coisa que a gente pode fazer também é a gente pode ter um underline ou algum indicador visual
+
+34:13.460000000000036
+em qual idioma está selecionado no momento
+
+34:15.760000000000218
+para o usuário trocar isso facilmente.
+
+34:19.059999999999945
+Beleza, galera?
+
+34:20
+Então, vamos aqui colocar primeiro aquele home, né?
+
+34:23.159999999999854
+Que vai ser um link.
+
+34:26.019999999999982
+Aqui vai ser um A.
+
+34:30.73999999999978
+E aqui, olha só, vai ser home, né?
+
+34:33.88000000000011
+Home, eu acho que a gente está chamando igual nos dois lados,
+
+34:37.179999999999836
+tanto em português quanto em inglês.
+
+34:39.11999999999989
+Mas a gente poderia ter a tradução aqui também.
+
+34:41.69999999999982
+Então, é o que vocês preferirem tá bom então olha só vou
+
+34:47.679999999999836
+colocar aqui next link e o hf disso aqui é sempre para a página inicial ótimo depois a gente vai ter
+
+34:57.76000000000022
+que uma div que vai ser onde a gente vai armazenar aqueles dois carinhas né e aqui vem uma coisa
+
+35:4.239999999999782
+interessante para não ter colocar esses botões fixos,
+
+35:07
+eu posso criar uma coisa dinâmica.
+
+35:9.320000000000164
+Eu posso criar algo que mude aqui
+
+35:11.360000000000127
+à medida que eu adicionar uma nova linguagem.
+
+35:14.139999999999873
+Como é que eu faço isso?
+
+35:15.7199999999998
+O router,
+
+35:17.840000000000146
+do useRouter,
+
+35:19.340000000000146
+do next,
+
+35:20.940000000000055
+me dá uma informação aqui muito importante.
+
+35:24.179999999999836
+Vamos colocar aqui um console.log
+
+35:28.820000000000164
+e vamos só chamar esse header lá na home para gente conseguir renderizá-lo então vou invocar aqui
+
+35:43.340000000000146
+Ok, vamos lá pra página agora Home
+
+35:44.23999999999978
+Vou abrir aqui a minha
+
+35:51.57999999999993
+DevTools, tá bom?
+
+35:53.30000000000018
+E eu tenho aqui, ó, algumas coisas
+
+35:55.23999999999978
+Olha que legal, nesse objeto que veio
+
+35:57.559999999999945
+Olha o que eu tenho aqui, pessoal
+
+35:58.98000000000002
+Loqueios
+
+36:00
+O Next dá, através do Use Router
+
+36:3.300000000000182
+Quais são os bloquequeios disponíveis na página
+
+36:5.960000000000036
+E assim eu já consigo renderizar algo dinâmico baseado nesses loqueios
+
+36:12.260000000000218
+Então o que eu posso fazer agora?
+
+36:14.800000000000182
+Eu posso fazer aqui um map
+
+36:17.679999999999836
+Eu vou até copiar um código aqui para a gente ganhar algum tempo
+
+36:21.800000000000182
+Que é o que eu vou fazer no nosso header
+
+36:24.980000000000018
+Dentro dessa div aqui E eu vou ter esse código aqui pra gente ganhar algum tempo que é o que eu vou fazer no nosso header, ó, dentro
+
+36:26.079999999999927
+dessa div aqui
+
+36:26.940000000000055
+e eu vou ter esse código aqui, ó
+
+36:30.559999999999945
+router
+
+36:31.960000000000036
+aqui em cima
+
+36:32.86000000000013
+olha só o que eu vou fazer, eu vou pegar
+
+36:35.940000000000055
+os loqueios e vou fazer um map
+
+36:38
+neles, tá bom? E aí pra
+
+36:39.7800000000002
+cada linguagem que existir
+
+36:41.61999999999989
+eu vou criar um link diferente
+
+36:43.2800000000002
+olha que massa, né?
+
+36:46.69999999999982
+E aí, o que eu posso fazer?
+
+36:51.61999999999989
+Eu posso, nesse link, que é para trocar linguagem, fazer o seguinte.
+
+36:53.7199999999998
+Olha, não troca a sua roda atual.
+
+36:56.90000000000009
+Eu posso renderizar esse header em várias páginas.
+
+37:0.42000000000007276
+E quando eu clicar no link, não manda eu para outra página.
+
+37:3.119999999999891
+Mantém a que você tem atualmente, só troca pra mim o location
+
+37:5.579999999999927
+olha que sensacional, e aí
+
+37:8.019999999999982
+aqui eu só coloquei um A
+
+37:9.7800000000002
+e tem um estilo
+
+37:11.860000000000127
+fica aí com underline
+
+37:13.800000000000182
+aquele que tiver a linguagem atual
+
+37:15.860000000000127
+como que eu sei a linguagem atual?
+
+37:17.840000000000146
+eu posso importar aqui pessoal
+
+37:19.320000000000164
+o i18n
+
+37:20.61999999999989
+aqui vai ser o useTranslation
+
+37:26.5
+E ó
+
+37:28.639999999999873
+Nessa instância aqui do hook
+
+37:30.539999999999964
+Do useTranslation
+
+37:32.48000000000002
+Eu vou ter qual é a linguagem atual
+
+37:34.179999999999836
+Então, se a linguagem que eu estou renderizando
+
+37:37.01999999999998
+No momento, for igual a linguagem
+
+37:39.340000000000146
+Que o user selecionou
+
+37:41
+Põe um underline
+
+37:42.320000000000164
+E pronto, vai ficar lindo isso aqui, né?
+
+37:46.11999999999989
+Vamos só nessa div aqui
+
+37:47.840000000000146
+colocar um style
+
+37:49.80000000000018
+vamos colocar aqui um display
+
+37:52.13999999999987
+flex, que eu quero que ele fique aqui
+
+37:54.2800000000002
+um na frente do outro
+
+37:55.679999999999836
+e um justify content, é isso mesmo
+
+37:58.42000000000007
+copilot, só que vai ser
+
+37:59.69999999999982
+space around
+
+38:1.2600000000002183
+distribui espaço entre eles
+
+38:4.320000000000164
+mas põe um espacinho no fim também
+
+38:6.800000000000182
+E só pra ficar
+
+38:8.260000000000218
+Mais bonito, vamos colocar aqui um
+
+38:10.360000000000127
+Padding de 20
+
+38:11.940000000000055
+E vamos colocar aqui um
+
+38:14.179999999999836
+Background de Light Blue
+
+38:16.079999999999927
+Não sei
+
+38:16.73999999999978
+Background Color
+
+38:18.7199999999998
+De Light
+
+38:21.539999999999964
+Coral, não sei, pode ser
+
+38:24.40000000000009
+Vamos ver como que isso fica
+
+38:25.90000000000009
+Ah, não ficou mal, boa
+
+38:28.300000000000182
+Então vamos mudar o F5 aqui
+
+38:30.5
+Ok, temos a home, né
+
+38:32.51999999999998
+Então eu vou pra página de contato
+
+38:34.13999999999987
+Na página de contato eu ainda não coloquei o header
+
+38:36.320000000000164
+Vamos colocar ele lá
+
+38:37.51999999999998
+Aqui na página de contatos
+
+38:40.7800000000002
+Vamos colocar o header
+
+38:43.07999999999993
+Ok, boa Contatos. Vamos colocar o header.
+
+38:46.539999999999964
+Ok.
+
+38:47.38000000000011
+Boa.
+
+38:48.940000000000055
+Então, pronto.
+
+38:50.179999999999836
+Posso voltar para home.
+
+38:51.30000000000018
+Voltei. E olha só.
+
+38:52.86000000000013
+Eu estou em inglês.
+
+38:53.7800000000002
+Vamos alterar para português.
+
+38:56
+Pronto.
+
+38:56.820000000000164
+Alterou para português.
+
+38:58.159999999999854
+Detalhe.
+
+38:58.80000000000018
+Ele sabe aqui que está português selecionado.
+
+39:02
+E eu não tenho nada da URL.
+
+39:3.480000000000018
+Porque ele controla isso para nós.
+
+39:5.1599999999998545
+Sensacional, né?
+
+39:6.320000000000164
+Então, vamos para contato.
+
+39:8.38000000000011
+Manteve em português.
+
+39:9.88000000000011
+E não trocou nada.
+
+39:11.079999999999927
+E se eu der F5 na página?
+
+39:13.599999999999909
+Pronto.
+
+39:14.460000000000036
+Ele veio aqui já com o PT.
+
+39:16.460000000000036
+E está funcionando lindamente.
+
+39:19.61999999999989
+Ok.
+
+39:20.079999999999927
+Vamos então fazer só uma melhoria aqui. Que eu quero que vocês tenham noção Que dá pra ser feita
+
+39:25.2199999999998
+A gente criou aqui
+
+39:27.23999999999978
+Um GetStaticProps
+
+39:29.61999999999989
+Que a gente vai ter que ter pra toda a página
+
+39:31.73999999999978
+Porque esse processo é realmente
+
+39:34.679999999999836
+Necessário
+
+39:37.679999999999836
+Pra gente conseguir fazer o build da nossa aplicação
+
+39:40.42000000000007
+Só pra gente não ter que ficar repetindo
+
+39:42.539999999999964
+Isso aqui em toda a página
+
+39:43.840000000000146
+E passando esse bloqueio
+
+39:46.07999999999993
+a gente pode simplesmente criar uma funçãozinha
+
+39:48.38000000000011
+só pra abstrair um pouco dessa
+
+39:50.01999999999998
+lógica, tá? A gente pode ter aqui
+
+39:52
+uma pastinha chamada útil
+
+39:53.36000000000013
+podemos aqui ter um translations
+
+39:56.01999999999998
+.ts
+
+39:58.07999999999993
+tá bom? O que a gente vai
+
+40:0.07999999999992724
+ter aqui? A gente vai copiar
+
+40:2.2600000000002183
+olha só, isso aqui
+
+40:4.2199999999998
+lá pra dentro e vamos criar uma
+
+40:8.760000000000218
+função chamada loadTranslation aonde a gente vai receber aqui um loqueio o copalo já tá me ajudando
+
+40:17.039999999999964
+aqui né e que que eu vou fazer eu vou retornar aquela função olha lá que legal Só que aqui eu vou passar aqui
+
+40:25.539999999999964
+Os namespaces que eu quero carregar
+
+40:28.199999999999818
+Então namespace
+
+40:29.679999999999836
+Que vai ser
+
+40:31.159999999999854
+Aqui um array de string
+
+40:33.320000000000164
+E eu posso passar pra cá
+
+40:35.07999999999993
+Isso aqui é só pra facilitar um pouco a abstração
+
+40:38.48000000000002
+A gente poderia colocar aqui
+
+40:40.36000000000013
+Uma lógica, por exemplo
+
+40:42
+Sempre que for determinado o locale
+
+40:43.90000000000009
+Eu carrego determinado oio carrega determinado
+
+40:45.559999999999945
+nem space e assim por diante isso aqui pode ser útil então vamos só fazer essa melhoria Zinha
+
+40:50.92000000000007
+aqui então aqui vai ser é isso aqui no translation já não preciso desse importe né E a mesma coisa lá para a nossa home.
+
+41:11.139999999999873
+Muito bem.
+
+41:12.159999999999854
+Então, posso apagar esses importes aqui que não estou usando.
+
+41:15.079999999999927
+E está ótimo.
+
+41:16.11999999999989
+Melhoria feita, pessoal.
+
+41:17.7199999999998
+Então, eu acho que até aqui já deu para entender muito bem
+
+41:20.940000000000055
+como a gente traduz,
+
+41:22.88000000000011
+como que a gente se move de uma página para outra, preservando essa tradução, mas como a gente pode fazer para traduzir dados dinâmicos, como por exemplo, uma mensagem não lidas, ou você leu todas as mensagens, quando é 0. Quando é 1,
+
+41:46.01999999999998
+você tem uma mensagem
+
+41:48.059999999999945
+não lida. Quando é
+
+41:50.059999999999945
+2 ou mais, você tem
+
+41:51.840000000000146
+duas mensagens não lidas.
+
+41:54.61999999999989
+Como que a gente faz pra traduzir
+
+41:56.48000000000002
+isso, né, super complicado,
+
+41:58.940000000000055
+usando aqui
+
+41:59.7199999999998
+o i18n? A gente tem,
+
+42:2.119999999999891
+como eu mostrei lá no começo da aula pra vocês,
+
+42:4.420000000000073
+uma forma de fazer isso de uma maneira bem fácil.
+
+42:7.300000000000182
+Então vamos aqui criar um exemplo.
+
+42:9.420000000000073
+Só fechar aqui essas outras páginas para não nos confundirmos.
+
+42:13.860000000000127
+Fechar tudo.
+
+42:16.320000000000164
+Minimizar todas as páginas.
+
+42:17.76000000000022
+Vamos aqui no index.
+
+42:18.559999999999945
+E vamos criar aqui esse exemplo que eu acabei de dar para vocês.
+
+42:22.59999999999991
+Imagina que a gente tivesse aqui um p.
+
+42:28.26000000000022
+E a gente tivesse aqui uma tradução.
+
+42:31.539999999999964
+Unread messages.
+
+42:33.559999999999945
+Vai ser aqui uma chave.
+
+42:37.07999999999993
+Só que a gente vai ter aqui um counter.
+
+42:38.659999999999854
+Como que a gente faz?
+
+42:45.19999999999982
+Olha só, a gente pode aqui como segundo argumento passar um objeto e passar, olha só um count lá pra nossa tradução
+
+42:48.09999999999991
+e aí com esse
+
+42:49.80000000000018
+count aqui em mãos, digamos assim
+
+42:51.86000000000013
+a gente consegue criar uma tradução
+
+42:53.940000000000055
+específica, vamos na nossa
+
+42:56.11999999999989
+home pra entender como que isso fica
+
+42:58.01999999999998
+aqui em inglês
+
+43:0.03999999999996362
+no home, como que a gente
+
+43:1.9600000000000364
+faz pra quando a gente tiver
+
+43:3.7800000000002
+zero, né, A gente pode fazer
+
+43:6.119999999999891
+assim, unread
+
+43:7.400000000000091
+messages
+
+43:9.039999999999964
+underline zero
+
+43:11.7199999999998
+esse underline zero
+
+43:13.800000000000182
+é uma convenção da própria biblioteca
+
+43:16.159999999999854
+então ele sabe que quando você coloca
+
+43:18.139999999999873
+o underline zero é porque você está falando
+
+43:20.199999999999818
+de zero, então
+
+43:22
+ok, o copilot está me ajudando você não tem mensagens não lidas né ok E aí quando
+
+43:31.579999999999927
+eu tiver uma só olha só o Paulo já também fez para mim underline one you have one a red message
+
+43:40.40000000000009
+sensacional né E quando eu tiver mais? Olha só A gente tem aqui um order
+
+43:46.659999999999854
+Que é basicamente qualquer outra coisa
+
+43:48.59999999999991
+Que não tiver nesses dois casos
+
+43:50.51999999999998
+A gente pode fazer aqui
+
+43:51.960000000000036
+You have a read message
+
+43:54.07999999999993
+A read message
+
+43:55.59999999999991
+E aqui colocar um counter
+
+43:58.059999999999945
+Só que aqui o corpólatra fez errado
+
+44:0.7199999999997999
+Porque a gente vai colocar
+
+44:2.5599999999999454
+Dois colchetes
+
+44:6.360000000000127
+Abrindo e fechando E a variável que a gente vai obter
+
+44:8.11999999999989
+aqui vai ser count, que foi aquela que a gente
+
+44:9.960000000000036
+passou lá atrás. E pronto,
+
+44:11.940000000000055
+feito isso, a nossa aplicação já vai
+
+44:13.960000000000036
+estar dinâmica, tá bom? Vamos só
+
+44:15.940000000000055
+copiar isso aqui e traduzir
+
+44:18.340000000000146
+pra português também, né?
+
+44:20.019999999999982
+Então, home
+
+44:20.920000000000073
+olha lá. Então aqui
+
+44:23.659999999999854
+no zero eu vou colocar aqui.
+
+44:26.7199999999998
+Ah, alright.
+
+44:28.7800000000002
+Você leu tudo.
+
+44:31.300000000000182
+O legal é isso.
+
+44:32.57999999999993
+Você muda aqui conforme você quiser, tá bom?
+
+44:35.960000000000036
+No 1 você tem uma mensagem não lida.
+
+44:55.36000000000013
+uma mensagem não lida e quando for mais você tem mensagens não lidas ou seja tudo no plural então olha que massa que fica né e fica bem bem bonitinho a sintaxe vamos ver se já tá funcionando
+
+45:0.7600000000002183
+vamos lá para o nosso servidor só para a gente conseguir carregar essa nova tradução. E vamos pra home page. Boa. Aqui ele não deu certo. Unread messages. que é a chave correta aqui está igual index
+
+45:26.300000000000182
+unread
+
+45:27.659999999999854
+message, está igual
+
+45:29.860000000000127
+porque não deu certo
+
+45:32.40000000000009
+vamos tentar entender aqui
+
+45:42.820000000000164
+pessoal
+
+45:43.38000000000011
+eu acho que o erro
+
+45:44.80000000000018
+foi lá da minha função
+
+45:46.559999999999945
+Talvez
+
+45:47.51999999999998
+Ahn
+
+45:50.340000000000146
+Namespaces
+
+45:52.30000000000018
+Não, aparentemente isso tá certo
+
+45:55.2199999999998
+Pessoal, a gente fez
+
+45:56.73999999999978
+Aquele refactor, né, mas eu esqueci aqui
+
+45:58.659999999999854
+De alterar o namespace que eu tô carregando
+
+46:0.8400000000001455
+Tá, aqui é home
+
+46:2.019999999999982
+Boa, então, vamos ver aqui se agora
+
+46:4.900000000000091
+Foi, beleza,a. Então, vamos ver aqui se agora foi. Beleza, já tá.
+
+46:6.760000000000218
+Então, home page,
+
+46:8.199999999999818
+this is the home page,
+
+46:10.420000000000073
+you have no unread message.
+
+46:12.800000000000182
+Só pra ficar fácil aqui
+
+46:13.980000000000018
+da gente alterar esse contador,
+
+46:16.460000000000036
+vamos criar um estadozinho aqui,
+
+46:18.90000000000009
+const
+
+46:19.460000000000036
+messages
+
+46:22.019999999999982
+counter
+
+46:23.360000000000127
+set messages counter, começando aqui em zero, né? MessagesCounter SetMessagesCounter
+
+46:25.7800000000002
+Começando aqui em 0
+
+46:27.079999999999927
+E vamos colocar dois botões
+
+46:29.76000000000022
+Aqui bem simples mesmo
+
+46:31.199999999999818
+Vamos colocar aqui um botão
+
+46:33.63999999999987
+Que é um mais e um botão que é um
+
+46:35.80000000000018
+Menos
+
+46:36.679999999999836
+E aqui no onClick
+
+46:39.48000000000002
+Desse botão aqui
+
+46:41.90000000000009
+A gente vai fazer o que?
+
+46:44.40000000000009
+A gente faz um set
+
+46:46
+MethodsCounter
+
+46:47.159999999999854
+Pegando o valor anterior
+
+46:49.38000000000011
+E incrementando mais um
+
+46:51.48000000000002
+E eu vou fazer a mesma coisa
+
+46:53.820000000000164
+No botão de baixo
+
+46:54.76000000000022
+Só que aqui vai ser
+
+46:57.7199999999998
+Menos um
+
+46:58.90000000000009
+Falta eu fechar aqui
+
+47:1.3400000000001455
+E ótimo, já estou aqui com a variável.
+
+47:6.320000000000164
+Vamos só obter a variável aqui então.
+
+47:9.820000000000164
+Message counter.
+
+47:11.099999999999909
+Ótimo.
+
+47:11.639999999999873
+Então temos aqui dois botões.
+
+47:13.159999999999854
+Só para conseguir ver melhor a mensagem.
+
+47:15.11999999999989
+Então.
+
+47:16.360000000000127
+Zero.
+
+47:17.300000000000182
+You have no unread message.
+
+47:19.340000000000146
+Mais.
+
+47:20.73999999999978
+Ó.
+
+47:21.480000000000018
+Uma.
+
+47:22.7800000000002
+Mais uma.
+
+47:24.360000000000127
+Duas.
+
+47:26.659999999999854
+E ao infinito.
+
+47:28.960000000000036
+Muito bem, tá funcionando bem.
+
+47:30
+Vamos ver em português.
+
+47:31.480000000000018
+Então, vou alterar aqui em português.
+
+47:33
+Pronto.
+
+47:36.86000000000013
+Começou em zero, né, porque a gente fez aqui um refresh.
+
+47:39.840000000000146
+E, alright, você leu tudo, ou seja, tá zero.
+
+47:40.90000000000009
+Vamos adicionar uma.
+
+47:46.2199999999998
+Você tem uma mensagem não lida e duas não lidas.
+
+47:47.7800000000002
+Então, sensacional.
+
+47:49.940000000000055
+Está funcionando aqui a tradução.
+
+47:52.059999999999945
+E eu acho que a gente abordou tudo.
+
+47:56.23999999999978
+Deixa eu só mostrar para vocês aqui outra coisa que talvez possa ser útil,
+
+47:57.90000000000009
+que é o nesting, tá bom?
+
+47:59.69999999999982
+O que é o nesting, pessoal? O nesting é como a gente quer referenciar outra chave que a gente tem ali no mesmo nível na tradução, tá bom?
+
+48:8.840000000000146
+E ele dá até aqui um exemplo, né?
+
+48:11.599999999999909
+Nesting 1, Nesting 2, Nesting 3.
+
+48:14.239999999999782
+Quando a gente traduzir A1, olha o que vai acontecer.
+
+48:18.440000000000055
+Na 1, ele vai traduzir o que está na 2.
+
+48:22.059999999999945
+E A2 tem o que lá dentro?
+
+48:24.559999999999945
+A2 mais o que está na 2. E a 2 tem o que lá dentro? A 2 mais
+
+48:26.26000000000022
+o que está na 3. E olha só.
+
+48:29.420000000000073
+Isso fica assim.
+
+48:30.920000000000073
+Isso é legal para quando
+
+48:32.19999999999982
+você quer, por exemplo,
+
+48:34
+criar palavras soltas
+
+48:35.57999999999993
+e compô-las
+
+48:37.539999999999964
+de maneira mais independente.
+
+48:40.01999999999998
+Nem sempre isso casa bem por causa de
+
+48:41.90000000000009
+plurais e outras coisas, mas
+
+48:43.960000000000036
+isso pode ser útil para vocês também.
+
+48:46.5
+E explorem a documentação aqui à vontade, tem coisas bem mais complexas, você pode ter lógica dentro desse template.
+
+48:55.01999999999998
+E para fechar com chave de ouro, você pode estar se perguntando,
+
+48:58.07999999999993
+João, mas então eu tenho que ter um JSON fixo no meu código-fonte,
+
+49:3.099999999999909
+e sempre que eu tiver que adicionar
+
+49:6.619999999999891
+uma nova tradução, eu tenho
+
+49:8.2800000000002
+que fazer um deploy novo? Não necessariamente.
+
+49:11.099999999999909
+A gente tem duas
+
+49:12.340000000000146
+formas. A gente tem a primeira
+
+49:14.320000000000164
+que é
+
+49:15.019999999999982
+o que está aqui no topo da página
+
+49:18.039999999999964
+que é Localization as a Service.
+
+49:20.76000000000022
+Isso daqui, se eu não me engano, é da
+
+49:22.360000000000127
+própria organização. Eles criaram um projeto
+
+49:24.579999999999927
+em que você
+
+49:25.559999999999945
+tem um painel, um dashboard
+
+49:27.73999999999978
+que você pode traduzir sua aplicação
+
+49:29.679999999999836
+você como dev não precisa fazer isso
+
+49:31.90000000000009
+você pode passar pra uma equipe de produto
+
+49:34.159999999999854
+né, ou uma equipe que queira
+
+49:36.11999999999989
+ser responsável por isso, e
+
+49:37.7800000000002
+vai funcionar, vai integrar muito fácil
+
+49:40.38000000000011
+tá bom, só que
+
+49:42.059999999999945
+provavelmente é paga, né
+
+49:43.80000000000018
+e é barato, 5 dólares.
+
+49:46.59999999999991
+Ok?
+
+49:48.51999999999998
+Mas deve ter algum
+
+49:50.039999999999964
+limite, enfim, eu não uso isso aqui.
+
+49:52.340000000000146
+Uma coisa que eu já usei foi
+
+49:53.840000000000146
+usar um back-end pra
+
+49:56
+prover essas traduções, tá bom?
+
+49:58.7199999999998
+Se eu não me engano,
+
+50:1.6799999999998363
+lá no
+
+50:2.5399999999999636
+i18n
+
+50:4.3400000000001455
+next, a gente vai ter aqui uma seção disso
+
+50:6.980000000000018
+Vamos dar uma olhadinha aqui
+
+50:9.139999999999873
+Vou descer
+
+50:10.38000000000011
+A gente tem uma seção disso
+
+50:12.7199999999998
+Asynchronous I18
+
+50:14.460000000000036
+Next backends
+
+50:16.159999999999854
+Ou seja, você pode
+
+50:17.7800000000002
+Ter aí um backend diferente
+
+50:20.440000000000055
+E a gente pode ver
+
+50:22.90000000000009
+Que a gente tem como fazer preload
+
+50:24.860000000000127
+De namespace Você pode ter um de
+
+50:27.440000000000055
+foto para o teu site carregar e depois colocar um servidor com ele deixa eu ver se aqueles falam de
+
+50:34.63999999999987
+algum servidor eu já vi um exemplo com o node vamos ver que se a gente encontra e tá aqui ó client-side loading of translations via HTTP, ok, então
+
+50:46.440000000000055
+basicamente
+
+50:47.38000000000011
+você pode fazer aquele
+
+50:50.01999999999998
+service-side translations
+
+50:51.539999999999964
+via HTTP, tá bom
+
+50:54.2199999999998
+batendo lá no seu servidor, então você
+
+50:56.19999999999982
+pode construir um serviço
+
+50:58.36000000000013
+como esse, né, do
+
+50:59.7199999999998
+Locais, não sei como que é o nome
+
+51:2.2199999999998
+como se diz o nome disso
+
+51:04
+mas você pode fazer isso no teu backend
+
+51:6.5
+Ter uma UI tua própria
+
+51:8.360000000000127
+E aí você consome teu backend
+
+51:10.88000000000011
+Lá naquele momento que a gente criou
+
+51:14.179999999999836
+Aqui essa função
+
+51:15.960000000000036
+Foi por isso que eu já deixei uma função aqui separada pronta
+
+51:19.139999999999873
+Porque você pode querer trocar
+
+51:21.179999999999836
+Da onde que você vai buscar essas traduções
+
+51:24.079999999999927
+Depois que você possa fazer esse fetch,
+
+51:27.860000000000127
+é só respeitar o que ele te pede de contrato,
+
+51:32.07999999999993
+o que você tem que retornar, qual é o formato.
+
+51:35.11999999999989
+Inclusive, só para mostrar para vocês,
+
+51:37.679999999999836
+a gente pode aqui fazer o seguinte.
+
+51:40.820000000000164
+Vamos colocar isso aqui em uma variável.
+
+51:45.679999999999836
+const translation recebe isso
+
+51:48.01999999999998
+e vamos aqui
+
+51:50.039999999999964
+fazer o spread disso e vamos colocar
+
+51:51.86000000000013
+um log aqui, translation
+
+51:54.11999999999989
+só pra você entender
+
+51:56.059999999999945
+o que tem dentro desse carinha, né, não é
+
+51:57.92000000000007
+mágico o que tá acontecendo aqui
+
+51:59.320000000000164
+vou dar F5
+
+52:1.300000000000182
+acho que ele, ah tá, foi do lado
+
+52:4.079999999999927
+do servidor o console.log, né?
+
+52:5.639999999999873
+Claro.
+
+52:6.579999999999927
+Então, olha só que massa.
+
+52:8.300000000000182
+Dentro ali, ele tem um objeto chamado next, i18 next.
+
+52:12.579999999999927
+Onde ele tem o initial i18n store, que é as nossas traduções.
+
+52:18.40000000000009
+Olha que legal.
+
+52:19.559999999999945
+Ele tem qual que é o initial location, provavelmente porque no nosso site estava n.
+
+52:24.440000000000055
+Qual que foi o namespace
+
+52:25.90000000000009
+carregado e outras configurações
+
+52:27.960000000000036
+de usuário. Então,
+
+52:30.2800000000002
+o user config, o namespace
+
+52:32
+e o initial OK podem ser, continuar
+
+52:34.059999999999945
+como estão, só que
+
+52:36.01999999999998
+a tua store aqui pode vir
+
+52:38.039999999999964
+de um back-end e assim
+
+52:40.13999999999987
+por diante. Inclusive, talvez isso vale
+
+52:42.059999999999945
+um vídeo, só de
+
+52:43.51999999999998
+integrar isso com o backend. Mas eu
+
+52:45.90000000000009
+acredito que pra aula de hoje
+
+52:47.59999999999991
+foi o suficiente pra você entender
+
+52:49.2800000000002
+como que a gente pode traduzir
+
+52:51.7800000000002
+tudo. Ok, então pessoal,
+
+52:54.340000000000146
+abordamos tudo,
+
+52:55.960000000000036
+tá bom? Esse código aqui
+
+52:57.679999999999836
+vai estar disponível pra vocês
+
+52:59.80000000000018
+no GitHub. Eu vou fazer
+
+53:1.599999999999909
+upload dele e deixar no link
+
+53:3.699999999999818
+aí da nossa aula
+
+53:4.940000000000055
+esse repositório pra que vocês
+
+53:7.7199999999998
+consigam copiar
+
+53:9.7199999999998
+o código ou ver se algo não
+
+53:11.699999999999818
+funcionou bem no teu código, você pode olhar
+
+53:13.7800000000002
+nesse código fonte pra garantir
+
+53:15.679999999999836
+assim que você consiga
+
+53:16.90000000000009
+aproveitar dessa aula
+
+53:19.659999999999854
+e desse código que a gente fez. Muito bem,
+
+53:22.199999999999818
+vamos então voltar aqui
+
+53:23.73999999999978
+pro Notion e hora de codar já
+
+53:25.960000000000036
+foi. Muito obrigado por ter
+
+53:27.940000000000055
+acompanhado até aqui. Essa foi uma
+
+53:29.960000000000036
+aula um pouco mais longa, mas é porque é um conteúdo
+
+53:32.059999999999945
+muito extenso, né? A gente tocou em alguns
+
+53:34.07999999999993
+pontos aqui core, coisas que
+
+53:35.98000000000002
+são principais, mas tem muita coisa
+
+53:37.940000000000055
+pra falar desse tema. E
+
+53:39.539999999999964
+partir agora pro nosso encerramento.
+
+53:41.90000000000009
+Gostaria de agradecer você, né,
+
+53:46.01999999999998
+nossos agora para o nosso encerramento. Gostaria de agradecer você, nossos alunos, por terem assistido até aqui.
+
+53:47.73999999999978
+Parabéns também por investir na sua educação
+
+53:49.820000000000164
+e por estar aqui no final comigo.
+
+53:52.460000000000036
+Gostaria também de deixar
+
+53:53.7800000000002
+claro para vocês que esse foi um dos
+
+53:56.039999999999964
+conteúdos que veio da comunidade
+
+53:58
+através de vocês. Então,
+
+54:0.05999999999994543
+continuem enviando conteúdos
+
+54:1.8800000000001091
+para nós, fazendo sugestões de
+
+54:3.900000000000091
+conteúdo, porque a gente está sempre lendo e preparando material bem massa para trazer para vocês.
+
+54:9.960000000000036
+E por fim, deixem também o feedback.
+
+54:13.960000000000036
+O feedback nos ajuda a entender o que funciona e o que não funciona dessas aulas,
+
+54:18.960000000000036
+garantindo que a gente consiga sempre melhorar o Rocket Seed Plus.
+
+54:23.09999999999991
+Então é isso pessoal, muito obrigado por assistir até aqui.
+
+54:26.360000000000127
+Um abraço e tchau!

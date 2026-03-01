@@ -1,0 +1,1700 @@
+00:00
+Fala Dev, beleza? Bem-vindo a mais uma aula aqui do Experts Club. Meu nome é Ragneli e na aula de
+
+00:11.56
+hoje a gente vai falar sobre uma biblioteca fantástica para trabalhar com formulários,
+
+00:15.52
+que é o React Hook Forms. Beleza? Então vamos para aula.
+
+00:22.2
+Bom, o que a gente vai fazer basicamente é implementar um formulário
+
+00:26.78
+simples aqui de login tá porque o intuito da aula não é falar sobre sobre
+
+00:35.68
+o uai sobre design mas sim é aprender sobre a biblioteca reato form se também
+
+00:41.96
+um pouco sobre material UI para
+
+00:46.3
+gente implementar o nosso formulário ok então eu vou coloquei aqui um
+
+00:50.86
+formulário simples de e-mail e senha
+
+00:57.44
+e ele tem uma certa validação
+
+01:2.1799999999999997
+bom então por exemplo se a senha tiver três caracteres não pode atender no mínimo 6
+
+01:9.459999999999994
+Oi e aí o formulário submeter aqui a informação tá ok o e-mail também tem que ser um e-mail válido tá dando tudo certo ele vai mandar aqui o
+
+01:26.959999999999994
+json é pra onde a gente quiser é por uma api e assim sucessivamente
+
+01:34.879999999999995
+então o intuito da aula é essa a gente aprender a trabalhar com o rector form e
+
+01:40.22
+um e também vamos utilizar o material uai Essa aula específica não é sobre Material UI,
+
+01:46.72
+eu pretendo fazer uma aula aqui no Experts Club
+
+01:49.540000000000006
+explicando melhor sobre a biblioteca,
+
+01:52.260000000000005
+que é uma biblioteca muito boa também,
+
+01:54.040000000000006
+a gente vai ver um overview aqui nessa aula também.
+
+01:59.36
+Então, começando aqui com o React Hookform,
+
+02:1.7199999999999989
+o React Hookform é uma biblioteca pra quem se preocupa com performance
+
+02:6.219999999999999
+e também com
+
+02:8.039999999999992
+o developer
+
+02:10.180000000000007
+experience, né?
+
+02:11.759999999999991
+É uma biblioteca muito boa, porque
+
+02:13.960000000000008
+ela tem
+
+02:15.5
+uma documentação
+
+02:17.900000000000006
+excelente, tá? Uma das melhores
+
+02:20
+documentação, assim, que eu conheço
+
+02:22.25999999999999
+de biblioteca, tá?
+
+02:25.379999999999995
+E... E ela se preocupa muito em ser leve,
+
+02:29.02000000000001
+ter uma performance
+
+02:29.939999999999998
+bastante
+
+02:31.659999999999997
+performática nessa biblioteca.
+
+02:36.81999999999999
+A adoção dela
+
+02:37.80000000000001
+é bem crescente.
+
+02:42.74000000000001
+Ela também pode ser utilizada para React Native ou para React Web.
+
+02:49.58000000000001
+Então, qual é a principal vantagem de você estar utilizando ela?
+
+02:55.08000000000001
+Principalmente performance, redução de renderização,
+
+02:59.03999999999999
+e também você não vai se preocupar em trabalhar em fazer vários várias implementações
+
+03:5.900000000000006
+que não tem a ver com a sua regra de negócio apenas para trabalhar com
+
+03:9.240000000000009
+formulário né então assim aqui na própria documentação
+
+03:14.460000000000008
+você vê que com o rex o que forma se você tem um input todos os seus outros
+
+03:18.659999999999997
+componentes eles não vão ficar renderizando como se
+
+03:22.19999999999999
+você trabalhar por exemplo com state né um state para cada componente para cada input né
+
+03:29.24000000000001
+é toda vez que você alterar o input e o value desse input é foi atualizada no
+
+03:35.46000000000001
+state ele vai atualizar a tela toda isso diminui bastante a performance
+
+03:39.860000000000014
+principalmente em formulários que são grandes. Apesar disso, você também pode ficar verificando a alteração no seu input.
+
+03:54.25999999999999
+Mesmo não sendo um input controlado, onde você não vai atribuir ele a um state,
+
+03:59.46000000000001
+você tem uma funcionalidade na biblioteca, que é o watch que toda vez que você
+
+04:5.680000000000007
+alterar o seu input, você vai
+
+04:8.319999999999993
+poder captar essa alteração
+
+04:10.280000000000001
+porém sem
+
+04:11.580000000000013
+desnecessárias
+
+04:13.879999999999995
+re-renderizações do seu front-end
+
+04:16.360000000000014
+uma coisa bacana também dele
+
+04:20.180000000000007
+é que comparado com outras
+
+04:22.319999999999993
+bibliotecas, a performance
+
+04:24.120000000000005
+de loading dele é bem elevada, então bibliotecas a performance de loading
+
+04:25.339999999999975
+dele é bem elevada né então você vê aqui o react form um formulário padrão
+
+04:31.75999999999999
+implementado com ele o mesmo formulário aqui ele foi carregado em 1.800 segundos
+
+04:37.339999999999975
+no caso da utilização do formic foi para 2070 segundos é uma diferença pequena
+
+04:43.75999999999999
+mas dependendo do tipo e do
+
+04:45.579999999999984
+tamanho do formulário pode ser significativa tá e utilizando aqui o
+
+04:50.51999999999998
+redux form 2380 milissegundos uma coisa que eu queria mostrar pra
+
+04:57.860000000000014
+vocês é também o tamanho do bundle dele porque quando você vai crescendo né
+
+05:9.060000000000002
+o seu a sua aplicação você percebe que o seu bundle seu no de módulos ali vai
+
+05:17.69999999999999
+ficando gigante né então por exemplo o formic que é uma
+
+05:21.939999999999998
+biblioteca também muito utilizada vamos ver o tamanho do bundle dela bundle 43 44.3 k tá minificado
+
+05:33
+vamos ver o react
+
+05:37.27999999999997
+o que o que forma o que forma quase metade, 24.3
+
+05:45.60000000000002
+então também isso
+
+05:47.24000000000001
+contribui para o seu projeto
+
+05:49.24000000000001
+ficar com uma performance bacana
+
+05:51.56
+leve
+
+05:52.379999999999995
+e além disso
+
+05:55.160000000000025
+a sua implementação, a utilização
+
+05:57.44
+do React Rookform
+
+05:58.420000000000016
+tem uma complexidade
+
+06:1.579999999999984
+bem baixa
+
+06:2.7200000000000273
+então você facilmente consegue aplicar no seu projeto.
+
+06:8.519999999999982
+E a comunidade é muito grande também.
+
+06:11.45999999999998
+Qualquer dúvida que você tiver, você pode pesquisar,
+
+06:15.319999999999993
+tanto na documentação como no Stack Overflow, esse tipo de coisa.
+
+06:18.620000000000005
+Então você vai conseguir bastante informação sobre a biblioteca.
+
+06:24.54000000000002
+vai conseguir bastante informação sobre a biblioteca.
+
+06:31
+Bom, uma outra biblioteca que eu também costumo utilizar bastante nos meus projetos,
+
+06:36.68000000000001
+principalmente eu desenvolvo os sistemas internos da empresa, né?
+
+06:42.620000000000005
+Então, a gente tem uma preocupação bem grande com regra de negócio, tem de UX também,
+
+06:46.54000000000002
+porém, a regra de negócio acaba se tornando mais importante a produtividade também. Então ao invés da gente criar os nossos
+
+06:50.5
+próprios componentes, os nossos inputs, a gente acaba utilizando bastante
+
+06:57.22000000000003
+bibliotecas no dia a dia com o Material UI que facilita muito a
+
+07:4.060000000000002
+implementação.
+
+07:9.899999999999977
+Então, aqui você tem nessa biblioteca vários componentes como buttons,
+
+07:15.639999999999986
+inputs de texto, seletor de datas, input com seleção de data,
+
+07:18.339999999999975
+checkbox, suites.
+
+07:26.45999999999998
+Então, isso é bem legal para a gente poder focar no nosso objetivo, né? Que é resolver um problema da de negócio, tá? Então, o que que eu
+
+07:31.80000000000001
+fiz aqui pra pra gente começar o nosso projeto aqui, focar na
+
+07:37.5
+na utilização do do React Hook Form, né? Eu criei aqui um
+
+07:42.31999999999999
+projeto, um projeto Next, tá com Yarn mesmo Yarn create
+
+07:48.94
+next app né e e basicamente limpei tudo aqui que não tinha a ver com que não tem a ver com o que
+
+07:59.139999999999986
+a gente vai precisar tá tirei algumas estilizações e tal. E deixei aqui apenas uma página, um index, onde vai ter o nosso formulário.
+
+08:10.740000000000009
+Uma coisa que também eu instalei são as dependências do Material UI, logo de começo aqui.
+
+08:17.220000000000027
+Então ele tem uma instalação onde você vai utilizar essas dependências aqui.
+
+08:30.19999999999999
+você vai utilizar essas dependências aqui tá é uma material e motion react e motion style tá então como eu já instalei eu não vou precisar instalar
+
+08:37.460000000000036
+mas vocês aí além depois de criar o projeto do next instale essas
+
+08:41.539999999999964
+dependências aqui que tô mostrando para vocês. Beleza.
+
+08:46.60000000000002
+E basicamente aqui o nosso código inicial,
+
+08:52.120000000000005
+o nosso repositório,
+
+08:56.360000000000014
+eu esqueci de falar do repositório, que é importante também.
+
+09:0.08000000000004093
+Aqui eu vou deixar para vocês na descrição o repositório
+
+09:3.8799999999999955
+aqui desse projeto da aula,
+
+09:10.519999999999982
+onde nesse repositório eu deixei aqui para vocês de uma forma prática,
+
+09:20.039999999999964
+ele é dividido em partes, parte 1, parte 2, parte 3, parte 4
+
+09:25.019999999999982
+e parte 5
+
+09:26.399999999999977
+a parte 1 é o
+
+09:29.17999999999995
+projeto já configurado
+
+09:31.460000000000036
+e assim
+
+09:32.879999999999995
+sucessivamente
+
+09:35.22000000000003
+cada etapa de
+
+09:36.60000000000002
+implementação eu coloquei
+
+09:39.27999999999997
+em uma parte
+
+09:40.39999999999998
+para vocês analisarem
+
+09:42.700000000000045
+e avaliarem passo a passo
+
+09:44.799999999999955
+da criação da tela de login do formulário.
+
+09:49.91999999999996
+Eu vou deixar na descrição aqui onde fica esse repositório do projeto.
+
+10:2.7999999999999545
+Voltando aqui para a nossa parte 1, né?
+
+10:14.299999999999955
+Colocar aqui a parte 1, que é a parte inicial mesmo do projeto, onde apenas eu coloquei um box aqui, uma div,
+
+10:20.17999999999995
+dois inputs que não tem nem implementação ainda do React Hookforms e um button.
+
+10:26.220000000000027
+Então, eu tenho apenas uma tela nesse início aqui.
+
+10:29.840000000000032
+É uma tela que ela tem aqui o stack.
+
+10:34.299999999999955
+O que é esse stack?
+
+10:35.72000000000003
+No Material UI, a div pode ser um box.
+
+10:39.5
+A box é a div.
+
+10:40.700000000000045
+E a stack também é uma div.
+
+10:43.25999999999999
+A diferença é que essa div aqui com stack
+
+10:46.299999999999955
+ela já tem o flexbox nela embutido né e aí facilita bastante a nossa nosso
+
+10:53.440000000000055
+trabalho aqui então quando eu coloco uma stack que ela já tem um flexbox é o
+
+10:57.879999999999995
+flexbox com o direction column e eu coloco um Spacing 2,
+
+11:8.32000000000005
+o Material UI também tem um padrão que é o seguinte,
+
+11:14.080000000000041
+a cada um valor aqui, tanto de margem quanto de padding, quanto de espaço, ele equivale a 8 pixels, então Spacing 2 equivale a 16 pixels.
+
+11:20.379999999999995
+Então eu tenho aqui uma Stack, que é a tela principal,
+
+11:29.039999999999964
+então eu tenho aqui uma stack que é a tela principal né essa tela aqui por trás o background né que aquela primeira stack onde eu coloquei só para ele
+
+11:33.879999999999995
+ocupar a tela toda height sem vh e como ele já tem o flexbox implementado só
+
+11:42.559999999999945
+coloquei o justify content e o alignado, só coloquei o justify-content e o align-items para center.
+
+11:46.75999999999999
+Coloquei uma cor de background aqui para melhorar um pouco o visual.
+
+11:51.84000000000003
+E dentro do stack eu tenho um box.
+
+11:53.799999999999955
+O box é a div, tá?
+
+11:55.539999999999964
+A div do material-y é o box.
+
+11:59.17999999999995
+Aí eu tenho o meu formulário, que é o form aqui normal do HTML, né?
+
+12:4.539999999999964
+No React Hook Forms a gente
+
+12:5.82000000000005
+utiliza o form normal do HTML,
+
+12:8.720000000000027
+e aqui os inputs
+
+12:9.980000000000018
+dentro aqui do meu formulário.
+
+12:13.279999999999973
+O que que
+
+12:13.799999999999955
+eu coloquei também? Eu coloquei
+
+12:15.919999999999959
+uma stack também, novamente
+
+12:17.980000000000018
+aqui dentro do formulário,
+
+12:20.220000000000027
+entre o formulário e os inputs
+
+12:21.980000000000018
+aqui, o button, pra ele colocar
+
+12:24.120000000000005
+um embaixo do outro aqui, como botão para ele colocar um embaixo do
+
+12:26.360000000000014
+outro aqui né como tá aqui na tela um embaixo do outro então esse daqui é uma
+
+12:30.32000000000005
+é uma stack que é uma div com flexbox né em formato de coluna com Space em 16
+
+12:37.039999999999964
+pixels que aquele dois ali é e apenas para isso que eu coloquei aqui essa stack. Tem um padding também de 32 pixels, widget.
+
+12:49.299999999999955
+Ah, uma coisa que é bacana do Material UI também,
+
+12:53.460000000000036
+que ele utiliza a estilização Emotion.
+
+12:58.39999999999998
+Ele pode utilizar o style do component,
+
+13:1.1000000000000227
+ele pode utilizar também o sass ou ou o emotion né que é o padrão
+
+13:9.480000000000018
+dele o emotion você dentro de qualquer tag do material UI se você colocar o SX
+
+13:16.799999999999955
+você abre aqui a chave você já pode começar a estilizar aquele componente né e ele tem algumas é algumas abreviações
+
+13:28.75999999999999
+como por exemplo p é o padding o m é o margem né para facilitar aí o seu dia a
+
+13:34.460000000000036
+dia tá então eu só coloquei um border-radius um background aqui então
+
+13:39.51999999999998
+basicamente isso daqui é o esqueleto aqui do nosso formulário tá e o o texto no material UI você sempre utiliza esse
+
+13:46.960000000000036
+typography esse typography você é uma é uma tag do material que você pode utilizar ela com
+
+13:53.60000000000002
+esse x também mas ela tem algumas coisas já prontas como por exemplo a o variante aqui você
+
+13:59.25999999999999
+pode escolher vários tipos de texto body caption h1 h2 h3 h4 então coloquei h4 né que é aquele título do meu
+
+14:8.100000000000023
+formulário Zinho lá login react-hook-forms tá e aqui dentro tem dois em pontos e um botão aqui
+
+14:15.600000000000023
+do material UI o botão ele tem esse variante também que ele tem três tipos ele tem o outline
+
+14:22.980000000000018
+que é um botão só com uma linha de borda ele tem o
+
+14:26.600000000000023
+text que é o padrão que é só o texto né então enviar vai ter só o texto enviar como se fosse
+
+14:32.17999999999995
+o link né e o container que ele monta o botão com aquele background ali ele já até coloca um
+
+14:38.41999999999996
+Shadow aqui atrás né e quando você dá um Hoover aqui ele ele tem esse efeito aqui que é bem parecido
+
+14:46.879999999999995
+com android material ui ele tem essa característica que é o ripple o nome
+
+14:53.5
+desse efeito aqui é o ripple tá então assim basicamente isso daqui é não tem a
+
+14:59.440000000000055
+ver muito com o react performance é mais assim a tela para ficar mais bonitinha
+
+15:3.6399999999999864
+aqui pra gente implementar, tá?
+
+15:5.600000000000023
+E o input, por enquanto, eu coloquei o input
+
+15:7.67999999999995
+normal do HTML, não coloquei o
+
+15:9.779999999999973
+input do
+
+15:11.620000000000005
+Material UI ainda, tá?
+
+15:14.139999999999986
+Legal? Então, basicamente
+
+15:15.740000000000009
+essa é a estrutura do nosso projeto.
+
+15:18.299999999999955
+O que que a gente vai começar
+
+15:19.960000000000036
+a fazer aqui com esses inputs?
+
+15:21.720000000000027
+A gente vai começar a colocar
+
+15:23.799999999999955
+ele pra trabalhar junto
+
+15:26.360000000000014
+com uma tira com o reto que forma estava a gente vai colocar implementar isso daí agora então a
+
+15:34.74000000000001
+primeira coisa que a gente tem que fazer aqui conforme a própria documentação é para a gente
+
+15:39.559999999999945
+dar um guerra em start and aqui a gente tem que instalar as dependências né Qual que é a dependência que
+
+15:46.41999999999996
+a gente instala essa react-hook form apenas essa dependência inicialmente
+
+15:52.72000000000003
+tá legal então vamos lá vamos instalar dependência yarn-ed react-hook form
+
+16:15.120000000000005
+tá legal bom pessoal aí depois que a gente instala a react-hook-form a gente vai importar de dentro do react-hook-form um hook chamado useForm
+
+16:26.639999999999986
+claro, como o próprio nome diz, a gente trabalha bastante com context API
+
+16:32.08000000000004
+e React Hooks dentro do React Hook Form
+
+16:36.639999999999986
+esse hook useForm, o que ele traz aqui para a gente?
+
+16:40.860000000000014
+ele traz alguns métodos né algum algumas funcionalidades aqui ó use for
+
+16:49.940000000000055
+eu abro aqui use for e dentro daqui que que eu tenho eu tenho o register que é importante e eu
+
+17:1.5
+tenho o renda o submit uma coisa que eu posso fazer aqui também,
+
+17:7.059999999999945
+que é bem importante a gente fazer,
+
+17:9.759999999999991
+é criar uma interface.
+
+17:14.039999999999964
+Eu vou colocar aqui iform inputs
+
+17:17.90000000000009
+com o que a gente espera receber no nosso formulário.
+
+17:25.440000000000055
+Então eu vou esperar receber aqui um e-mail, que é uma string.
+
+17:32.83999999999992
+E eu vou receber um password, que é uma string também.
+
+17:40.319999999999936
+E aqui nesse useForm eu já posso te pac colocar o ai form em todos
+
+17:49.3599999999999
+ele vai facilitar bem aqui com o autocomplete pra gente tá eu o que eu
+
+17:56.25999999999999
+tenho que fazer aqui pra começar eu coloco aqui no final
+
+18:12.240000000000009
+aquele método register que veio do meu use form e aqui dentro coloca o nome do
+
+18:19.980000000000018
+meu componente esse ó ele já traz até o autocomplete esse daqui é o e-mail
+
+18:32.11999999999989
+e esse daqui de baixo vai ser o password botão aqui eu vou colocar que ele tem um type de submit e eu vou criar o meu a
+
+18:53.74000000000001
+minha função de submit aqui tá vou criar uma função aqui ó
+
+19:2.2799999999999727
+é uma função que ela tem um data a dar que são os dados do formulário que tem o tipo ai form
+
+19:10.019999999999982
+inputs e a única coisa que ela vai fazer por enquanto No meu formulário
+
+19:27.779999999999973
+Eu vou dizer que
+
+19:29.039999999999964
+OnSubmit
+
+19:30.220000000000027
+Quando ele for submetido
+
+19:32.59999999999991
+O que que
+
+19:33.799999999999955
+Ele vai fazer
+
+19:35.83999999999992
+Ele vai chamar essa função
+
+19:37.059999999999945
+OnSubmit
+
+19:37.8599999999999
+Mas o que a gente faz aqui
+
+19:40.16000000000008
+Quando a gente usa o React HookForms
+
+19:42.51999999999998
+A gente pega essa função
+
+19:44.460000000000036
+Que ele passa aqui no UseForm Então a gente usou o reto conforme a gente pega essa função que ele passa
+
+19:45.319999999999936
+aqui no ios forma então a gente chama ela renda o submit e passa a nossa
+
+19:53.200000000000045
+função aqui dentro
+
+20:1.1199999999998909
+com isso teoricamente já é pra estar funcionando aqui o nosso formulário.
+
+20:9.599999999999909
+Então vamos ver aqui.
+
+20:14.6400000000001
+Nome.
+
+20:20.799999999999955
+Senha. Qualquer coisa.
+
+20:31.220000000000027
+Beleza. senha qualquer coisa beleza lá já começou a funcionar aqui o nosso formulário já está enviando aqui o e mail ea senha você pode ver que isso daqui a gente não criou nenhum estado
+
+20:39.75999999999999
+para fazer isso nem nada só recapitulando que a gente fez a gente importou aqui o
+
+20:45.460000000000036
+react-hookforms.useform desestruturou aqui o register e o handleSubmit
+
+20:52.680000000000064
+ele está tipado aqui com a interface que a gente criou dos nossos inputs aqui do
+
+20:59
+que a gente vai colocar no formulário tá o register dentro do input eu registrei ele aqui coloquei o o nome
+
+21:8.759999999999991
+do componente aqui do input e o render submit eu coloquei no submit aqui do
+
+21:16.8599999999999
+formulário beleza então basicamente é isso é pra começar assim esse é o básico do do reto que forma tá porém
+
+21:28.88000000000011
+deixou ver que no meu passo a passo aqui que eu vou mostrar pra vocês aqui tem
+
+21:38.11999999999989
+uma tem uma funcionalidade aqui que é legal mostrar que é o watch também que esse watch faz é muitas vezes
+
+21:46.180000000000064
+você quer ficar captando né o que o usuário está digitando para fazer alguma
+
+21:55.75999999999999
+validação ali ou apareceu ou não algum componente dentro da sua tela
+
+22:3.400000000000091
+é esse tipo de coisa então você pode usar essa função
+
+22:7.619999999999891
+ótima então por exemplo vou colocar aqui que eu tô observando o campo e-mail então eu posso passar
+
+22:15.779999999999973
+aqui para o meu ótimo que eu tô olhando o e-mail ele vai mostrar aqui no console o nome aqui
+
+22:32.5
+e ele tá até com nome aqui coloquei errado aqui em meio né nome tá então toda vez que eu digitar
+
+22:38.440000000000055
+ele mostra no console bom então ele tem essa funcionalidade aqui também que é essa funcionalidade do
+
+22:46.40000000000009
+watch deixa só mudar o placeholder aqui que tá como nome
+
+22:51.16000000000008
+e-mail
+
+22:57
+tá uma coisa que a gente utiliza bastante aqui em conjunto com o React Hook Forms é
+
+23:6.079999999999927
+validação, a gente tem que fazer a validação
+
+23:8.579999999999927
+dos nossos inputs
+
+23:10.299999999999955
+o que o usuário está digitando
+
+23:12.1400000000001
+e a biblioteca que se integra bastante
+
+23:14.720000000000027
+que se integra bem
+
+23:16.3599999999999
+aqui é o IUP
+
+23:17.1400000000001
+vou mostrar aqui para vocês como que a gente
+
+23:20.519999999999982
+usa o IUP
+
+23:21.460000000000036
+com o React Hook Forms
+
+23:24.559999999999945
+então você instala essas duas esses dois
+
+23:29.3599999999999
+componentes aqui o iup e o arroba hookforms barra resolvers
+
+23:53.200000000000045
+legal falou beleza instalando isso daí a gente vai utilizar o iup como a gente já está acostumado né importe asterisco as iup from iup e uma outra importação que a gente tem que fazer é o resolver
+
+24:17.11999999999989
+hook form resolvers aqui você coloca barra yup e aqui você importa o iope resolve
+
+24:29.420000000000073
+beleza então o que vai mudar para fazer a validação primeiro eu tenho que criar igual e up.com object.com esquema eu tenho o e mail que é o iam pinto string ponto e mail e eu quero que ele
+
+25:14.220000000000027
+seja o quadro é obrigatório e eu tenhointo string. eu vou colocar que ela tem que ter um mínimo de seis caracteres
+
+25:32
+e também é requerida
+
+25:35
+dentro aqui você pode também colocar o texto de validação né então você coloca aqui no e mail por
+
+25:46.42000000000007
+exemplo se ele colocar um e mail que é inválido insira um e mail vale o e mail obrigatório opa, aqui não é esquema, é shape
+
+26:9.1400000000001
+normal
+
+26:13.339999999999918
+é
+
+26:14.88000000000011
+aqui, quando você coloca
+
+26:19.38000000000011
+aqui, ó, mínimo de 6 caracteres, você também pode
+
+26:21.440000000000055
+colocar um texto de validação
+
+26:22.90000000000009
+a senha deve
+
+26:26.24000000000001
+possuir no mínimo seis caracteres e required a senha tá legal criei aqui o meu o meu esquema e aqui no use form você pode
+
+26:55.299999999999955
+passar aqui dentro o resolver e aí você coloca o resolver e passa seu skin.
+
+27:7.740000000000009
+Legal?
+
+27:10.079999999999927
+Vamos ver o que acontece agora?
+
+27:17.299999999999955
+Acontece que isso é o seguinte, se eu tentar enviar, ele não vai enviar.
+
+27:21.220000000000027
+Você pode ver que ele está travando aqui no primeiro input.
+
+27:23.819999999999936
+Ele não está deixando passar porque está acontecendo porque eu não digitei um
+
+27:31.24000000000001
+e-mail válido então vou colocar aqui ó teste arroba e mail.com
+
+27:37.5
+vamos ver se ele vai passar o papo se eu não colocar uma senha de seis
+
+27:42.059999999999945
+caracteres ele vai travar lá na senha.
+
+27:48.66000000000008
+Vai travar até eu conseguir atingir os caracteres que ele precisa.
+
+27:54.07999999999993
+Mas o problema é que ele não está mostrando na tela o que está acontecendo,
+
+27:56.460000000000036
+qual é o erro de validação. Então, no React Hook Forms, nós temos também uma outra funcionalidade aqui que é o
+
+28:6.539999999999964
+form state e dentro do form state eu tenho meus erros
+
+28:18.61999999999989
+como é que eu trabalho com esses erros aqui então embaixo do input eu vou colocar um
+
+28:26
+typography que é o texto né do material UI ele já vai importar aqui ó deixa eu
+
+28:33.799999999999955
+ver se ele vai importar aqui mas materialize system
+
+28:45.61999999999989
+e aí
+
+28:48.98000000000002
+e você importou ali vai para o material tá arroba m ui material mais um componente
+
+28:58.460000000000036
+do material então eu vou colocar aqui ó teste de erro por exemplo eu vou colocar uma variante aqui
+
+29:7.6400000000001
+para o seu texto menor caption que é um pequeno e vou utilizar aqui só para ele
+
+29:15.660000000000082
+ficar com a color colocar com o red aqui de vermelho, tá? Um teste de erro aqui só pra ver que ele aparece aqui, ó, isso, vai aparecer
+
+29:26.559999999999945
+aqui, tá legal?
+
+29:29.61999999999989
+Só que o
+
+29:30.420000000000073
+que a gente vai colocar aqui nesse erro?
+
+29:33.5
+É o erro
+
+29:34.3599999999999
+erro
+
+29:35.039999999999964
+ponto
+
+29:38.559999999999945
+no caso aqui é e-mail, né?
+
+29:41.09999999999991
+ponto message
+
+29:42.09999999999991
+só que
+
+29:44.33999999999992
+essa informação aqui de errors e-mail né. Mestre é só que esse essa informação aqui de
+
+29:47.59999999999991
+erros e-mail message ela pode não existir que se não tiver erro isso daqui
+
+29:52.24000000000001
+vai ser vai estar em branco né então para ele não dar problema eu posso colocar
+
+29:57.5
+isso daqui com interrogação aqui do TypeScript
+
+30:13.279999999999973
+do do time script e vou fazer a mesma coisa que para o input aqui do de senha erros ponto password ponto mestre beleza
+
+30:30.180000000000064
+o mestre beleza tá legal então não aparece nada por enquanto se eu tentar fazer o submit do formulário a ele vai mostrar o e mail obrigatório ea senha
+
+30:34.98000000000002
+deve possuir no mínimo seis caracteres assim que eu vá que eu consigo preencher esse requisito né então eu coloco aqui ó preenche o requisito ele já some o erro.com
+
+30:52.72000000000003
+pronto já sumiu erro senha 1 2 3 4 5 6 já sumiu o erro tá bom então essa esse erro aqui que vem do form state ele fica vigiando nessa estava passou
+
+31:14.940000000000055
+da validação e quando passa ele limpa essa informação que tem aqui dentro se não passou
+
+31:23.160000000000082
+da validação ele coloca a a message aqui, que é aquela
+
+31:25.700000000000045
+mensagem que a gente
+
+31:26.700000000000045
+colocou aqui no IA.
+
+31:30.5
+Beleza, pessoal?
+
+31:34.25999999999999
+Tranquilo.
+
+31:35.40000000000009
+Uma das coisas que normalmente a gente
+
+31:37.57999999999993
+faz, né, quando a gente está criando
+
+31:39.74000000000001
+o nosso projeto aqui no React,
+
+31:41.960000000000036
+o nosso front-end, a gente
+
+31:43.83999999999992
+não implementa o... a gente não implementa o que não coloca o
+
+31:47.440000000000055
+elemento e cria que o componente direto dentro do nosso formulário
+
+31:52.59999999999991
+normalmente a gente importa componentes externos né
+
+31:55.90000000000009
+então a gente tem lá uma pasta com componentes e dentro daquela daquela
+
+32:1.240000000000009
+pasta a gente vai dar um importe daquele componente e vamos utilizar dentro dos nossos diversos formulários que a gente tem no sistema.
+
+32:11.539999999999964
+Então, como é que a gente faz isso?
+
+32:13.160000000000082
+A gente faz utilizando o React Hook Forms aqui, o context, o form context e o form provider.
+
+32:23.279999999999973
+Então, é isso que eu vou mostrar para vocês aqui agora né então não
+
+32:27.8599999999999
+vamos mais utilizar esse input que tá aqui a gente vai criar um componente separado aqui do input e
+
+32:34.940000000000055
+vamos importar ele para cá tá bom então primeira coisa esse use form a gente não vai utilizar aqui a gente vai utilizar o
+
+32:45.700000000000045
+form provider
+
+32:51.40000000000009
+a tal vai utilizar o uso form sim utilizar o uso form também e mais também
+
+32:58.059999999999945
+vão utilizar o form provider só que o use form
+
+33:3.240000000000009
+ele vai ficar de um jeito um pouco diferente aqui ao invés
+
+33:7.900000000000091
+da gente diz estruturar tudo que tem aqui dentro de vai colocar tudo dentro
+
+33:12.839999999999918
+de um uma variável aqui chamada métodos é assim que normalmente a gente utiliza
+
+33:22
+então esse renda o submit aqui não vai ser mais renda o
+
+33:26
+submit ele vai ser metas ponto renda o submit
+
+33:33.799999999999955
+e por fora de todo esse nosso formulário a gente vai encapsular isso daqui dentro
+
+33:40.27999999999997
+do form provider
+
+33:52.24000000000001
+dentro do form provider então é bem assim característico da utilização do do contexto né a gente tem o provider ele que vai
+
+33:57.039999999999964
+fornecer para todo mundo os métodos que a gente vai utilizar e as informações
+
+34:1.7999999999999545
+que a gente vai utilizar então aqui dentro que a gente vai utilizar. Então, aqui dentro, o que eu vou passar para ele aqui?
+
+34:5.119999999999891
+Os métodos.
+
+34:6.7000000000000455
+Todos os métodos aqui que tem dentro do useForm
+
+34:10.2800000000002
+vão vir aqui para o formProvider.
+
+34:13.579999999999927
+Deixa eu ver aqui porque ele está reclamando.
+
+34:20.960000000000036
+formProvider.
+
+34:24.61999999999989
+Ah, tá. Aqui tem que ficar embaixo do form tá beleza agora vai tranquilo
+
+34:33.159999999999854
+bom então encapsulei o meu formulário dentro do form provider né se eu fechar
+
+34:38.039999999999964
+que vocês vão ver então tem uma forma tem o form provider que tá aqui do lado
+
+34:41.59999999999991
+e eu coloquei os métodos aqui dentro que tem
+
+34:45.57999999999993
+dentro do ios form aqui eu dei o spread operator aqui coloquei os métodos aqui
+
+34:50.63999999999987
+dentro do form provider tá então o que que a gente vai fazer aqui agora vamos
+
+34:56.01999999999998
+criar uma pasta aqui de componentes
+
+35:55.36000000000013
+dentro da pasta eu vou criar o meu input eu vou criar o que o react-hookforms-text-input então vai ser um uma função react normal tá que receber o que eu vou colocar ai text input
+
+36:5.5
+as minhas próprias aqui do input normalmente eu tenho que passar o nome né o name do input normalmente eu tenho que passar um nome nem do input vou passar o type também é para saber se ele é um input de senha um input de texto
+
+36:13.079999999999927
+e também vou passar um label
+
+36:31.159999999999854
+o chão o companhia e eu vou te paqui com meu ai text input
+
+36:38.30000000000018
+e aqui dentro eu vou pegar minhas próprias aqui ney
+
+36:42.61999999999989
+o type e o label
+
+36:46.559999999999945
+o react
+
+36:50.61999999999989
+e aqui vou dar um return aqui do input eu posso até pegar o input que tá lá
+
+37:9.5
+e para facilitar eu vou pegar um aqui de exemplo aqui ó ele já tem até o
+
+37:18.88000000000011
+e até o typography aqui do erro né
+
+37:34.5
+do erro né coisa mais aqui só esse aqui de cima aqui é o cabeçalho do formulário tá legal
+
+37:37.659999999999854
+vou passar aqui o input é claro que aqui eu vou ter que colocar um fragment né porque eu tenho duas
+
+37:48.76000000000022
+duas tags aqui dentro que eu não posso retornar duas tags o typography eu vou
+
+37:55
+ter que importar material UI
+
+38:2.0399999999999636
+e aqui eu vou pegar as informações do meu da minhas próprias né
+
+38:6.420000000000073
+o type place holder aqui vai ser a minha label
+
+38:15.480000000000018
+eu não tenho esse register aqui ainda mas eu vou já pegar ele ea parte de erros aqui eu vou tratar também Então eu vou
+
+38:26.579999999999927
+Adicionar aqui
+
+38:30.2199999999998
+Ao meu input
+
+38:32.539999999999964
+Que eu estou criando
+
+38:33.7800000000002
+Eu vou registrar ele aqui no meu React Hookform
+
+38:37.179999999999836
+Só que ele está vindo pelo context API
+
+38:42.440000000000055
+Então eu vou utilizar aqui
+
+38:44.059999999999945
+O form Use form Só que ele está vindo pelo context API, então eu vou utilizar aqui o useFormContext.
+
+38:54.40000000000009
+O que tem dentro desse useFormContext?
+
+39:2.3200000000001637
+const igual a useFormContext.
+
+39:7.679999999999836
+Dentro desse useFormContext, ele tem aqueles mesmos métodos que a gente utilizava no useForm.
+
+39:15.739999999999782
+Só que ele vem pelo formProvider.
+
+39:18.40000000000009
+Então, eu tenho o register, que eu vou utilizar aqui dentro,
+
+39:23.420000000000073
+que eu estou usando aqui para registrar
+
+39:27
+e o nome do meu empate tá só que aí eu tenho que passar aqui o neyme né que foi
+
+39:32.80000000000018
+passado lá pelo
+
+39:35.80000000000018
+e pela quem tá chamando aqui o componente
+
+39:51.5
+uma função e aqui nos erros eu vou fazer o seguinte vou ter que fazer um pouco diferente aqui esses erros tá eu vou pegar erros
+
+39:59.07999999999993
+o nome do do campo é o name
+
+40:10.739999999999782
+o ponto mestre
+
+40:18.820000000000164
+e aí eu já não peguei aqui ó não tem que pegar aqui o form state
+
+40:24.659999999999854
+e dentro de forma state tem os
+
+40:26.300000000000182
+erros
+
+40:31.7199999999998
+beleza então criamos nosso componente separado aqui de empate ea gente vai
+
+40:39.61999999999989
+chamar ele aqui dentro da nossa página né
+
+40:42.63999999999987
+dentro do nosso formulário então vou chamar ele aqui que da nossa página dentro do nosso formulário então eu vou chamar ele aqui
+
+40:46.30000000000018
+que é o react-hook-forms-text-impact
+
+40:49.13999999999987
+pronto, já importou
+
+40:51.039999999999964
+vou colocar aqui
+
+40:52.840000000000146
+os
+
+40:53.36000000000013
+os props
+
+40:56.679999999999836
+que eu preciso passar
+
+40:58.039999999999964
+vou passar name aqui
+
+40:59.48000000000002
+o name desse daqui vai ser e-mail
+
+41:1.800000000000182
+o label
+
+41:4.019999999999982
+vai ser e-mail, o label vai ser e-mail, assim, maiúsculo,
+
+41:9.440000000000055
+o que mais que eu tenho que passar? O type, né?
+
+41:13.11999999999989
+O type dele aqui, no caso, que vai ser...
+
+41:16.5
+Ah, tá, uma coisa que é legal fazer aqui no type é você restringir, né?
+
+41:22.420000000000073
+Então você pode, por exemplo, tipo a ele da seguinte forma por exemplo
+
+41:27.980000000000018
+text e o péssimo por exemplo só quero que seja implante de texto de senha então aquele já te
+
+41:38.30000000000018
+traz o autocomplete até text nesse caso aqui no primeiro que é o e-mail vou criar um outro aqui embaixo que vai ser o o péssimo senha e aqui eu completo aqui com 100
+
+41:57.340000000000146
+legal então beleza o que eu fiz aqui eu peguei o meu o componente foi criado
+
+42:03
+externamente é um componente do criado externamente não componente
+
+42:5.619999999999891
+do meu projeto e coloquei dentro do formulário tá e ele foi registrado lá no
+
+42:14.2199999999998
+componente utilizando os métodos que veio do form provider tá então que
+
+42:19.199999999999818
+métodos são esses os métodos aqui o que que eu coloquei aqui no use form e aqui eu importo eles
+
+42:27.559999999999945
+utilizando o use form context vamos ver se está funcionando que tal
+
+42:34.38000000000011
+formulário não recarregar aqui vamos testar. E-mail, vou colocar aqui sem...
+
+42:47.26000000000022
+A validação está ok.
+
+42:48.960000000000036
+Opa, funcionou.
+
+42:52.13999999999987
+.com, está legal.
+
+42:56.340000000000146
+Preenchi os requisitos, mandei, está funcionando.
+
+43:0.11999999999989086
+Beleza? Então, assim,
+
+43:2.880000000000109
+essa é a forma que a gente utiliza para...
+
+43:7.579999999999927
+no projeto real mesmo, né?
+
+43:12.920000000000073
+A gente sempre está importando os componentes e utilizando esse useFormContext.
+
+43:27.09999999999991
+Uma coisa que eu quero mostrar para vocês é quando a gente integra com formulários, com componente de terceiros, né?
+
+43:38.960000000000036
+Então, se você vir aqui no React Hook Forms, você tem na document UI, onde você vai registrar, em vez de você utilizar o register, você vai utilizar esse componente aqui do React Forms chamado controller.
+
+44:5.420000000000073
+para você poder renderizar o componente que está na biblioteca de terceiros aqui.
+
+44:10.7199999999998
+Mas também é simples, eu vou mostrar para vocês aqui como é que faz.
+
+44:12.699999999999818
+E fica bem bacana.
+
+44:18.09999999999991
+Então, nesse componente que a gente está utilizando o input normal do HTML aqui, a gente vai trocar esse input e vai utilizar o quê?
+
+44:21.7199999999998
+Vai utilizar o input do Material UI. Qual que utilizar o importe do material e o ai né qual que
+
+44:26.23999999999978
+é o importe do material e o ai aqui componente dele é o text field
+
+44:32.460000000000036
+bom então vamos tá utilizando esse text field aí então dentro do material e o ai
+
+44:38.039999999999964
+a gente tem o text field e no lugar do emp input eu vou estar usando ele aqui eu não preciso mais desse typography aqui
+
+44:48.40000000000009
+vocês vão ver porque
+
+44:49.460000000000036
+ele funciona um pouco diferente
+
+44:52.57999999999993
+porque o text field
+
+44:53.940000000000055
+ele já tem um local para você colocar
+
+44:56.960000000000036
+se der algum erro de validação
+
+44:58.98000000000002
+ele já tem nativamente dele
+
+45:0.8600000000001273
+então eu vou colocar aqui
+
+45:3.400000000000091
+text field relativamente dele tá então vou colocar aqui o text-field
+
+45:15.179999999999836
+e aí e aí
+
+45:19.860000000000127
+e a gente tem que fazer um pouco uma outra coisa que antes dentro do react form então a gente vai utilizar o controller
+
+45:32.5
+componente controle ele utiliza o não não usa mais o rádio ele vai utilizar
+
+45:39.51999999999998
+um uma outra um outro método aqui do uso forma conta que se chamado control
+
+45:47.440000000000055
+tá e aqui a gente vai retornar o controller que é um componente que ele
+
+45:56.07999999999993
+fecha só aqui mesmo dentro dele que você vai passar o name tá ele vem aqui das próprias ele tem um outro parâmetro aqui que o control
+
+46:13.139999999999873
+você vai passar esse control componente que você quer controlar
+
+46:31.23999999999978
+né ele tem ele tem uma propriedade que fio
+
+46:38.2199999999998
+de aqui dentro desse fio a gente vai ver ele tem o um change ele tem um meme que
+
+46:44.57999999999993
+ele vai passar por um componente que vai renderizar então dentro aqui a gente vai ver ele tem o on-chain de ele tem um meme que ele vai passar por
+
+46:45.2800000000002
+o componente que vai renderizar então dentro aqui a gente vai colocar o text
+
+46:50.07999999999993
+field do material uai o text field ele pede o que aqui dentro ele pede o um um label que é o label que a gente passou aqui e aí a gente registra ele
+
+47:12.900000000000091
+aqui com o field
+
+47:27.079999999999927
+e o que não tá achando
+
+47:37.11999999999989
+o ata falta um ter que o tex textfield e ele pede o label
+
+47:45.40000000000009
+e o name ele o próprio controller vai passar para ele aqui e dentro desse fio de só para você ver aqui o que tem aqui ó ele tem o name ele tem um change o ref o velho então não preciso passar velho e nada aqui
+
+47:53.26000000000022
+já é bem automático aqui desse fio de do react-hook forma tá é uma coisa que eu tenho que passar aqui também é o type vem da minha própria e vamos só ver como
+
+48:16.26000000000022
+é que se ele tá funcionando direito por enquanto aqui tá só vamos dar uma olhada ó ele já integrou aqui com o material que bacana que ele já traz o
+
+48:27.26000000000022
+padrão e só esse comportamento aqui do label isso aqui é o é o label que é como
+
+48:32.659999999999854
+se fosse o place holder dele é muito legal facilita bastante nessa gente
+
+48:38
+gostar desse visual aqui só que ainda não coloquei a questão dos erros de validação aqui tá como é que a
+
+48:45.57999999999993
+gente coloca aqui ele tem um campo o textfile tem um campo também que é o
+
+48:53.5
+error que é um campo boleano deixa só deixar assim mais fácil de visualizar
+
+49:5.039999999999964
+eu vou dividir aqui nos atributos
+
+49:12.659999999999854
+é mais fácil de entender esse filho aqui posso passar em qualquer ordem já aqui
+
+49:19.579999999999927
+em cima fica mais fácil de vocês chegarem aqui eu tô passando tão label type o erro o
+
+49:27.76000000000022
+erro é um campo booleano né o que eu vou passar aqui erro
+
+49:33.38000000000011
+erros é um erro daquele campo não erros ponto nem ponto message
+
+49:45
+é só que como ele é boleano eu tenho que dar esses dois duas exclamações aqui
+
+49:50.86000000000013
+porque ele vai transformar uma string se ela existir né ou string vazia no num
+
+49:57.63999999999987
+resultado boleano se tiver vazio aqui a string ele vai dar fosse né E aí não não vai ter erro no nesse campo nesse fio de esse a string for não for vazia
+
+50:12.460000000000036
+E aí ele vai retornar tudo né E o texto que ele vai mostrar é o helper text que também aqui desse componente do material e o ai onde
+
+50:25.09999999999991
+que tá esse helper text é isso aqui mesmo erro
+
+50:31.440000000000055
+o name message tá
+
+50:36.340000000000146
+bom então vamos lá deixa eu ver tá ele deu um erro aqui porque o mestre pode estar vazio
+
+50:45.159999999999854
+bom então eu tenho que colocar um interrogação
+
+50:49.940000000000055
+e agora vai
+
+50:54.30000000000018
+e aí embaixo também
+
+51:1.4600000000000364
+e aí
+
+51:13.7199999999998
+beleza show de bola uma coisa que eu quero mostrar pra vocês aqui que acontece é até de propósito eu deixei esse erro acontecer pra vocês é ficarem atentos a evitar tá pode ver que
+
+51:21.659999999999854
+na hora que começar a digitar que ele ele vai jogar um erro aqui no console.
+
+51:26.480000000000018
+Ó,
+
+51:27.679999999999836
+o que é esse erro?
+
+51:29.679999999999836
+É o seguinte, o Material UI,
+
+51:32.88000000000011
+quando você utiliza um input
+
+51:34.23999999999978
+dele, e você
+
+51:36.23999999999978
+não passa nenhum valor default,
+
+51:37.960000000000036
+default value, ele
+
+51:39.7199999999998
+reconhece que
+
+51:42.2199999999998
+o componente, ele é um componente
+
+51:44.07999999999993
+não controlado
+
+51:45.11999999999989
+e quando você começa a
+
+51:46.88000000000011
+digitar um valor, ele
+
+51:48.07999999999993
+ele fala, pô, você está digitando
+
+51:50.5
+um valor num componente não controlado
+
+51:52.92000000000007
+tal, então
+
+51:54.2199999999998
+na documentação você vai ver
+
+51:56.86000000000013
+que você tem que passar sempre um valor default
+
+51:58.86000000000013
+só que tem uma forma bacana
+
+52:1.0599999999999454
+de passar um valor, eu poderia colocar aqui
+
+52:3.019999999999982
+default value
+
+52:4.519999999999982
+direto aqui no componente do text field aqui do material UI mas o react hook forms
+
+52:10.61999999999989
+ele já tem uma forma de passar valores default aqui na própria use form
+
+52:16.559999999999945
+então aqui no resolver além de passar o resolver eu posso passar o default
+
+52:21.659999999999854
+default values e aqui ele já traz até no outro complete aquele já
+
+52:26.61999999999989
+traz um e mail que eu vou deixar assim em branco ea senha também vou colocar o
+
+52:33.19999999999982
+password aqui o em branco como default então fazendo isso você vai ver que ele
+
+52:40.159999999999854
+já não vou até dar uma flecha aqui pra vocês verem que ele não traz mais
+
+52:46.960000000000036
+esse erro tá vou digitar aqui ó não apareceu mais o erro ali no console
+
+52:52.960000000000036
+então vamos ver eu coloquei um e mail e vou deixar sem branco o país e um e-mail
+
+52:58.36000000000013
+válido então vou colocar aqui aroba gmail.com, senha 123456, show de bola, passou e deu o submit do meu formulário.
+
+53:16.38000000000011
+Beleza pessoal, uma coisa que também eu quero mostrar para vocês, é que tem uma outra funçãozinha legal aqui do react-workforms
+
+53:26.440000000000055
+que você pode dar um reset
+
+53:28.40000000000009
+no formulário, o que é o reset?
+
+53:30.480000000000018
+ele vai voltar os valores do
+
+53:32.2199999999998
+formulário pra o valor default values
+
+53:34.460000000000036
+que você definiu aqui em cima
+
+53:36.01999999999998
+então nesse onSubmit
+
+53:38.63999999999987
+além de eu dar o console.log
+
+53:40.80000000000018
+no final eu vou
+
+53:41.659999999999854
+apagar os valores aqui do
+
+53:44.179999999999836
+voltar pro valor padrão e da onde que vem
+
+53:47.679999999999836
+esse reset esse reset ele vem aqui do próprio uniforme tá então dentro desse métodos aqui eu
+
+53:53.440000000000055
+posso pegar métodos. Reset e com isso após ele dá um console na ali os dos valores né ele vai dar o reset do formulário então
+
+54:9.900000000000091
+deixou um pronto apagou Deu reset no formulário
+
+54:25.940000000000055
+Beleza pessoal?
+
+54:28.539999999999964
+Então é assim que a gente utiliza
+
+54:30.980000000000018
+O React Hook Form
+
+54:32.07999999999993
+Tá?
+
+54:35.19999999999982
+Espero que vocês tenham gostado
+
+54:37.059999999999945
+Dessa ferramenta
+
+54:37.960000000000036
+Tanto do Material UI quanto o React Hook Form
+
+54:41.460000000000036
+Vocês veem que eles trabalham
+
+54:43.19999999999982
+Muito bem assim
+
+54:44.960000000000036
+Em conjunto o React Hook Form, vocês veem que eles trabalham muito bem em conjunto.
+
+54:48.42000000000007
+É claro que esse formulário
+
+54:50.07999999999993
+que a gente implementou é um formulário
+
+54:51.679999999999836
+simples, não tem muita
+
+54:53.98000000000002
+complexidade, mas você pode
+
+54:56.179999999999836
+utilizar essa mesma forma de implementar
+
+54:58.40000000000009
+para colocar os checkboxes,
+
+55:0.6599999999998545
+os combo box,
+
+55:2.9600000000000364
+texto de input
+
+55:4.579999999999927
+de data. É a mesma forma de utilizar, tá ok?
+
+55:9.260000000000218
+Então, agradeço bastante aqui para quem chegou até o final do vídeo,
+
+55:14.800000000000182
+e deixe seus comentários aí, dá o feedback de vocês que é bem importante para nós,
+
+55:20.840000000000146
+para a gente estar sempre melhorando os conteúdos aqui do Experts Club,
+
+55:32.940000000000055
+e com bastante aderência do que os usuários estão pedindo, os alunos estão pedindo.
+
+55:36.92000000000007
+Tá legal, pessoal? Muito obrigado e até o próximo vídeo.

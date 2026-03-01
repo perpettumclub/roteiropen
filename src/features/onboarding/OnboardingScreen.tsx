@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, TrendingUp, Users, ChevronRight, ArrowRight } from 'lucide-react';
+import { Sparkles, TrendingUp, Users, ChevronRight, ArrowRight, Zap } from 'lucide-react';
+import { useGlobalStats } from '../../shared/hooks/useGlobalStats';
 
 interface OnboardingScreenProps {
     onComplete: () => void;
 }
 
 // Prova social - Depoimentos reais (editar com dados reais)
+// =================================================================
+// 📌 TESTIMONIALS_PAGE - Guardado para uso futuro com depoimentos reais
+// Para reativar: descomentar e usar no step 1
+// =================================================================
+/*
 const TESTIMONIALS = [
     {
         name: 'Juliana M.',
@@ -33,22 +39,20 @@ const TESTIMONIALS = [
         quote: 'Finalmente entendi como criar hooks que viralizam'
     }
 ];
+*/
 
-// Contador global simulado (substituir por API real depois)
-const GLOBAL_STATS = {
-    totalScripts: 12847,
-    activeUsers: 2341,
-    avgGrowth: '+340%'
-};
+// avgGrowth kept as static since it's a marketing stat
+const AVG_GROWTH = '+340%';
 
 export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }) => {
     const [step, setStep] = useState(0);
-    const [testimonialIndex, setTestimonialIndex] = useState(0);
+    // const [testimonialIndex, setTestimonialIndex] = useState(0); // TESTIMONIALS_PAGE - reativar quando tiver depoimentos reais
     const [counter, setCounter] = useState(0);
+    const { totalScripts, activeCreators } = useGlobalStats();
 
     // Animate counter
     useEffect(() => {
-        const target = GLOBAL_STATS.totalScripts;
+        const target = totalScripts;
         const duration = 2000;
         const increment = target / (duration / 50);
 
@@ -63,15 +67,15 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
         }, 50);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [totalScripts]);
 
-    // Rotate testimonials
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setTestimonialIndex(prev => (prev + 1) % TESTIMONIALS.length);
-        }, 4000);
-        return () => clearInterval(interval);
-    }, []);
+    // TESTIMONIALS_PAGE - Rotate testimonials (reativar com depoimentos reais)
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         setTestimonialIndex(prev => (prev + 1) % TESTIMONIALS.length);
+    //     }, 4000);
+    //     return () => clearInterval(interval);
+    // }, []);
 
     const handleContinue = () => {
         if (step < 2) {
@@ -192,6 +196,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                         exit={{ opacity: 0, y: -20 }}
                         style={{ textAlign: 'center', maxWidth: '400px' }}
                     >
+                        {/* === MINI VSL PAGE === */}
                         <div style={{
                             display: 'flex',
                             alignItems: 'center',
@@ -199,7 +204,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                             gap: '0.5rem',
                             marginBottom: '1rem'
                         }}>
-                            <TrendingUp size={24} color="var(--primary)" />
+                            <Zap size={24} color="var(--primary)" />
                             <span style={{
                                 fontSize: '0.8rem',
                                 fontWeight: 700,
@@ -207,104 +212,74 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                                 textTransform: 'uppercase',
                                 letterSpacing: '0.1em'
                             }}>
-                                Resultados Reais
+                                Como Funciona
                             </span>
                         </div>
 
                         <h2 style={{
                             fontSize: '1.8rem',
                             fontFamily: 'var(--font-display)',
-                            marginBottom: '2rem',
+                            marginBottom: '0.5rem',
                             color: 'var(--dark)'
                         }}>
-                            Veja o que os criadores estão conseguindo
+                            Sua ideia vira roteiro viral em 3 passos
                         </h2>
 
-                        {/* Testimonial Card */}
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={testimonialIndex}
-                                initial={{ opacity: 0, x: 50 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -50 }}
-                                style={{
-                                    background: 'white',
-                                    borderRadius: '24px',
-                                    padding: '2rem',
-                                    marginBottom: '2rem',
-                                    boxShadow: '0 10px 40px rgba(0,0,0,0.1)',
-                                    border: '1px solid rgba(0,0,0,0.05)'
-                                }}
-                            >
-                                <div style={{
-                                    fontSize: '3rem',
-                                    marginBottom: '1rem'
-                                }}>
-                                    {TESTIMONIALS[testimonialIndex].avatar}
-                                </div>
+                        <p style={{
+                            fontSize: '0.95rem',
+                            color: 'var(--gray)',
+                            marginBottom: '2rem',
+                            lineHeight: 1.6
+                        }}>
+                            Sem horas editando. Sem bloqueio criativo. Apenas fale e a IA faz o resto.
+                        </p>
 
+                        {/* VSL Embed Area - formato Stories (9:16) */}
+                        <div style={{
+                            background: 'linear-gradient(135deg, rgba(255,107,107,0.08) 0%, rgba(255,230,109,0.08) 100%)',
+                            borderRadius: '20px',
+                            padding: '1.5rem',
+                            marginBottom: '2rem',
+                            border: '1px solid rgba(255,107,107,0.15)'
+                        }}>
+                            <div style={{
+                                fontSize: '0.85rem',
+                                color: 'var(--primary)',
+                                fontWeight: 600,
+                                marginBottom: '0.5rem'
+                            }}>
+                                🎬 Assista em 30 segundos
+                            </div>
+                            {/* 
+                                TODO: Substituir por embed de vídeo real (Loom, YouTube, etc.)
+                                Exemplo: <iframe src="https://www.loom.com/embed/..." ... />
+                            */}
+                            <div style={{
+                                width: '100%',
+                                aspectRatio: '9/16',
+                                borderRadius: '12px',
+                                background: 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                                position: 'relative',
+                                overflow: 'hidden'
+                            }}>
                                 <div style={{
-                                    fontWeight: 700,
-                                    fontSize: '1.1rem',
-                                    marginBottom: '0.5rem',
-                                    color: 'var(--dark)'
-                                }}>
-                                    {TESTIMONIALS[testimonialIndex].name}
-                                </div>
-
-                                <div style={{
+                                    width: '60px',
+                                    height: '60px',
+                                    borderRadius: '50%',
+                                    background: 'rgba(255,255,255,0.9)',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
-                                    gap: '0.75rem',
-                                    marginBottom: '1rem',
-                                    fontSize: '1.2rem'
+                                    fontSize: '1.5rem',
+                                    boxShadow: '0 4px 20px rgba(0,0,0,0.2)'
                                 }}>
-                                    <span style={{ color: 'var(--gray)' }}>
-                                        {TESTIMONIALS[testimonialIndex].before}
-                                    </span>
-                                    <ArrowRight size={20} color="var(--primary)" />
-                                    <span style={{ color: 'var(--primary)', fontWeight: 700 }}>
-                                        {TESTIMONIALS[testimonialIndex].after}
-                                    </span>
-                                    <span style={{ fontSize: '0.8rem', color: 'var(--gray)' }}>
-                                        seguidores
-                                    </span>
+                                    ▶️
                                 </div>
-
-                                <p style={{
-                                    fontSize: '1rem',
-                                    color: 'var(--gray)',
-                                    fontStyle: 'italic',
-                                    lineHeight: 1.5
-                                }}>
-                                    "{TESTIMONIALS[testimonialIndex].quote}"
-                                </p>
-
-                                <div style={{
-                                    marginTop: '1rem',
-                                    fontSize: '0.8rem',
-                                    color: 'var(--gray)',
-                                    opacity: 0.7
-                                }}>
-                                    Dia {TESTIMONIALS[testimonialIndex].days} do desafio
-                                </div>
-                            </motion.div>
-                        </AnimatePresence>
-
-                        {/* Dots */}
-                        <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', marginBottom: '2rem' }}>
-                            {TESTIMONIALS.map((_, i) => (
-                                <div
-                                    key={i}
-                                    style={{
-                                        width: '8px',
-                                        height: '8px',
-                                        borderRadius: '50%',
-                                        background: i === testimonialIndex ? 'var(--primary)' : 'rgba(0,0,0,0.1)'
-                                    }}
-                                />
-                            ))}
+                            </div>
                         </div>
 
                         <motion.button
@@ -395,7 +370,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                                     fontWeight: 800,
                                     color: 'var(--dark)'
                                 }}>
-                                    {GLOBAL_STATS.activeUsers.toLocaleString()}
+                                    {activeCreators.toLocaleString()}
                                 </div>
                                 <div style={{
                                     fontSize: '0.8rem',
@@ -414,7 +389,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                                     fontWeight: 800,
                                     color: 'var(--primary)'
                                 }}>
-                                    {GLOBAL_STATS.avgGrowth}
+                                    {AVG_GROWTH}
                                 </div>
                                 <div style={{
                                     fontSize: '0.8rem',

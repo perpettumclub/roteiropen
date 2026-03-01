@@ -5,17 +5,25 @@ export interface HookVariation {
 }
 
 export interface ViralScript {
-    hooks: HookVariation[]; // Array of 7 hook variations
+    hooks: HookVariation[]; // Array of hook variations
     selectedHookIndex: number; // Which hook the user selected
-    conflito: string;
-    climax: string;
-    solucao: string;
-    cta: string;
+    contexto: string; // Ato II
+    conceito: string; // Ato III
+    ruptura: string; // Ato IV
+    plano: string; // Ato V
+    cta: string | CTAStructure; // Ato VI - Agora suporta objeto estruturado
     metadata: {
         duration: string;
         tone: string;
         platform: string;
     };
+}
+
+export interface CTAStructure {
+    texto: string;
+    palavra_chave: string;
+    entrega_prometida: string;
+    emoji: string;
 }
 
 // Saved script with metadata

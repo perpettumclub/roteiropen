@@ -2,10 +2,9 @@ import { useEffect } from 'react';
 import { Routes, Route, Navigate, useNavigate, Outlet, useLocation } from 'react-router-dom';
 
 // Features
-import { CheckoutScreen, ChallengeCheckout, Paywall } from './features/billing';
+import { CheckoutScreen, Paywall } from './features/billing';
 import { Dashboard, ScriptLibrary, ProgressScreen } from './features/dashboard';
-import { LoginScreen, SignUpScreen, ForgotPasswordScreen, useAuth, ChallengeLoginScreen } from './features/auth';
-import { MembersLayout, MembersLogin, CommunityFeed, ModulesGrid, EventsFeed, ProfileScreen } from './features/members';
+import { LoginScreen, SignUpScreen, ForgotPasswordScreen, useAuth } from './features/auth';
 import { LanguageTest } from './features/test';
 
 // Pages
@@ -20,13 +19,13 @@ import { RemixPage } from './pages/RemixPage';
 import { ScriptGenerationPage } from './pages/ScriptGenerationPage';
 import { ResultPage } from './pages/ResultPage';
 import { SharePage } from './pages/SharePage';
-import { ChallengeSignUpPage } from './pages/ChallengeSignUpPage';
+
 import { ChallengeVSL } from './pages/ChallengeVSL';
 
 // Shared
 import { StreakDisplay, BadgeNotification, useUser } from './shared';
 import { useSubscription } from './hooks/useSubscription';
-import { TierGuard } from './shared/guards';
+
 import { PLAN_PRICE_BRL } from './shared/constants';
 
 // --- Guards ---
@@ -156,7 +155,6 @@ export const AppRouter = () => {
             <Route path="/" element={<LandingPage />} />
             <Route path="/test" element={<LanguageTest />} />
             <Route path="/desafio" element={<ChallengeVSL />} />
-            <Route path="/checkout-desafio" element={<ChallengeCheckout onSuccess={() => window.location.href = '/membros'} onError={console.error} />} />
 
             {/* Public Flow with Centralized Layout */}
             <Route element={<PublicLayout />}>
@@ -173,11 +171,7 @@ export const AppRouter = () => {
                     else window.location.href = '/app/gravar';
                 }} />} />
 
-                <Route path="/signup-desafio" element={<ChallengeSignUpPage />} />
-                <Route path="/login-desafio" element={<ChallengeLoginScreen
-                    onSuccess={() => window.location.href = '/membros'}
-                    onForgotPassword={() => window.location.href = '/esqueci-senha'}
-                />} />
+
 
                 <Route path="/esqueci-senha" element={<ForgotPasswordScreen onBack={() => window.location.href = '/login'} />} />
 
@@ -190,7 +184,7 @@ export const AppRouter = () => {
                 }} onError={console.error} planPrice={PLAN_PRICE_BRL} planName="Anual" />} />
             </Route>
 
-            <Route path="/membros/login" element={<MembersLogin />} />
+
 
             {/* Protected App Routes */}
             <Route element={<RequireAuth />}>
@@ -219,20 +213,7 @@ export const AppRouter = () => {
                     </Route>
                 </Route>
 
-                {/* Members Area */}
-                <Route path="/membros" element={
-                    <TierGuard requiredTier="desafio_vip">
-                        <MembersLayout />
-                    </TierGuard>
-                }>
-                    <Route index element={<Navigate to="comunidade" replace />} />
-                    <Route path="comunidade" element={<CommunityFeed />} />
-                    <Route path="sala-de-aula" element={<ModulesGrid />} />
-                    <Route path="agenda" element={<EventsFeed />} />
-                    <Route path="perfil" element={<ProfileScreen />} />
-                    <Route path="lista" element={<div style={{ padding: '2rem', color: 'white' }}>Lista de Membros (Em breve)</div>} />
-                    <Route path="ranking" element={<div style={{ padding: '2rem', color: 'white' }}>Ranking (Em breve)</div>} />
-                </Route>
+
             </Route>
 
             {/* Fallback */}

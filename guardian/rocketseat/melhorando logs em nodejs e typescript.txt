@@ -1,0 +1,4298 @@
+00:00
+Fala, Deves. Beleza?
+
+00:10.56
+Bom, meu nome é Lucas.
+
+00:12.02
+Hoje eu vim trazer mais um conteúdo aí para vocês.
+
+00:14.36
+Então, sejam bem-vindos a mais uma aula.
+
+00:16.4
+Hoje eu vou falar um pouquinho sobre logs no Node.js.
+
+00:20.16
+Vou colocar algumas ferramentinhas aqui também para ajudar a gente a ter mais produtividade
+
+00:24.9
+e a ter logs melhores. Então, eu vou utilizar PINUM, que é uma biblioteca,
+
+00:29.46
+vou utilizar o LogDNA, que é uma ferramenta de management de logs.
+
+00:34.86
+Bom, antes de começar o conteúdo, deixa eu falar um pouquinho sobre mim.
+
+00:38.42
+Meu nome é Lucas Lopes, atualmente eu estou estudando um MBA em Arquitetura de Soluções na FIAP,
+
+00:47.06
+me formei em Engenharia da computação na Facenze, em Sorocaba.
+
+00:50.26
+Eu estou atuando no mercado há mais ou menos quatro anos, vou fazer quatro anos no fim do ano.
+
+00:53.66
+Eu trabalho lá na IBM, comecei lá como estagiário
+
+00:56.24
+e desde lá tenho seguido minha carreira.
+
+00:59.18
+Vou deixar alguns links aqui para as minhas redes sociais.
+
+01:6.019999999999996
+No Beacons vocês conseguem encontrar todos os links, vocês podem me adicionar também na própria plataforma
+
+01:8.219999999999999
+da Rocketseat,
+
+01:9.540000000000006
+e o LinkedIn eu acho que é o lugar mais fácil de
+
+01:11.920000000000002
+entrar em contato comigo, então
+
+01:13.439999999999998
+podem me chamar, a gente pode
+
+01:16.14
+trocar uma ideia, pode tirar dúvida,
+
+01:18.379999999999995
+enfim, estou aberto aí.
+
+01:21.14
+Então, começando
+
+01:22.159999999999997
+a falar um pouco sobre o conteúdo,
+
+01:24.260000000000005
+explicando o tema, como eu já disse antes,
+
+01:26.78
+eu vou falar um pouco sobre logs,
+
+01:29.319999999999993
+e vai ser utilizando o TypeScript, no Node.js.
+
+01:32.519999999999996
+Dá para utilizar também sem o TypeScript, caso você não goste,
+
+01:36.239999999999995
+mas ele vai ser muito útil para a gente conseguir construir interfaces,
+
+01:39.64
+construir tipos, para deixar a nossa aplicação um pouco mais desacoplada
+
+01:44.620000000000005
+e mais orientada à abstração das interfaces em si,
+
+01:48.14
+e não às implementações.
+
+01:51.019999999999996
+Então, deixa eu começar mostrando o projetinho base.
+
+01:54.120000000000005
+Isso daqui, inclusive, já é um spoiler, meus arquivos de backup.
+
+01:57.58
+Bom, mas o que vocês vão ver de início,
+
+01:59.42
+o que vai estar na branch master do GitHub,
+
+02:1.8199999999999932
+é só esse projetinho bem basicão.
+
+02:4.400000000000006
+Ele tem o TypeScript aqui configurado, então são algumas poucas dependências. branch master do GitHub, é só esse projetinho bem basicão, ele tem um
+
+02:5.079999999999998
+TypeScript aqui configurado,
+
+02:8.219999999999999
+então são algumas poucas dependências,
+
+02:10.340000000000003
+tem uma pasta source aqui com
+
+02:12.099999999999994
+um app.ts que não tem nada dentro dele,
+
+02:14.919999999999987
+então a gente vai começar
+
+02:16.099999999999994
+a desenvolver aqui do zero e vocês podem ir
+
+02:18.180000000000007
+acompanhando. No fim, eu vou
+
+02:20.180000000000007
+deixar uma branch chamada final,
+
+02:22.060000000000002
+final, com todo
+
+02:23.97999999999999
+o conteúdo entregue aqui na aula.
+
+02:26.139999999999986
+Então, tudo que eu desenvolver aqui vai estar entregue lá.
+
+02:29.02000000000001
+Eu vou deixar tudo separadinho por commit.
+
+02:31.080000000000013
+Então, vocês podem olhar no histórico de commits
+
+02:33.58000000000001
+que tudo que eu fizer vai estar lá dentro.
+
+02:37.03999999999999
+Bom, então, o que eu quero começar a falar aqui?
+
+02:41.879999999999995
+Eu quero começar a falar sobre um problema
+
+02:43.900000000000006
+daquela abordagem clássica que a gente
+
+02:46.099999999999994
+tem em trabalhar com logs
+
+02:47.900000000000006
+dentro das nossas aplicações, que é
+
+02:50.08000000000001
+o tal do console, né? A gente tem acesso
+
+02:52.24000000000001
+a ele tanto no navegador, quanto no
+
+02:54.28
+próprio back-end do JTS,
+
+02:56.84
+e ele não é uma
+
+02:58.120000000000005
+solução muito elegante, resolve
+
+03:0.2400000000000091
+poucos problemas, na verdade,
+
+03:2.0600000000000023
+só resolve normalmente aquele problema de ter
+
+03:4.039999999999992
+um log mais simples possível,
+
+03:5.460000000000008
+sem conseguir trabalhar muito com os dados nele.
+
+03:8.199999999999989
+E tem um problema mais grave ainda,
+
+03:10.180000000000007
+que é a questão de performance.
+
+03:11.740000000000009
+O console.log é uma função bloqueante,
+
+03:14.780000000000001
+então ele vai bloquear o seu event loop
+
+03:17.22
+da sua V8, da sua engine, do JavaScript,
+
+03:19.939999999999998
+e isso pode trazer problemas de performance.
+
+03:22.939999999999998
+Não pode, na verdade, vai trazer,
+
+03:25.22
+principalmente quando a gente está falando de logs
+
+03:27.139999999999986
+em aplicações que recebem muitos usuários.
+
+03:29.97999999999999
+Então, para cada usuário lá na sua aplicação
+
+03:32.31999999999999
+vai ter um console que vai estar bloqueando o seu event loop
+
+03:35.879999999999995
+e isso vai trazer impactos de performance, sim.
+
+03:38.75999999999999
+Ainda mais, a gente tem que lembrar que o Node.js,
+
+03:41.74000000000001
+a V8, ela roda em single thread.
+
+03:45.81999999999999
+Então, a gente tem que tomarbrar que o Node.js, a V8, ela roda em single thread, então a gente tem que tomar cuidado aí com essas execuções
+
+03:48.06
+síncronas e que tem esse
+
+03:49.879999999999995
+bloqueio aí da
+
+03:51.099999999999994
+da V8, né,
+
+03:53.84
+do nosso event loop.
+
+03:56.34
+Bom, então o que eu quero trazer
+
+03:57.879999999999995
+como solução aqui?
+
+03:59.620000000000005
+Eu quero apresentar para vocês uma biblioteca
+
+04:2.219999999999999
+chamada Pino,
+
+04:3.3799999999999955
+deixa eu até abrir aqui a documentação desse carinha aqui.
+
+04:7.060000000000002
+E esse Pino, não se pronuncia Pino,
+
+04:9.280000000000001
+antes eu pronunciava errado, mas o certo é Pino.
+
+04:12.419999999999987
+Ela é uma biblioteca que tem o intuito de ser super rápida,
+
+04:15.860000000000014
+então ela não tem essa queda de performance.
+
+04:19.24000000000001
+E ela tem uma filosofia bem bacana,
+
+04:21.399999999999977
+que é de você deixar o básico dentro da sua aplicação,
+
+04:25.75999999999999
+de você fazer só realmente o login, pegar os dados,
+
+04:27.75999999999999
+estruturar eles de maneira bem básica,
+
+04:30.399999999999977
+e o restante, que for mais complexo,
+
+04:32.139999999999986
+ou você faz num processo separado,
+
+04:34.51999999999998
+ou numa work thread
+
+04:35.80000000000001
+separada, que é o que
+
+04:37.879999999999995
+está sendo implementado agora,
+
+04:40.18000000000001
+a versão 7 dessa
+
+04:41.75999999999999
+biblioteca lançou em julho desse ano,
+
+04:44
+então eles estão introduzindo alguns transporters em WorkThreads,
+
+04:48.04000000000002
+que é uma funcionalidade nativa do Node.
+
+04:50.120000000000005
+Assim a gente não precisa trabalhar com processos paralelos,
+
+04:53.639999999999986
+mas isso eu vou estar trabalhando um pouquinho conforme a aula for passando.
+
+04:56.89999999999998
+O importante aqui é aquela focada realmente em trazer essa performance
+
+05:0.4399999999999977
+para que a gente não tenha esse custo dentro da nossa aplicação.
+
+05:5.319999999999993
+Então, antes de começar a falar sobre o pino, eu quero trazer aqui também um pouco
+
+05:10.819999999999993
+de como a gente pode abstrair essa parte de logs dentro da nossa aplicação.
+
+05:16.079999999999984
+Então, o que eu vou começar aqui a implementar é uma interface padrão
+
+05:19.879999999999995
+para o nosso logger. Então, eu vou criar uma pastinha chamada logger, vou criar um types.ts
+
+05:27.560000000000002
+e aqui começa aquela brincadeira
+
+05:30.04000000000002
+de usar o TypeScript, de você
+
+05:31.80000000000001
+primeiro criar suas abstrações,
+
+05:33.95999999999998
+primeiro criar quais são as suas interfaces
+
+05:36
+para depois criar o código que consome
+
+05:37.94
+elas. Então, você consegue fazer esse
+
+05:39.80000000000001
+desacoplamento aí na sua aplicação de maneira
+
+05:41.95999999999998
+mais elegante. Então,
+
+05:44.04000000000002
+eu vou começar criando
+
+05:45.25999999999999
+um tipo
+
+05:47.160000000000025
+e esse tipo vai
+
+05:50.04000000000002
+se chamar logData. E com
+
+05:52
+ele, eu vou abstrair o meu input
+
+05:54.24000000000001
+nas minhas
+
+05:54.860000000000014
+funções de log. Então,
+
+05:57.95999999999998
+como se eu estivesse dando
+
+06:0.01999999999998181
+um console.log, eu vou
+
+06:1.9599999999999795
+passar, normalmente a gente passa uma string lá,
+
+06:3.8600000000000136
+ou pode passar um objeto. Então, aqui eu quero param a gente passa uma string lá, ou pode passar um objeto, então aqui eu quero
+
+06:5.819999999999993
+parametrizar, deixar isso um pouco mais fechado.
+
+06:8.360000000000014
+O objeto que eu for passar para
+
+06:9.759999999999991
+essa minha função de login tem que seguir
+
+06:11.680000000000007
+essa estrutura, esse tipo,
+
+06:13.839999999999975
+essa interface. Então eu vou começar
+
+06:15.920000000000016
+dando um tipo
+
+06:17.95999999999998
+para ele, ele vai ser um tipo
+
+06:19.980000000000018
+obrigatório, uma string, isso daqui
+
+06:21.980000000000018
+eu já explico melhor um pouco mais o porquê que eu faço isso, e lembrando que
+
+06:26.019999999999982
+toda essa estrutura, todas essas interfaces
+
+06:28.360000000000014
+elas são bem arbitrárias,
+
+06:30.279999999999973
+então o que eu estou colocando aqui é o que
+
+06:32.31999999999999
+normalmente eu utilizo no meu dia a dia,
+
+06:34.160000000000025
+o que funciona para mim, mas pode ser que
+
+06:36.04000000000002
+para você não funcione tão bem, você queira algo mais
+
+06:38.10000000000002
+simples, ou algo mais completo,
+
+06:40.120000000000005
+mas eu vou passar aqui realmente o que eu utilizo e o que funciona para mim. Então, tem um tipo para definir qual é o tipo daquela informação.
+
+06:47.75999999999999
+Eu vou definir um payload.
+
+06:50.579999999999984
+Esse payload não vai ser obrigatório.
+
+06:52.639999999999986
+E eu vou usar um generics aqui,
+
+06:54.420000000000016
+porque eu quero que essa minha estrutura,
+
+06:57.98000000000002
+esse meu tipo, ele seja um pouco mais maleável aqui
+
+07:0.6999999999999886
+para este tipo.
+
+07:2.9399999999999977
+Então, eu estou usando o generics.
+
+07:4.740000000000009
+No tempo de execução, quando for...
+
+07:7.079999999999984
+Na verdade, no tempo de chamada,
+
+07:8.54000000000002
+quando for chamar essa função,
+
+07:9.699999999999989
+eu vou definir qual é o tipo desse payload.
+
+07:12.180000000000007
+E aqui eu vou definir mais duas propriedades.
+
+07:14.399999999999977
+Uma é o message, o clássico,
+
+07:15.839999999999975
+a mensagem que a gente quer passar para o nosso log.
+
+07:20.899999999999977
+Eu vou definir ele como string, também não vai ser obrigatório.
+
+07:25.939999999999998
+E vou também definir um error, para quando acontecer algum erro, eu armazenar
+
+07:28
+nesse objeto, ao invés de armazenar no payload
+
+07:29.939999999999998
+ou no message, vai realmente ser
+
+07:31.720000000000027
+algo específico para isso, ele também
+
+07:34.04000000000002
+vai ser
+
+07:34.98000000000002
+um erro, uma propriedade
+
+07:38.339999999999975
+que não é obrigatória,
+
+07:40.660000000000025
+eu vou fazer mais uma brincadeirinha
+
+07:42.24000000000001
+aqui com os tipos, que eu quero que aconteça o seguinte
+
+07:45.45999999999998
+sempre que eu passar uma mensagem
+
+07:47.19999999999999
+eu não quero receber um error
+
+07:48.98000000000002
+e sempre que eu passar um error
+
+07:50.60000000000002
+eu não quero receber uma mensagem
+
+07:52.27999999999997
+então eu vou fazer
+
+07:54.639999999999986
+meio que um conjunto aqui
+
+07:57.139999999999986
+uma junção
+
+07:58.51999999999998
+então é esse tipo
+
+08:0.37999999999999545
+com esse tipo
+
+08:1.7200000000000273
+como se fosse um extends, um implement aqui,
+
+08:6.3799999999999955
+mais um extends, estou fazendo uma extensão
+
+08:8.240000000000009
+desse tipo, e aqui eu vou passar
+
+08:10
+dois tipos, o primeiro vai ser uma mensagem
+
+08:12.279999999999973
+obrigatória,
+
+08:14.860000000000014
+o meu segundo tipo,
+
+08:16.04000000000002
+com o ou,
+
+08:17.680000000000007
+vai ser o error
+
+08:18.579999999999984
+obrigatório. Então, o que acontece?
+
+08:22.860000000000014
+Nesse primeiro tipo aqui,
+
+08:24.019999999999982
+eu estou passando o meu tipo base, a estrutura base
+
+08:26.120000000000005
+que eu vou ter, quais são as possibilidades
+
+08:28.339999999999975
+que eu posso ter dentro do meu
+
+08:30.720000000000027
+parâmetro. Aqui,
+
+08:32.360000000000014
+eu estou passando que
+
+08:33.440000000000055
+ele está estendendo um comportamento
+
+08:36.15999999999997
+de ter ou uma mensagem
+
+08:37.82000000000005
+obrigatória ou de ter um erro obrigatório.
+
+08:40.41999999999996
+Então, quando não tem mensagem, tem erro
+
+08:42.15999999999997
+e quando não tem erro,
+
+08:45.60000000000002
+ele tem que ter mensagem.
+
+08:47.10000000000002
+Então, é basicamente isso.
+
+08:49.75999999999999
+A gente vai trabalhar um pouquinho, vai dar para entender um pouquinho melhor conforme a gente for desenvolvendo as outras coisas.
+
+08:53.22000000000003
+Agora, eu vou criar um log method.
+
+08:55.620000000000005
+Ele vai ser um tipo também.
+
+08:58.01999999999998
+Ele vai ser uma abstração para todos, a chamada de log em si.
+
+09:1.759999999999991
+Então, quando eu for dar um console.log, por exemplo,
+
+09:7.2999999999999545
+o método .log, ele vai seguir essa interface.
+
+09:11.740000000000009
+A gente não vai chamar de log aqui, mas deixa eu criar esse tipo.
+
+09:13.360000000000014
+Então, eu vou chamar ele de log method.
+
+09:18.08000000000004
+Ele vai ser uma função, um método.
+
+09:20.519999999999982
+Ele vai ter o generics dele também.
+
+09:23.799999999999955
+Ele vai receber como parâmetro o log em si. E nesse log ele vai ter o tipo do logData.
+
+09:28.940000000000055
+Deixa eu até chamar de logData para ficar um pouco mais coeso. E aqui eu vou passar novamente
+
+09:35.89999999999998
+meu generics que está autocompletando sem eu querer. E aqui ele não vai retornar nada, ele é
+
+09:41.299999999999955
+um do tipo void. Então é um método que recebe
+
+09:45.89999999999998
+esse generics, esse tipo t, do qual
+
+09:47.77999999999997
+estou passando para esse tipo, ele recebe
+
+09:50.120000000000005
+um parâmetro, que é logData,
+
+09:51.89999999999998
+que vem desse tipo, e ele não retorna
+
+09:53.860000000000014
+nada. Então esses são os meus
+
+09:55.41999999999996
+métodos de log. Agora
+
+09:58.039999999999964
+eu vou criar um encapsulamento
+
+09:59.58000000000004
+para o logger em si, então vai ser o meu
+
+10:1.8799999999999955
+tipo logger,
+
+10:7.580000000000041
+e para o logger em si, então vai ser o meu tipo logger, e esse tipo logger vai ter todos os métodos que eu quero para fazer o logger em si.
+
+10:9.659999999999968
+Então, se eu quisesse simplesmente substituir o console.log,
+
+10:12.600000000000023
+eu poderia muito bem vir aqui e fazer um log,
+
+10:15.32000000000005
+é igual a log, método.
+
+10:16.91999999999996
+Então, esse meu objeto de log,
+
+10:19.720000000000027
+ele vai sempre expor um método log,
+
+10:21.980000000000018
+e esse método log é do tipo logmethods.
+
+10:25.340000000000032
+Mas,
+
+10:27.200000000000045
+eu quero abandonar um pouco essa interface que a gente está acostumado com
+
+10:30.059999999999945
+o Node.js. Eu quero
+
+10:31.91999999999996
+trazer aqui alguns outros tipos
+
+10:34.120000000000005
+de login. E esses
+
+10:36.01999999999998
+tipos de login, eles também são meio que
+
+10:38
+assim, eles são um padrão
+
+10:40.32000000000005
+já existente aí nas
+
+10:41.82000000000005
+aplicações, nas bibliotecas
+
+10:44.01999999999998
+de login existentes,
+
+10:45.67999999999995
+mas ele não tem um sentido muito
+
+10:47.91999999999996
+vamos dizer...
+
+10:50.51999999999998
+Ele não é
+
+10:51.98000000000002
+assim porque ele deveria ser. Ele é assim porque
+
+10:53.77999999999997
+alguém fez assim e virou um padrão.
+
+10:56.799999999999955
+Se eu não me engano,
+
+10:58
+ele surgiu muito com aquela biblioteca do Java,
+
+11:0.20000000000004547
+Log4j, e ele traz
+
+11:1.9400000000000546
+alguns padrões que
+
+11:3.4600000000000364
+o Pino também segue, mas são padrões
+
+11:06
+que são bastante conhecidos por
+
+11:8.120000000000005
+várias bibliotecas, são utilizados em várias bibliotecas,
+
+11:10.919999999999959
+inclusive no próprio log de
+
+11:12.299999999999955
+DNA, ele também tem o debug,
+
+11:14.080000000000041
+ele tem o info, ele tem o error, ele tem
+
+11:15.879999999999995
+o fatal, e
+
+11:17.74000000000001
+aqui também tem a mesma coisa.
+
+11:20.299999999999955
+E para cada um desses
+
+11:21.360000000000014
+meus levels, eu tenho um valor
+
+11:24.120000000000005
+numérico para ele também.
+
+11:25.67999999999995
+No começo, eu apanhava muito para entender por que tem esses valores,
+
+11:29.58000000000004
+por que trace tem que ser 10, por que debug tem que ser 20.
+
+11:32.89999999999998
+Justamente, eu vou pedir para vocês não se prenderem muito a esses valores.
+
+11:35.82000000000005
+São valores padrões que a gente tem, não tem uma explicação muito lógica
+
+11:40.460000000000036
+do por que é isso, mas a gente também vai ver alguns usos
+
+11:44.17999999999995
+do por queê que é isso, mas a gente também vai ver alguns usos do porquê que esses valores existem. Além desses valores
+
+11:47.91999999999996
+padrões, caso você olhe para eles e fale, poxa, isso não encaixa muito no meu contexto,
+
+11:51.960000000000036
+não quero utilizar todos, ou eu quero ter algum customizável, a gente consegue
+
+11:55.82000000000005
+também criar os nossos próprios customs levels.
+
+12:0.08000000000004093
+Então, a documentação do Pino é super boa, ela explica isso super bem,
+
+12:6.2999999999999545
+mas para essa aula, para a gente não estender muito,
+
+12:8.480000000000018
+eu vou seguir com os levels que são padrões.
+
+12:13.980000000000018
+E eu nem vou utilizar todos aqui, eu vou estar utilizando o debug, o info e o error.
+
+12:15.340000000000032
+Ok?
+
+12:18.659999999999968
+Então, como que a gente vai fazer isso?
+
+12:20.100000000000023
+É através dos próprios métodos. Então, já deixa eu dar...
+
+12:22.460000000000036
+Eu até fiz uma bagunça aqui, mas vamos dessa forma mesmo.
+
+12:25.91999999999996
+Então, eu vou ter um método chamado debug,
+
+12:28.799999999999955
+que vai ter essa lógica de fazer logs em nível de debug.
+
+12:32.879999999999995
+Eu vou ter para o info o warn também.
+
+12:36.41999999999996
+Então, eu vou ter quatro métodos.
+
+12:38.059999999999945
+A diferença entre eles, eles seguem toda a mesma interface,
+
+12:40.91999999999996
+mas a diferença está no metadado deles,
+
+12:42.91999999999996
+que é justamente qual é o level que eles querem passar.
+
+12:46.860000000000014
+Então, dito isso,
+
+12:48.460000000000036
+esses são os tipos,
+
+12:49.940000000000055
+essas são as interfaces que eu queria
+
+12:51.39999999999998
+fazer. E a gente olhando
+
+12:53.960000000000036
+para essas interfaces, em momento algum,
+
+12:56.01999999999998
+elas estão ligadas com a biblioteca Pino.
+
+12:58.39999999999998
+Então você pode utilizar essas interfaces
+
+13:0.2999999999999545
+com outras bibliotecas também. A gente tem
+
+13:2.0599999999999454
+o Winston, a gente tem o Log4JS,
+
+13:5.8799999999999955
+inclusive eu já trabalhei com elas, mas
+
+13:7.600000000000023
+foi durante uma live, uma
+
+13:9.759999999999991
+conferência de um dos contribuidores
+
+13:11.840000000000032
+do Pino, que ele estava explicando sobre
+
+13:13.519999999999982
+o paralelismo de work threads no
+
+13:15.759999999999991
+Node.js, eu acabei
+
+13:17.779999999999973
+me encantando por essa biblioteca do Pino.
+
+13:19.700000000000045
+Então, lá no meu trabalho, a gente
+
+13:21.91999999999996
+já tem encaixado justamente essa arquitetura de pino com o logDNA.
+
+13:27.539999999999964
+E, inclusive, esse conjunto de pino com o logDNA,
+
+13:31.82000000000005
+ele é a recomendação oficial da IBM para arquiteturas de aplicação em Node.js.
+
+13:38.940000000000055
+Eu, inclusive, vou deixar um link para essa arquitetura lá no repositório,
+
+13:43.24000000000001
+onde vocês podem acessar e dar uma olhadinha
+
+13:45.5
+a mais caso vocês tenham interesse.
+
+13:47.17999999999995
+Então, beleza.
+
+13:50.120000000000005
+Agora eu vou criar realmente o meu logger com a implementação do Pino seguindo essa
+
+13:56.539999999999964
+interface.
+
+13:57.539999999999964
+Então, eu vou começar aqui abrindo meu terminal e vou instalar a minha biblioteca do Pino. Vou instalar ele.
+
+14:6.17999999999995
+Deixa eu já fechar essas duas abas aqui, que a gente não vai precisar mais.
+
+14:11.32000000000005
+Aqui eu vou instalar também o Types,
+
+14:15.139999999999986
+que é para o TypeScript, para a gente ter acesso aos tipos do Pino.
+
+14:20.220000000000027
+É até meio estranho falar Pino, mas eu estava acostumado com Pino,
+
+14:23.82000000000005
+mas conforme o próprio criador lá do Pino, é pino, então vou falar pino aqui.
+
+14:30.58000000000004
+Então o que eu vou começar a fazer aqui?
+
+14:32.379999999999995
+Eu vou dar um import, pino, as aspas simples aqui.
+
+14:42.24000000000001
+as aspas simples aqui.
+
+14:44.960000000000036
+É que é muito simples.
+
+14:47.039999999999964
+Eu vou pegar o meu... Opa.
+
+14:49.5
+Acabadinho.
+
+14:50.860000000000014
+Vou pegar um logger.
+
+14:54.10000000000002
+É igual a pino.
+
+14:56.41999999999996
+Conforme a documentação, é assim que a gente instancia o novo logger.
+
+15:0.05999999999994543
+E agora, eu quero exportar o logger seguindo esse tipo.
+
+15:5.139999999999986
+Então eu quero seguir essa interface aqui.
+
+15:7.899999999999977
+Então eu vou começar dando import types, que eu criei naquele meu arquivo.
+
+15:14.600000000000023
+Types.ts
+
+15:17.059999999999945
+Primeiramente eu vou pegar aquele meu logger em si.
+
+15:23.480000000000018
+E eu vou pegar também
+
+15:25.159999999999968
+esse log data aqui.
+
+15:28.899999999999977
+A gente vai utilizar ele.
+
+15:31.200000000000045
+Então, vamos lá.
+
+15:32.58000000000004
+Eu vou dar um...
+
+15:34.08000000000004
+criar um aqui
+
+15:34.700000000000045
+para chamar do logger.
+
+15:39.74000000000001
+Deixa eu renomear os caras aqui para ficar mais fácil.
+
+15:41.98000000000002
+Não vai ter logger para todo lado
+
+15:43.360000000000014
+e a gente não vai saber o que é o quê.
+
+15:45.82000000000005
+E aqui eu vou colocar logger, que é o nosso logger customizado.
+
+15:52.51999999999998
+Lembrando, ele tem que ser do tipo que são esses caras daqui.
+
+15:58.39999999999998
+Para cada um deles...
+
+15:59.91999999999996
+Deixa eu mandar aqui para a vírgula, para a vírgula e para a vírgula.
+
+16:6.32000000000005
+Para cada um deles, eu vou criar um encapsulamento de execução de função.
+
+16:10.139999999999986
+Então aqui é uma função que vai receber um logData,
+
+16:13.399999999999977
+que é do tipo logData,
+
+16:15.840000000000032
+e aqui eu preciso passar o meu generics,
+
+16:19.159999999999968
+então essa função também precisa ser generics,
+
+16:20.399999999999977
+deixa eu passar ela aqui.
+
+16:25.039999999999964
+O bit está chato, mas é assim mesmo.
+
+16:27.779999999999973
+E aqui, o que eu vou fazer? Eu vou pegar
+
+16:29.899999999999977
+esse meu Pinologger
+
+16:30.91999999999996
+e vou utilizar o método dele
+
+16:33.89999999999998
+para fazer
+
+16:36.059999999999945
+o log em si.
+
+16:37.48000000000002
+No caso é debug.
+
+16:39.559999999999945
+O que a gente vê na documentação do Pino
+
+16:41.89999999999998
+é assim que a gente consegue
+
+16:44.01999999999998
+fazer logs a nível de
+
+16:45.940000000000055
+debug. E para o restante eu vou repetir essa mesma coisa, vou pegar esse cara
+
+16:49.700000000000045
+daqui, substituir ele. Só que aqui eu vou mudando o método, então aqui vai ser info,
+
+16:56
+vai ser warn, e aqui vai ser error. Só que aqui tem uma coisinha que a gente precisa fazer. Deixa eu até dar um export default.
+
+17:8.019999999999982
+Uma função.
+
+17:10.1400000000001
+Retorna um logger.
+
+17:13.799999999999955
+Essa função daqui sempre vai retornar esse logger aqui que eu já criei.
+
+17:19.980000000000018
+Eu estou criando em função.
+
+17:22.1400000000001
+Eu poderia muito dar um export nesse objeto por padrão,
+
+17:25.559999999999945
+mas eu sempre prefiro exportar uma função, porque depois é mais fácil para você
+
+17:29.019999999999982
+seguir uma interface para poder fazer o mock disso quando você for testar.
+
+17:35.6400000000001
+Então é um padrão que eu gosto de seguir.
+
+17:37.72000000000003
+Mas ele sempre vai estar retornando a mesma instância,
+
+17:40.180000000000064
+que inclusive é applogger, não logger.
+
+17:42.3599999999999
+Ok.
+
+17:44.8599999999999
+Uma coisa aqui que eu disse que a gente precisa ainda se atentar,
+
+17:48.180000000000064
+a gente precisa mudar.
+
+17:50.09999999999991
+Aqui é só types, pronto, parou de reclamar.
+
+17:53.42000000000007
+A mensagem na nossa interface padrão, ela não está respetando um pino.
+
+17:57.559999999999945
+É uma interface que a gente criou para a nossa aplicação.
+
+18:0.2400000000000091
+Novamente dizendo, ela não está presa à biblioteca.
+
+18:03
+E é isso que faz com que a gente tenha um desacoplamento
+
+18:6.279999999999973
+Entre a biblioteca e o nosso logger da nossa aplicação em si
+
+18:9.759999999999991
+E o porquê que está diferente?
+
+18:12.660000000000082
+No Pino, ele não utiliza o nome de propriedade message e nem error
+
+18:17.279999999999973
+Ele utiliza aqui, conforme a documentação, msg para message
+
+18:21.1400000000001
+E ele utiliza err para error
+
+18:24.460000000000036
+Então, eu vou criariza ERR para error.
+
+18:29.180000000000064
+Então, eu vou criar aqui uma função para traduzir o conteúdo que a gente recebe com a nossa interface padrão de aplicação
+
+18:33.42000000000007
+para o tipo de conteúdo que o Pino espera receber.
+
+18:37.42000000000007
+Então, eu vou criar aqui um const, eu chamo ele de parse,
+
+18:42.77999999999997
+logger input, Pino format. eu chamo ele de parseLoggerInput to pin
+
+18:46.22000000000003
+format, ele vai receber um logData
+
+18:50.40000000000009
+que é do tipo logData,
+
+18:53.440000000000055
+generics de novo, então deixa eu receber esse
+
+18:58.07999999999993
+t aqui.
+
+19:1.8599999999999
+Esse cara vai fazer o seguinte, ele vai retornar um novo objeto com essa tradução.
+
+19:7.7000000000000455
+Então, inclusive, aqui eu já vou fazer um destructing
+
+19:10.180000000000064
+para ficar mais fácil.
+
+19:11.799999999999955
+Então, eu vou pegar aqui o meu message, pegar o meu error,
+
+19:14.680000000000064
+e o restante dos dados eu vou pegar aqui em data.
+
+19:18.200000000000045
+Aqui eu já faço essa conversão para msg como sendo meu message,
+
+19:23.940000000000055
+url como sendo meu error, e o RR como sendo o meu error,
+
+19:27.039999999999964
+e o meu data aqui com o restante dos dados que eu enviei aqui como parâmetro.
+
+19:32.3599999999999
+Então aqui eu só preciso pegar,
+
+19:35.440000000000055
+fazer a conversão em cada um desses caras.
+
+19:37.5
+Então deixa eu pegar aqui um,
+
+19:39.51999999999998
+pegar todos eles de uma vez,
+
+19:41.09999999999991
+e aqui eu vou chamar o meu parse,
+
+19:44.42000000000007
+parse, logger input, de painel format. todos eles de uma vez. E aqui eu vou chamar o meu parse.
+
+19:47.83999999999992
+Logger input de painel format.
+
+19:52.33999999999992
+E aqui está feito.
+
+19:53.700000000000045
+Então, tudo o que está acontecendo aqui é um encapsulamento.
+
+19:56.8599999999999
+Eu estou pegando o pino e estou
+
+19:58.039999999999964
+adequando ele à minha aplicação.
+
+20:0.16000000000008185
+A interface que a minha aplicação conhece.
+
+20:2.4400000000000546
+Com isso, a minha aplicação
+
+20:3.839999999999918
+fica desacoplada da biblioteca do Pino.
+
+20:7.180000000000064
+Se caso eu não tenha gostado, caso não esteja mais servindo,
+
+20:10.019999999999982
+chegou uma atualização que quebrou tudo e já não funciona mais para mim,
+
+20:14.099999999999909
+basta mudar aqui a minha biblioteca para o Winston
+
+20:16.11999999999989
+e readequar esse meu logger para o que a minha aplicação espera.
+
+20:21.720000000000027
+Então, beleza.
+
+20:22.519999999999982
+Com isso daqui, a gente já está pronto para poder fazer os nossos logs.
+
+20:25.8599999999999
+Então, a gente está utilizando o Pino, que é super rápido.
+
+20:28.74000000000001
+Então, aqui, eu já deixo até
+
+20:29.920000000000073
+fazer um teste no meu app.ts.
+
+20:32.22000000000003
+Deixa eu primeiro fazer um
+
+20:33.8599999999999
+index.ts, que é um padrão que eu
+
+20:36.01999999999998
+também curto seguir. E ele exporta
+
+20:38.25999999999999
+tudo que eu tenho aqui dentro. Então, eu vou dar um
+
+20:39.8599999999999
+export
+
+20:40.460000000000036
+meu logger.
+
+20:42.57999999999993
+export meu logger,
+
+20:46.74000000000001
+eu vou usar a sintaxe for os logger,
+
+20:51.72000000000003
+deixa eu até chamar ele de make logger,
+
+20:54.75999999999999
+que é uma função para criar um logger.
+
+20:57.01999999999998
+E aqui eu vou exportar também alguns dos meus tipos,
+
+20:59.51999999999998
+caso algum cara de cima,
+
+21:2.7799999999999727
+ou quem estiver chamando esse módulo,
+
+21:4.8599999999999
+ele possa conhecer as interfaces.
+
+21:7.460000000000036
+Então aqui eu vou chamar,
+
+21:8.960000000000036
+aqui é types.
+
+21:11.579999999999927
+Vou chamar o meu logData,
+
+21:13.180000000000064
+vou exportar meu logData, meu logMethods,
+
+21:15.759999999999991
+e o meu logger em si,
+
+21:17.660000000000082
+os meus tipos.
+
+21:19.5
+E aqui, no meu appts,
+
+21:21.299999999999955
+aí sim,
+
+21:23.160000000000082
+vou dar um import no meu
+
+21:25.299999999999955
+módulo de logger
+
+21:28.180000000000064
+vou chamar o meu make logger
+
+21:30.90000000000009
+com isso eu consigo
+
+21:32.559999999999945
+pegar um logger
+
+21:33.88000000000011
+e agora eu posso utilizar
+
+21:38.5
+qualquer um desses caras daqui
+
+21:39.98000000000002
+eu vou começar com um debug
+
+21:41.88000000000011
+porque ele tem uma certa
+
+21:44.319999999999936
+pegadinha, ah lembrando, aqui a gente tem que passar
+
+21:46.51999999999998
+Nosso message
+
+21:48.72000000000003
+Eu vou passar o meu message
+
+21:50.88000000000011
+E aqui eu tenho que passar um type
+
+21:52.539999999999964
+Então eu vou passar log type
+
+21:54.960000000000036
+Inclusive se eu passasse um error aqui
+
+22:2.9200000000000728
+Eu me passaria
+
+22:4.059999999999945
+Então Ok Então, ok. Vamos executar esse cara aqui e vamos ver o que acontece.
+
+22:11.420000000000073
+Deixa eu dar um clear para ficar melhor.
+
+22:15.400000000000091
+Vou dar um npm run, deixa eu lembrar qual é o nome do comando.
+
+22:20.079999999999927
+npm run start local, ok.
+
+22:22.200000000000045
+Então, vou dar um npm run start dar um vai executar o log para mim executar a aplicação
+
+22:34.57999999999993
+tá parado aqui
+
+22:39.24000000000001
+não aconteceu nada aqui
+
+22:44.1400000000001
+É uma travadinha.
+
+22:47.74000000000001
+Por que ele não logou nada?
+
+22:51.039999999999964
+Porque a gente tem uma configuração no nosso logger que informa quais são os níveis de log
+
+22:55.25999999999999
+que a gente quer mostrar, que a gente quer considerar.
+
+22:58.48000000000002
+Então, lembra que eu mostrei na documentação
+
+23:0.7999999999999545
+aqueles níveis de log?
+
+23:2.660000000000082
+Tinha 10, 20, 30, 40.
+
+23:6.259999999999991
+Sempre que eu passo aqui no meu parâmetro,
+
+23:8.11999999999989
+quando eu estou construindo o pino,
+
+23:10.819999999999936
+o level, eu vou
+
+23:12.220000000000027
+dizer qual que é o nível mínimo
+
+23:14.539999999999964
+que eu quero que a minha aplicação mostre.
+
+23:16.339999999999918
+Então, se eu colocar aqui error, por exemplo,
+
+23:18.680000000000064
+que é um level bem alto,
+
+23:20.700000000000045
+eu não vou mostrar nem o warn,
+
+23:22.25999999999999
+nem info e nem debug.
+
+23:24.180000000000064
+Por padrão, o level,
+
+23:25.88000000000011
+o valor padrão para
+
+23:27.039999999999964
+o level do pino é o info.
+
+23:30.039999999999964
+Então, não vou mostrar debug.
+
+23:31.6400000000001
+Então, aqui no caso, como eu coloquei
+
+23:33.539999999999964
+o debug aqui,
+
+23:35.98000000000002
+ele não vai mostrar. Então, aqui,
+
+23:37.66000000000008
+eu tenho que colocar no meu
+
+23:39.90000000000009
+level debug, para aí sim,
+
+23:41.8599999999999
+a partir de debug, ele começar a mostrar
+
+23:44.059999999999945
+todos os logs.
+
+23:46.299999999999955
+Então, deixa eu executar aqui
+
+23:47.460000000000036
+a nossa aplicação.
+
+23:52
+Com esse calor, meu Mac está fritando, então
+
+23:53.88000000000011
+ele até demora um pouco para
+
+23:55.40000000000009
+executar aqui, está sofrendo.
+
+23:58.16000000000008
+Mas agora sim, ele executou. Então, se a gente
+
+24:0.11999999999989086
+voltar lá e colocar,
+
+24:2.5799999999999272
+por exemplo,
+
+24:4.1400000000001
+ele até mostra qual é o valor do level. Então, se a gente voltar para e colocar, por exemplo, ele até mostra qual que é o
+
+24:6.1400000000001
+valor do level. Então, se a gente
+
+24:7.7999999999999545
+voltar para a info,
+
+24:9.900000000000091
+o padrão,
+
+24:10.519999999999982
+ele não vai
+
+24:12.519999999999982
+mostrar.
+
+24:14.579999999999927
+O processador
+
+24:18.5
+está fritando para executar isso,
+
+24:21.11999999999989
+mas já já ele executa.
+
+24:25.579999999999927
+Enquanto isso, a gente tem que se atentar aqui a uma coisa.
+
+24:29.420000000000073
+Aqui, terminou e ele não mostrou.
+
+24:31.339999999999918
+Então, a gente tem que estar configurando aqui certinho.
+
+24:34.57999999999993
+Mas o que acontece?
+
+24:36.33999999999992
+Esse tipo de configuração é recomendado ficar invariável de ambiente,
+
+24:40.559999999999945
+porque no seu ambiente de produção, você não vai querer ficar mostrando,
+
+24:43.90000000000009
+por exemplo, logs de debug.
+
+24:46.180000000000064
+Aqui eu não expliquei muito o que é cada um
+
+24:47.98000000000002
+dos níveis, mas o debug, ele é
+
+24:50.16000000000008
+justamente o que já diz, é para você
+
+24:52.059999999999945
+ter logs com bastante informação
+
+24:54.24000000000001
+sobre várias
+
+24:55.51999999999998
+partes do seu código.
+
+24:58.25999999999999
+Então, se um usuário
+
+24:59.460000000000036
+vai lá, acessa a sua aplicação, executa
+
+25:2.1400000000001
+uma funcionalidade, você tem um log de qual é o usuário, de qual é o IP dele,
+
+25:8.38000000000011
+esse tipo de informação.
+
+25:9.559999999999945
+Então, você não quer ficar vendo muitas vezes isso em produção.
+
+25:12.160000000000082
+Você quer realmente ver quando você está no ambiente de QA,
+
+25:14.319999999999936
+no ambiente de desenvolvimento, que você quer ter um debug realmente melhor.
+
+25:18.720000000000027
+Então, o que eu diria para a gente fazer aqui
+
+25:22.38000000000011
+é receber esse valor daqui de level através de variáveis de ambiente.
+
+25:27.24000000000001
+Então, eu vou fazer aqui bem rapidinho o npm install m.
+
+25:31.779999999999973
+m.
+
+25:33.180000000000064
+Para a gente poder receber variáveis de ambiente
+
+25:36.51999999999998
+e deixar isso um pouco mais parametrizado.
+
+25:41.8599999999999
+Então, eu vou instalar também o type, os types
+
+25:45.16000000000008
+é para ficar na
+
+25:46.92000000000007
+nas variáveis
+
+25:49.33999999999992
+de desenvolvimento, mas eu acabei
+
+25:51.039999999999964
+colocando aqui nas variáveis
+
+25:52.6400000000001
+era para ficar aqui no
+
+25:54.88000000000011
+dev dependencies, mas acabou
+
+25:56.960000000000036
+ficando no dependencies, mas fica
+
+25:59.039999999999964
+assim mesmo, então o que eu vou
+
+26:1.0599999999999454
+fazer, aqui no meu
+
+26:2.900000000000091
+entry point da minha aplicação, eu já vou
+
+26:4.599999999999909
+dar um import no .env.
+
+26:11.299999999999955
+Vou fazer um .env.config para ele conseguir ler aqui do meu arquivo .env.
+
+26:21.819999999999936
+Então aqui vamos criar uma variável para ele. Eu vou chamar ela de log
+
+26:27.440000000000055
+level. E aqui eu vou colocar no começo
+
+26:31.660000000000082
+o info. E aqui, no meu logger,
+
+26:36.51999999999998
+eu só preciso dar um
+
+26:37.92000000000007
+.env.
+
+26:44.22000000000003
+.loglevel. Lembrando que
+
+26:46.01999999999998
+não é legal você ficar pegando
+
+26:48.11999999999989
+os valores de
+
+26:49.90000000000009
+process.env dentro dos seus
+
+26:52
+módulos. É interessante você
+
+26:53.90000000000009
+criar, por exemplo, um
+
+26:55.299999999999955
+config. Vamos até fazer
+
+26:57.98000000000002
+isso, acho que não custa nada.
+
+27:0.14000000000010004
+Então aqui eu vou pegar um config.ts
+
+27:2.619999999999891
+e ele tem que
+
+27:3.880000000000109
+ficar fora de logger.
+
+27:7.279999999999973
+E aqui sim eu vou centralizar todos os valores de configuração.
+
+27:11.980000000000018
+Existem até módulos, um que eu recomendo muito é o convict,
+
+27:15.420000000000073
+com o qual você consegue organizar suas configurações por arquivo,
+
+27:18.420000000000073
+por variável de ambiente, mas aqui a gente quer ser simples,
+
+27:20.680000000000064
+então eu simplesmente vou dar um export default no objeto, e esse
+
+27:26.039999999999964
+objeto vai ter aqui o meu log
+
+27:27.839999999999918
+level, e aí sim ele pega do
+
+27:29.980000000000018
+process.env.loglevel.
+
+27:33.07999999999993
+Então, daqui
+
+27:34.16000000000008
+da mesma forma eu vou
+
+27:35.59999999999991
+fazer por
+
+27:39.039999999999964
+por função
+
+27:46.27999999999997
+e aqui eu vou exportar esse cara daqui.
+
+27:54.799999999999955
+Aqui no meu logger, aí sim,
+
+27:56.299999999999955
+eu consigo pegar
+
+27:57.42000000000007
+o meu objeto de configuração,
+
+28:1.8800000000001091
+então eu vou pegar o make config.
+
+28:6.900000000000091
+Configure. E aqui o meu objeto de configuração, então vou pegar o make config. Config.
+
+28:8.61999999999989
+E aqui...
+
+28:11.559999999999945
+Agora sim, sem aqui eu ficar dependendo de qual que é a fonte dessa configuração,
+
+28:19.180000000000064
+consigo dar um config.loglevel.
+
+28:23.319999999999936
+A partir de agora, como eu tinha colocado o info,
+
+28:26.160000000000082
+como sendo o meu logLevel,
+
+28:27.8599999999999
+vou dar um
+
+28:28.700000000000045
+mstartLocal, e aquele meu debug,
+
+28:31.74000000000001
+ele não vai rodar, ele não vai mostrar aqui.
+
+28:34.42000000000007
+Vamos esperar a lentidão
+
+28:36.059999999999945
+do meu computador, mas logo ele
+
+28:37.799999999999955
+executa.
+
+28:39.460000000000036
+Inclusive, eu já vou mudar aqui no meu .env
+
+28:41.51999999999998
+para debug.
+
+28:44.51999999999998
+Eu vou mudar aqui no meu .env para debug.
+
+28:53.09999999999991
+Se eu executar novamente, ele vai retornar para a gente o log.
+
+28:55.09999999999991
+Aqui ele até retornou.
+
+28:56.3599999999999
+Vamos ver o que está acontecendo.
+
+29:6.400000000000091
+Agora eu não sei se ele voltou porque ele tinha executado e eu tinha mudado e ele tinha lido ainda, vamos voltar pra ah tá, ok, aqui é pra
+
+29:7.759999999999991
+ok, vamos voltar pra info
+
+29:10.279999999999973
+realmente acho que foi isso
+
+29:12.460000000000036
+vai ter que novamente ele rodar
+
+29:21.90000000000009
+não é pra aparecer nada
+
+29:23.75999999999999
+enquanto isso e não é para aparecer nada.
+
+29:32.66000000000008
+Enquanto isso, já vou falando aqui sobre o nosso próximo passo,
+
+29:34.25999999999999
+até isso daqui rodar.
+
+29:35.42000000000007
+Aqui, ele não mostrou.
+
+29:38.01999999999998
+O nosso próximo passo é deixar isso daqui bonitinho,
+
+29:39.98000000000002
+é deixar isso daqui um pouco mais estruturado,
+
+29:42.51999999999998
+porque por mais que o JSON seja um bom formato,
+
+29:45.51999999999998
+você consegue depois trabalhar em cima dele,
+
+29:47.319999999999936
+ele é muito ruim para a gente ler aqui,
+
+29:50.819999999999936
+enquanto a gente está no nosso ambiente local.
+
+29:56.22000000000003
+Então, como eu disse, o Pino tem toda aquela... Eu vou até voltar para o debug aqui,
+
+29:57.539999999999964
+para mostrar agora os logs, enquanto eu vou explicando.
+
+30:1.6400000000001
+O Pino funciona com transporters,
+
+30:4.259999999999991
+e esses transporters, eles
+
+30:6.039999999999964
+são responsáveis por fazer alguns
+
+30:08
+processos, algumas execuções
+
+30:10.099999999999909
+em cima do seu log que requerem
+
+30:12.039999999999964
+muito processamento. Então,
+
+30:13.8599999999999
+ou eles vão fazer isso dentro
+
+30:16.11999999999989
+de um processo separado
+
+30:18.40000000000009
+e antes da versão 7,
+
+30:20.480000000000018
+na versão 6, isso
+
+30:22.039999999999964
+só funcionava por processo separado
+
+30:24.25999999999999
+ou a partir da versão 7
+
+30:26.019999999999982
+ele vai fazer isso utilizando
+
+30:27.24000000000001
+as work threads
+
+30:28.960000000000036
+que são da próxima,
+
+30:31.6400000000001
+da própria V8,
+
+30:34.039999999999964
+do próprio Node.js, é uma implementação
+
+30:36.24000000000001
+nativa.
+
+30:38.59999999999991
+Então se a gente vê aqui
+
+30:40.039999999999964
+no pino, a gente consegue
+
+30:42.059999999999945
+dar uma olhadinha aqui nos transportes,
+
+30:44.299999999999955
+então aqui ele explica
+
+30:45.01999999999998
+direitinho sobre esse
+
+30:46.940000000000055
+Pino Pretty, deixa eu até abrir aqui
+
+30:48.88000000000011
+deixa eu dar um zoom para ficar mais fácil de enxergar
+
+30:51.22000000000003
+esse Pino Pretty aqui é o cara
+
+30:54.98000000000002
+que é responsável por pegar aquele JSON
+
+30:56.57999999999993
+e deixar ele um pouco mais bonito, mas ao mesmo
+
+30:59.1400000000001
+tempo, se a gente
+
+31:1.0199999999999818
+olhar a documentação do Pino Pretty
+
+31:3.3199999999999363
+eles não recomendam você
+
+31:4.920000000000073
+executar isso daqui em produção,
+
+31:7.579999999999927
+mas recomendam trabalhar isso daqui como uma dependência de desenvolvimento.
+
+31:14.88000000000011
+Porque a gente realmente, o certo é a gente pegar isso daqui,
+
+31:17.700000000000045
+deixar ele bonitinho para quando a gente está trabalhando ele localmente,
+
+31:20.8599999999999
+que a gente realmente quer ver no terminal,
+
+31:22.579999999999927
+mas para quando a gente está em produção,
+
+31:24.200000000000045
+a gente quer utilizar uma ferramenta um pouco mais parruda para isso,
+
+31:27.180000000000064
+que é justamente o que eu vou mostrar para vocês com o LogDNA.
+
+31:30.480000000000018
+Então, eu vou começar aqui, só para mostrar,
+
+31:34.3599999999999
+instalar o...
+
+31:38.819999999999936
+InnoPretty.
+
+31:43.799999999999955
+Instalar como dependência de desenvolvimento.
+
+31:46.6400000000001
+E tem duas opções.
+
+31:47.72000000000003
+Ou a gente usa ele como um transporte,
+
+31:50.75999999999999
+que eles estariam utilizando toda aquela questão de worker threads
+
+31:56.440000000000055
+dentro do Node.js,
+
+31:58.059999999999945
+ou a gente utiliza ele como um processo separado.
+
+32:1.3399999999999181
+Nesse caso aqui, eu vou utilizar ele como um processo separado
+
+32:4.599999999999909
+porque eu não quero
+
+32:6.240000000000009
+ficar colocando muito código
+
+32:7.980000000000018
+aqui dentro do meu logger,
+
+32:9.839999999999918
+para decidir se quando ele está em produção
+
+32:12.279999999999973
+eu não quero colocar
+
+32:14.299999999999955
+o preader, e quando ele está
+
+32:15.720000000000027
+em desenvolvimento, quando ele está
+
+32:17.980000000000018
+localmente, eu quero colocar o preader.
+
+32:20.079999999999927
+Então fica muito mais fácil, na minha
+
+32:22.1400000000001
+opinião, a gente simplesmente vir
+
+32:24.059999999999945
+aqui, ele já está instalado,
+
+32:25.90000000000009
+o Pino Pretty, e executar ele como um novo processo
+
+32:31
+que vai ficar lendo através do pipe todo o output que a gente executar aqui.
+
+32:36.92000000000007
+Então, se eu executar agora a minha aplicação,
+
+32:40.799999999999955
+ele vai deixar mais bonitinho esse JSON aqui.
+
+32:43.83999999999992
+E aqui, como a gente já consegue ver,
+
+32:48.1400000000001
+é um script focado para execuções locais.
+
+32:50.940000000000055
+Então aqui ele já deixou mais bonitinho,
+
+32:53.74000000000001
+já não é mais aquele JSON, ele deixou a mensagem numa cor,
+
+32:56.24000000000001
+ele deixou aqui separado qual que é o meu...
+
+32:58.75999999999999
+Qual que é o meu level que está sendo logado aqui.
+
+33:2.3599999999999
+Até vamos tentar colocar um error para ver como a cor se diferencia.
+
+33:10.539999999999964
+Deixa eu executar.
+
+33:16.519999999999982
+E ele vai deixar a cor aqui diferente.
+
+33:18.8599999999999
+Enfim, fica muito mais fácil para a gente trabalhar localmente
+
+33:21.61999999999989
+e ele não fica consumindo a sua
+
+33:25.09999999999991
+o seu
+
+33:28.09999999999991
+processo principal, ele está rodando
+
+33:29.799999999999955
+num processo separado, então isso aqui vai rodar
+
+33:31.920000000000073
+rapidão e esse processo que é um pouco
+
+33:33.8599999999999
+mais lento, ele vai rodar lá naquela
+
+33:35.940000000000055
+velocidade dele um pouco mais lenta
+
+33:37.6400000000001
+então
+
+33:39.5
+esperando aqui que ele
+
+33:41.940000000000055
+ele retorna
+
+33:43.90000000000009
+agora eu vou começar com o NEM em si.
+
+33:49.539999999999964
+Então, sobre o P, não é isso.
+
+33:51.299999999999955
+A gente tem ele funcionando,
+
+33:55.09999999999991
+já é muito melhor do que aquela solução
+
+33:56.66000000000008
+que a gente tinha com o console.log,
+
+33:58.319999999999936
+é mais escalável, é mais rápido,
+
+34:0.11999999999989086
+é muito mais elegante.
+
+34:1.1800000000000637
+A gente tem toda essa abstração aqui
+
+34:3.099999999999909
+que a gente criou,
+
+34:4.059999999999945
+que eu acho que é o que mais traz valor para a nossa aplicação,
+
+34:6.220000000000027
+ela ficar mais coesa, ela ficar com menos acoplamento.
+
+34:11.039999999999964
+Mas agora falando sobre o log de ENEM.
+
+34:13.739999999999782
+Como eu disse no começo, o interessante é a gente manter o básico de log
+
+34:17.90000000000009
+dentro da nossa aplicação, de realmente só pegar o dado
+
+34:20.820000000000164
+e enviar ele para algum lugar formatado com JSON,
+
+34:27.539999999999964
+mas toda a questão de análise, de fazer filtros, criar views,
+
+34:30.519999999999982
+ter uma visualização melhor em cima daquele log,
+
+34:33.92000000000007
+é melhor a gente deixar para uma ferramenta terceira.
+
+34:36.61999999999989
+Existem diversas disponíveis no mercado,
+
+34:41.940000000000055
+para cada uma das clouds principais, para a AWS, para a Google Cloud,
+
+34:46.61999999999989
+para a Azure da Microsoft, a gente vai ter algumas ferramentas específicas para isso.
+
+34:50.059999999999945
+Mas aqui, no caso, como eu estou falando do meu dia a dia,
+
+34:53.13999999999987
+do que eu trabalho, eu vou estar mostrando o Loggenei.
+
+34:59.38000000000011
+Então, dentro da IBM Cloud, a gente consegue encontrar o Loggenei.
+
+35:2.5
+Deixa eu até dar um zoom aqui para todo mundo conseguir enxergar.
+
+35:6.7800000000002
+A gente consegue encontrar o Loggenei através desse serviço chamado IBM Log Análises.
+
+35:9.239999999999782
+Ele é muito fácil de criar.
+
+35:10.559999999999945
+A gente pode simplesmente vir aqui, clicar nele.
+
+35:14.199999999999818
+Ele tem um plano gratuito, mas que não serve para nada,
+
+35:17.679999999999836
+porque você não consegue enviar os logs para ele.
+
+35:20.579999999999927
+Ele é justamente...
+
+35:21.440000000000055
+É só para você fazer algumas configurações e só.
+
+35:25.320000000000164
+Mas ele em si não é caro, você paga R$6,47 para cada gigabyte no seu mês.
+
+35:32.659999999999854
+Então, eu paguei, eu fiz esse papel aqui para mostrar para vocês.
+
+35:35.559999999999945
+Eu estou na minha conta pessoal, não estou na minha conta da IBM.
+
+35:38.80000000000018
+Então, se a gente vier aqui em Resource List, a gente consegue encontrar todos os nossos serviços,
+
+35:43.820000000000164
+para quem não está muito acostumado com a IBM Cloud.
+
+35:46.539999999999964
+E após ele carregar aqui,
+
+35:48.440000000000055
+a gente vai conseguir ver o nosso serviço,
+
+35:50.26000000000022
+que eu já criei, já deixei preparado para a aula,
+
+35:52.679999999999836
+do LogDNA. Então, a gente tem
+
+35:54.340000000000146
+aqui o IBM Cloud, o IBM Log Análises.
+
+35:57.07999999999993
+Se eu clicar aqui,
+
+35:58.51999999999998
+ele tem até um cluster em São Paulo,
+
+36:0.2199999999997999
+então, foi inaugurado ano passado, então a gente consegue ter mais velocidade.
+
+36:10.440000000000055
+Então se eu clicar aqui, ele vai carregar meio que um dashboard padrão da IBM Cloud,
+
+36:12.179999999999836
+com todos os serviços de login que eu tenho.
+
+36:14.360000000000127
+Eu vou ter que clicar em mais um carinha.
+
+36:16.940000000000055
+Está meio lento, mas é o meu computador, eu já até peço perdão.
+
+36:21.300000000000182
+Esse calor está deixando o chip bem quente, então está difícil.
+
+36:24.40000000000009
+Então ele vai dar essa telinha para mim aqui. Se eu clicar em Open Dashboard,
+
+36:26.199999999999818
+ele vai abrir uma nova aba, que é justamente
+
+36:28.039999999999964
+essa que eu já tinha mostrado.
+
+36:30.519999999999982
+E dentro dessa aba,
+
+36:32.559999999999945
+deixa eu dar um leave site,
+
+36:34.51999999999998
+eu consigo ter acesso ao
+
+36:36.07999999999993
+meu serviço.
+
+36:38.159999999999854
+Então, beleza. Vamos esperar carregar
+
+36:40.09999999999991
+aqui. E esse log de
+
+36:42.179999999999836
+Enem, conforme vai carregando, eu vou explicando,
+
+36:44.7800000000002
+ele tem várias funcionalidades
+
+36:46
+bacanas. A gente consegue criar algumas
+
+36:47.7800000000002
+views, ele já está até trazendo aqui
+
+36:49.940000000000055
+alguns logs que eu tinha testado hoje,
+
+36:51.820000000000164
+mais cedo. E eu vou
+
+36:53.86000000000013
+mostrar um pouquinho dele para vocês.
+
+36:56.92000000000007
+Mas primeiro,
+
+36:58.440000000000055
+vamos fazer os
+
+37:0.3200000000001637
+logs da nossa aplicação virem
+
+37:2.0799999999999272
+para cá para o log de NEM. E para
+
+37:3.8400000000001455
+isso, a gente pode utilizar um outro
+
+37:6.579999999999927
+transporte, que é o pino
+
+37:8.139999999999873
+log de NA.
+
+37:9.920000000000073
+Então, eu vou fazer a instalação dele aqui.
+
+37:12.860000000000127
+Opa.
+
+37:15.420000000000073
+Deixa eu dar um
+
+37:16.559999999999945
+npm.
+
+37:21.820000000000164
+Então,
+
+37:22.90000000000009
+no pino log de NA,
+
+37:24.320000000000164
+ele vai estar instalando.
+
+37:26.139999999999873
+Infelizmente, como a versão 7,
+
+37:28.480000000000018
+que dá suporte a worker threads do pino,
+
+37:31.38000000000011
+só foi lançada em julho,
+
+37:33.039999999999964
+muitos dos transportes ainda não se adaptaram
+
+37:35.23999999999978
+a essa nova sintaxe.
+
+37:38.40000000000009
+Então, a gente só tem duas opções aqui.
+
+37:40.559999999999945
+Ou a gente executa como um processo separado,
+
+37:43.26000000000022
+que nem eu havia feito para o Prettier, ou a gente colocaa como um processo separado, que nem eu havia feito para o Prettier,
+
+37:45.76000000000022
+ou a gente coloca ele como um destination.
+
+37:49.57999999999993
+O destination é uma funcionalidade do Pino
+
+37:52.320000000000164
+e ela não é tão rápida,
+
+37:55.73999999999978
+ela tem uma queda de performance
+
+37:57.26000000000022
+comparado a rodar um processo separado
+
+37:59.26000000000022
+ou rodar uma worker thread,
+
+38:0.9200000000000728
+mas dizem eles que ela é 30% mais rápida
+
+38:4.7199999999998
+do que uma string comum nativa do Node.js.
+
+38:8.460000000000036
+Então, é para ser um pouco mais rápido do que o normal.
+
+38:11.360000000000127
+Então, caso você esteja em um ambiente que é difícil executar processos em paralelo,
+
+38:16.340000000000146
+o que é uma reclamação dos usuários, por isso eles incluíram o suporte a worker threads,
+
+38:22.679999999999836
+você pode optar por trabalhar com o destination, tendo aí um pequeno
+
+38:26.340000000000146
+custo de
+
+38:27.920000000000073
+processamento.
+
+38:30.23999999999978
+Mas creio eu que logo, daqui a alguns
+
+38:32.320000000000164
+meses, a gente já vai ver os
+
+38:34.2199999999998
+principais transporters estarem
+
+38:36.19999999999982
+se adaptando à versão 7 do Pino.
+
+38:38.63999999999987
+Então, eu instalei aqui
+
+38:40.09999999999991
+o Pino LogDNA e a gente vai seguir
+
+38:42.440000000000055
+a mesma
+
+38:43.86000000000013
+coisinha aqui que eles estão mandando.
+
+38:46.2199999999998
+A gente pode mandar uns metadados aqui, mas eu quero partir pelo básico.
+
+38:49.940000000000055
+Então, eu vou criar um novo script aqui, vai se chamar StartProt,
+
+38:57.679999999999836
+porque ele não vai ter o Pinoperator, porque eu não preciso disso em produção,
+
+39:2.1799999999998363
+mas ele vai executar a minha função e agora ele vai chamar
+
+39:7.639999999999873
+o pin no log de NA. E aqui eu tenho que passar a minha ingestion key
+
+39:12.2199999999998
+e não só isso, eu tenho que passar uma
+
+39:15.760000000000218
+URL customizada, porque como eu estou
+
+39:19.860000000000127
+na IBM Cloud, a URL não é a padrão do log de NA.
+
+39:24.440000000000055
+Então eu vou ensinar para vocês aqui como a gente consegue pegar essa URL.
+
+39:28.559999999999945
+Deixa eu vir aqui na IBM Cloud novamente.
+
+39:31.09999999999991
+Eu acabei fechando aquela aba.
+
+39:32.98000000000002
+Vou voltar no meu serviço. Inclusive, acho que eu consigo achar ele aqui direto.
+
+39:37.98000000000002
+Está por log.
+
+39:39.5
+E é para ele aparecer aqui.
+
+39:45.159999999999854
+Está girando,
+
+39:46.2199999999998
+está carregando.
+
+39:50.840000000000146
+Ok, já aparece.
+
+39:57.76000000000022
+Ok, dessa vez ele não quis aparecer.
+
+40:0.3000000000001819
+Então,
+
+40:0.7399999999997817
+vamos pelo caminho direto logo.
+
+40:5.800000000000182
+Vamos aqui ver todos os meus serviços no meu catálogo.
+
+40:11.739999999999782
+E a partir do catálogo, a gente consegue pegar a URL aqui do serviço.
+
+40:17.88000000000011
+Eu já tenho ela pronta, mas eu quero mostrar como pega,
+
+40:21.679999999999836
+caso ela muda por zona.
+
+40:23.76000000000022
+Então, aqui em São Paulo é uma URL,
+
+40:25.59999999999991
+se você estiver em uma outra zona, você tem que trocar a URL.
+
+40:28.039999999999964
+Então, eu já vou explicar como se encontra,
+
+40:32.30000000000018
+caso você esteja utilizando uma zona diferente,
+
+40:35.61999999999989
+você pode encontrar essa URL também.
+
+40:37.92000000000007
+Então, deixa eu clicar aqui.
+
+40:40.23999999999978
+E aqui, quando eu estiver nessa telinha,
+
+40:42.2800000000002
+eu vou vir aqui em Login Sources,
+
+40:45.98000000000002
+ele vai me mostrar algumas fontes aqui, quando eu estiver nessa telinha, eu vou vir aqui em Login Sources. Ele vai me mostrar algumas fontes aqui, algumas maneiras de configurar o Logginei para algumas plataformas.
+
+40:51.86000000000013
+Eu vou vir aqui no Linux Ubuntu.
+
+40:55.09999999999991
+E vou pegar essa URL daqui.
+
+40:57.23999999999978
+Ele está nesse comandinho aqui.
+
+40:59.320000000000164
+Esse carinha aqui do final.
+
+41:1.1399999999998727
+Só que eu vou ter que adicionar algumas coisinhas nele.
+
+41:3.1799999999998363
+Então, nessa URL daqui, eu vou ter que adicionar algumas coisinhas nele. Então, nessa URL daqui,
+
+41:6.519999999999982
+eu vou ter que colocar o HTTPS.
+
+41:9.960000000000036
+Ele reclama.
+
+41:11.7800000000002
+E aqui no final,
+
+41:13.800000000000182
+eu vou ter que colocar a barra API,
+
+41:15.2800000000002
+barra ingest.
+
+41:17.5
+E com essa URL,
+
+41:19.40000000000009
+eu consigo já enviar
+
+41:21.519999999999982
+os meus logs
+
+41:22.800000000000182
+para o meu serviço na IBM Cloud.
+
+41:26.860000000000127
+E agora, a gente precisa da nossa
+
+41:28.76000000000022
+API Key. Então, basta eu vir aqui em
+
+41:30.679999999999836
+configurações.
+
+41:34.30000000000018
+Aqui, mas para baixo
+
+41:36.69999999999982
+em Usage.
+
+41:38.23999999999978
+Na verdade, não é aqui.
+
+41:40.5
+Deixa eu lembrar onde que é. Organization. Isso,
+
+41:42.460000000000036
+Organization. Perdão. API Keys.
+
+41:45.659999999999854
+E eu vou gerar uma nova aqui para a gente poder testar.
+
+41:48.51999999999998
+Lembrando que essas ingestion keys, elas são dados sensitivos,
+
+41:52.960000000000036
+então você nunca deve subir no seu repositório.
+
+41:55.440000000000055
+Eu estou mostrando aqui na aula, mas eu vou deletar depois,
+
+41:57.820000000000164
+então cuidem desse valor, ele é um valor sensitivo.
+
+42:2.2800000000002
+E colocando aqui, eu vou agora só rodar o meu comando
+
+42:5.900000000000091
+npm start prod
+
+42:08
+e vamos colocar até uma mensagem
+
+42:10
+mais bonitinha para a gente saber
+
+42:11.960000000000036
+que é ela. Então, ao invés do um oi,
+
+42:13.88000000000011
+eu vou mandar
+
+42:14.5
+fala devs.
+
+42:19.019999999999982
+Agora basta
+
+42:19.960000000000036
+eu executar o meu
+
+42:22.2199999999998
+npm run start, só que agora
+
+42:24.179999999999836
+com prod. Então, só que agora com o project.
+
+42:26.76000000000022
+Então, o que ele vai fazer?
+
+42:28.73999999999978
+Ele está executando dois
+
+42:30.019999999999982
+processos. O processo principal é a
+
+42:31.980000000000018
+aplicação em si. Eu estou rodando
+
+42:34.07999999999993
+aqui o REPL do
+
+42:35.42000000000007
+TypeScript e ele vai
+
+42:38.07999999999993
+pegar, vai fazer um pipe de todo o output
+
+42:40.179999999999836
+que eu estiver mandando aqui desse
+
+42:41.98000000000002
+processo para esse processo
+
+42:43.960000000000036
+que é um transporter do log de NA,
+
+42:46.09999999999991
+e ele em si vai mandar os meus logs lá para o meu log de NA.
+
+42:52.63999999999987
+Então, deixa eu vir aqui nessa parte de cima.
+
+43:0.8200000000001637
+E aqui eu consigo ver todos os logs que estão chegando.
+
+43:3.5599999999999454
+Então, ele deu um erro aqui, 404, vamos ver qual é o problema.
+
+43:9.920000000000073
+HTTPS, ele não encontrou.
+
+43:13.260000000000218
+Então, é algum erro aqui na minha URL, vamos dar uma olhadinha no que aconteceu.
+
+43:20.059999999999945
+HTTPS, API, São Paulo.
+
+43:23.679999999999836
+Ok, se eu não me engano, eu estava tendo problema com essas aspas aqui.
+
+43:27.199999999999818
+Eu vou tirar elas
+
+43:28.23999999999978
+e vamos ver se elas
+
+43:30.840000000000146
+funcionam agora.
+
+43:32.92000000000007
+Deixa eu executar novamente o meu processo.
+
+43:37.11999999999989
+E agora é para funcionar. Opa!
+
+43:39
+Tá, já sei. Na verdade, é o que errei.
+
+43:41.13999999999987
+Aqui não é barra API, é barra ingest.
+
+43:43.59999999999991
+Desculpa. Aqui é barra logs, barra ingest.
+
+43:46.57999999999993
+E agora, não vai precisar
+
+43:48.059999999999945
+daquelas aspas, espero eu,
+
+43:49.73999999999978
+senão é mais um erro, mas agora é para rodar.
+
+43:52.840000000000146
+Então ele vai pegar esse transporter,
+
+43:54.40000000000009
+vai pegar os logs que ele está recebendo
+
+43:56.09999999999991
+e vai enviar lá para
+
+43:57.69999999999982
+para IBM Cloud.
+
+44:0.38000000000010914
+Mas foi até importante a gente ter colocado, a gente ter recebido esse erro daqui,
+
+44:7.679999999999836
+porque mais para frente, daqui a pouquinho,
+
+44:9.820000000000164
+quando a gente for implementar de uma outra forma,
+
+44:12.920000000000073
+a gente vai precisar fazer uma coisa específica para esses erros aparecerem para a gente,
+
+44:14.659999999999854
+senão a gente fica nas cegas.
+
+44:16.480000000000018
+E ele deu erro de novo, vamos ver o que está acontecendo.
+
+44:19.659999999999854
+404, logs ingest, deixa eu ver o que está acontecendo.
+
+44:31.019999999999982
+Aqui é o API. logs ingest deixa eu ver o que está acontecendo aqui é barra logs também eu peguei o link errado
+
+44:32.159999999999854
+então é só você procurar lá na IBM Cloud
+
+44:35.40000000000009
+qual que é o link correto
+
+44:37.42000000000007
+que
+
+44:38.320000000000164
+começa com .logs, ele sempre tem que começar
+
+44:41.36000000000013
+com .logs, tem vários
+
+44:43.01999999999998
+links lá dentro daquela documentação que eu mostrei.
+
+44:46.179999999999836
+Um deles vai começar com logs.talcoisa.
+
+44:49.01999999999998
+Então, aquele que começar com logs.talcoisa
+
+44:50.90000000000009
+é o que você vai pegar, ele.
+
+44:52.59999999999991
+Você vai colocar HTTPS no começo
+
+44:54.73999999999978
+e depois você vai colocar no final
+
+44:56.840000000000146
+.logs.ingest também.
+
+44:59.059999999999945
+E aí sim, ele vai enviar,
+
+45:0.5399999999999636
+vai pegar o link certo para a sua... e vai enviar, vai pegar o link certo para sua... e vai enviar para o seu log de DNA.
+
+45:6.7199999999998
+Então aqui ele não fez o query, porque a gente não está executando, e ele já chegou aqui.
+
+45:11.519999999999982
+Fala, Deves. Deixa eu até dar um zoom para ficar mais fácil da gente ler.
+
+45:16.38000000000011
+Ele chegou aqui, fala, Deves. Então, a partir de agora, eu consigo ter muita informação sobre
+
+45:21.420000000000073
+esses logs que estão chegando aqui. Eu consigo ver qual foi o processo, eu consigo mandar metadados.
+
+45:26.059999999999945
+A documentação do pino é bem explicativa,
+
+45:28.440000000000055
+a do log de DNA também é,
+
+45:30.11999999999989
+mas o básico do básico é isso daqui.
+
+45:32.73999999999978
+Eu vou mostrar
+
+45:33.5
+uma segunda implementação aqui,
+
+45:36.01999999999998
+bem rapidinho, para
+
+45:37.92000000000007
+caso você tenha
+
+45:39.98000000000002
+problema em executar
+
+45:42.11999999999989
+dois processos
+
+45:43.460000000000036
+no mesmo
+
+45:44.460000000000036
+deploy. Existem
+
+45:47.340000000000146
+algumas plataformas que não aceitam isso muito bem,
+
+45:49.90000000000009
+às vezes uma plataforma serverless
+
+45:52.01999999999998
+de functions,
+
+45:53.539999999999964
+que você só quer executar um trechinho
+
+45:55.940000000000055
+de código, mas você ainda quer ter o log
+
+45:57.960000000000036
+essa
+
+45:58.659999999999854
+sub-ele. Então,
+
+46:02
+eu vou mostrar uma forma da gente
+
+46:3.6399999999998727
+parametrizar isso daqui a nível de execução
+
+46:6.119999999999891
+de comando. Então aqui, eu só vou deixar
+
+46:7.960000000000036
+esse pino log de ENEI
+
+46:9.61999999999989
+e quando eu for executar,
+
+46:11.860000000000127
+deixa eu até mudar o log para a gente ver que é um log diferente,
+
+46:15.5
+quando eu for executar
+
+46:16.40000000000009
+o meu processo, eu vou
+
+46:17.940000000000055
+passar traço-traço,
+
+46:20.059999999999945
+depois eu vou passar todos os
+
+46:22.059999999999945
+meus parâmetros. Então aqui aqui estou passando a minha key e estou passando a minha URL.
+
+46:26.559999999999945
+Esse traço-traço é padrão do NPM.
+
+46:29.26000000000022
+Para tudo que vier depois disso, vai servir como parâmetro
+
+46:32.559999999999945
+para o seu último comando aqui no script do seu pack de JSON.
+
+46:39.679999999999836
+Então, eu vou dar uma execução.
+
+46:40.88000000000011
+Ele vai enviar os logs aqui para o meu log de ENEM novamente.
+
+46:47.039999999999964
+Então, quando você for fazer o deploy disso,
+
+46:50.179999999999836
+basta você colocar no seu Travis,
+
+46:52.11999999999989
+no seu Jenkins,
+
+46:53.42000000000007
+até no seu Dockerfile,
+
+46:54.59999999999991
+recebendo isso como variável de ambiente,
+
+46:56.659999999999854
+qual que é o valor que você quer colocar
+
+46:58.340000000000146
+aqui no seu comando de start,
+
+47:0.42000000000007276
+no seu comando de bootstrap da aplicação.
+
+47:2.5799999999999272
+Então, a gente não precisa subir no GitHub, no Git,
+
+47:5.960000000000036
+as credenciais dentro do nosso script.
+
+47:9.2199999999998
+Então, como a gente viu, vamos ver se ele está chegando.
+
+47:12.599999999999909
+Se eu clicar aqui em Live, eu consigo ver em tempo real
+
+47:15.659999999999854
+os logs chegando na minha aplicação.
+
+47:18.40000000000009
+Aqui, vamos ver se deu algum erro.
+
+47:20.11999999999989
+Não deu nenhum erro.
+
+47:21.639999999999873
+Já já é para ele chegar aqui.
+
+47:23.199999999999818
+Às vezes, ele tem um delayzinho.
+
+47:25.26000000000022
+Mas, enfim Não deu nenhum erro. Já já é para ele chegar aqui. Às vezes ele tem um delayzinho. Mas enfim, dessa forma aqui a gente consegue fazer essa parametrização.
+
+47:31.38000000000011
+Beleza.
+
+47:33.11999999999989
+Vamos para a próxima implementação,
+
+47:35.340000000000146
+que é tirar esse cara aqui do subprocesso
+
+47:39.36000000000013
+e utilizar aquela outra abordagem que eu mostrei para vocês na documentação,
+
+47:44.820000000000164
+que é através do destination.
+
+47:47.7800000000002
+Então, o que eu vou fazer aqui? Eu vou tirar esse cara daqui.
+
+47:50.61999999999989
+Aqui no meu logger.
+
+47:55.13999999999987
+Eu vou criar um cara chamado...
+
+47:58.460000000000036
+Eu vou importar, na verdade, o meu log.
+
+48:3.019999999999982
+Pino log DNA. o meu log, o pino, log, dna, log dna, que é aquele pacote que eu instalei,
+
+48:10.820000000000164
+que a gente estava utilizando lá como pipe do processo.
+
+48:15.940000000000055
+Vamos ver se está chegando aqui.
+
+48:18.300000000000182
+Já era para ter chego aquele último log que a gente enviou,
+
+48:24.61999999999989
+não sei por porque não chegou.
+
+48:26.7199999999998
+No processo foi tudo certo.
+
+48:28.76000000000022
+Vamos dar uma olhadinha nisso,
+
+48:29.960000000000036
+porque não adianta eu falar e vocês confiarem em mim
+
+48:32.179999999999836
+se não chega.
+
+48:33.09999999999991
+Então, vou dar um refresh aqui.
+
+48:37.7800000000002
+Enquanto isso,
+
+48:39.559999999999945
+vou explicar um pouquinho como funciona
+
+48:41.57999999999993
+aqui nessa implementação.
+
+48:43.40000000000009
+Então, a gente vai pegar, vai instanciar
+
+48:45.340000000000146
+o pino log DNA, passando
+
+48:47.659999999999854
+algumas propriedades que a gente passava
+
+48:49.460000000000036
+lá por linha de comando, e a gente vai
+
+48:52.039999999999964
+passar ele como o segundo parâmetro do
+
+48:54.039999999999964
+pino, o primeiro option
+
+48:55.960000000000036
+e depois é o destination,
+
+48:57.960000000000036
+e aí sim ele vai também
+
+49:0.05999999999994543
+rodar aquilo no mesmo processo.
+
+49:1.8400000000001455
+Aqui eu dou um refresh e aquele último log chegou.
+
+49:6.559999999999945
+Então, podem confiar que aquilo que eu falei está funcionando.
+
+49:8.579999999999927
+Então, vamos fazer conforme está mandando lá a documentação.
+
+49:10.7800000000002
+Eu tenho meu pin no log de DNA.
+
+49:13.239999999999782
+Eu vou instanciar ele aqui.
+
+49:23.960000000000036
+DNA
+
+49:24.40000000000009
+é igual a make DNA. E aqui eu tenho que passar os dois parâmetros
+
+49:29.179999999999836
+que eu estava passando lá na minha linha de comando,
+
+49:31.420000000000073
+que é o URL e a key.
+
+49:33.36000000000013
+Vamos aproveitar esse objeto de config
+
+49:35.5
+para criar a variável de ambiente para isso.
+
+49:37.840000000000146
+Então, aqui eu vou colocar log DNA URL,
+
+49:42.7199999999998
+log DNA key.
+
+49:44.2800000000002
+Vou pegar aqui do meu comando, deixa até copiar daqui mesmo, o meu key e a minha url.
+
+49:54.679999999999836
+Então fica mais elegante ainda. No meu env, eu vou passar aqui para cá, a url, eu vou passar para cá, é o URL,
+
+50:6.739999999999782
+eu vou passar para cá.
+
+50:9.699999999999818
+Então, eu vou vir no meu objeto de configuração e vou pegar mais essas duas variáveis,
+
+50:16.360000000000127
+essas duas caras,
+
+50:17.559999999999945
+e vou exportar por aqui.
+
+50:26.26000000000022
+Esse daqui primeiro, eu vou chamar por aqui. Esse daqui primeiro,
+
+50:27.840000000000146
+eu vou chamar de
+
+50:28.960000000000036
+log
+
+50:30.860000000000127
+DNA URL.
+
+50:37.659999999999854
+Esse cara daqui, eu vou chamar de log
+
+50:39.90000000000009
+DNA aqui.
+
+50:43.7199999999998
+Lembrando que essa implementação do config aqui está bem
+
+50:46.179999999999836
+porca, mas é só para a gente ter
+
+50:47.88000000000011
+uma quebra.
+
+50:50.61999999999989
+No futuro dá até para fazer uma aula
+
+50:52.38000000000011
+só sobre como a gente separar
+
+50:54.51999999999998
+as configurações de ambiente
+
+50:55.840000000000146
+num módulo um pouco mais específico.
+
+50:58.36000000000013
+Eu sempre gosto de separar as dependências
+
+51:0.7600000000002183
+deixando na borda
+
+51:2.3200000000001637
+da aplicação e trabalhar com interfaces.
+
+51:4.559999999999945
+Mas aqui eu vou pegar
+
+51:6.239999999999782
+o meu key
+
+51:08
+e passar config.logdna
+
+51:11.159999999999854
+key
+
+51:11.5
+e o meu url, eu vou passar como
+
+51:14.139999999999873
+config.logdna
+
+51:15.7800000000002
+url.
+
+51:18.7800000000002
+Então, a partir de agora,
+
+51:20.23999999999978
+basta eu pegar esse pino logdna
+
+51:22.2800000000002
+e passar como segundo parâmetro aqui
+
+51:24.079999999999927
+do meu construtor do pino.
+
+51:25.920000000000073
+E ele vai servir como destination.
+
+51:28.300000000000182
+Pronto.
+
+51:29.199999999999818
+É para estar tudo pronto.
+
+51:30.340000000000146
+É para estar tudo certo.
+
+51:31.7800000000002
+A partir de agora, então, eu só vou ter um processo rodando.
+
+51:34.57999999999993
+E esse destination aqui, ele é 30% mais rápido do que uma string comum.
+
+51:38.48000000000002
+Então, ele é um pouco mais rápido.
+
+51:40.19999999999982
+Mas eu vou ganhar um custo de processamento da minha aplicação.
+
+51:48.2199999999998
+Mas vamos lá, enviar mais um log para o nosso log de ENEM lá.
+
+51:49.5
+Vou colocar um 3 aqui.
+
+51:52.7800000000002
+Tem pouco isso também, mas... Agora basta eu dar um npm run start prod, sem passar nenhum parâmetro.
+
+52:0.5
+Ele vai rodar e enviar o meu log lá para o log de Enem.
+
+52:7.239999999999782
+Faltou uma única coisinha, um detalhe,
+
+52:9.739999999999782
+que foi justamente aquilo que eu tinha comentado sobre esse log de erro.
+
+52:14.159999999999854
+Se acontecer algum erro aqui nessa chamada, eu não vou ficar sabendo.
+
+52:18.340000000000146
+Então, eles pedem para a gente fazer um...
+
+52:23.159999999999854
+escutar o evento de erro no nosso...
+
+52:27.320000000000164
+nesse nosso
+
+52:28
+string que a gente criou, nesse nosso
+
+52:30.09999999999991
+destination. Então, é isso que eu vou
+
+52:32.07999999999993
+fazer aqui. Eu vou pegar esse pino
+
+52:34.2199999999998
+log DNA, vou fazer um onError
+
+52:38.26000000000022
+e sempre que acontecer um erro,
+
+52:39.7199999999998
+eu vou usar o console.error aqui,
+
+52:42.69999999999982
+mas ele...
+
+52:44.01999999999998
+assim, ele é um console.error final
+
+52:46.19999999999982
+que só vai acontecer uma vez,
+
+52:47.7199999999998
+minha aplicação vai dar um shutdown,
+
+52:49.679999999999836
+e é só para realmente eu saber,
+
+52:51.7800000000002
+ter algum feedback de que aconteceu algum erro
+
+52:55.07999999999993
+e de que minha aplicação não conseguiu dar um bootstrap corretamente.
+
+52:59.57999999999993
+Então, certo, era eu fazer um graceful shutdown aqui na minha aplicação,
+
+53:5.7800000000002
+que é fazer um desligamento da aplicação de maneira graciosa, vamos dizer assim,
+
+53:11.960000000000036
+de maneira que a aplicação não tenha nenhum impacto em estar sendo desligada.
+
+53:16.73999999999978
+Ele também pede para eu passar aqui na minha configuração do pin no log de NA
+
+53:20.7199999999998
+um onError passando essa função aqui, para a gente saber sempre que acontecer um error.
+
+53:26.2800000000002
+Mas aqui no caso, não é para acontecer
+
+53:28.079999999999927
+nenhum erro.
+
+53:29.73999999999978
+Já já é para o nosso log estar aqui. Vou dar um refresh
+
+53:31.980000000000018
+novamente.
+
+53:34.48000000000002
+E é para a gente ter aquele nosso log
+
+53:36.13999999999987
+com um 3 no final.
+
+53:38.840000000000146
+Se não chegar é porque tem algum erro.
+
+53:40.23999999999978
+Então, já aprova o que eu falei.
+
+53:42.340000000000146
+A gente não tem o feedback aqui de quando acontece
+
+53:44.36000000000013
+algum erro.
+
+53:45.98000000000002
+Vamos dar uma olhadinha. Não, não deu um erro, ele chegou
+
+53:48.09999999999991
+aqui. Então,
+
+53:50.26000000000022
+essa é uma segunda opção do como
+
+53:52.059999999999945
+a gente pode estar implementando esse transporter
+
+53:54.2199999999998
+do log DNA dentro
+
+53:55.960000000000036
+do pino.
+
+53:58.679999999999836
+E como eu disse, o pino
+
+54:0.2600000000002183
+na versão 7, que lançou em julho
+
+54:2.099999999999909
+agora de 2021, ele dá
+
+54:4.119999999999891
+suporte a transporters
+
+54:6.1599999999998545
+que funcionam nas worker threads
+
+54:8.340000000000146
+do Node.js.
+
+54:9.940000000000055
+Mas, infelizmente, o transporter
+
+54:12.11999999999989
+do LogDNA ainda não se adequou
+
+54:14.159999999999854
+a essa nova
+
+54:15.840000000000146
+API de
+
+54:18.079999999999927
+worker threads. Mas creio
+
+54:20.139999999999873
+que daqui a algum tempo
+
+54:21.480000000000018
+isso já vai estar implementado. Então, a gente
+
+54:24.019999999999982
+não vai precisar utilizar a destination, a gente não vai precisar utilizar
+
+54:25.360000000000127
+a destination, a gente não vai ter um custo
+
+54:28.11999999999989
+de processamento
+
+54:29.5
+da nossa aplicação e a gente também
+
+54:31.7199999999998
+não vai precisar executar aquilo como
+
+54:33.659999999999854
+um processo secundário aqui
+
+54:35.659999999999854
+no nosso comando. Então, a gente não vai ter
+
+54:37.820000000000164
+impacto de não poder rodar aquilo, talvez
+
+54:39.59999999999991
+em algum ambiente peculiar.
+
+54:41.73999999999978
+Vai rodar em todo o ambiente que roda
+
+54:43.57999999999993
+a aplicação normalmente. Então, vale
+
+54:45.98000000000002
+muito a pena a gente ficar de olho nos
+
+54:48
+próximos meses, porque já já
+
+54:49.7199999999998
+vai chegar uma coisa nova, vai chegar
+
+54:51.69999999999982
+uma atualização nesse transporter
+
+54:54.07999999999993
+e a gente vai conseguir utilizar a nova
+
+54:55.940000000000055
+API. Mas, enfim,
+
+54:57.86000000000013
+resumindo o que eu falei tudo agora,
+
+54:59.7800000000002
+a gente utilizou, criou uma interface,
+
+55:2.6799999999998363
+criou tipos
+
+55:3.8200000000001637
+para um logger padrão da nossa aplicação.
+
+55:7.7199999999998
+Ele não está específico, não está linkado com o Pino, com o Winston,
+
+55:11.579999999999927
+com nenhuma biblioteca.
+
+55:12.760000000000218
+Ele é nosso.
+
+55:13.639999999999873
+A gente customiza ele como quiser.
+
+55:16.659999999999854
+E ao invés da nossa aplicação se adequar à biblioteca do Pino,
+
+55:19.679999999999836
+ao contrário, o Pino, a implementação do Pino,
+
+55:22.2199999999998
+ela vai se adequar à nossa aplicação. E a gente faz isso através de encapsulamento.
+
+55:26.559999999999945
+Então, aqui eu estou fazendo encapsulamento de conversão de dados,
+
+55:29.480000000000018
+aqui eu estou fazendo encapsulamento a nível de, realmente,
+
+55:33.07999999999993
+de objeto, de logger, enfim.
+
+55:35.90000000000009
+Eu tenho toda essa abstração, então eu desacoplo.
+
+55:38.59999999999991
+Muita gente fala sobre clean architecture,
+
+55:40.440000000000055
+arquitetura hexagonal,
+
+55:45.98000000000002
+e tudo isso funciona com base em justamente isso.
+
+55:52.88000000000011
+Você ter desacoplado do seu código as aplicações, as bibliotecas externas.
+
+55:58.23999999999978
+Então, tudo que é para você controlar, fazer log, fazer configuração, banco de dados,
+
+56:1.1599999999998545
+você deixa aquilo na camada mais exterior possível e você deixa a sua aplicação conhecendo simplesmente uma interface que você definiu.
+
+56:7.1599999999998545
+Esses tipos,
+
+56:8.039999999999964
+essas interfaces, é como eu uso,
+
+56:10.059999999999945
+pode não servir para você, você pode achar isso daqui
+
+56:12.079999999999927
+um lixo e você dá no seu direito.
+
+56:13.860000000000127
+Não existe muito certo ou errado dentro da
+
+56:15.920000000000073
+programação, quer dizer, existem coisas que
+
+56:17.960000000000036
+são erradas, que são ruins, mas
+
+56:20.079999999999927
+a gente é livre
+
+56:22.2800000000002
+para entender o contexto que a gente está
+
+56:24.019999999999982
+e escolher a melhor abordagem.
+
+56:26.2800000000002
+Então, beleza.
+
+56:27.2199999999998
+Agora, eu vou passar um pouquinho, bem rapidinho,
+
+56:30.320000000000164
+em algumas funcionalidades aqui do Loggenei.
+
+56:32.659999999999854
+É uma ferramenta bem bacana.
+
+56:33.960000000000036
+A gente utiliza ela.
+
+56:35.039999999999964
+Ela está na IBM Cloud.
+
+56:36.059999999999945
+Então, as nossas aplicações externas normalmente utilizam
+
+56:38.840000000000146
+os serviços da IBM Cloud.
+
+56:40.48000000000002
+Mas você pode muito bem, se você utiliza a AWS,
+
+56:46.059999999999945
+ver qual é o serviço da WS que serve para isso. Inclusive, eu acho
+
+56:48.059999999999945
+que é o Logstash.
+
+56:50.539999999999964
+Eu não estou enganado.
+
+56:51.98000000000002
+Deixa eu até pesquisar aqui, só para
+
+56:53.559999999999945
+realmente ter certeza. É, é o Logstash.
+
+56:56.36000000000013
+Então, o Logstash, você consegue utilizar
+
+56:58.2199999999998
+lá na WS
+
+56:59.26000000000022
+para Google Cloud, não sei qual que é.
+
+57:2.8200000000001637
+Às vezes tem algum open source.
+
+57:5.860000000000127
+Eu para Google Cloud, não sei qual que é, às vezes tem algum open source, eu sinceramente não conheço muitas ferramentas que fazem esse management de log,
+
+57:8.300000000000182
+mas eu estou passando aqui o log de Enem,
+
+57:11.239999999999782
+então caso você utilize a IBM Cloud,
+
+57:13.11999999999989
+sinta-se à vontade de utilizar,
+
+57:14.920000000000073
+e caso você não utilize, é um convite também,
+
+57:16.840000000000146
+é super baratinho os planos aqui do log de Enem,
+
+57:21.11999999999989
+eu mesmo peguei aqui um basiquinho para poder mostrar na aula, para poder ter acesso.
+
+57:26.039999999999964
+Então, vou começar mostrando aqui algumas funcionalidades.
+
+57:29.039999999999964
+A primeira delas
+
+57:30.039999999999964
+é a criação de views.
+
+57:32.01999999999998
+Como que funciona? Vamos supor
+
+57:34.09999999999991
+eu já até
+
+57:36.460000000000036
+criei algumas aqui, mas deixa eu
+
+57:38.07999999999993
+deletar isso daqui para a gente
+
+57:40.159999999999854
+também ficar
+
+57:40.90000000000009
+tudo do zero, começar aqui tudo
+
+57:44.01999999999998
+do zero. Então, vou criar a categoria, vou deletar esses caras,
+
+57:47.73999999999978
+essas views daqui, deixa eu entrar nelas e deletar,
+
+57:52.63999999999987
+e aí eu vou criando do zero.
+
+57:53.76000000000022
+Então, delete this view.
+
+57:56.840000000000146
+E aqui também, delete this view.
+
+57:59.40000000000009
+Então, o que você vai ver quando você acabar de criar o serviço
+
+58:2.2800000000002
+é justamente essa telinha sem nada aqui no canto esquerdo.
+
+58:6.739999999999782
+E as views servem justamente para eu poder filtrar
+
+58:10.340000000000146
+quais são os logs que eu quero ver em cada ocasião.
+
+58:14.88000000000011
+Então, vamos supor que agora eu só quero ver logs de debug.
+
+58:18.59999999999991
+Então, basta eu vir aqui em cima,
+
+58:20.860000000000127
+ele vai ter algumas coisinhas como, por exemplo,
+
+58:23.519999999999982
+filtrar por algum metadado, filtrar por qual é o host.
+
+58:29.699999999999818
+Então, aqui é o meu computador local,
+
+58:31.840000000000146
+mas às vezes eu estou num servidor on-premises,
+
+58:33.7199999999998
+ou estou num Kubernetes, num cluster.
+
+58:35.63999999999987
+Aqui eu consigo diferenciar de cada local que vem.
+
+58:40.440000000000055
+Aqui consigo também diferenciar quais são as minhas aplicações.
+
+58:44.07999999999993
+Então, como que a gente estrutura o LogDNA?
+
+58:46.179999999999836
+Todas as nossas aplicações que a minha squad cuida,
+
+58:49.59999999999991
+a gente manda para o único serviço do LogDNA,
+
+58:52.2199999999998
+e dentro dele a gente vai fazer as filtragens,
+
+58:55.01999999999998
+então eu vou filtrar por ambiente, se é QA, se é produção,
+
+58:57.159999999999854
+eu vou filtrar se é aplicação X, se é aplicação Y, se é microserviço,
+
+59:5.619999999999891
+qual que é o microserviço, eu consigo diferenciar tudo por aqui.
+
+59:8.059999999999945
+E aqui eu tenho a diferenciação por level. Então aqui,
+
+59:10.199999999999818
+como eu falei, eu queria criar uma view para só ver
+
+59:12.099999999999909
+debug, então basta eu
+
+59:13.579999999999927
+clicar aqui, clicar em Apply,
+
+59:16.679999999999836
+ele só vai me mostrar
+
+59:17.73999999999978
+logs de debug,
+
+59:19.360000000000127
+e aqui eu também, no Search,
+
+59:21.5
+eu consigo criar
+
+59:22.519999999999982
+alguns parâmetros,
+
+59:25.90000000000009
+algumas filtragens mais específicas.
+
+59:29.179999999999836
+Então, eu poderia fazer a mesma coisa de level, dois pontos, debug,
+
+59:32.69999999999982
+e aqui eu filtraria só por debug.
+
+59:34.63999999999987
+A mesma coisa que eu fiz aqui, só que aqui pela sintaxe de query.
+
+59:39.2800000000002
+E aqui ele já só está me mostrando o debug.
+
+59:41.26000000000022
+Eu posso muito bem vir aqui e dar um save as new view.
+
+59:46.13999999999987
+E aqui eu vou criar.
+
+59:48.179999999999836
+O nome para a minha view vai ser debug logs.
+
+59:52
+Eu vou colocar uma carinha feliz só para mostrar
+
+59:54.01999999999998
+que sou eu que estou colocando isso. Não é uma regra,
+
+59:56.26000000000022
+não é nada. Você coloca o que você quiser.
+
+59:58.57999999999993
+E eu posso colocar dentro de uma
+
+00:00
+categoria também, mas isso eu vou fazer já já.
+
+01:00:2.619999999999891
+E eu posso criar um alerta que eu também vou mostrar para vocês. Então, tem aqui
+
+01:00:6.059999999999945
+a minha view, view logs.
+
+01:00:8.159999999999854
+O que eu posso fazer, vamos
+
+01:00:10
+criar mais uma view. Então, eu vou vir aqui em everything
+
+01:00:11.960000000000036
+e vou criar agora uma
+
+01:00:13.7800000000002
+para mostrar só
+
+01:00:16.139999999999873
+logs de erro.
+
+01:00:18.460000000000036
+Então, a mesma coisa
+
+01:00:20
+que eu tinha feito aqui, eu fiz aqui agora.
+
+01:00:22.139999999999873
+E eu vou salvar essa view também. E ela vai
+
+01:00:23.980000000000018
+se chamar Errors. Uma carinha de surpresa.
+
+01:00:29.079999999999927
+Então, eu tenho duas
+
+01:00:30.09999999999991
+views aqui, diferentes.
+
+01:00:31.90000000000009
+O que eu quero fazer agora é categorizar elas.
+
+01:00:34.039999999999964
+Então, vamos supor que cada uma dessas views
+
+01:00:35.840000000000146
+é de aplicações diferentes.
+
+01:00:38.659999999999854
+Eu tenho vários microserviços,
+
+01:00:40.23999999999978
+então eu posso criar categorias, são pastas,
+
+01:00:48.539999999999964
+eu posso fazer o que eu quiser com elas. Então eu vou criar aqui microserviço 1, vou criar uma categoria para ele e vou criar um microserviço 2.
+
+01:00:56.2199999999998
+E aqui basta eu arrastar minhas views para quais categorias eu quero que elas pertençam.
+
+01:01:1.3200000000001637
+E elas podem fazer parte de mais de uma categoria.
+
+01:01:4.019999999999982
+Então, a partir de agora, eu tenho um esqueminha
+
+01:01:5.980000000000018
+de pastas aqui, e eu consigo ver
+
+01:01:7.800000000000182
+como estão os meus
+
+01:01:9.61999999999989
+filtros, as minhas views. Aqui eu só estou vendo
+
+01:01:12.099999999999909
+o debug, e aqui eu só estou vendo o error.
+
+01:01:15.38000000000011
+Fora isso,
+
+01:01:16.340000000000146
+uma coisa super útil que a gente pode
+
+01:01:18.019999999999982
+fazer é criar alertas.
+
+01:01:20.300000000000182
+Então, se eu vier aqui em
+
+01:01:22.019999999999982
+attach an alert, eu consigo
+
+01:01:24.460000000000036
+criar um novo alerta para essa view.
+
+01:01:28.59999999999991
+E aqui eu consigo fazer várias integrações.
+
+01:01:30.73999999999978
+Eu posso enviar um e-mail, eu posso criar o pager dirty.
+
+01:01:33.7800000000002
+Então, se foi um erro fatal, você pode ligar 3 horas da manhã
+
+01:01:38.01999999999998
+para o desenvolvedor, para ele entrar e solucionar o problema
+
+01:01:41.09999999999991
+ou para o time de operações.
+
+01:01:42.76000000000022
+Pode ser o Slack, a gente utiliza muito o Slack.
+
+01:01:47.340000000000146
+Criar um canalzinho lá de logs, com alertas,
+
+01:01:49.059999999999945
+e deixa lá os alertas chegando,
+
+01:01:51.38000000000011
+sempre que acontece alguma treta, dá algum problema,
+
+01:01:56.179999999999836
+a gente consegue visualizar facilmente no nosso workspace.
+
+01:01:59
+E aqui existem algumas regrinhas que eu posso colocar, então, na presença de um log, dentro de 30 segundos,
+
+01:02:4.8400000000001455
+eu posso enviar um log, ou se não tiver log,
+
+01:02:8.11999999999989
+às vezes é um log de health check,
+
+01:02:9.820000000000164
+eu estou checando sempre se a aplicação está up,
+
+01:02:11.860000000000127
+então sempre vou estar mandando um log periodicamente.
+
+01:02:14.599999999999909
+Se aquele log não aparecer, eu posso enviar um alerta.
+
+01:02:18.360000000000127
+Então, aqui é bem customizável, é super útil isso daqui.
+
+01:02:21.840000000000146
+Não vou criar um aqui, mas estou passando bem rápido, só para a gente
+
+01:02:26.2199999999998
+dar uma olhadinha.
+
+01:02:27.7800000000002
+Existem algumas outras funcionalidades
+
+01:02:30.26000000000022
+aqui que vão
+
+01:02:31.940000000000055
+contemplar isso, a solução de Observability,
+
+01:02:34.73999999999978
+que é criar, por exemplo, boards.
+
+01:02:36.36000000000013
+Então, posso criar aqui um board e colocar gráficos.
+
+01:02:38.7800000000002
+Então, vamos ver.
+
+01:02:39.960000000000036
+Eu vou criar um gráfico
+
+01:02:42.539999999999964
+para ver...
+
+01:02:43.88000000000011
+Vamos ver aqui o level.
+
+01:02:47.26000000000022
+Levels.
+
+01:02:47.840000000000146
+E aqui vai ser level de error.
+
+01:02:51.460000000000036
+Então, eu posso adicionar esse gráfico aqui.
+
+01:02:54.40000000000009
+Eu posso colocar diferentes tipos de gráfico.
+
+01:02:56.86000000000013
+Eu posso mudar qual é o intervalo de data que eu quero ver esses gráficos.
+
+01:03:0.900000000000091
+Qual é a métrica que eu quero ver.
+
+01:03:4.019999999999982
+Se eu quero ver contagem, se eu quero ver média, enfim.
+
+01:03:9.139999999999873
+Aqui eu tenho muito pouco dado, então fica até um pouco chato de mostrar.
+
+01:03:13.320000000000164
+Infelizmente, eu não posso mostrar das minhas aplicações na IBM,
+
+01:03:17.019999999999982
+porque está na minha conta da IBM,
+
+01:03:18.76000000000022
+e eu só consigo acessar durante o trabalho,
+
+01:03:20.960000000000036
+mas aqui a gente já consegue ter uma noção,
+
+01:03:22.860000000000127
+consigo ter uma visualização legal da minha ter vários, consigo ter uma visualização
+
+01:03:26.2800000000002
+legal da minha aplicação, consigo ter uma
+
+01:03:28.059999999999945
+customização bacana.
+
+01:03:30.26000000000022
+Consigo criar também screen, da onde eu consigo
+
+01:03:32.159999999999854
+criar, como se fosse
+
+01:03:33.61999999999989
+aqueles gráficos que a gente tem no
+
+01:03:35.7800000000002
+New Relic, que é de monitoramento, aqui eu também
+
+01:03:38.059999999999945
+consigo colocar, então consigo colocar
+
+01:03:39.5
+um count,
+
+01:03:41.320000000000164
+vamos ver, um count,
+
+01:03:44.840000000000146
+até, ah, new screen,
+
+01:03:46.51999999999998
+add widget,
+
+01:03:48.820000000000164
+ele não está funcionando, deixa eu
+
+01:03:50.38000000000011
+testar,
+
+01:03:53.30000000000018
+vou colocar um widget aqui,
+
+01:03:55.23999999999978
+ver se ele salva,
+
+01:03:57.13999999999987
+ele não está colocando widget,
+
+01:03:58.320000000000164
+ok,
+
+01:03:58.92000000000007
+tá ok, mas
+
+01:04:2.1799999999998363
+infelizmente eu queria mostrar, mas aqui eu não estou
+
+01:04:4.260000000000218
+conseguindo, o que eu não estou conseguindo.
+
+01:04:10.599999999999909
+O que eu estou fazendo errado? É tão fácil de fazer, mas infelizmente não está indo.
+
+01:04:17.40000000000009
+Ah, ok, please expand your... Ah, ok, eu tenho que tirar o zoom.
+
+01:04:22.059999999999945
+Será que é isso mesmo? Aí, tá, ok, era só tirar o zoom.
+
+01:04:25.920000000000073
+Bastava ler o negócio. Então, se eu der um aqui, tava adicionando um monte e não tava vendo, então consigo colocar esses gráficos
+
+01:04:28.420000000000073
+consigo expandir eles
+
+01:04:30.059999999999945
+consigo
+
+01:04:30.579999999999927
+criar um dashboard mesmo
+
+01:04:33.7800000000002
+pro meu time de suporte, meu time de operações
+
+01:04:35.98000000000002
+problemas, então
+
+01:04:37.179999999999836
+de maneira bem rápida, de maneira bem
+
+01:04:40.07999999999993
+corrida, fiz um overview
+
+01:04:42
+aqui do LogDNA, mas eu recomendo que vocês
+
+01:04:44.059999999999945
+tem vários
+
+01:04:46
+materiais no próprio YouTube,
+
+01:04:47.63999999999987
+do próprio canal do LogGNA,
+
+01:04:50.159999999999854
+se você quiser dar uma olhadinha,
+
+01:04:52.19999999999982
+é baratinho também para
+
+01:04:53.159999999999854
+contratar o serviço mais barato
+
+01:04:55.940000000000055
+daqui, enfim,
+
+01:04:58.059999999999945
+era esse conteúdo que eu queria passar
+
+01:04:59.940000000000055
+para vocês, um pouquinho de código,
+
+01:05:1.9800000000000182
+uma biblioteca, fazendo abstrações,
+
+01:05:5.039999999999964
+deixando o log
+
+01:05:6.1599999999998545
+bonitinho no seu terminal quando está
+
+01:05:7.920000000000073
+em desenvolvimento,
+
+01:05:9.61999999999989
+quando está em produção, em ambientes que estão
+
+01:05:11.980000000000018
+na cloud, mandar esses
+
+01:05:14.059999999999945
+logs para uma plataforma que você consegue
+
+01:05:16.300000000000182
+adicionar filtros, consegue
+
+01:05:17.920000000000073
+ter uma visualização em gráficos,
+
+01:05:19.90000000000009
+consegue realmente ter um controle total
+
+01:05:22.11999999999989
+dos seus logs, ter uma visualização bacana,
+
+01:05:24.460000000000036
+aumentar realmente o nível de observabilidade
+
+01:05:27.559999999999945
+que você tem na sua aplicação através dessas ferramentas.
+
+01:05:31.2199999999998
+Existem diversas outras,
+
+01:05:32.61999999999989
+mas eu trabalho basicamente com essas ferramentas,
+
+01:05:34.80000000000018
+então é uma recomendação super pessoal,
+
+01:05:38.42000000000007
+mas que o meu time curte,
+
+01:05:40.340000000000146
+a gente super apoia,
+
+01:05:42.51999999999998
+a IBM utiliza esse stack aqui como default para a arquitetura, ela recomenda
+
+01:05:46.69999999999982
+você utilizar essas duas
+
+01:05:48.7800000000002
+bibliotecas do Pino
+
+01:05:50.26000000000022
+e a ferramenta do LogGN
+
+01:05:52.340000000000146
+para trabalhar com logs na sua
+
+01:05:54.460000000000036
+aplicação, então
+
+01:05:55.7800000000002
+é algo que está sendo utilizado em produção
+
+01:05:58.320000000000164
+por vários times dentro da IBM, então
+
+01:06:0.40000000000009095
+eu posso recomendar sem medo que
+
+01:06:2.3400000000001455
+você siga por esse stack, ok?
+
+01:06:5.860000000000127
+Então é isso, pessoal.
+
+01:06:7.300000000000182
+Eu agradeço vocês pela presença.
+
+01:06:11.519999999999982
+Vou pedir aqui o feedback de vocês,
+
+01:06:13.679999999999836
+para que vocês mandem mais sugestões de conteúdo,
+
+01:06:16.679999999999836
+o que vocês queiram ver.
+
+01:06:18.579999999999927
+Todo esse código aqui vai estar todo comitado no GitHub.
+
+01:06:21.579999999999927
+Eu sempre deixo bem documentado no Readme.
+
+01:06:23.90000000000009
+Então se você tiver uma dúvida, dá uma passadinha lá no
+
+01:06:26.09999999999991
+Git, vê se eu já
+
+01:06:27.800000000000182
+escrevi algo relacionado à sua dúvida.
+
+01:06:30.440000000000055
+Se não solucionei, a gente tem um Discord
+
+01:06:32.11999999999989
+da Experts Club, pode me mandar mensagem
+
+01:06:34.23999999999978
+lá, pode mandar mensagem nos canais
+
+01:06:36.2199999999998
+gerais, eu estou sempre de olho lá,
+
+01:06:38.179999999999836
+então a gente pode trocar uma ideia, pode ser relacionado a essa aula, pode ser relacionado a qualquer coisa, simplesmente um papo, um café, eu estou sempre disponível. Então, valeu gente, e a gente se vê na próxima.

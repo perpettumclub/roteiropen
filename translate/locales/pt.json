@@ -1,0 +1,104 @@
+{
+    "hero": {
+        "title": "Transforme Áudios em Roteiros Virais",
+        "subtitle": "Framework de 6 Atos com IA para Máxima Retenção",
+        "description": "Grave suas ideias brutas. Receba roteiros engenheirados em segundos.",
+        "cta": "Começar Agora",
+        "cta_secondary": "Ver Como Funciona"
+    },
+    "auth": {
+        "sign_in": "Entrar",
+        "sign_up": "Cadastrar",
+        "sign_out": "Sair",
+        "email": "E-mail",
+        "password": "Senha",
+        "forgot_password": "Esqueceu a senha?",
+        "no_account": "Não tem uma conta?",
+        "have_account": "Já tem uma conta?"
+    },
+    "paywall": {
+        "title": "Desbloqueie Roteiros Ilimitados",
+        "subtitle": "Pagamento único anual. Sem cobranças recorrentes.",
+        "price_us": "R$ 67/ano",
+        "price_label": "Preço de Lançamento",
+        "regular_price": "Preço regular: R$ 97",
+        "cta": "Garantir Acesso Vitalício",
+        "guarantee": "Garantia de 7 dias",
+        "features": {
+            "unlimited": "Roteiros virais ilimitados",
+            "hooks": "7 variações de ganchos psicológicos",
+            "remix": "Análise de vídeos e modo remix",
+            "framework": "Framework Proprietário de 6 Atos",
+            "support": "Suporte prioritário"
+        },
+        "social_proof": {
+            "users": "10.000+ creators no mundo",
+            "scripts": "500.000+ roteiros gerados",
+            "retention": "Retenção média: 68%"
+        }
+    },
+    "dashboard": {
+        "welcome": "Bem-vindo de volta, {{name}}!",
+        "create_script": "Criar Novo Roteiro",
+        "my_scripts": "Meus Roteiros",
+        "stats": "Estatísticas",
+        "streak": "Ofensiva de {{count}} dias! 🔥",
+        "level": "Nível {{level}}",
+        "next_badge": "Próximo badge em {{count}} roteiros"
+    },
+    "recording": {
+        "title": "Grave Sua Ideia",
+        "subtitle": "Fale naturalmente. Sem roteiro necessário.",
+        "recording": "Gravando...",
+        "duration": "{{duration}} / 5:00",
+        "start": "Iniciar Gravação",
+        "stop": "Parar Gravação",
+        "delete": "Excluir",
+        "generate": "Gerar Roteiro",
+        "tip": "Dica: Fale como se estivesse explicando para um amigo"
+    },
+    "script": {
+        "your_script": "Seu Roteiro Viral",
+        "act_1": "Ato I: Gancho de Invasão (0-3s)",
+        "act_2": "Ato II: Identificação (4-12s)",
+        "act_3": "Ato III: Ancoragem (13-25s)",
+        "act_4": "Ato IV: Ruptura (26-35s)",
+        "act_5": "Ato V: Plano de Ação (36-45s)",
+        "act_6": "Ato VI: CTA Desafio (46-60s)",
+        "hooks_title": "Ganchos Alternativos",
+        "copy": "Copiar Roteiro",
+        "share": "Compartilhar",
+        "remix": "Remix com Vídeo",
+        "copied": "Copiado para área de transferência!",
+        "generating": "Gerando seu roteiro..."
+    },
+    "pricing": {
+        "comparison": "Por que Hooky?",
+        "vs_audiopen": "AudioPen te dá texto limpo. Hooky te dá roteiros virais.",
+        "vs_manual": "Roteirização manual: 2-3 horas. Hooky: 30 segundos.",
+        "roi": "Um vídeo viral paga a assinatura vitalícia"
+    },
+    "footer": {
+        "tagline": "Feito para creators que recusam soar genéricos",
+        "product": "Produto",
+        "features": "Recursos",
+        "pricing": "Preços",
+        "company": "Empresa",
+        "about": "Sobre",
+        "contact": "Contato",
+        "legal": "Legal",
+        "terms": "Termos de Uso",
+        "privacy": "Política de Privacidade"
+    },
+    "common": {
+        "loading": "Carregando...",
+        "error": "Algo deu errado",
+        "retry": "Tentar novamente",
+        "cancel": "Cancelar",
+        "save": "Salvar",
+        "close": "Fechar",
+        "next": "Próximo",
+        "back": "Voltar",
+        "or": "ou"
+    }
+}

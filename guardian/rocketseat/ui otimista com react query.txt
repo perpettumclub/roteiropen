@@ -1,0 +1,2765 @@
+00:00
+E aí
+
+00:0.04
+fala deve seja bem-vindo a mais uma aula aqui na Rocket City no expert club meu nome é João
+
+00:13.56
+Bibiano e hoje a gente vai trabalhar com uma aula incrível que é sobre react-giri um uma
+
+00:20.44
+e o ai otimista tá já vou explicar para você que que é isso que que é uma e o ai otimista, tá? Já vou explicar pra você o que é isso, o que é uma UI otimista, o que é o React
+
+00:25.82
+Query. Então, já preparei aqui uma pauta pra gente conseguir se orientar. Vou trocar aqui pra vocês.
+
+00:33.68
+E, basicamente, sejam bem-vindos. Essa daqui é minha aula 3, então se você não assistiu a minha
+
+00:41.1
+primeira e segunda aula, vale a pena, principalmente a primeira, aonde eu trato
+
+00:45.56
+como usar o React Query para fazer queries, tá? Inclusive o projeto Starter que nós vamos usar
+
+00:51.86
+hoje é o projeto da aula 1, beleza? Então vamos lá, galera. Vou começar aqui me apresentando, tá?
+
+00:58.76
+Meu nome é João Bibiano, eu sou formado em análise e desenvolvimento de sistemas. Tenho mais de 7 anos de experiência com desenvolvimento de software.
+
+01:8.799999999999997
+Hoje, eu sou o Senior Software Engineer na Talkdesk, uma empresa aqui em Lisboa, Portugal.
+
+01:14.340000000000003
+A equipe de engenharia está aqui. É uma empresa também que está situada nos Estados Unidos.
+
+01:18.22
+Estou morando aqui em Lisboa, Portugal.
+
+01:21.040000000000006
+E caso você queira saber mais, acompanhar o meu trabalho, você pode ficar à vontade
+
+01:25.439999999999998
+pra me seguir no Instagram e
+
+01:28.040000000000006
+no meu YouTube, no canal do meu YouTube,
+
+01:31.019999999999996
+aonde eu também
+
+01:31.980000000000004
+produzo conteúdo pra
+
+01:33.58
+vocês, beleza galera? Então é
+
+01:36.14
+isso apresentado aqui.
+
+01:38.18000000000001
+Vamos entender o que a gente vai construir
+
+01:39.92
+hoje, tá? A gente vai usar esse projeto
+
+01:41.94
+Starter, que é um projeto que eu já fiz,
+
+01:43.980000000000004
+vou mostrar pra vocês agora, e lista produtos, tá? A gente vai usar esse projeto Starter, que é um projeto que eu já fiz, vou mostrar pra vocês agora, e lista
+
+01:46.120000000000005
+produtos, tá? A gente lê
+
+01:47.72
+uma API, lista
+
+01:49.980000000000004
+esses produtos na tela, e o que a gente
+
+01:52.040000000000006
+vai fazer? A gente vai implementar
+
+01:54.120000000000005
+a inclusão de novos itens
+
+01:55.760000000000005
+nessa lista, diretamente
+
+01:58.099999999999994
+no servidor, usando uma interface
+
+01:59.86
+otimista, tá? Então, basicamente,
+
+02:10.439999999999998
+esse daqui é o projeto que a gente vai estar trabalhando hoje é uma lista bem simples que que a gente vai fazer a gente vai construir aqui em cima um formulário tá deixa eu até abrir minha canetinha aqui e a gente vai construir ó aqui em cima um formulário
+
+02:19.319999999999993
+tá minha canetinha aqui pega no fullscreen já mudo pra vocês. Vamos lá.
+
+02:27.860000000000014
+Vê se eu consigo agora. Beleza.
+
+02:29.97999999999999
+A gente vai construir aqui em cima um formulário onde a gente vai poder cadastrar um novo produto.
+
+02:32.68000000000001
+E qual que vai ser a graça
+
+02:34.03999999999999
+aqui da coisa, né?
+
+02:36.06
+No momento que a gente clicar no botão
+
+02:38.139999999999986
+de cadastrar, adicionar,
+
+02:40.56
+a gente vai enviar uma requisição
+
+02:42.24000000000001
+pro servidor. Só que
+
+02:44.139999999999986
+é aqui que entra o tchan da coisa
+
+02:46.68000000000001
+Aqui que entra a beleza da coisa
+
+02:48.900000000000006
+Ao invés de a gente esperar o servidor responder
+
+02:52.16
+A gente já vai criar uma UI otimista
+
+02:55.08000000000001
+A gente vai esperar que aquilo dá certo
+
+02:56.81999999999999
+Então no momento que a gente clicar aqui
+
+02:59.139999999999986
+Da mesma forma que a gente vai disparar uma requisição
+
+03:1.5600000000000023
+Lá para a network funcionar e tudo mais
+
+03:3.8000000000000114
+Mandar para o nosso servidor Ao mesmo tempo a gente vai disparar uma requisição lá pra network funcionar e tudo mais mandar pro nosso servidor
+
+03:5.800000000000011
+ao mesmo tempo a gente vai adicionar
+
+03:8.060000000000002
+o item na lista, fazendo
+
+03:9.960000000000008
+assim com que a nossa aplicação
+
+03:12
+fique responsiva e
+
+03:14
+não dependa da resposta da network
+
+03:15.960000000000008
+tá, obviamente a gente vai mostrar
+
+03:18.080000000000013
+um status, alguma informação
+
+03:19.840000000000003
+pro usuário saber que aquilo tá acontecendo
+
+03:22.28
+beleza, mas
+
+03:23.860000000000014
+ele já vai ter o feedback instantâneo da operação.
+
+03:28.5
+Então vamos lá, voltar aqui, concluímos aqui também o que vamos construir hoje.
+
+03:34.22
+E agora falar um pouquinho aqui dos requisitos que a gente vai ter.
+
+03:37.94
+Você precisa ter o NPM ou o Yarn instalado na tua máquina.
+
+03:42.31999999999999
+A Rocketseat tem vários tutoriaisis como você pode fazer essa instalação
+
+03:46.120000000000005
+então fique à vontade só estúdio Cold ou qualquer outro editor de texto fique à vontade aí para
+
+03:51.34
+escolher o editor que você mais gosta e o Starter tá o projeto Starter esse projeto está lá no
+
+03:59.31999999999999
+GitHub da roque de se tivesse perto clube o link está aqui para vocês caso você queira copiar.
+
+04:11.939999999999998
+Caso não, você pode entrar lá, Rocketseat Experts Club, e procurar por essa aula, tranquilo.
+
+04:16
+Aqui você vai ter duas brands, você vai ter a Starter e depois a Main,
+
+04:18.379999999999995
+que é onde vai estar o código finalizado.
+
+04:24.019999999999982
+Então, muito bem, entendendo aqui que a gente já tem esses requisitos,
+
+04:26.80000000000001
+podemos passar para a próxima etapa.
+
+04:29.360000000000014
+O que é uma interface otimista?
+
+04:32.160000000000025
+Eu já falei disso com vocês, mas por que eu deixei esse exemplo aqui?
+
+04:35.360000000000014
+Um exemplo muito legal que a gente tem de UI otimista,
+
+04:38.48000000000002
+sabe quando você está navegando no Facebook ou no Twitter,
+
+04:43.18000000000001
+e muitas vezes você está até sem internet, quando você dá like, quando você curte,
+
+04:45.860000000000014
+muitas vezes a aplicação já te dá o feedback que aquilo foi curtido realmente.
+
+04:48.339999999999975
+Não significa que essa informação
+
+04:50.10000000000002
+chegou no servidor, mas
+
+04:52.01999999999998
+significa que
+
+04:53.01999999999998
+a aplicação entendeu
+
+04:56.120000000000005
+a tua ação, salvou isso
+
+04:57.94
+no estado local e em algum momento ela vai persistir.
+
+05:0.8000000000000114
+É mais ou menos isso que a gente vai
+
+05:2.0600000000000023
+fazer, tá? A gente não vai
+
+05:3.740000000000009
+persistir isso localmente nem nada do tipo, mas a gente já vai dar feedback instantâneo, independentemente se a operação der certo, tá? Se ela der errado, a gente vai voltar ao estado anterior, garantindo assim que o usuário não vai ficar confuso, ele realmente vai saber quando deu certo ou quando não deu, tranquilo? Então, vamos aqui voltar.
+
+05:21.680000000000007
+ou quando não deu, tranquilo?
+
+05:23.30000000000001
+Então, vamos aqui voltar. Aqui agora
+
+05:26.019999999999982
+eu quero fazer uma revisãozinha sobre o React
+
+05:27.939999999999998
+Query, por isso que eu deixei o código aqui pra vocês,
+
+05:30.24000000000001
+tá? Sobre a filosofia,
+
+05:32.339999999999975
+os recursos e as vantagens.
+
+05:34.01999999999998
+O React Query é uma biblioteca
+
+05:36.079999999999984
+de cache pro front-end
+
+05:38.24000000000001
+de gerenciamento de requisições
+
+05:39.860000000000014
+HTTP. Deixa o site deles
+
+05:41.860000000000014
+aberto aqui, ó, React Query.
+
+05:45.860000000000014
+Basicamente, a descrição do site é performance and powerful
+
+05:47.920000000000016
+data synchronization for React.
+
+05:50.54000000000002
+Basicamente, ele nos ajuda
+
+05:52.420000000000016
+a manter todos os nossos
+
+05:54.18000000000001
+dados sincronizados, atualizados,
+
+05:56.54000000000002
+cacheados no front-end,
+
+05:59.160000000000025
+aumentando muito
+
+06:0.36000000000001364
+a performance e a usabilidade
+
+06:2.3600000000000136
+das nossas aplicações. Recomendo
+
+06:4.180000000000007
+mesmo que vocês vejam a aula 1, a aula 1, a aula 1,
+
+06:8.060000000000002
+para que vocês entendam melhor como funciona a Skills e tudo mais.
+
+06:12.240000000000009
+Porém, não é um requisito para essa aula, tá bom?
+
+06:14.899999999999977
+Só é complementar e eu acho que vale a pena.
+
+06:17.939999999999998
+E aí, só rapidamente mostrando aqui para vocês,
+
+06:22.420000000000016
+tem aqui os clientes, né?
+
+06:24.360000000000014
+Todas as grandes empresas usam.
+
+06:26.100000000000023
+Eu também uso aqui na empresa.
+
+06:28.279999999999973
+Os sponsors e tudo mais.
+
+06:30.980000000000018
+Basicamente, ele fala
+
+06:31.839999999999975
+menos código, menos edge cases, né?
+
+06:33.920000000000016
+Ou seja, ao invés de você escrever
+
+06:35.94
+lógica de cache,
+
+06:38.19999999999999
+timer, retries,
+
+06:40.079999999999984
+quantas vezes você quer executar.
+
+06:41.920000000000016
+Cara, o React Query
+
+06:43.639999999999986
+já te entrega isso muito, muito rápido e muito fácil, tá?
+
+06:47.69999999999999
+Inclusive tem aqui, galera, as principais features.
+
+06:51.660000000000025
+Então, é isso.
+
+06:52.74000000000001
+Fiquem à vontade para explorar aqui a ferramenta, beleza?
+
+06:57.5
+Então, vamos lá.
+
+06:58.72000000000003
+Vamos entender agora um pouco do código aqui que a gente tem, tá?
+
+07:2.660000000000025
+O que eu vou fazer aqui?
+
+07:4.519999999999982
+Eu vou clonar novamente
+
+07:6.019999999999982
+com vocês
+
+07:6.8799999999999955
+o projeto, vou deletar
+
+07:10.019999999999982
+aqui
+
+07:10.379999999999995
+a
+
+07:13.560000000000002
+pasta que eu tenho aqui e vou fazer
+
+07:15.819999999999993
+juntamente com vocês, então o que eu quero que vocês
+
+07:17.95999999999998
+façam aí, abram
+
+07:19.839999999999975
+o VS Code de vocês
+
+07:21.519999999999982
+o que a gente vai fazer, a gente vai fazer um git
+
+07:23.69999999999999
+clone
+
+07:24.420000000000016
+da branch starter e a gente vai fazer? A gente vai fazer um git clone.
+
+07:27.5
+Da branch starter.
+
+07:30.339999999999975
+E a gente vai copiar o link lá do GitHub.
+
+07:32.19999999999999
+A gente vai vir aqui em code.
+
+07:33.94
+E a gente pode copiar.
+
+07:35.5
+Se você usar SSH.
+
+07:37.579999999999984
+Com Linux ou Mac ou até Windows.
+
+07:39.06
+Você pode copiar o SSH.
+
+07:40.30000000000001
+Se não, dá ttps.
+
+07:41.5
+É público.
+
+07:42.60000000000002
+Qualquer um dos dois aí.
+
+07:47.56
+É para funcionar então eu faço um kit clone traço traço Brent e Starter né eu quero essa Brent e colo aqui a URL e ele já clonou repostar para mim
+
+07:56.44
+posso atualizar aqui e tá aqui o Starter que é da onde você vai começar junto comigo então vamos
+
+08:1.7200000000000273
+entender um pouco desse código aqui primeiro Primeiro quero abrir o pack de JSON aqui
+
+08:5.899999999999977
+pra explicar o que a gente tem já pronto nessa
+
+08:7.939999999999998
+aplicação.
+
+08:9.759999999999991
+A gente tem o Axios instalado, temos o
+
+08:12
+JSON Server, que é
+
+08:13.54000000000002
+uma dependência que vai subir um servidor local
+
+08:16.100000000000023
+pra nós, pra gente conseguir trabalhar
+
+08:17.879999999999995
+com requisições HTTP sem ter que
+
+08:20
+usar Node nem nada do tipo. O JSON
+
+08:22.019999999999982
+Server já vai subir pra nós tudo e
+
+08:23.939999999999998
+configurar. E
+
+08:26.019999999999982
+depois o React, né?
+
+08:27.879999999999995
+Obviamente. E o React Query.
+
+08:29.980000000000018
+Então, poucas dependências, é só
+
+08:31.899999999999977
+mesmo o que a gente precisa. A gente tá usando
+
+08:34.10000000000002
+aqui o Vite, né?
+
+08:36.15999999999997
+Aí um corrente
+
+08:37.84000000000003
+substituto ao CreateHackTap.
+
+08:39.960000000000036
+Nada de novo também. E uma
+
+08:41.940000000000055
+coisa que eu quero frisar com vocês aqui é esse script aqui, server.json.
+
+08:46.25999999999999
+É esse script que vai levantar o nosso servidor.
+
+08:48.74000000000001
+E o que ele olha?
+
+08:50.15999999999997
+Ele enxerga o arquivo db.json, que está aqui dentro de server.
+
+08:54.799999999999955
+Então, se eu abrir aqui para vocês,
+
+08:56.620000000000005
+aqui a gente já tem três produtos fake, que é o nosso banco de dados.
+
+09:1.3600000000000136
+E aí eu vou voltar lá.
+
+09:6.100000000000023
+E a gente também tem a porta que ele está usando e um midware, por que a gente tem esse
+
+09:8.100000000000023
+midware?
+
+09:9.740000000000009
+esse midware vai garantir que a gente tem
+
+09:12.139999999999986
+um delay específico
+
+09:14.799999999999955
+nas requisições de post
+
+09:16.360000000000014
+por que eu quero esse delay?
+
+09:18.299999999999955
+porque eu quero realmente que a ação de
+
+09:20.100000000000023
+salvar um novo produto
+
+09:21.559999999999945
+demore um tempo a mais, para a gente
+
+09:23.940000000000055
+conseguir ver o React.Curry
+
+09:25.539999999999964
+a mutation ali funcionando.
+
+09:28.82000000000005
+Se eu não coloco esse delay,
+
+09:30.059999999999945
+vai ser tão rápido que a gente não vai conseguir
+
+09:32
+enxergar, tá? Então,
+
+09:33.82000000000005
+não precisa entender isso daqui, é só pra você
+
+09:36.01999999999998
+saber que isso tá acontecendo por trás
+
+09:38.22000000000003
+dos panos. Não quero mágica
+
+09:40.139999999999986
+aqui, eu quero que você entenda cada etapa.
+
+09:42.08000000000004
+Muito bem. Então, já passamos aqui o pack Jason
+
+09:45.639999999999986
+entendemos as dependências vamos fazer o seguinte vamos abrir aqui o nosso projeto agora ó e eu vou
+
+09:52.77999999999997
+instalar as dependências dele você pode rodar aí na tua máquina e ar ou npm install para instalar
+
+09:58.89999999999998
+as dependências isso feito vou rodar o comandinho e, yarn server 2.json, para subir aqui a minha API, né?
+
+10:7.960000000000036
+E aqui do outro lado, eu vou dar um yarn dev.
+
+10:13.360000000000014
+Para quê? Para realmente subir a aplicação.
+
+10:17.32000000000005
+Perfeito? Está up, né?
+
+10:19.600000000000023
+Então, se eu der aqui um localhost, pronto, já temos a aplicação funcionando e tudo bonito aparecendo.
+
+10:26.960000000000036
+Isso que você está vendo aqui
+
+10:28.059999999999945
+embaixo, ó, é uma
+
+10:30.019999999999982
+extensão, um plugin, tá?
+
+10:31.899999999999977
+Do próprio React Query pra gente ver as queries
+
+10:33.84000000000003
+sendo feitas. Não precisa se preocupar
+
+10:35.940000000000055
+com isso agora. A gente pode até dar um close aqui, tá?
+
+10:39.48000000000002
+Eu vou
+
+10:40.059999999999945
+depois talvez mostrar pra vocês alguma coisa, mas
+
+10:42.139999999999986
+não. Não precisa nem se
+
+10:44.01999999999998
+preocupar com isso agora. Então, temos a aplicação aqui, faz um request, mostra a nossa listagem.
+
+10:50.51999999999998
+Muito bem, é isso mesmo.
+
+10:52.84000000000003
+Então, o que a gente vai começar fazendo aqui?
+
+10:55.440000000000055
+Como eu disse para vocês, a gente precisa de um formulário aqui para adicionar um novo produto.
+
+10:59.039999999999964
+E onde que a gente vai adicionar esse formulário?
+
+11:1.1200000000000045
+Aqui em Pages, a gente tem a paixinha Products e a gente tem o
+
+11:5.8799999999999955
+List, que é realmente na listagem
+
+11:7.919999999999959
+que a gente quer adicionar esse novo
+
+11:9.960000000000036
+produto. Vou fechar aqui o nosso
+
+11:11.840000000000032
+terminal para ganhar um pouco de espaço.
+
+11:14.980000000000018
+E olha só.
+
+11:16.17999999999995
+Temos aqui a nossa tabela,
+
+11:18.58000000000004
+o corpo da nossa tabela
+
+11:20.100000000000023
+que é onde a gente está mostrando
+
+11:21.940000000000055
+todos os produtos.
+
+11:23.659999999999968
+Então, o que eu vou fazer? Antes da tabela que é onde a gente tá mostrando todos os produtos né legal então o que que eu vou fazer
+
+11:25.879999999999995
+antes da tabela aqui eu vou começar a escrever esse nosso formulário tá então vou digitar aqui
+
+11:34.34000000000003
+o nosso form dentro desse forma eu vou ter alguns inputs tá e o primeiro input que eu vou ter aqui vai ser a propriedade name.
+
+11:45.879999999999995
+Vou até abrir aqui o nosso banco.
+
+11:48.360000000000014
+Ó, name.
+
+11:50.77999999999997
+Depois a gente vai ter um price.
+
+11:53.940000000000055
+Depois a gente vai ter aqui uma description.
+
+11:58.460000000000036
+E depois a gente vai ter aqui uma image, que vai ser o link para a imagem.
+
+12:2.8799999999999955
+E só para isso ficar mais bonito, eu vou colocar um placeholder, tá?
+
+12:6.860000000000014
+Esse primeiro aqui vai ser name.
+
+12:10.480000000000018
+Type the product name.
+
+12:14.159999999999968
+Melhorzinho.
+
+12:15.100000000000023
+Placeholder.
+
+12:16.799999999999955
+Type the product price.
+
+12:21
+Fiquem à vontade aí pra colocar o texto
+
+12:22.5
+que vocês quiserem, tá?
+
+12:24.720000000000027
+Type the product description
+
+12:26.940000000000055
+E aqui embaixo
+
+12:29.639999999999986
+Type the product image link
+
+12:36.01999999999998
+Muito bem
+
+12:37.48000000000002
+Então, já temos aqui o nosso formular
+
+12:39.299999999999955
+Tá bom? Funcionando
+
+12:41.17999999999995
+E aqui, pessoal
+
+12:43.25999999999999
+Nessa parte do formular a gente podia fazer de várias formas.
+
+12:46.41999999999996
+A gente podia usar state, a gente podia usar uma biblioteca como o one form da própria Rocket,
+
+12:51.700000000000045
+o React Hook Form, mas eu vou fazer da forma mais simples,
+
+12:56.17999999999995
+porque o foco não é aqui no formulário, mas é sim na mutation, beleza?
+
+13:0.6200000000000045
+Então, o que eu vou fazer aqui?
+
+13:1.6399999999999864
+Eu vou, aqui no form Colocar um onSubmit
+
+13:5.360000000000014
+Passar uma função anônima aqui
+
+13:7.6200000000000045
+E dessa função anônima
+
+13:9.67999999999995
+Eu vou pegar o evento
+
+13:11.039999999999964
+O evento que está chegando desse form
+
+13:13.379999999999995
+Vou dar um preventSubmit
+
+13:15.860000000000014
+PreventFault
+
+13:16.980000000000018
+Para que? Para evitar
+
+13:19.039999999999964
+Que ele execute aquela ação automática
+
+13:21.860000000000014
+Que é dar um reload na página
+
+13:23.620000000000005
+Beleza? e vou fazer o seguinte
+
+13:26.08000000000004
+vou pegar o form data
+
+13:27.299999999999955
+vou obter os dados desse form
+
+13:30.17999999999995
+de que forma? vou dar um new form data
+
+13:32.32000000000005
+aqui
+
+13:32.639999999999986
+pegando o event ponto
+
+13:35.440000000000055
+se eu não me engano é current
+
+13:37.940000000000055
+target, exatamente
+
+13:39.440000000000055
+o que a gente consegue fazer com isso?
+
+13:42.039999999999964
+meio que converter
+
+13:43.27999999999997
+o nosso formulário HTML para um formato de formidata.
+
+13:48.860000000000014
+E aí a gente consegue pegar as propriedades agora.
+
+13:52.039999999999964
+const name recebe formidata.get
+
+13:57.89999999999998
+E aí a gente pega por name, assim.
+
+14:0.6399999999999864
+A gente pega pelo nome do input aqui embaixo.
+
+14:4.480000000000018
+E eu vou fazer isso com todos
+
+14:5.659999999999968
+vou fazer com o price
+
+14:7.860000000000014
+price
+
+14:12.139999999999986
+vou fazer aqui
+
+14:14.159999999999968
+com a description
+
+14:15.120000000000005
+vou fazer aqui com a image
+
+14:21.659999999999968
+olha lá que legal
+
+14:24.299999999999955
+então, já tenho
+
+14:25.82000000000005
+aqui todas as propriedades que eu preciso pra realmente salvar
+
+14:29.960000000000036
+esse meu produto. Então, o que que eu vou fazer agora? Eu vou
+
+14:32.77999999999997
+criar uma constante aqui que chama tipo vai ser esse novo
+
+14:37.039999999999964
+produto que a gente tá esperando vai ser o que? Vai
+
+14:40.51999999999998
+ser um um uma e uma imed e como eu tô usando
+
+14:50.5
+o TypeScript aqui vamos te pá né Vamos aqui o nosso ai product interface até um detalhe nesse
+
+14:58.120000000000005
+caso da adição vamos entrar aqui nessa interface ó o ID a gente não vai ter ainda porque a gente
+
+15:4.480000000000018
+não sabe qual que vai ser o Haiti quem dá
+
+15:6.6200000000000045
+o ideal servidor aqui que eu vou dizer aqui eu vou dizer que ele pode ser um define ele pode tá
+
+15:11.879999999999995
+vou me enganar o TypeScript aqui e aqui embaixo ó ele vai reclamar né porque ele diz agora que
+
+15:18.620000000000005
+o detalhe pode não tem um aí de realmente a gente faz um tratamento Zinho aqui ó se existir aí de
+
+15:21.860000000000014
+Então a gente só faz um tratamento Se existir ID
+
+15:23.480000000000018
+Aí sim você chama a função
+
+15:26.17999999999995
+Perfeito
+
+15:27.600000000000023
+Já colocamos muito código aqui
+
+15:29.539999999999964
+Para finalizar vamos só pôr um console.log
+
+15:32.08000000000004
+Aqui
+
+15:32.34000000000003
+New product
+
+15:35.65999999999997
+Para a gente ver
+
+15:37.84000000000003
+Se isso vai aparecer
+
+15:39.860000000000014
+Uma coisa que eu esqueci aqui
+
+15:41.67999999999995
+Foi o botão de submit
+
+15:43.08000000000004
+Então vamos colocar aqui o Input Submit
+
+15:45.75999999999999
+Salvar
+
+15:49.01999999999998
+Salvar
+
+15:50.460000000000036
+Salvar
+
+15:51.620000000000005
+Acho que salvar, tá bom
+
+15:52.940000000000055
+E vamos lá pra nossa página
+
+15:56.039999999999964
+Olha que legal, já tá aqui o nosso formulário
+
+15:57.879999999999995
+Então vamos abrir aqui nossa tab de Developer
+
+16:0.6599999999999682
+Vira aqui em Console
+
+16:3.2200000000000273
+Vou até dar um zoom que eu acho que está pequeno
+
+16:5.759999999999991
+para vocês, muito bem
+
+16:6.8799999999999955
+então vamos lá, eu vou colocar aqui no product
+
+16:9.580000000000041
+keyboard
+
+16:11.879999999999995
+no price
+
+16:14.360000000000014
+vou colocar 99
+
+16:15.240000000000009
+description awesome
+
+16:17.659999999999968
+keyboard
+
+16:19.399999999999977
+e o link
+
+16:21.75999999999999
+que eu posso copiar
+
+16:23.620000000000005
+depois algum
+
+16:24.299999999999955
+image.com.br.png.
+
+16:33.440000000000055
+Beleza, salvar.
+
+16:35.620000000000005
+Então, olha que legal.
+
+16:37.460000000000036
+Já temos aqui o nosso objeto pronto, né?
+
+16:42.17999999999995
+Então, a informação já está prontinha pra gente enviar pro nosso servidor
+
+16:46.41999999999996
+Só voltar pro Notion ali
+
+16:48.22000000000003
+Pra gente ver, né?
+
+16:50.799999999999955
+Onde a gente tá
+
+16:51.58000000000004
+Então, beleza
+
+16:52.960000000000036
+Então, agora eu vou mostrar pra vocês como que a gente vai fazer sem a mutation
+
+16:56.700000000000045
+Sem ali a UI otimista, né?
+
+16:58.799999999999955
+Como que a gente faria isso sem usar o React Query
+
+17:1.5399999999999636
+Então, eu vou citar aquela parte que eu disse do delay do servidor.
+
+17:5.960000000000036
+O servidor pode demorar, né?
+
+17:8.460000000000036
+E vamos lá ao código sem o React Query.
+
+17:11.759999999999991
+O que eu preciso fazer agora?
+
+17:12.779999999999973
+Preciso enviar o servidor, né?
+
+17:14.059999999999945
+Então, a gente pode vir aqui em cima, ó.
+
+17:16.460000000000036
+E criar uma funçãozinha para salvar.
+
+17:19.460000000000036
+A gente já tem um exemplo aqui, ó.
+
+17:21.579999999999927
+Prontinho.
+
+17:23.559999999999945
+Que a gente pode copiar, inclusive
+
+17:25.339999999999918
+ó, fetch products
+
+17:27.339999999999918
+ao invés de ser um fetch, vai ser um
+
+17:30.019999999999982
+save product
+
+17:30.90000000000009
+e ele vai receber como argumento aqui
+
+17:34.11999999999989
+um product
+
+17:34.960000000000036
+e vai ser o que? Um iproduct
+
+17:38.180000000000064
+né, vamos sempre colocar
+
+17:39.77999999999997
+a tipagem certinha
+
+17:41.22000000000003
+depois
+
+17:42.88000000000011
+não vai ser um get, né, porque o get é pra obter um recur Depois Não vai ser um get, né?
+
+17:45.33999999999992
+Porque o get é para obter um recurso
+
+17:46.75999999999999
+Vai ser um post para criar esse novo recurso
+
+17:50.319999999999936
+E depois aqui, como segundo argumento
+
+17:55.539999999999964
+A gente pode passar o nosso objetinho
+
+17:58.75999999999999
+E o resto continua igual
+
+18:0.5399999999999636
+A gente realmente quer obter os dados
+
+18:2.2799999999999727
+Depois que o servidor nos enviar
+
+18:4.2000000000000455
+Com o id pronto Então, está lindo isso isso aqui pessoal agora que eu tenho a função aqui que eu posso
+
+18:11.099999999999909
+fazer ó eu posso voltar aqui e invocar essa função passando esse meu new product então posso parar de
+
+18:23.339999999999918
+lugar ele aqui acho que não preciso mais E aparentemente isso já vai funcionar
+
+18:27.460000000000036
+A gente vai clicar em salvar
+
+18:29.180000000000064
+Ele vai fazer a requisição
+
+18:30.90000000000009
+E o nosso servidor vai responder
+
+18:33.559999999999945
+Então vamos lá
+
+18:34.319999999999936
+Ele já fez o hot reload aqui
+
+18:36.66000000000008
+Eu vou abrir aqui a tab de network
+
+18:39.88000000000011
+Vou limpar aqui
+
+18:41.960000000000036
+E vou aqui dar um salvar
+
+18:43.11999999999989
+Fez aqui a requisição
+
+18:46.07999999999993
+Tá carregando
+
+18:47.07999999999993
+Essa última aqui, ó
+
+18:48.460000000000036
+Vamos ver aqui, ó, o payload
+
+18:51.07999999999993
+Enviamos esses dados e
+
+18:52.940000000000055
+Já me retornou o IG3
+
+18:55.75999999999999
+Se eu der um F5 aqui
+
+18:57.3599999999999
+Não preciso nem dar F5
+
+18:59.700000000000045
+Porque o React Queer já faz a revalidação
+
+19:2.019999999999982
+A hora que eu volto pra página
+
+19:4.339999999999918
+É incrível.
+
+19:5.779999999999973
+Então, vocês viram aqui que já cadastrou
+
+19:08
+o produto. Só que é como eu disse,
+
+19:10.1400000000001
+se eu clicar aqui mais uma vez,
+
+19:12.11999999999989
+ó, eu tenho que
+
+19:13.920000000000073
+esperar 3 segundos, depois
+
+19:15.900000000000091
+esperar uma revalidação, alguma
+
+19:17.90000000000009
+coisa, e aí ele aparece.
+
+19:19.8599999999999
+Não é tão legal, não é aquela coisa que
+
+19:21.8599999999999
+eu clico em salvar, parece que eu estou trabalhando offline, eu já vejo ali o produto na lista.
+
+19:26.420000000000073
+Então, é isso que a gente vai implementar juntos agora.
+
+19:29.25999999999999
+Então, vamos dar um check lá para ter aquela injeção de dopamina.
+
+19:33.33999999999992
+Vou tomar uma água.
+
+19:37.299999999999955
+E a gente vai passar para o próximo passo,
+
+19:40.27999999999997
+que é onde a gente vai ver aqui o react-query brilhar, né?
+
+19:44.819999999999936
+Então, vamos lá vamos entender
+
+19:47.25999999999999
+é primeiro como que vai funcionar esse fluxo tá é basicamente como que eu vou explicar para vocês
+
+19:53.8599999999999
+vou explicar aqui mesmo a gente vai ter aqui ó e aqui uma mutation tá que vocês conseguem enxergar aí. O primeiro passo dessa...
+
+20:5.6400000000001
+Deixa eu colocar um comentário multiline aqui.
+
+20:11.61999999999989
+Mutation.
+
+20:12.960000000000036
+O que é essa mutation, pessoal?
+
+20:15
+Primeiro, o React Query updates the cache.
+
+20:22.079999999999927
+Então, o que ele faz?
+
+20:23.579999999999927
+Ele pega esse objeto novo que a gente está fazendo a mutation
+
+20:26.38000000000011
+E vai lá e atualiza o cache
+
+20:28.839999999999918
+Dele interno
+
+20:29.660000000000082
+O que isso acontece?
+
+20:31.339999999999918
+Ele faz um re-render
+
+20:32.460000000000036
+Na nossa aplicação
+
+20:35.559999999999945
+E esse re-render já mostra esse produto pronto
+
+20:38.680000000000064
+No cache
+
+20:39.24000000000001
+E aí depois ao mesmo tempo
+
+20:41.74000000000001
+Ele faz um refetch
+
+20:44.819999999999936
+To server Então ele pede para o servidor E aí depois, ao mesmo tempo, meio que simultâneo, ele faz um refetch to server.
+
+20:47.33999999999992
+Então, ele pede para o servidor os dados frescos para ver se está tudo certo, se essa requição acabou, se está tudo bem.
+
+20:57.799999999999955
+Vamos colocar aqui success.
+
+21:0.35999999999989996
+Vamos colocar aqui case success.
+
+21:2.380000000000109
+O que ele faz? Ele pega esse objeto antigo e place the old object by the new object.
+
+21:13.960000000000036
+Ele pega a resposta que deu sucesso ali e atualiza o cache.
+
+21:18.940000000000055
+Então, o nosso cache fica sincronizado com o servidor.
+
+21:21.940000000000055
+E aí, case error.
+
+21:24
+A gente pode fazer o quê? A gente pode
+
+21:26
+remover
+
+21:27.74000000000001
+esse objeto do cache. Então, a gente removes
+
+21:30.299999999999955
+the cache
+
+21:32.09999999999991
+object.
+
+21:34.1400000000001
+E aí, a gente tem um cenário perfeito,
+
+21:36.299999999999955
+que é, o usuário clicou em salvar,
+
+21:38.22000000000003
+a gente já atualiza o array.
+
+21:40.3599999999999
+Então, essa query
+
+21:41.90000000000009
+aqui, que a gente vê, já vai
+
+21:43.83999999999992
+vir com os dados prontinhos ali, mastigados, já dizendo, olha, products tem um item novo, por mais que esse item não esteja no servidor ainda.
+
+21:55.940000000000055
+Louco isso, né?
+
+21:57.539999999999964
+Depois, assim que ele atualiza isso, ele faz um re-render, então a nossa aplicação vai mostrar esse novo item.
+
+22:7.8599999999999
+ele faz um render então a nossa aplicação vai mostrar esse novo item depois ele faz um a verdade que não reflete tá ele a a wait the response from server ele espera a resposta da nossa requisição
+
+22:16.680000000000064
+né e com essa resposta caso tenha sucesso ele pega esse objeto no cache e coloca o objeto novo do servidor e no caso de
+
+22:27.680000000000064
+erro ele substitui né é móvel e esse tem deixando a nossa e vai perfeitamente alinhada então bora
+
+22:36.61999999999989
+implementar tudo isso então parece muita coisa mas não é beleza primeira coisa que eu vou precisar aqui é invocar aqui o nosso query client, tá?
+
+22:47.1400000000001
+Por que eu vou precisar pegar esse carinha aqui, galera?
+
+22:49.24000000000001
+Porque eu vou precisar acessar coisas de cache do React Query.
+
+22:54.74000000000001
+Então, eu vou precisar mexer lá no core dele, beleza?
+
+22:57.440000000000055
+Então, o que eu vou fazer aqui?
+
+22:58.3599999999999
+Eu vou dar um use query client, que é um hook do React Query.
+
+23:9.059999999999945
+Vou importar ele lá de dentro e eu tenho ele aqui perfeito eu acho que sim acho que tá bom para você enxergar
+
+23:16.200000000000045
+muito bem agora que eu tenho que reclame aqui que que eu vou fazer eu vou criar
+
+23:20.799999999999955
+minha mutation então vou colocar aqui const mutation recebe use mutation. É o hook que a gente vai criar agora.
+
+23:30.559999999999945
+Cortei também. E esse hook vai receber bastante coisa, beleza? Primeira função aqui que ele pede para receber,
+
+23:37.940000000000055
+se eu passar o mouse aqui, vocês vão ver. Cadê? Posso entrar nela aqui Ele tem a interface aqui
+
+23:47.07999999999993
+Depois ele tem as options
+
+23:48.88000000000011
+Vamos lá
+
+23:50.5
+A primeira coisa que ele pede aqui
+
+23:53.25999999999999
+É o mutation function
+
+23:54.88000000000011
+Então qual que é a mutation
+
+23:56.799999999999955
+Qual que é a função
+
+23:59.22000000000003
+Que você vai usar
+
+24:0.31999999999993634
+Para ir até o servidor
+
+24:1.9800000000000182
+E essa função tem que retornar o dado atualizado
+
+24:4.7000000000000455
+Qual que é aqui a nossa?
+
+24:7.019999999999982
+Save Product.
+
+24:8.299999999999955
+Beleza?
+
+24:10.299999999999955
+Muito bem. Depois que eu tenho
+
+24:12.160000000000082
+aqui a minha mutation, o que eu posso
+
+24:14.059999999999945
+fazer? Eu posso abrir um objeto aqui
+
+24:15.920000000000073
+e posso passar uma
+
+24:17.88000000000011
+série de configurações, tá? Então,
+
+24:19.980000000000018
+a gente vai usar aqui um onMutate.
+
+24:22.819999999999936
+Beleza? Vai ser
+
+24:24.059999999999945
+uma função assíncrona
+
+24:26
+E essa função assíncrona
+
+24:28.25999999999999
+Vai receber aqui o updateProduct
+
+24:30.38000000000011
+Então
+
+24:31.779999999999973
+UpdatedProduct
+
+24:33.72000000000003
+Ou seja, ou só Product
+
+24:36.09999999999991
+Vamos deixar assim pra gente saber o que é
+
+24:37.90000000000009
+Então
+
+24:39.24000000000001
+Essa é a primeira função que a gente vai ter
+
+24:41.8599999999999
+Beleza?
+
+24:43.319999999999936
+Depois a gente vai ter aqui também o onError,
+
+24:46.680000000000064
+que a gente vai ter que executar aqui algumas coisinhas caso dê erro.
+
+24:52.40000000000009
+Então, ela também vai ser assíncrona.
+
+24:54.42000000000007
+A gente pode receber o erro aqui, quais foram as variáveis que foram usadas na requisição
+
+24:59.24000000000001
+e qual foi o contexto dessa coisa toda.
+
+25:2.7799999999999727
+Muito bem.
+
+25:3.660000000000082
+E depois, um settled,
+
+25:5.900000000000091
+desculpa meu inglês, não sei como
+
+25:8.200000000000045
+pronuncia isso.
+
+25:10.660000000000082
+A gente vai receber aqui,
+
+25:12.400000000000091
+eu sei o que significa, um settled é tipo
+
+25:14.460000000000036
+quando descansar,
+
+25:16.039999999999964
+quando acabar.
+
+25:17.90000000000009
+Dando erro, dando sucesso,
+
+25:19.920000000000073
+quando acabar isso, o que eu faço?
+
+25:22.559999999999945
+E aqui a gente vai fazer uma coisa
+
+25:24.519999999999982
+bem legal. Já que a gente vai fazer uma coisa bem legal.
+
+25:26
+Então, já que a gente está aqui, vamos fazer o seguinte.
+
+25:29.420000000000073
+O que eu quero fazer quando a operação acabar?
+
+25:32.680000000000064
+Dando erro, dando sucesso, o que eu quero fazer?
+
+25:35.77999999999997
+Eu quero falar para a minha aplicação,
+
+25:38.940000000000055
+olha, eu fiz uma mutation aqui, eu não sei o que aconteceu,
+
+25:42.539999999999964
+mas faz uma requisição lá para o servidor para validar que está tudo certo.
+
+25:46.539999999999964
+Então, o que eu faço?
+
+25:47.3599999999999
+Eu faço assim, um query client, ponto, invalidate queries.
+
+25:52.559999999999945
+E o que eu posso falar aqui?
+
+25:53.799999999999955
+Eu posso falar, invalida para mim uma query.
+
+25:56.92000000000007
+Que query que eu quero invalidar?
+
+25:58.77999999999997
+Qual que é a chave dessa query?
+
+26:0.9600000000000364
+Essa aqui, ó.
+
+26:2.7200000000000273
+Products, beleza?
+
+26:3.9200000000000728
+Então, eu vou fazer assim, ó
+
+26:5.8599999999999
+Vou criar aqui uma constante chamada
+
+26:7.519999999999982
+QueryKey
+
+26:9.920000000000073
+A chave da query
+
+26:11.339999999999918
+Vou copiar isso pra cá
+
+26:13.579999999999927
+Vou botar a variável pra cá
+
+26:18.25999999999999
+E
+
+26:19.339999999999918
+Vou colar
+
+26:22.059999999999945
+A variável aqui
+
+26:23.299999999999955
+Como a gente vai usar esse queryKey em mais de um lugar A gente deixa ela dessa forma Então, a variável aqui. Como a gente vai usar esse query aqui em mais de um lugar,
+
+26:26.480000000000018
+a gente deixa ela dessa forma.
+
+26:28.519999999999982
+Então, a gente começou aqui, olha, no final de tudo,
+
+26:31.5
+cara, invalida essa query.
+
+26:32.92000000000007
+E o que a gente diz quando a gente faz essa invalidação?
+
+26:36.059999999999945
+A gente está falando, faz um refatting dessa query para mim no servidor.
+
+26:40.77999999999997
+Perfeito, galera, perfeito.
+
+26:42.059999999999945
+Então, continuando aqui, vamos Vamos aqui no onMutate
+
+26:45.40000000000009
+O que a gente vai fazer aqui
+
+26:47.59999999999991
+No momento que a gente mutar, né
+
+26:50.33999999999992
+A primeira coisa que eu quero fazer é
+
+26:51.98000000000002
+Dar um await
+
+26:52.75999999999999
+QueryClient.cancelQueeries
+
+26:56.74000000000001
+QueryKey
+
+26:58.27999999999997
+Por que que eu quero fazer esse cancel aqui, tá
+
+27:0.9400000000000546
+É
+
+27:2.380000000000109
+Porque eu não sei
+
+27:4.180000000000064
+Se tem coisas rodando ali no Porque eu não sei se tem coisas
+
+27:05
+rodando ali no background. Eu não sei se tem
+
+27:7.079999999999927
+uma requisição sendo feita.
+
+27:9.759999999999991
+Cara, antes de fazer
+
+27:11.079999999999927
+qualquer coisa, para tudo que você está fazendo
+
+27:13.279999999999973
+porque eu agora vou fazer uma alteração
+
+27:14.960000000000036
+importante, beleza? É isso que a gente está
+
+27:16.940000000000055
+dizendo aqui. E aí a gente vai fazer o seguinte,
+
+27:19.180000000000064
+a gente vai obter o estado anterior,
+
+27:21.059999999999945
+o estado que está lá no cache. Então, vou dar um preview state aqui. Preview state. Vai ser um query client
+
+27:26.25999999999999
+ponto get query data.
+
+27:29.24000000000001
+Obtenha aí
+
+27:29.980000000000018
+os dados para mim
+
+27:31.539999999999964
+dessa aqui. Então,
+
+27:34.01999999999998
+olha que legal. Aqui eu já vou ter
+
+27:35.48000000000002
+qual que é o estado, o snapshot
+
+27:37.75999999999999
+desse estado no momento.
+
+27:40.11999999999989
+E agora, vou até colocar uns comentários
+
+27:41.77999999999997
+aqui.
+
+27:47.59999999999991
+Enter o estado atual
+
+28:14.339999999999918
+o celular as que eu estou misturando ingl que eu já tenho o cache, né?
+
+28:26.220000000000027
+eu posso chamar aqui o queryClient
+
+28:28.160000000000082
+.set
+
+28:29.319999999999936
+queryData, da mesma forma que eu tenho
+
+28:31.74000000000001
+o get, eu tenho o set
+
+28:32.799999999999955
+e eu vou falar o que que é o
+
+28:35.799999999999955
+qual que é o shape, qual que é o formato aqui
+
+28:37.72000000000003
+desse dado, né? Vai ser um
+
+28:39.460000000000036
+iproduct array
+
+28:41.3599999999999
+é isso que eu tenho aqui dentro
+
+28:43.25999999999999
+e abro aqui uma função, o que que eu tenho aqui dentro E Abro aqui uma função
+
+28:46.42000000000007
+O que ele pede? Ele pede aqui o Requey mais uma vez
+
+28:49.180000000000064
+E como segundo argumento
+
+28:51.90000000000009
+Ele pede uma função
+
+28:53.09999999999991
+É como se fosse aquela função
+
+28:55.460000000000036
+Do setState, sabe?
+
+28:57.25999999999999
+Eu pego o oldState aqui
+
+28:58.819999999999936
+E faço o seguinte
+
+29:1.2200000000000273
+Eu faço um return
+
+29:2.3199999999999363
+Do oldState Mais, é um array, então, mais o novo produto.
+
+29:11.38000000000011
+Olha que legal.
+
+29:13.079999999999927
+Ele tá me dando um errinho aqui porque ele disse que esse IProduct aqui pode ser undefined.
+
+29:18.980000000000018
+Então, o que eu faço aqui, ó, eu abro um parênteses aqui, eu falo, cara, se ele for undefined, considera um array vazio, tá?
+
+29:24.74000000000001
+E é isso que vazio, tá?
+
+29:26.819999999999936
+E é isso que pode acontecer, né?
+
+29:30.200000000000045
+Eu posso estar sem produtos, se ele for undefined, considera um array vazio.
+
+29:31.960000000000036
+Perfeito, galera, perfeito.
+
+29:37.59999999999991
+E agora que eu já cancelei todas as queries, atualizei aqui, né?
+
+29:39.16000000000008
+Fiz um set query data.
+
+29:46.180000000000064
+Olha o que eu vou fazer. Eu vou dar um return de dentro desse allMotate do previousState.
+
+29:48.200000000000045
+E você pode falar, ué, João, mas por que
+
+29:49.92000000000007
+você está fazendo o return
+
+29:52.22000000000003
+desse previousState aqui?
+
+29:54.07999999999993
+Por quê? E você vai entender
+
+29:55.960000000000036
+agora, no error, o que acontece?
+
+29:59.299999999999955
+Assim
+
+29:59.98000000000002
+que a ordem
+
+30:2.2000000000000455
+aqui de acontecimento é, primeiro
+
+30:3.900000000000091
+essa,
+
+30:4.240000000000009
+essa pode ou não é, primeiro essa essa
+
+30:6.119999999999891
+pode ou não acontecer
+
+30:7.7000000000000455
+e essa é sempre por último
+
+30:9.779999999999973
+beleza? então aqui nessa
+
+30:12
+que pode acontecer, o que eu tenho que fazer?
+
+30:14.240000000000009
+eu tenho que voltar
+
+30:16.039999999999964
+caso de erro, eu tenho que voltar
+
+30:17.75999999999999
+pra esse preview state aqui
+
+30:19.839999999999918
+então quando eu dou um return
+
+30:21.779999999999973
+dessa função, ele meio que injeta
+
+30:23.819999999999936
+esse preview state dentro desse context
+
+30:26.299999999999955
+Olha que louco
+
+30:27.660000000000082
+Então eu vou fazer o seguinte
+
+30:28.61999999999989
+Query client, caso de erro
+
+30:31.299999999999955
+.setquerydata
+
+30:33.51999999999998
+E aqui eu preciso pegar esse estado anterior
+
+30:37.799999999999955
+Como que eu faço? Vou desestruturar aqui
+
+30:39.940000000000055
+const previous state
+
+30:42.72000000000003
+Recebe context
+
+30:46
+e aqui o context
+
+30:48
+o previousState eu posso já passar aqui
+
+30:50.799999999999955
+e só para eu tipar
+
+30:52.8599999999999
+aqui, para o TypeScript não
+
+30:54.200000000000045
+me encher o saco, eu posso falar
+
+30:56.680000000000064
+que o previousState aqui é
+
+30:58.539999999999964
+nada menos, nada mais que um array
+
+31:0.7799999999999727
+de IProducts
+
+31:2.619999999999891
+beleza galera
+
+31:04
+só aqui eu tenho que passar aqui o req antes olha que legal mais que um array de iproducts. Beleza, galera. Só que, né, eu
+
+31:5.279999999999973
+tenho que passar antes. Olha que legal. Então, parece muito
+
+31:11.279999999999973
+código, mas não é. Então, vamos vamos recapitular. A gente faz
+
+31:15.599999999999909
+uma mutação, cancela todas as que tão acontecendo, né? Obtenha
+
+31:20.6400000000001
+aqui o o estado antes de eu fazer a mutation.
+
+31:27.700000000000045
+Altero o meu cache, tá?
+
+31:29.960000000000036
+E aí, retorno esse previous state.
+
+31:34.98000000000002
+Depois, caso dê erro, eu injeto esse previous state aqui nesse context.
+
+31:39.680000000000064
+E, cara, se der erro, eu volto para aquilo que estava antes.
+
+31:42.539999999999964
+E, caso dê sucesso, né?
+
+31:54.98000000000002
+Ou caso dê erro também, eu sempre invalido a query para garantir que eu vou lá no servidor consultar o que está lá, que é a informação verdadeira, para não deixar o meu front-end aqui, né, com as coisas erradas.
+
+31:57.299999999999955
+Legal, né, pessoal? É muito massa.
+
+32:5.720000000000027
+Vou copiar aqui o nosso byte exemplo e colar em cima da nossa mutation. E agora, agora, a gente escreveu tudo isso de código
+
+32:8.240000000000009
+Como que a gente faz para usar?
+
+32:9.759999999999991
+É muito simples
+
+32:10.420000000000073
+Aqui dentro do
+
+32:12.88000000000011
+Do nosso onSubmit do form
+
+32:16.40000000000009
+A gente estava chamando diretamente
+
+32:18.1400000000001
+A função, né? Mas por que que isso é ruim?
+
+32:21.059999999999945
+Porque a gente tem que esperar o servidor
+
+32:22.38000000000011
+Responder, não tem tratamento de erro
+
+32:24.220000000000027
+Não tem nada. Então o que a gente faz aqui? A gente com, porque a gente tem que esperar o servidor responder, não tem tratamento de erro, não tem nada. Então, o que a gente faz
+
+32:26.09999999999991
+aqui? A gente comenta
+
+32:27.960000000000036
+e a gente faz assim, ó, mutation
+
+32:29.88000000000011
+ponto mutate
+
+32:32.16000000000008
+olha que legal
+
+32:34.07999999999993
+e eu passo new product
+
+32:36.319999999999936
+então, basicamente
+
+32:38.319999999999936
+isso aqui
+
+32:40.1400000000001
+é o que vai chamar
+
+32:41.799999999999955
+minha requisição HTTP e vai
+
+32:44
+passar por todas aquelas funções ali
+
+32:46.07999999999993
+e fazer aquela mágica que a gente está esperando.
+
+32:49.799999999999955
+Beleza?
+
+32:50.440000000000055
+Vocês estão ansiosos para testar?
+
+32:51.75999999999999
+Eu estou.
+
+32:53.01999999999998
+Só tem uma coisa aqui que eu quero melhorar com vocês, que é...
+
+32:57.57999999999993
+Imagina uma coisa.
+
+32:59.22000000000003
+Imagina que aqui, por exemplo, ele vem o meu produto de cache.
+
+33:6.440000000000055
+Lembra que eu disse que a gente não tem
+
+33:7.660000000000082
+um id? Não temos, né?
+
+33:9.700000000000045
+Pode ser que não tenha. Então, o que eu quero
+
+33:11.660000000000082
+fazer caso eu não tenha um id?
+
+33:13.759999999999991
+Eu quero exibir
+
+33:15.319999999999936
+três pontinhos.
+
+33:17.680000000000064
+Pra dizer que, olha,
+
+33:19.980000000000018
+você tem um item aí na tabela, só que
+
+33:21.680000000000064
+ele ainda não tá efetivado.
+
+33:24.420000000000073
+E aí, por enquanto é isso.
+
+33:26.779999999999973
+Vamos testar, ver como que isso está.
+
+33:29.079999999999927
+Vamos ver como que isso está legal.
+
+33:30.74000000000001
+Se isso está legal.
+
+33:32.09999999999991
+Eu vou aproveitar aqui que eu já tenho essa requisição.
+
+33:36.960000000000036
+Vou colocar aqui.
+
+33:38.6400000000001
+Vou limpar mais uma vez.
+
+33:39.72000000000003
+Então, vamos lá.
+
+33:40.1400000000001
+Product name, keyboard.
+
+33:43.38000000000011
+Price.
+
+33:44.57999999999993
+Vou pô por keyboard dois. Price e tal, keyboard e o link.
+
+33:51.24000000000001
+Então, olhem só o que vai acontecer agora. Eu vou clicar em salvar. Olhem aqui embaixo do produto
+
+33:55.11999999999989
+quatro. Ó, instantaneamente veio, ele tava revalidando no servidor e agora apareceu. A gente teve aqui um errinho.
+
+34:5.539999999999964
+Vamos ver o que aconteceu.
+
+34:8.059999999999945
+Ó.
+
+34:9.199999999999818
+Cada filho na lista deve ter uma key.
+
+34:11.900000000000091
+Por que isso aconteceu, galera?
+
+34:14.179999999999836
+Porque, como eu disse, esse ID aqui, ó, desse novo produto, pode realmente não existir.
+
+34:21.820000000000164
+O que eu gosto de fazer nesses casos?
+
+34:24.159999999999854
+Ou a gente gera um ID para ele aqui nesse momento.
+
+34:28.980000000000018
+Só que eu não quero fazer isso.
+
+34:30.76000000000022
+Porque eu realmente quero que ele não tenha.
+
+34:32.42000000000007
+Para eu saber quem é o produto que ainda está em cache.
+
+34:36.19999999999982
+Ou eu venho aqui.
+
+34:38.09999999999991
+E eu faço o seguinte.
+
+34:39.26000000000022
+Se não tiver um ID.
+
+34:41.2800000000002
+Faz um new date.
+
+34:43.659999999999854
+E pega o get time.
+
+34:46.48000000000002
+Essa estratégia eu gosto de usar
+
+34:47.940000000000055
+muito, Dev, quando a gente
+
+34:49.86000000000013
+não... a gente
+
+34:52.039999999999964
+não sabe, a gente precisa gerar um id único.
+
+34:54.679999999999836
+Por que o getTime é único?
+
+34:56
+Porque o passado nunca volta,
+
+34:58
+né? Então, esse getTime vai dar
+
+34:59.840000000000146
+uma unidade em milissegundos do
+
+35:1.7399999999997817
+tempo atual. Então, é praticamente impossível a gente
+
+35:3.8400000000001455
+conseguir repetir ele.
+
+35:5.539999999999964
+É só aqui um workaround, um jeitinho de a gente garantir
+
+35:9.260000000000218
+que a gente sempre tem uma aqui para os nossos itens.
+
+35:12.300000000000182
+Então, vamos fazer um teste mais uma vez, que está muito legal isso, né?
+
+35:15.420000000000073
+Vamos lá.
+
+35:17.300000000000182
+Vamos colocar aqui um produto agora chamado Laptop.
+
+35:22.26000000000022
+Price 2, Description Laptop
+
+35:25.920000000000073
+E Product HTTP
+
+35:28.11999999999989
+Tá, tá, tá, tá, tá
+
+35:29.860000000000127
+Então, vamos lá
+
+35:31.139999999999873
+Deixa eu abrir aqui pra vocês a network
+
+35:34.69999999999982
+Vou clicar em
+
+35:36.039999999999964
+Aqui ele fez um get, né
+
+35:38.159999999999854
+Vou clicar em salvar
+
+35:38.90000000000009
+Ó, apareceu aqui o laptop, três pontinhos
+
+35:42.5
+A requisição tava acontecendo
+
+35:44.179999999999836
+A hora que deu sucesso, ele veio aqui
+
+35:46.460000000000036
+E já mostrou
+
+35:47.539999999999964
+Muito, muito massa, uma salva de palmas pra vocês
+
+35:50.340000000000146
+Vocês merecem, chegaram até aqui
+
+35:51.98000000000002
+Vocês merecem
+
+35:53.19999999999982
+O que eu vou fazer pra deixar isso mais legal
+
+35:55.840000000000146
+Muito mais legal
+
+35:57.13999999999987
+Eu vou fazer o seguinte, eu vou lá na nossa aplicação
+
+35:59.86000000000013
+E vou
+
+36:1.6399999999998727
+Fazer uma coisa, ó
+
+36:3.3600000000001273
+Vou vir aqui no nosso Midware
+
+36:5.460000000000036
+Ao invés de ser 3 segundos que eu estou demorando
+
+36:8.460000000000036
+Eu vou colocar 10 segundos
+
+36:10.579999999999927
+Para ficar bem demorado mesmo
+
+36:12.340000000000146
+E aqui no nosso banco de dados
+
+36:14.860000000000127
+Está vendo que ele já cadastrou
+
+36:16.73999999999978
+Os produtos novos aqui?
+
+36:17.940000000000055
+Eu vou excluir esses produtos novos
+
+36:19.40000000000009
+É opcional, você não precisa fazer isso
+
+36:21.059999999999945
+Só vou fazer para ficar mais fácil de você ver
+
+36:22.7199999999998
+Deixa eu ver aqui
+
+36:24.76000000000022
+Se ele reiniciou
+
+36:27.26000000000022
+Vou reiniciar aqui só pra garantir que ele pegou o novo midware
+
+36:29.559999999999945
+E vamos lá testar então
+
+36:31.800000000000182
+Ó
+
+36:33.07999999999993
+Vou dar um F5 na página
+
+36:35.01999999999998
+Página limpa
+
+36:36.460000000000036
+Então vamos colocar aqui
+
+36:37.86000000000013
+Product name é keyboard
+
+36:39.460000000000036
+Product price 99
+
+36:43.340000000000146
+Product description keyboard 2 ProductPrice 99, ProductDescription Keyboard
+
+36:45.30000000000018
+2
+
+36:47.36000000000013
+ImageLink
+
+36:50.059999999999945
+HTTPS, uma imagem qualquer
+
+36:52.57999999999993
+salvar
+
+36:53.7800000000002
+olha que legal, pending, é isso que eu queria
+
+36:56.57999999999993
+mostrar pra vocês, mas já tá aqui o item
+
+36:58.61999999999989
+na lista, a parte legal é
+
+37:0.44000000000005457
+se eu clicar em detail, como a gente tem aquele
+
+37:2.480000000000018
+if, ele protege, então
+
+37:4.3400000000001455
+eu realmente sei que é algo que está acontecendo.
+
+37:6.980000000000018
+E
+
+37:7.119999999999891
+ficam os três pontinhos no id.
+
+37:10.239999999999782
+Então, eu tenho o feedback instantâneo.
+
+37:12.579999999999927
+O user sabe que aconteceu
+
+37:13.960000000000036
+a operação e que
+
+37:15.440000000000055
+em algum momento ela vai se concretizar.
+
+37:18.539999999999964
+E aí você fala, João, mas se der erro,
+
+37:20.059999999999945
+como que eu testo isso?
+
+37:21.860000000000127
+Olha só, a gente vai testar isso.
+
+37:26.300000000000182
+Eu vou clicar aqui no nosso pedido Com o botão direito
+
+37:27.40000000000009
+E vou
+
+37:28.7199999999998
+Vou clicar aqui, botão direito
+
+37:33.940000000000055
+E vou vir aqui, block request URL
+
+37:37.23999999999978
+E o que ele vai fazer?
+
+37:39.01999999999998
+Ele vai abrir aqui essa abinha pra você
+
+37:40.38000000000011
+Bloqueando a requisição
+
+37:42.57999999999993
+Que é isso que a gente quer
+
+37:43.69999999999982
+A gente quer bloquear pra causar um erro de verdade.
+
+37:46.38000000000011
+Então, ó, eu vou clicar aqui, ó, salvar.
+
+37:49.63999999999987
+Vocês estão vendo
+
+37:50.19999999999982
+que ele tá... Eu não sei se
+
+37:52.039999999999964
+acho que vocês conseguem enxergar. Tô clicando
+
+37:54
+em salvar várias vezes, tá?
+
+37:55.7800000000002
+Ele chega a aparecer, mas some.
+
+37:58.69999999999982
+Ó.
+
+37:59.7800000000002
+Ele chega a aparecer, mas some.
+
+38:8.059999999999945
+Uma coisa que a gente poderia fazer pra simular isso é aqui, ó.
+
+38:10.139999999999873
+Depois dos 10 segundos,
+
+38:11.860000000000127
+ao invés de fazer um next, eu vou fazer, ele dá
+
+38:14.039999999999964
+um erro aqui, ó. Eu vou fazer um
+
+38:15.519999999999982
+res.
+
+38:19.11999999999989
+Eu não sei se eu
+
+38:20.039999999999964
+consigo fazer isso aqui. Eu não sei se isso aqui é um
+
+38:21.920000000000073
+express, mas vamos tentar.
+
+38:23.860000000000127
+Vou fazer um res.status
+
+38:25.840000000000146
+400
+
+38:27.179999999999836
+.send
+
+38:29.860000000000127
+Vamos deixar só assim. Vamos ver se isso
+
+38:32
+funciona. Eu acho que vai funcionar.
+
+38:34.88000000000011
+Então, beleza. Reiniciamos
+
+38:36.179999999999836
+aqui, né? Vamos limpar aqui.
+
+38:38.11999999999989
+Vamos desbloquear a nossa requisição.
+
+38:40.23999999999978
+E lá, vou dar um salvar.
+
+38:42.179999999999836
+Então, ele apareceu na lista.
+
+38:43.840000000000146
+Está pendente.
+
+38:44.5
+Está pendente, ó.
+
+38:45.98000000000002
+Tá pendente.
+
+38:49.2800000000002
+Vamos ver o que vai acontecer na hora que der os 10 segundos.
+
+38:55.820000000000164
+Tá, ele tá pendente pra sempre aqui, provavelmente ele vai dar um timeout.
+
+38:58.539999999999964
+Pode ser também, eu acho que pra nós vai servir.
+
+39:2.3600000000001273
+Mas olha que legal, enquanto a requisição não termina, pessoal,
+
+39:5.2800000000002
+a gente tem a informação e o feedback que, ó,
+
+39:9.7199999999998
+eu sei que você clicou, eu recebi essa informação e ela já está no cache.
+
+39:14.840000000000146
+Só que eu estou carregando, estou processando essa informação.
+
+39:16.2800000000002
+Isso é muito legal.
+
+39:19.820000000000164
+Outra coisa também, a gente pode exibir uma mensagem, tá?
+
+39:26.960000000000036
+A gente pode realmente obter o status da mutation e colocar talvez um load Um spinner, ao invés de mostrar 3 pontinhos Colocar ali um spinner
+
+39:28.519999999999982
+E não funcionou
+
+39:31.199999999999818
+Meu middleware aqui, mas vocês entenderam
+
+39:33.30000000000018
+Eu consegui demonstrar bem aqui
+
+39:34.960000000000036
+Que isso ficou legal
+
+39:36.48000000000002
+Eu não sei se eu tenho que dar um send aqui
+
+39:37.940000000000055
+Fazer o último teste, porque a gente é teimoso
+
+39:40.40000000000009
+Vamos lá
+
+39:42.2199999999998
+Ele falhou, né?
+
+39:45.42000000000007
+Porque eu dei um F5 lá e ele sumiu daqui.
+
+39:47.80000000000018
+Vamos tentar mais uma vez.
+
+39:49.460000000000036
+Vou dar um save.
+
+39:50.5
+Eu quero fazer ele falhar.
+
+39:51.90000000000009
+Vamos ver se eu consigo.
+
+39:55.059999999999945
+Depois de 10 segundos.
+
+39:59.059999999999945
+Ah, consegui.
+
+40:0.3400000000001455
+Muito bem.
+
+40:1.0199999999999818
+Então, deu 400, ó.
+
+40:2.7399999999997817
+E sumiu.
+
+40:3.6599999999998545
+Legal, né?
+
+40:4.699999999999818
+Pra exemplificar aquilo que eu falei pra vocês
+
+40:6.599999999999909
+Agora, do loading
+
+40:8.340000000000146
+Eu vou vir aqui no nosso componente
+
+40:10.179999999999836
+E vou
+
+40:12.179999999999836
+Aqui ó
+
+40:14.639999999999873
+Antes da tabela, vou colocar assim
+
+40:16.420000000000073
+Mutation.isLoading
+
+40:20.480000000000018
+Se tiver loading
+
+40:21.76000000000022
+Eu quero mostrar aqui
+
+40:23.679999999999836
+A guard Aqui tá tudo em inglês né Saving loading, se tiver loading eu quero mostrar aqui a guard
+
+40:26.420000000000073
+então, aqui está tudo em inglês
+
+40:28.199999999999818
+saving
+
+40:29.679999999999836
+the product
+
+40:31.039999999999964
+não é um ponto de
+
+40:35.01999999999998
+é assim, dois ex comerciais
+
+40:37.59999999999991
+e muito bem
+
+40:39.659999999999854
+então, vamos lá
+
+40:40.659999999999854
+vamos dar um salvar
+
+40:42.2800000000002
+saving the product, eu já mostrei na lista
+
+40:45.940000000000055
+Do feedback que eu estou salvando
+
+40:47.80000000000018
+Tá
+
+40:48.5
+E
+
+40:50.059999999999945
+Caso aqui ele dê problema
+
+40:53.659999999999854
+Ele some e volta ao estado atual
+
+40:55.679999999999836
+E está tudo funcionando
+
+40:58.13999999999987
+Muito bem, muito bem
+
+40:59.159999999999854
+Então já vimos aqui
+
+41:1.2399999999997817
+A implementação com a mutation
+
+41:3.519999999999982
+Vimos como que isso está legal,
+
+41:6.460000000000036
+o tanto de possibilidade que a gente tem,
+
+41:8.5
+e isso fica ao teu cargo aí o que tu quer fazer.
+
+41:13.019999999999982
+Se tu quiser deixar um like, como do Facebook, como do Twitter,
+
+41:16.480000000000018
+você fica à vontade para deixar a tua interface o mais otimista possível para o usuário.
+
+41:22.820000000000164
+Lembrando que, por mais que a gente seja otimista,
+
+41:25.460000000000036
+a gente trata situações de erro,
+
+41:27.23999999999978
+a gente não deixa o usuário ficar esperando
+
+41:30.980000000000018
+ter uma interface que não está realmente adequada.
+
+41:34.320000000000164
+Então, basicamente, é só seguir aqui a lógica pessoal dessa mutation
+
+41:38.539999999999964
+que eu tenho certeza que vocês vão conseguir fazer
+
+41:41.63999999999987
+muita, muita coisa legal.
+
+41:44.460000000000036
+Só para não deixar isso errado eu vou
+
+41:48.57999999999993
+comentar aqui o status 400 e vou deixar o next para quando vocês baixarem aqui a versão final
+
+41:54.63999999999987
+deixar cinco segundos vocês saberem que que a coisa tá muito bem feita então vamos aqui para o encerramento. Muito obrigado por assistir essa aula.
+
+42:6.7199999999998
+Eu sei que talvez é um pouco de informação do momento rápido,
+
+42:12.260000000000218
+mas é isso que a gente quer entregar para vocês mesmo.
+
+42:14.480000000000018
+Muito valor, de forma objetiva, clara,
+
+42:17.440000000000055
+para que vocês consigam no dia a dia implementar esse monte de coisa legal.
+
+42:21.559999999999945
+Então, muito obrigado pela audiência de vocês aqui no Experts Club e obrigado
+
+42:25.88000000000011
+por ter assistido, tá?
+
+42:27.920000000000073
+Enviem pra nós também sugestões de conteúdo,
+
+42:30.199999999999818
+a gente tá sempre aqui em busca de novos
+
+42:31.90000000000009
+temas, coisas que agreguem pra vocês
+
+42:34.09999999999991
+de maneira com que
+
+42:35.659999999999854
+cada dia mais vocês se sintam
+
+42:37.840000000000146
+servidos aqui pela nossa plataforma.
+
+42:40.57999999999993
+E também feedback,
+
+42:41.92000000000007
+aqui na plataforma vocês conseguem
+
+42:43.86000000000013
+clicar em curtir
+
+42:45.440000000000055
+Dar um dislike
+
+42:46.92000000000007
+Explica porque você não gostou
+
+42:49.2199999999998
+Por que você gostou
+
+42:50.73999999999978
+O que você mais admirou, gostou da aula
+
+42:53.07999999999993
+Para que a gente possa sempre estar melhorando
+
+42:55.960000000000036
+O produto
+
+42:56.5
+Então é isso, vamos fazer aqui o check
+
+42:58.90000000000009
+Do nosso último
+
+43:02
+Item aqui da lista
+
+43:3.1399999999998727
+Então vejo vocês na próxima aula
+
+43:5.7800000000002
+Um abraço e tchau

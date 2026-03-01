@@ -1,0 +1,2414 @@
+00:00
+Fala Dev, seja bem-vindo a mais uma aula. Meu nome é João Bibiano e na aula de hoje a gente vai trabalhar com o tema
+
+00:12.16
+Responsividade, Contém o Índice SS com o React, tá bom?
+
+00:17.26
+Vocês pediram lá na comunidade e nós estamos sempre olhando as sugestões para trazer aquilo que vai ajudar vocês. E eu tenho certeza que a aula de hoje vai fazer total diferença no seu dia a dia,
+
+00:27.66
+para você dominar não só os conceitos de responsividade,
+
+00:31.9
+mas também aprender a ter aqui um jeitinho artesanal de fazer CSS,
+
+00:37.6
+que é bem legal, tá?
+
+00:39.02
+A gente vai trabalhar com um exemplo fantástico,
+
+00:41.38
+que é um menu de hambúrguer.
+
+00:43.38
+Sabe aquele menu que quando você vai diminuindo ele gera um botãozinho?
+
+00:47.18
+Eu já vou mostrar para vocês como que vai ser, mas antes vamos seguir a nossa pauta
+
+00:51.02
+aqui.
+
+00:51.42
+Então, o tema da nossa aula é Responsividade com o Teu Índice SS e React, criando um menu
+
+00:57.26
+hambúrguer, tá bom?
+
+00:58.72
+E só me apresentando rapidamente, meu nome é João Bibiano, eu sou formado em análise e desenvolvimento de sistemas, mais de sete anos aí desenvolvendo sistemas, né? Hoje trabalho como software engineer na Apple
+
+01:10.480000000000004
+Market e se você quiser acompanhar meu trabalho também produzo conteúdo no Instagram e no YouTube
+
+01:16.260000000000005
+e pode me encontrar por João Bibiano, João V. Bibiano e assim por diante. Beleza, apresentações
+
+01:21.459999999999994
+feitas, algumas pessoas já me conhecem, mas se você não me conhecia, prazer, agora você me conhece.
+
+01:26.64
+Então, após essa aula, você vai ser capaz do quê? De entender como funcionam os breakpoints no Tailwind, tá bom?
+
+01:35.760000000000005
+O que é breakpoint, João? A gente já vai falar e eu vou explicar pra vocês de um jeito bem fácil para entender. E também você vai dominar a técnica de Mobile First,
+
+01:46.379999999999995
+entender o que é essa técnica,
+
+01:47.94
+por que ela funciona muito bem com o Tailwind
+
+01:50.81999999999999
+e como que a gente pode ter muita produtividade
+
+01:53.900000000000006
+nas nossas aplicações usando essa técnica.
+
+01:56
+Vamos agora para os requisitos, tá?
+
+01:58.31999999999999
+O requisito aí vai ser ter o NPM ou YARN instalado na tua máquina
+
+02:2.180000000000007
+e um editor de texto.
+
+02:4.400000000000006
+Pode ser o Visual Studio Code
+
+02:5.819999999999993
+ou qualquer outro editor dá para fazer num colo sandbox da só que eu recomendo você fazer na sua
+
+02:12.960000000000008
+máquina porque a gente vai aprender a configurar também o teu índio junto com aplicação então é
+
+02:17.580000000000013
+legal você fazer isso mas não há empecilho se você quiser fazer no colo sandbox por exemplo
+
+02:23.400000000000006
+Beleza então vamos ao que interessa, né? Vamos pra demo
+
+02:26.120000000000005
+pra gente entender o que a gente vai fazer.
+
+02:28.599999999999994
+Eu já deixei aqui uma aplicaçãozinha
+
+02:30.539999999999992
+demo pronta pra gente
+
+02:32.22
+entender. Olha que legal.
+
+02:34.03999999999999
+A gente tem um menu, um header
+
+02:36.25999999999999
+na nossa aplicação bem
+
+02:37.69999999999999
+padrão, né? Bem simples.
+
+02:40.18000000000001
+É onde eu coloquei aqui, home,
+
+02:41.97999999999999
+quem somos nós, serviços e contato.
+
+02:47.08000000000001
+É bem padrão de um site, né?
+
+02:50
+Mas olha que legal, e aqui que vem o segredo.
+
+02:55.639999999999986
+À medida que eu diminuir a minha tela, pessoal,
+
+02:58.16
+ó, olha o que aconteceu.
+
+03:2.3600000000000136
+Daqui pra cá, a partir de determinada resolução,
+
+03:5.8799999999999955
+a gente perdeu, entre aspas, sumiu todos aqueles menus e apareceu um novo
+
+03:8.120000000000005
+carinha, olha que massa
+
+03:9.800000000000011
+um botão, e quando eu clico
+
+03:12.099999999999994
+nesse botão
+
+03:12.840000000000003
+olha que sensacional, eu não sei
+
+03:16.02000000000001
+se vocês repararam, mas a gente
+
+03:17.900000000000006
+teve uma animação nesse botão
+
+03:20.159999999999997
+e os nossos itens
+
+03:21.900000000000006
+agora passaram pra ter uma tela cheia
+
+03:23.860000000000014
+e por que esse comportamento?
+
+03:25.74000000000001
+Porque normalmente essa resolução aqui vai ser a resolução de um dispositivo móvel, de um celular.
+
+03:31.72
+Inclusive, o que eu vou fazer?
+
+03:34.08000000000001
+Eu vou abrir aqui para vocês um iPhone, por exemplo, 12 Pro.
+
+03:39.25999999999999
+E só dar um zoom adicional.
+
+03:42.120000000000005
+E olha que massa.
+
+03:43.72
+Desculpa, eu fiz isso, mas não expliquei como eu fiz
+
+03:46.400000000000006
+Pra gente abrir aqui a nossa página
+
+03:48.400000000000006
+Num dispositivo móvel
+
+03:49.860000000000014
+A gente faz um inspect na página
+
+03:51.80000000000001
+Ou aperta F12, tá bom?
+
+03:54.47999999999999
+E a gente vai ter um botãozinho aqui
+
+03:56.120000000000005
+Do lado do
+
+03:57.68000000000001
+Inspect, vamos ter um botão
+
+04:0.09999999999999432
+E aí a gente pode escolher alguns devices
+
+04:2.280000000000001
+Pra ver o nosso site
+
+04:3.319999999999993
+E aqui eu coloquei o iPhone 12
+
+04:5.560000000000002
+Eu vou dar só um zoom aqui para ficar melhor para a gente enxergar, tá bom?
+
+04:9.900000000000006
+E olha lá, eu já consigo ter a vista do que um usuário do iPhone 12 Pro vai enxergar
+
+04:15.699999999999989
+E olha como fica melhor, fica muito mais mobile friendly, né?
+
+04:20.639999999999986
+E se eu clicar aqui no X, some e volta para aquele layout inicial, aquele layout do início.
+
+04:28.45999999999998
+Então, vamos aprender como a gente faz isso com o T-Winds puro, pessoal.
+
+04:32.68000000000001
+A gente não vai usar biblioteca nenhuma, vamos só usar CSS.
+
+04:37.89999999999998
+Só que ao invés de escrever o CSS manualmente, a gente vai usar o T-Winds,
+
+04:41.74000000000001
+que é uma ferramenta fantástica para otimizar o nosso trabalho.
+
+04:45.01999999999998
+Vamos lá.
+
+04:45.860000000000014
+Eu vou agora mover aqui essa nossa aplicação para cá, porque a gente não vai precisar mais dela, tá bom?
+
+04:51.56
+E vamos ao código.
+
+04:53.44
+Como que eu vou iniciar essa aplicação?
+
+04:54.860000000000014
+Eu vou usar aqui o Vite, que é aquela aplicação que se assemelha ao CreateHacktApp.
+
+05:2.339999999999975
+Se você quiser, por exemplo Usar a Unext
+
+05:5.639999999999986
+Fique à vontade, tá? O procedimento vai ser o mesmo
+
+05:8.45999999999998
+E
+
+05:9.279999999999973
+O importante é você usar a Tailwind
+
+05:11.860000000000014
+Você consegue até usar a Tailwind sem o React
+
+05:13.939999999999998
+Então isso vai funcionar pra todos esses casos
+
+05:16.579999999999984
+Então como que eu vou criar minha aplicação aqui?
+
+05:19.180000000000007
+Eu vou
+
+05:19.620000000000005
+Invocar aqui o Yarn Create
+
+05:22.120000000000005
+Vou dar um zoom pra vocês aí
+
+05:24.819999999999993
+Yarn Create Yarn Create White Esse daqui Invocar aqui o yarn create. Vou até dar um zoom para vocês aí.
+
+05:27.079999999999984
+Yarn create byte.
+
+05:29.19999999999999
+Esse daqui é o comandinho inicial.
+
+05:31.399999999999977
+Aqui é o nome do projeto.
+
+05:40.360000000000014
+Então aqui eu vou renomear para menu-hamburger.
+
+05:44.44
+E eu vou usar aqui o template de React TypeScript.
+
+05:45.860000000000014
+Não faz diferença para essa nossa aula, mas é que eu tô tão acostumado
+
+05:47.879999999999995
+que vai ficar esse template, se você não quiser
+
+05:49.879999999999995
+usar, fica a vontade pra usar só
+
+05:51.860000000000014
+JS, porque vai funcionando a mesma
+
+05:53.920000000000016
+vou dar um enter
+
+05:55.18000000000001
+e pronto, né, a nossa
+
+05:57.80000000000001
+aplicação já foi criada, como sempre
+
+05:59.74000000000001
+vou abrir essa nossa aplicação
+
+06:1.5400000000000205
+com o Visual Studio Code, então
+
+06:3.5400000000000205
+Code, menu Hambúrguer já vamos aqui abrir essa nossa aplicação com o Visual Studio Code. Então, Code, menu Hambúrguer, já vamos aqui abrir a nossa aplicação.
+
+06:8.839999999999975
+E só para garantir que vocês enxerguem bem,
+
+06:11.939999999999998
+eu acho que a fonte já está boa, mas eu vou dar só mais um zoom aqui para ter certeza.
+
+06:16.100000000000023
+Beleza?
+
+06:17.060000000000002
+E agora, o que a gente precisa fazer?
+
+06:18.75999999999999
+A gente precisa aqui no nosso terminal, dentro do projeto, instalar o T-Wind, tá bom?
+
+06:31.620000000000005
+Então, para isso, eu vou lá no site do Tailwind, vou no site inicial, é tailwindsss.com,
+
+06:38.69999999999999
+vou clicar aqui em Get Started, e aí vocês podem ver que logo aqui na página a gente tem Installation.
+
+06:46.39999999999998
+E a gente tem algumas formas de instalar a gente tem o Twind CLI, que é uma forma de usar
+
+06:47.48000000000002
+o próprio Twind para compilar
+
+06:50.24000000000001
+o nosso CSS
+
+06:51.95999999999998
+porque se você não conhece bem o Twind
+
+06:54.379999999999995
+o que a gente faz é, a gente coloca
+
+06:56.44
+abreviações, a gente coloca
+
+06:58.22000000000003
+atalhos para classes e ele
+
+07:0.4800000000000182
+às vezes compila essas classes
+
+07:2.5600000000000023
+em outras classes adicionais
+
+07:4.360000000000014
+então muitas vezes você vai digitar uma coisa só,
+
+07:6.720000000000027
+mas o teu end vai gerar duas ou três classes CSS.
+
+07:9.680000000000007
+Mas o mais legal é, ele não vai colocar um monte de coisa que a gente não precisa.
+
+07:13.639999999999986
+Ele só vai colocar aquilo que a nossa aplicação precisa.
+
+07:16.5
+Então, é bem rápido mesmo, tá bom?
+
+07:18.319999999999993
+Então, eu vou usar aqui, ó, essa abordagem de post CSS,
+
+07:25
+que ela funciona muito bem com o createhacktap
+
+07:26.939999999999998
+com o vite, tá bom?
+
+07:29.30000000000001
+e a gente pode ver aqui
+
+07:30.720000000000027
+que o primeiro comandinho
+
+07:31.839999999999975
+é npm install, como
+
+07:34.31999999999999
+desenvolvimento, como eu disse pra vocês, o teu engine
+
+07:36.68000000000001
+não vai pra produção
+
+07:37.639999999999986
+e a gente instala essas libraries
+
+07:40.420000000000016
+eu vou instalá-las com o yarn
+
+07:42.39999999999998
+fiquem à vontade se quiserem instalar com o npm
+
+07:44.75999999999999
+tá bom? então eu vou instalá-las com o yarn, fiquem à vontade se quiserem instalar com npm, tá bom?
+
+07:45.89999999999998
+então eu vou rodar aqui
+
+07:46.839999999999975
+yarn add isso
+
+07:49.80000000000001
+menos d, pra instalar como dependência
+
+07:52.25999999999999
+de desenvolvimento
+
+07:53.19999999999999
+beleza, instaladas
+
+07:56.30000000000001
+as dependências, e vou
+
+07:58.079999999999984
+voltar lá e vou executar esse comandinho aqui
+
+07:59.89999999999998
+npx tail-indice-css init
+
+08:2.4399999999999977
+o que isso vai fazer é
+
+08:4.019999999999982
+gerar a configuração do nosso projeto
+
+08:5.899999999999977
+perfeito
+
+08:8.5
+então
+
+08:9.04000000000002
+já criou aqui pra nós
+
+08:11.399999999999977
+tailwind config.cjs
+
+08:13.879999999999995
+e gerou também
+
+08:16.399999999999977
+aqui o
+
+08:17.879999999999995
+ah, ele não gerou o post
+
+08:20.279999999999973
+css
+
+08:21.120000000000005
+engraçado
+
+08:23.360000000000014
+vamos colocar aqui um traço p no final Post CSS. Engraçado.
+
+08:27.639999999999986
+Vamos colocar aqui um traço P no final.
+
+08:32.539999999999964
+Porque a gente precisa também que ele tenha esse post CSS aqui.
+
+08:33.139999999999986
+Tá bem?
+
+08:34.860000000000014
+Que ele vai funcionar bem legal com o byte.
+
+08:38.75999999999999
+Então, npx, teu índice CSS, init, menos P.
+
+08:39.74000000000001
+Ótimo.
+
+08:43.08000000000004
+Então, vamos continuar.
+
+08:46.460000000000036
+Ah, ele diz para adicionar manualmente, né?
+
+08:48.39999999999998
+Eu sei que o Coupé já cria.
+
+08:49.51999999999998
+Então, já está feito.
+
+09:00
+Agora, a gente precisa lá no nosso config adicionar em quais caminhos, em quais paths o nosso código vai estar.
+
+09:0.5800000000000409
+Por quê?
+
+09:8.559999999999945
+Porque é por isso aqui que o T-Wind vai saber quando e como ele deve remover código que a gente não precisa, tá bem?
+
+09:13.720000000000027
+Então, eu vou abrir aqui o T-Wind Config e o que eu vou fazer?
+
+09:18.960000000000036
+Eu vou aqui dentro do content colocar o caminho, tá?
+
+09:21.440000000000055
+O Copilot está até me sugerindo uma coisa.
+
+09:23
+Como que eu vou fazer aqui? eu quero que tudo que esteja dentro
+
+09:25.940000000000055
+do src
+
+09:27.840000000000032
+porque src? porque é a raiz do meu projeto
+
+09:30.659999999999968
+e
+
+09:31.940000000000055
+depois do src
+
+09:34.440000000000055
+qualquer pasta
+
+09:35.700000000000045
+qualquer pasta
+
+09:37.200000000000045
+e qualquer arquivo
+
+09:39.799999999999955
+que termine
+
+09:42.08000000000004
+em js
+
+09:42.960000000000036
+jsx ts, tsx então basicamente eu estou passando um padrão Que termine em JS, JSX
+
+09:45.10000000000002
+TS, TSX
+
+09:46.860000000000014
+Então basicamente eu estou passando um padrão
+
+09:48.91999999999996
+Para ele
+
+09:49.559999999999945
+Dentro do SRC
+
+09:52.27999999999997
+Qualquer arquivo
+
+09:53.89999999999998
+Com essas
+
+09:56.89999999999998
+Extensões
+
+09:57.700000000000045
+Faz aí
+
+09:58.860000000000014
+Eles chamam isso de purge
+
+10:2.0599999999999454
+Basicamente
+
+10:4.480000000000018
+Que é basicamente remover Tudo aquilo que não vai ser usado.
+
+10:9.399999999999977
+E eu também vou colocar aqui um outro dentro desse array, que vai ser o próprio index.html.
+
+10:16.139999999999986
+Por quê? Porque às vezes você pode querer adicionar aqui algum estilo por algum motivo no teu index,
+
+10:21.379999999999995
+e a gente já garante que isso também já fica coberto.
+
+10:25.379999999999995
+Então, feito isso, o teu index está instalado
+
+10:28.279999999999973
+como que eu sei se ele está funcionando?
+
+10:30.460000000000036
+a gente abre aqui
+
+10:31.32000000000005
+nosso terminal, vamos dar um yarn dev
+
+10:34.25999999999999
+vamos abrir aqui
+
+10:36.27999999999997
+a porta da nossa aplicação
+
+10:38.27999999999997
+ele gerou isso aqui
+
+10:40.60000000000002
+eu vou dividir a nossa tela
+
+10:42.10000000000002
+por enquanto, tá bem?
+
+10:45.74000000000001
+e ok, eu vou dividir a nossa tela por enquanto, tá bem? e
+
+10:45.960000000000036
+ok, eu vou abrir aqui o app.ts
+
+10:48.860000000000014
+lembrei que falta uma coisa
+
+10:51.58000000000004
+a gente não terminou de seguir o guia, né?
+
+10:54.17999999999995
+aqui ó, falta importar isso aqui, tá?
+
+10:56.01999999999998
+isso aqui é super importante, desculpe
+
+10:57.72000000000003
+é isso aqui que vai realmente
+
+11:0.2599999999999909
+adicionar dentro do CSS
+
+11:2.340000000000032
+o CSS do teu
+
+11:4.039999999999964
+int, então eu vou jogar isso aqui
+
+11:6.519999999999982
+dentro do nosso index.css
+
+11:9.17999999999995
+eu posso deletar tudo que tem aqui
+
+11:11.059999999999945
+coloco só essas
+
+11:12.740000000000009
+três linhas, tá
+
+11:13.980000000000018
+e
+
+11:15.139999999999986
+o que eu vou fazer também, eu tenho um app.css
+
+11:18.559999999999945
+que já vem com o byte, eu não vou precisar dele
+
+11:21.039999999999964
+vou fazer delete
+
+11:22.75999999999999
+e vou remover essa linha aqui também
+
+11:24.58000000000004
+que eu importava esse app.css.
+
+11:27.5
+E agora sim.
+
+11:28.799999999999955
+Vamos lá para o yarn dev.
+
+11:32.17999999999995
+Vamos abrir a nossa aplicação.
+
+11:35.39999999999998
+Pronto.
+
+11:36.01999999999998
+A aplicação está aqui.
+
+11:38.10000000000002
+E como que eu sei que está funcionando?
+
+11:39.60000000000002
+Vamos aplicar por exemplo.
+
+11:42.27999999999997
+Nesse byte mais react.
+
+11:43.98000000000002
+Um class name.
+
+11:48.39999999999998
+BG red 500. aplicar por exemplo nesse white mais react um class name bg-red500
+
+11:54.15999999999997
+não foi
+
+12:8.32000000000005
+deixa eu entender porque é pessoal não foi porque eu coloquei reg, né? Reg não tem, tem que ser Red Então já está funcionando Já estamos conseguindo aqui aplicar
+
+12:9.960000000000036
+E eu só vou dar uma última dica antes da gente ir
+
+12:12.17999999999995
+Para o código que é, instalem aí
+
+12:14.120000000000005
+Uma extensão que chama-se
+
+12:16.279999999999973
+T-Wind
+
+12:17.940000000000055
+CSS Intellisense
+
+12:20.139999999999986
+Porque isso vai ajudar muito
+
+12:22.460000000000036
+Na hora que vocês forem
+
+12:24.460000000000036
+Codificar, tá bom?
+
+12:26.460000000000036
+Ele vai te dar autocomplete aqui nesse momento.
+
+12:30.08000000000004
+Então pronto, acho que agora estamos prontos aqui para iniciar a nossa aplicação.
+
+12:34.77999999999997
+E aí o que eu vou fazer primeiro?
+
+12:36.91999999999996
+Eu vou remover esses estados aqui, vou remover todo esse código e também essa clássica não precisa.
+
+12:44.940000000000055
+Vou deixar bem limpinho aqui, sem nada.
+
+12:47.82000000000005
+Ótimo.
+
+12:48.440000000000055
+Então, vamos começar aqui pelo mais simples.
+
+12:50.39999999999998
+Vamos colocar o elemento na tela.
+
+12:52.01999999999998
+Então, lembrando que a gente vai ter aqui um header, né?
+
+12:54.940000000000055
+É bom utilizar a semântica aqui do HTML.
+
+12:58.01999999999998
+E aí eu vou colocar aqui dentro desse header alguns as, tá?
+
+13:1.9600000000000364
+Que são links, né?
+
+13:3.480000000000018
+Vou colocar aqui um home.
+
+13:7.5
+esse raio alguns as tá que são links né vou colocar aqui um home depois eu coloquei aqui um quem somos nós depois eu vou colocar aqui também um com um serviços e contatos né acho
+
+13:21.600000000000023
+que é isso que eu coloquei lá ótimo, já temos aqui Deixa eu colocar até minha câmera aqui
+
+13:26.120000000000005
+Já temos aqui os menus
+
+13:28.460000000000036
+O que a gente vai fazer agora?
+
+13:31.519999999999982
+A gente vai começar a aplicar algum estilo
+
+13:35.10000000000002
+Porque está tudo colado
+
+13:36.39999999999998
+Então como a gente faz para aplicar estilos?
+
+13:38.75999999999999
+Class Name
+
+13:39.299999999999955
+O que eu vou fazer aqui?
+
+13:41.58000000000004
+A primeira coisa que eu vou fazer
+
+13:42.72000000000003
+Eu vou dar um background aqui pra nossa aplicação.
+
+13:45.84000000000003
+Deixa eu ver pra esse header, deixa eu ver uma cor que eu acho que fica legal.
+
+13:50.15999999999997
+Acho que eu usei o Sky na outra.
+
+13:54.25999999999999
+Podemos utilizar o Sky.
+
+13:56.440000000000055
+Essas são cores, né, já falando nisso, que vem com a nossa aplicação, tá?
+
+14:2.5
+Que vem com o teu int, na verdade. E se você quiser criar a tua própria paleta de cores,
+
+14:7.240000000000009
+você pode ir no teu int config e aplicar isso lá, beleza?
+
+14:11.620000000000005
+E aqui o que eu vou fazer aqui?
+
+14:13.700000000000045
+Vou colocar aqui um text white.
+
+14:16.17999999999995
+Pronto, ficou background ciano.
+
+14:19.559999999999945
+E ficou aqui o texto branco.
+
+14:22.799999999999955
+Vou colocar aqui um p5. Para adicionar padding.
+
+14:25.840000000000032
+Olha lá como dá diferença.
+
+14:27.220000000000027
+Já deixou um espaço ao redor.
+
+14:30.940000000000055
+E eu vou colocar aqui.
+
+14:32.620000000000005
+Que isso aqui é flex.
+
+14:35.32000000000005
+E que eu tenho aqui um justifying.
+
+14:38.039999999999964
+Around.
+
+14:39.58000000000004
+Olha que legal.
+
+14:40.460000000000036
+A gente já separou os nossos itens.
+
+14:43.25999999999999
+Então.
+
+14:44.299999999999955
+Com pouquíssimo CSS já conseguimos
+
+14:46.27999999999997
+aqui ter um aspecto bem máximo
+
+14:47.75999999999999
+e aí
+
+14:49.200000000000045
+pra gente continuar, a gente precisa
+
+14:51.940000000000055
+entender como
+
+14:53.700000000000045
+que a gente faz
+
+14:55.5
+pra ter aqui o conceito de
+
+14:57.72000000000003
+responsividade, como que a gente faz pra
+
+14:59.84000000000003
+a partir de determinado
+
+15:1.7799999999999727
+breakpoint ou a partir de determinada
+
+15:4.059999999999945
+tela, aplicar um estilo, tá bom?
+
+15:6.659999999999968
+Então, só para efeitos aqui de ensino, o que eu vou fazer?
+
+15:9.899999999999977
+Eu vou criar aqui uma div vazia embaixo.
+
+15:12.480000000000018
+E eu vou dizer aqui que essa div tem 40 de largura, 40 de altura e tem aqui um bg-red 500, tá bom?
+
+15:23.120000000000005
+É uma caixa.
+
+15:25.159999999999968
+Prestem atenção no que eu vou fazer.
+
+15:27.220000000000027
+Imaginem que eu quero que essa caixa no celular seja vermelha,
+
+15:33.17999999999995
+que num dispositivo maior seja azul,
+
+15:36.41999999999996
+e no maior ainda seja verde, né?
+
+15:39.39999999999998
+Como que a gente começa a fazer isso?
+
+15:41.74000000000001
+Quero agora voltar para o site do T-Wing e mostrar uma coisa para vocês.
+
+15:46.440000000000055
+Aqui eu estou na seção de Responsive Design
+
+15:49.17999999999995
+e a gente pode ver que aqui a gente tem breakpoints, tá bom?
+
+15:53.27999999999997
+O que são esses breakpoints?
+
+15:54.75999999999999
+São pontos de quebra,
+
+15:56.5
+são pontos que o comportamento vai mudar.
+
+15:59.460000000000036
+E aí você pode ver que a gente tem o Small,
+
+16:2.8799999999999955
+o Medium, MD, o Large, o extra large e o true extra large,
+
+16:8.259999999999991
+que é duas vezes o extra large, ou dois desse.
+
+16:14.980000000000018
+E o que é interessante?
+
+16:17.139999999999986
+É interessante a gente saber que esses breakpoints são aplicados de forma cumulativa,
+
+16:23.32000000000005
+ou seja, vamos descer um pouco aqui.
+
+16:27.75999999999999
+A gente tem esse ótimo exemplo deles.
+
+16:30.799999999999955
+À medida que eu abro isso aqui,
+
+16:35.01999999999998
+vocês percebem que em determinado momento
+
+16:36.879999999999995
+isso deixa de estar um ao lado do outro
+
+16:39.639999999999986
+e passa a estar na frente do outro?
+
+16:41.75999999999999
+E quando é esse momento?
+
+16:44.48000000000002
+Olhem essa dívida aqui.
+
+16:46.01999999999998
+A gente tem aqui um MD, dois pontos, flex.
+
+16:50.60000000000002
+O que ele está dizendo aqui?
+
+16:51.60000000000002
+Olha, quando chegar em MD, faça com que a orientação seja flex.
+
+16:59.059999999999945
+Então, vamos voltar no nosso quadrado vermelho que vai ser até mais fácil de entender.
+
+17:3.2000000000000455
+O que eu quero fazer aqui, pessoal?
+
+17:4.880000000000109
+Eu quero que quando chegar no MD
+
+17:6.079999999999927
+seja azul.
+
+17:8.279999999999973
+Então, ó, BGBLU500.
+
+17:12.740000000000009
+E eu quero que quando
+
+17:13.920000000000073
+chegar em LARGE, grande,
+
+17:16.420000000000073
+essa caixa
+
+17:17.3599999999999
+GREEN
+
+17:18.75999999999999
+seja 500, tá?
+
+17:21.720000000000027
+Olha o que vai acontecer. Eu vou começar a aumentar
+
+17:23.839999999999918
+aqui.
+
+17:25.819999999999936
+Ó.
+
+17:27.420000000000073
+Vermelho.
+
+17:30.24000000000001
+Azul.
+
+17:32.059999999999945
+Verde.
+
+17:34.92000000000007
+E o mais legal de tudo.
+
+17:40.33999999999992
+Aqui, provavelmente, eu já tô no 2 Extra Large ou no Extra Large.
+
+17:41.819999999999936
+Ele continua verde.
+
+17:43.3599999999999
+Por quê, pessoal?
+
+17:46
+Porque, imagina aqui, ó. imagina que a gente tem uma linha
+
+17:47.539999999999964
+aqui é celular
+
+17:49.700000000000045
+aqui é
+
+17:52.22000000000003
+o médio
+
+17:53.25999999999999
+aqui é o large
+
+17:55.66000000000008
+e aqui é o extra large
+
+17:56.92000000000007
+se aqui
+
+17:59.38000000000011
+eu aplico uma cor
+
+18:1.900000000000091
+essa cor vai valer pra todos
+
+18:4.079999999999927
+agora se eu, deixa eu mudar a cor da caneta aqui se eu aplico uma cor, essa cor vai valer para todos.
+
+18:6.720000000000027
+Agora, se eu... Deixa eu mudar a cor da caneta aqui.
+
+18:8.680000000000064
+Se eu aplico uma cor aqui,
+
+18:11.759999999999991
+essa cor aqui não vai mais valer
+
+18:13.38000000000011
+e vai valer essa para cima.
+
+18:16.420000000000073
+Então, o efeito aqui do CSS é sempre
+
+18:20.11999999999989
+o último ponto que foi definido
+
+18:22.200000000000045
+vai valer para quem está para frente.
+
+18:24.019999999999982
+É sempre de baixo para cima.
+
+18:26.579999999999927
+Nunca de cima para baixo.
+
+18:28.160000000000082
+Se você, por exemplo, quer falar assim, eu quero aplicar um efeito pro celular.
+
+18:33.33999999999992
+Sabe o que você faz?
+
+18:34.40000000000009
+Você não põe prefixo.
+
+18:36.200000000000045
+Você deixa sem prefixo.
+
+18:38.180000000000064
+Por padrão, sem prefixo, aqui ó.
+
+18:42.1400000000001
+Sem prefixo já é para fazer target ao dispositivo móvel.
+
+18:46.38000000000011
+Tá bom?
+
+18:47.11999999999989
+E aí, quando você quer o prefixo, aí sim você aplica o prefixo.
+
+18:52.460000000000036
+Isso vai fazer muito sentido quando a gente desenvolver aqui o nosso layout.
+
+18:55.66000000000008
+Mas isso é sensacional para a gente conseguir ter um layout mobile first.
+
+19:2.599999999999909
+Tudo que você faz primeiro É pro celular
+
+19:5.740000000000009
+É pro dispositivo mobile
+
+19:7.839999999999918
+Se você quer aplicar pra um tablet
+
+19:10.559999999999945
+Por exemplo, que provavelmente vai estar
+
+19:12.319999999999936
+Entre aqui o Medium e o Large
+
+19:14.339999999999918
+Ok, aí sim você fala
+
+19:16.25999999999999
+Medium, tal, large, tal
+
+19:18.539999999999964
+Vou dar só mais um exemplo pra gente fechar
+
+19:20.539999999999964
+Aqui é, imagina que isso fosse
+
+19:22.940000000000055
+Vou até fazer
+
+19:24.1400000000001
+Fosse um parágrafo
+
+19:26.160000000000082
+tá, olá
+
+19:27.440000000000055
+eu sou um texto
+
+19:29.339999999999918
+e aí eu falo assim pra vocês
+
+19:31.59999999999991
+eu quero que no celular
+
+19:33.059999999999945
+ele seja 2xl
+
+19:36.42000000000007
+o tamanho, então como que eu faço
+
+19:38.059999999999945
+isso, text
+
+19:39.440000000000055
+2xl
+
+19:42.25999999999999
+ah, mas
+
+19:44.16000000000008
+eu quero que no tablet
+
+19:45.059999999999945
+por eu ter uma tela um pouquinho ali
+
+19:46.799999999999955
+com mais espaço, talvez mais densidade
+
+19:48.61999999999989
+seja só XL
+
+19:51.1400000000001
+como que eu faço?
+
+19:53.01999999999998
+MD, text
+
+19:54.66000000000008
+XL
+
+19:57.27999999999997
+então, ó
+
+20:0.5199999999999818
+tô no celular aqui
+
+20:2.2000000000000455
+ó
+
+20:4.2999999999999545
+passei pro tablet.
+
+20:07
+Ó.
+
+20:8.980000000000018
+Olha que massa, pessoal.
+
+20:10.8599999999999
+Tá vendo?
+
+20:11.8599999999999
+Então, é esse conceito que eu quero que vocês peguem.
+
+20:14.079999999999927
+E a partir daqui, pro large, pro extra large, vai sempre continuar o último.
+
+20:19.8599999999999
+Que foi esse carinha aqui, ó.
+
+20:21.059999999999945
+foi esse carinha aqui, ó.
+
+20:21.920000000000073
+Perfeito?
+
+20:22.819999999999936
+Então, bora lá fazer a nossa aplicação.
+
+20:23.920000000000073
+Perfeito? Então bora lá fazer a nossa aplicação. Eu quero que vocês
+
+20:25.980000000000018
+entendam aqui que esse conceito se aplica
+
+20:28
+tanto pra estilos, quanto
+
+20:30.180000000000064
+pra alinhamento
+
+20:32.40000000000009
+de coisas. Eu quero que os alinhamentos
+
+20:34.40000000000009
+mudem pro celular
+
+20:35.960000000000036
+e pra outros dispositivos, tá bom?
+
+20:38.25999999999999
+Então, vamos continuar aqui, né?
+
+20:40.819999999999936
+Vamos fazer agora
+
+20:42.11999999999989
+o nosso botão, né? Vamos fazer
+
+20:43.940000000000055
+o nosso botão, que é aquele botãozinho que vai
+
+20:46.6400000000001
+permitir que a gente troque
+
+20:47.98000000000002
+esse botão, como que eu faço
+
+20:50.57999999999993
+aqueles risquinhos, eu poderia por um ícone
+
+20:52.90000000000009
+poderia, mas eu quero fazer tudo com CSS
+
+20:55.01999999999998
+então eu vou colocar aqui 3 divs
+
+20:57.440000000000055
+e nessas 3 divs
+
+21:0.03999999999996362
+vou dar um ctrl D
+
+21:1.4400000000000546
+para selecionar todos
+
+21:2.4400000000000546
+eu vou colocar aqui que ele vai ter um width de 10
+
+21:5.619999999999891
+uma altura de 1
+
+21:7.7999999999999545
+e ele vai ter
+
+21:10.920000000000073
+um bg
+
+21:12.539999999999964
+white
+
+21:14.200000000000045
+deixa eu ver se ele já vai aparecer
+
+21:16.200000000000045
+apareceu lá
+
+21:16.960000000000036
+e aí eu só vou dar aqui um padding
+
+21:20.160000000000082
+um pad bottom de 1
+
+21:22.700000000000045
+para eles também
+
+21:24.40000000000009
+na verdade vai ser um margin aqui
+
+21:28.460000000000036
+MB
+
+21:29.039999999999964
+Olha lá que legal
+
+21:31.440000000000055
+Eu já tenho um botão que faz o que eu quero
+
+21:34.92000000000007
+Legal né
+
+21:36.24000000000001
+Perfeito
+
+21:37.48000000000002
+Então o que eu vou fazer agora pessoal
+
+21:39.680000000000064
+Eu não quero que esse botão apareça
+
+21:42.59999999999991
+Eu quero que ele
+
+21:44.09999999999991
+Se esconda pra quando eu estiver em um dispositivo maior.
+
+21:47.88000000000011
+E como que eu vou fazer isso?
+
+21:51.5
+Eu vou dizer que o botão, quando estiver no MD, ele é hidden.
+
+22:0.900000000000091
+Tá?
+
+22:2.240000000000009
+Então, ó, sumiu
+
+22:6.2999999999999545
+entrei pro celular
+
+22:8.279999999999973
+apareceu?
+
+22:10.299999999999955
+fui pro computador ou pro tablet
+
+22:12.480000000000018
+sumiu? entrei no celular
+
+22:14.38000000000011
+apareceu
+
+22:15.88000000000011
+então esse conceito é bem legal
+
+22:17.700000000000045
+porque basicamente a gente está dizendo
+
+22:19.88000000000011
+eu quero que o botão só apareça
+
+22:22.09999999999991
+quando eu estiver aqui numa resolução
+
+22:24.1400000000001
+de celular
+
+22:24.90000000000009
+da mesma forma eu quero que o botão só apareça quando eu estiver aqui em uma resolução de celular.
+
+22:31.160000000000082
+Da mesma forma, eu quero que este, este e este, o segundo, o terceiro e o quarto,
+
+22:33.180000000000064
+desapareçam quando entrar no celular.
+
+22:36.27999999999997
+Porque eles vão aparecer só quando eu clicar no ícone.
+
+22:37.680000000000064
+Como que eu faço isso? Eu posso, aqui nesse isás, criar uma className.
+
+22:42.6400000000001
+Como eu vou usar nos três a mesma mesma eu vou criar aqui uma variável
+
+22:45.83999999999992
+vou criar aqui const
+
+22:48.039999999999964
+menu item
+
+22:49.88000000000011
+class name
+
+22:51.77999999999997
+recebe
+
+22:52.98000000000002
+e eu vou dizer o seguinte
+
+22:55.66000000000008
+por padrão
+
+22:58.22000000000003
+é hidden
+
+22:59.680000000000064
+ou seja, no celular é hidden
+
+23:1.2799999999999727
+e quando eu entrar no md é block
+
+23:4.2000000000000455
+que é em modo block.
+
+23:6.180000000000064
+Ou eu posso usar visible também aqui, que está no mesmo.
+
+23:9.3599999999999
+E aí, visible.
+
+23:12.180000000000064
+Pronto.
+
+23:13.440000000000055
+Então, pego aqui esses três.
+
+23:16.079999999999927
+ClassName.
+
+23:17.039999999999964
+Isso aqui.
+
+23:18.420000000000073
+E passo para os dois aqui também.
+
+23:22.3599999999999
+Boa.
+
+23:23.279999999999973
+E olha que legal.
+
+23:24.579999999999927
+Já ficou o que eu queria, né
+
+23:27.160000000000082
+E eu tô aqui no celular
+
+23:29
+Vou abrir
+
+23:30.90000000000009
+Ele não apareceu porque
+
+23:35.27999999999997
+MD, será que aqui é block?
+
+23:41
+É, ok, o visible aqui não vai funcionar
+
+23:42.90000000000009
+Então beleza, eu quero que seja block
+
+23:45.42000000000007
+Quando eu estiver no medium
+
+23:46.819999999999936
+E quando eu entrar
+
+23:48.42000000000007
+Pronto, já está ganhando vida
+
+23:51.33999999999992
+Vocês estão vendo que
+
+23:52.61999999999989
+Olha que a gente tem
+
+23:53.77999999999997
+15 linhas de código
+
+23:56.75999999999999
+Que a gente implementou por nós mesmos
+
+23:58.819999999999936
+E já estamos começando a ter aqui esse comportamento
+
+24:1.2000000000000455
+Que é o que a gente espera
+
+24:2.2200000000000273
+Vamos fazer o seguinte agora
+
+24:4.819999999999936
+Vamos fazer com que Esse botão fique sempre fixo a ter aqui esse comportamento que é o que a gente espera né, vamos fazer o seguinte agora, vamos fazer
+
+24:6.180000000000064
+com que esse botão
+
+24:8.319999999999936
+fique sempre fixo
+
+24:10
+a direita, tá, por que isso?
+
+24:12.579999999999927
+porque eu quero
+
+24:14.11999999999989
+que ele fique aqui né, não quero que ele fique
+
+24:15.980000000000018
+no meio ou que ele respeite
+
+24:18.019999999999982
+então o que eu vou dizer, eu vou dizer que ele é absoluto
+
+24:20.019999999999982
+que ele tem uma posição absoluta, tá bom
+
+24:22.279999999999973
+e eu vou colar
+
+24:24.160000000000082
+ele do lado direito.
+
+24:26.960000000000036
+Ó, vou falar aqui um right 4, pra ele ficar a 4 pontinhos da direita.
+
+24:32.6400000000001
+Se eu passar o mouse aqui, isso daqui representa 16 pixels, tá bom?
+
+24:40.1400000000001
+E eu vou dizer aqui que o top dele vai ser 6, talvez.
+
+24:47.92000000000007
+É, talvez.
+
+24:49.51999999999998
+Talvez seja isso.
+
+24:50.5
+Beleza.
+
+24:51.57999999999993
+E aí eu vou dizer aqui que esse home, tá?
+
+24:54.5
+Ele vai ser um pouquinho maior, né?
+
+24:56.940000000000055
+Porque tá muito pequeno aqui pro celular.
+
+24:58.75999999999999
+Então, o que eu vou dizer aqui?
+
+24:59.700000000000045
+Eu vou falar, olha, o home, o que ele vai ser?
+
+25:3.1800000000000637
+Ele vai ser um text for XL, tá bom?
+
+25:6.779999999999973
+Um pouquinho maior.
+
+25:8.38000000000011
+E quando chegar no meio, eu quero que ele volte a ser large, tá bom?
+
+25:14.480000000000018
+E vamos lá.
+
+25:17.220000000000027
+Ó, legal.
+
+25:18.339999999999918
+Vamos deixar os outros large também pra ficar igual.
+
+25:23.799999999999955
+Pronto.
+
+25:24.3599999999999
+Já tá ganhando shape aqui
+
+25:26.180000000000064
+Ó
+
+25:27.819999999999936
+Muito legal, né pessoal?
+
+25:30.779999999999973
+Muito legal mesmo
+
+25:31.660000000000082
+Beleza
+
+25:33.25999999999999
+Então, bora continuar aqui a nossa aplicação, né?
+
+25:36.88000000000011
+O que que tá faltando?
+
+25:37.960000000000036
+Tá faltando o ponto que eu disse pra vocês
+
+25:41.1400000000001
+Quando eu clicar nesse botão
+
+25:42.88000000000011
+O que que eu tenho que fazer?
+
+25:43.960000000000036
+Eu tenho que expandir.
+
+25:47.940000000000055
+Aqui.
+
+25:49.1400000000001
+Esse header.
+
+25:50.1400000000001
+Esse header tem que ocupar aqui talvez a tela toda.
+
+25:52.940000000000055
+E eu mostro os itens.
+
+25:54.74000000000001
+Mas ao invés de mostrá-los.
+
+25:56.92000000000007
+Um do lado do outro.
+
+25:58.299999999999955
+Eu mostro um embaixo do outro.
+
+26:0.5199999999999818
+Massa né?
+
+26:1.7999999999999545
+Como que a gente vai fazer isso?
+
+26:3.5399999999999636
+Agora a gente vai precisar do react
+
+26:5.279999999999973
+porque a gente vai precisar de uma variável pra controlar
+
+26:7.579999999999927
+quando tá aberto ou quando tá fechado
+
+26:9.660000000000082
+aqui é bem simples tá
+
+26:11.240000000000009
+const
+
+26:13
+set mobile menu open
+
+26:18.019999999999982
+set mobile menu open
+
+26:20.25999999999999
+falso, então o menu começa
+
+26:22.180000000000064
+né, fechado
+
+26:23.940000000000055
+e quando ele estiver aberto,
+
+26:26.579999999999927
+o que eu quero? Eu quero
+
+26:28.160000000000082
+que a altura
+
+26:30.019999999999982
+do header seja a altura da página.
+
+26:33
+Então,
+
+26:34.25999999999999
+vamos só aqui no onClick desse botão
+
+26:36.24000000000001
+fazer o toggle
+
+26:37.92000000000007
+do valor. Então, olha, no
+
+26:39.92000000000007
+onClick desse botão, eu quero
+
+26:42.07999999999993
+que o setMobileOpen seja
+
+26:43.90000000000009
+o contrário do que ele está agora.
+
+26:46.09999999999991
+Sempre o inverso.
+
+26:47.74000000000001
+Então eu pego aqui o currentValue.
+
+26:50.07999999999993
+E retorno o contrário dele.
+
+26:56.16000000000008
+Pronto.
+
+26:57.66000000000008
+Ótimo.
+
+26:58.799999999999955
+Então agora eu sei que ele vai ficar.
+
+27:1.1199999999998909
+True ou false.
+
+27:2.9600000000000364
+E aí o que eu quero?
+
+27:4.180000000000064
+Eu quero que quando isso estiver
+
+27:5.420000000000073
+true, isso aqui ocupe o espaço
+
+27:8.180000000000064
+da tela, como que eu vou fazer
+
+27:9.740000000000009
+eu posso fazer uma interpolação
+
+27:11.759999999999991
+de string, ó
+
+27:13.799999999999955
+eu posso pegar aqui isso
+
+27:15.819999999999936
+abrir aqui o interpolation
+
+27:18.519999999999982
+só remover
+
+27:20.1400000000001
+essas aspas, e aí eu faço assim
+
+27:22.299999999999955
+ó, abro aqui uma expressão
+
+27:24.160000000000082
+e falo, olha
+
+27:24.88000000000011
+mobile menu open, se está mover essas aspas, e aí eu faço assim, ó, abro aqui uma expressão e falo, olha,
+
+27:27.88000000000011
+mobile menu open, se está open, faz com
+
+27:30.079999999999927
+que o screen
+
+27:30.980000000000018
+a altura
+
+27:33.3599999999999
+da página seja o tamanho
+
+27:35.88000000000011
+da tela, caso contrário
+
+27:38
+não seja nada, tá bom?
+
+27:41.039999999999964
+E aí vamos ver como isso fica
+
+27:42.200000000000045
+Uou!
+
+27:44.72000000000003
+Olha que legal.
+
+27:45.700000000000045
+Já está funcionando.
+
+27:47.90000000000009
+Só tem uma coisinha aqui que não está muito legal.
+
+27:51.5
+Se eu for ficar fazendo ternários, expressões aqui dentro,
+
+27:55.27999999999997
+pessoal, isso vai virar uma bagunça.
+
+27:56.92000000000007
+E aí a gente tem uma biblioteca que a gente usa,
+
+27:59.09999999999991
+super levinha, mas é muito útil,
+
+28:1.599999999999909
+que chama CLXS.
+
+28:6.920000000000073
+CLSX Na verdade
+
+28:7.680000000000064
+E a Arniette CLSX
+
+28:9.980000000000018
+Ela é bem fácil de usar
+
+28:12.5
+E ajuda bastante nesses casos
+
+28:14.519999999999982
+Então vou importar ela aqui
+
+28:16.019999999999982
+CLSX from CLSX
+
+28:19
+E aí como que isso fica
+
+28:22.579999999999927
+Isso fica assim
+
+28:23.74000000000001
+Vou até apagar tudo para ficar mais fácil.
+
+28:27.660000000000082
+A gente chama o CLSX.
+
+28:30.420000000000073
+Eu passo a primeira classe que eu quero ter.
+
+28:34.07999999999993
+Vou só apagar aqui isso.
+
+28:36.539999999999964
+E eu posso dar uma vírgula e abrir um objeto.
+
+28:40.88000000000011
+E aí eu falo o seguinte.
+
+28:41.77999999999997
+Olha, quando o Copilot até me sugeriu
+
+28:46.83999999999992
+Aqui, né
+
+28:47.539999999999964
+Aplica
+
+28:50.07999999999993
+O hscreen
+
+28:51.440000000000055
+Só se isso for true
+
+28:53.8599999999999
+Então, depois a gente consegue
+
+28:56.680000000000064
+Colocar várias condições aqui
+
+28:58.22000000000003
+Por exemplo, olha, eu quero que o padding
+
+29:00
+Seja 6
+
+29:1.599999999999909
+Quando isso for true
+
+29:3.880000000000109
+E assim por diante E o que o CLX faz no final seja 6 quando isso for true e
+
+29:5.559999999999945
+assim por diante, e o que o CLX
+
+29:8.039999999999964
+faz no final, ele concatena essas classes
+
+29:10.019999999999982
+e coloca pra nós, é só um jeito
+
+29:12.099999999999909
+mais fácil de ter aqui
+
+29:14.039999999999964
+o nosso código, beleza? Então
+
+29:15.740000000000009
+olha lá, lindo, lindo, lindo
+
+29:17.980000000000018
+tá muito legal, vamos agora
+
+29:20.079999999999927
+fazer com que
+
+29:21.88000000000011
+esses nossos itens apareçam
+
+29:24.1400000000001
+quando a gente tiver com o menu aberto
+
+29:26.059999999999945
+Então o que eu vou fazer aqui
+
+29:27.539999999999964
+Vou envolver isso aqui com o CLSX
+
+29:30.61999999999989
+E vou dizer o seguinte
+
+29:32.74000000000001
+Não é isso aqui que eu quero
+
+29:35.75999999999999
+Eu quero que
+
+29:36.75999999999999
+Seja block também
+
+29:39.77999999999997
+Quando o menu estiver aberto
+
+29:41.33999999999992
+Então
+
+29:41.8599999999999
+Não funcionou.
+
+29:45.700000000000045
+Por que?
+
+29:46.5
+Deixa eu ver aqui.
+
+29:48.3599999999999
+Na verdade.
+
+29:49.38000000000011
+Hidden.
+
+29:49.960000000000036
+O block já está para o medium.
+
+29:51.75999999999999
+Deixa eu ver aqui.
+
+29:52.24000000000001
+Se o visible vai ficar melhor.
+
+29:53.940000000000055
+Na verdade pessoal.
+
+29:54.77999999999997
+Já vi aqui o problema.
+
+29:56.33999999999992
+Como eu tenho o hidden aqui.
+
+29:57.90000000000009
+Ele dá conflito.
+
+29:59.1400000000001
+Porque eu estou no mesmo breakpoint.
+
+30:0.42000000000007276
+Então o que eu vou fazer?
+
+30:2.019999999999982
+Ó.
+
+30:7.079999999999927
+Vou usar o clx para me ajudar eu quero que seja a hidden quando o menu não tiver aberto e quando tiver o menu tiver aberto seja bloco então próprio
+
+30:13.980000000000018
+clx aqui vai cuidar disso para mim tá bom vamos ver aqui agora eu acho que aqui eu tinha posto visible, mas eu tirei.
+
+30:27.960000000000036
+Pessoal, já vi o problema, tá?
+
+30:33.07999999999993
+Eu tava tentando achar o problema aqui, mas como eu instalei o CLX, eu não dei iron dev de novo.
+
+30:35.40000000000009
+Esqueçam aí o que eu disse.
+
+30:37.539999999999964
+Então, vamos ver se isso já tá funcionando.
+
+30:41.539999999999964
+Então, quando eu abrir aqui, ó, já apareceu, tá?
+
+30:42.319999999999936
+Os itens.
+
+30:43.24000000000001
+E quando eu fecho?
+
+30:43.680000000000064
+Some.
+
+30:45.200000000000045
+Agora vem uma dica aqui, né?
+
+30:49.200000000000045
+Eu não quero que ele fique um do lado do outro.
+
+30:51.75999999999999
+Eu quero que fique um embaixo do outro.
+
+30:56.799999999999955
+Então, mais uma vez, a gente vai usar aqui a nossa lógica que a gente aprendeu, né? Por padrão, o flex, ele é row.
+
+31:1.8399999999999181
+Então, eu vou dizer assim.
+
+31:3.0599999999999454
+Olha, faz um flex column
+
+31:5.599999999999909
+por padrão
+
+31:7.039999999999964
+e quando chegar no MD
+
+31:9.680000000000064
+você faz um flex row.
+
+31:11.5
+Tá bom? Então
+
+31:13.180000000000064
+só de fazer isso a gente já vai ter
+
+31:15.559999999999945
+o efeito que a gente quer. Vamos lá.
+
+31:18.279999999999973
+Fecho,
+
+31:19.420000000000073
+abro, legal, só precisamos arrumar a fonte
+
+31:21.5
+aqui, né? Posso até arrumar agora.
+
+31:24.299999999999955
+Eu posso dizer que no MD vai ser large e no normal vai ser 4XL.
+
+31:31.039999999999964
+Ótimo.
+
+31:33.25999999999999
+Ó, lindo, lindo, lindo.
+
+31:35.72000000000003
+Então agora a gente vai abrir.
+
+31:40.75999999999999
+E ainda está funcionando bem legal, né?
+
+31:45.74000000000001
+Muito bom, muito bom.
+
+31:47.27999999999997
+Vamos só aqui adicionar uma cereja do bolo.
+
+31:50.8599999999999
+Que vai ser, pessoal? Vai ser uma cerejinha.
+
+31:54.01999999999998
+Não sei se vocês viram no meu exemplo, mas eu mostrei para vocês, se vocês quiserem, voltem ao vídeo.
+
+32:0.09999999999990905
+Que isso aqui estava com um efeito muito massa, tá?
+
+32:3.099999999999909
+E a hora que eu clicava, ele virava um x. E a hora que eu clicava ele virava um x.
+
+32:6.559999999999945
+E a hora que eu tirava ele ficava um em cima do outro.
+
+32:9.660000000000082
+Vamos fazer isso juntos.
+
+32:11.220000000000027
+O que eu vou fazer aqui?
+
+32:13.5
+Eu vou fazer um translate nos meus pauzinhos aqui.
+
+32:19.920000000000073
+Então vamos começar aqui com a nossa lógica.
+
+32:22.90000000000009
+Primeiro o do meio.
+
+32:27.279999999999973
+Vou aplicar aqui um CLSX.
+
+32:33.59999999999991
+O do meio, eu quero que quando o mobile estiver open, ele fique hidden.
+
+32:39.460000000000036
+Ótimo, é isso mesmo. Esse de cima, eu quero, CLSX, que quando tiver open, ele aplique aqui um rotate 45 graus.
+
+32:56
+Olha que massa.
+
+32:57.6400000000001
+E esse último aqui, eu vou até copiar essa classe daqui e vou colocar no último.
+
+33:3.3599999999999
+Eu vou até copiar essa classe daqui e vou colocar no último.
+
+33:10.38000000000011
+Esse último eu quero que ele seja menos 45.
+
+33:15.099999999999909
+Olha que sensacional, né?
+
+33:16.539999999999964
+Tá quase, né?
+
+33:18.220000000000027
+Ainda eles estão desalinhados.
+
+33:19.819999999999936
+Mas aí o que eu vou fazer? Eu vou falar que o de ele tem que ter um translate y2.
+
+33:28.799999999999955
+E, tcharam!
+
+33:30.960000000000036
+Ou seja, o que eu estou dizendo?
+
+33:32.5
+Olha, quando estiver aberto, faz rotação e desce no eixo y duas unidades.
+
+33:37.960000000000036
+Isso daqui vai dar...
+
+33:40.11999999999989
+Ele mostra aqui 8 pixels.
+
+33:42.48000000000002
+E aí ele aplica o que eu disse para vocês, um monte de classe.
+
+33:45.24000000000001
+E, ó. Sensacional de classe. E ó.
+
+33:47.6400000000001
+Sensacional galera.
+
+33:48.960000000000036
+Isso está lindo né.
+
+33:50.38000000000011
+E só para deixar mais fênix ainda.
+
+33:52.1400000000001
+Vamos adicionar uma animação.
+
+33:54.059999999999945
+Como que a gente faz essa animação?
+
+33:56.33999999999992
+A gente pode aqui nos que se movem.
+
+33:59.539999999999964
+Colocar aqui um transition.
+
+34:1.900000000000091
+All.
+
+34:3.259999999999991
+Em todos os aspectos aplica uma transição
+
+34:6.680000000000064
+Uma transição aqui de
+
+34:8.2800000000002
+Meio segundo, tá?
+
+34:9.960000000000036
+E eu vou colocar aqui
+
+34:11.440000000000055
+Is In Out
+
+34:14.2199999999998
+Tá bom?
+
+34:15.400000000000091
+E vou copiar essa transição
+
+34:17.699999999999818
+E vou colar pro último também
+
+34:19.539999999999964
+Ótimo, vamos ver se já funciona
+
+34:22.2199999999998
+Uou
+
+34:24.5
+Pessoal, isso está muito pro né
+
+34:26.23999999999978
+Muito legal
+
+34:27.59999999999991
+Então vamos só ver se está tudo funcionando
+
+34:30.90000000000009
+Vou colocar aqui no bem pequeno
+
+34:32.76000000000022
+Ótimo, eu abro
+
+34:34.69999999999982
+Ele fica aqui o x para nós
+
+34:37.13999999999987
+Mostra os menus, fecha
+
+34:39.01999999999998
+Muito legal
+
+34:39.960000000000036
+E no momento que eu abro
+
+34:42.01999999999998
+Já fica normalizado e o menu sobe, sensacional
+
+34:46.940000000000055
+eu acho que cumprimos
+
+34:48.80000000000018
+aqui a nossa missão
+
+34:49.61999999999989
+mais uma vez, só usando o T-Wind
+
+34:52.7199999999998
+não usamos nada
+
+34:54.19999999999982
+como eu disse para vocês, isso poderia ser feito inclusive
+
+34:56.73999999999978
+com JavaScript puro, sem o React
+
+34:58.69999999999982
+o bom do React é que ele dá aqui
+
+35:0.5799999999999272
+a vantagem do state fácil para nós
+
+35:2.619999999999891
+mas acredito
+
+35:4.7199999999998
+que concluímos com sucesso um menu que pode ser usado nas aplicações suas.
+
+35:10.059999999999945
+Que fica muito bonitinho.
+
+35:11.760000000000218
+Muito, muito bonitinho.
+
+35:13.360000000000127
+Muito massa.
+
+35:14.320000000000164
+Vamos lá então para a nossa pauta.
+
+35:15.7800000000002
+Só ver o que falta.
+
+35:17.7800000000002
+Vamos ao código concluído.
+
+35:20
+E vamos fechando aqui, encerrando a nossa aula.
+
+35:23.519999999999982
+Muito obrigado pela audiência e por ter assistido essa aula.
+
+35:27.179999999999836
+Eu quero que você nos dê feedback, caso você possa, se você gostou, se não gostou.
+
+35:32.38000000000011
+E também envie novas sugestões de conteúdo.
+
+35:35.76000000000022
+Essa foi uma sugestão de conteúdo que veio da plataforma.
+
+35:38.460000000000036
+Na verdade, a sugestão foi responsividade.
+
+35:41.2199999999998
+Eu tive essa ideia de juntar uma feature com essa questão de responsividade
+
+35:45.98000000000002
+e também deixem o feedback aí na
+
+35:47.840000000000146
+plataforma que nos ajuda muito a
+
+35:49.840000000000146
+entender se essas aulas estão realmente sendo úteis
+
+35:52.159999999999854
+ou não
+
+35:53.57999999999993
+então é isso pessoal, muito obrigado
+
+35:55.7800000000002
+mais uma vez por terem assistido até
+
+35:58
+aqui e até a próxima aula
+
+36:0.2800000000002001
+tchau

@@ -215,7 +215,7 @@ export const ShareScreen: React.FC<ShareScreenProps> = ({ scriptContent, onShare
                         margin: 0,
                         fontWeight: 500
                     }}>
-                        🎁 Marque <strong>@hooky</strong> nos stories para ganhar dicas exclusivas!
+                        🎁 Marque <strong>@hookybr</strong> nos stories para ganhar dicas exclusivas!
                     </p>
                 </div>
 

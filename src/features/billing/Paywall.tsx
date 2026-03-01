@@ -54,11 +54,11 @@ export const Paywall: React.FC<PaywallProps> = ({ onUpgrade, onClose, isRequired
                 background: currentTab === 'promo'
                     ? 'linear-gradient(135deg, #ff6b6b 0%, #ffa07a 100%)'
                     : 'var(--gradient-primary)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                display: 'grid',
+                placeItems: 'center',
                 padding: '1.5rem',
-                zIndex: 1000
+                zIndex: 1000,
+                overflowY: 'auto'
             }}
         >
             <motion.div
@@ -74,7 +74,8 @@ export const Paywall: React.FC<PaywallProps> = ({ onUpgrade, onClose, isRequired
                     borderRadius: '32px',
                     textAlign: 'center',
                     position: 'relative',
-                    background: 'white'
+                    background: 'white',
+                    margin: 'auto'
                 }}
             >
                 {/* Close button - only if not required or showing promo */}
@@ -127,7 +128,7 @@ export const Paywall: React.FC<PaywallProps> = ({ onUpgrade, onClose, isRequired
                                     boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
                                 }}>
                                 <motion.img
-                                    src="/favicon.png"
+                                    src="/logo23hooky.png"
                                     alt="Hooky"
                                     initial={{ scale: 0, opacity: 0 }}
                                     animate={{ scale: 1, opacity: 1 }}
@@ -137,7 +138,7 @@ export const Paywall: React.FC<PaywallProps> = ({ onUpgrade, onClose, isRequired
                                         stiffness: 200,
                                         damping: 15
                                     }}
-                                    style={{ width: '56px', height: '56px', objectFit: 'contain' }}
+                                    style={{ width: '70px', height: '70px', objectFit: 'contain' }}
                                 />
                             </motion.div>
 

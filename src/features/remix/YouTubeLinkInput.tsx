@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Youtube, X, Plus, Link } from 'lucide-react';
+import { Youtube, X, Plus, Link, Loader2 } from 'lucide-react';
 
 interface YouTubeLinkInputProps {
     links: string[];
@@ -34,6 +34,44 @@ export const YouTubeLinkInput: React.FC<YouTubeLinkInputProps> = ({
 }) => {
     const [inputValue, setInputValue] = useState('');
     const [error, setError] = useState<string | null>(null);
+    const [videoTitles, setVideoTitles] = useState<Record<string, string>>({});
+    const [loadingTitles, setLoadingTitles] = useState<Record<string, boolean>>({});
+
+    const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001';
+
+    // Fetch video titles when links change (via backend to avoid CORS)
+    useEffect(() => {
+        const fetchTitles = async () => {
+            for (const link of links) {
+                const videoId = extractVideoId(link);
+                if (!videoId) continue;
+
+                // Skip if already fetched or loading
+                if (videoTitles[link] || loadingTitles[link]) continue;
+
+                setLoadingTitles(prev => ({ ...prev, [link]: true }));
+
+                try {
+                    // Use backend to avoid CORS
+                    const response = await fetch(`${BACKEND_URL}/api/youtube/info?url=${encodeURIComponent(link)}`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        setVideoTitles(prev => ({ ...prev, [link]: data.title || videoId }));
+                    } else {
+                        // Fallback to video ID
+                        setVideoTitles(prev => ({ ...prev, [link]: videoId }));
+                    }
+                } catch {
+                    // Fallback to video ID on error
+                    setVideoTitles(prev => ({ ...prev, [link]: videoId }));
+                } finally {
+                    setLoadingTitles(prev => ({ ...prev, [link]: false }));
+                }
+            }
+        };
+
+        fetchTitles();
+    }, [links]);
 
     const handleAddLink = () => {
         const url = inputValue.trim();
@@ -127,7 +165,7 @@ export const YouTubeLinkInput: React.FC<YouTubeLinkInputProps> = ({
                 marginBottom: '1rem',
                 lineHeight: 1.4
             }}>
-                Cole links de vídeos virais para a IA analisar e combinar com sua ideia
+                A IA vai usar o conteúdo dos vídeos para criar o storytelling do seu roteiro
             </p>
 
             {/* Input */}
@@ -250,17 +288,27 @@ export const YouTubeLinkInput: React.FC<YouTubeLinkInputProps> = ({
                                         }}
                                     />
 
-                                    {/* Video ID */}
+                                    {/* Video Title */}
                                     <span style={{
                                         flex: 1,
                                         fontSize: '0.85rem',
                                         color: 'var(--dark)',
-                                        fontFamily: 'var(--font-mono)',
+                                        fontFamily: 'var(--font-body)',
                                         overflow: 'hidden',
                                         textOverflow: 'ellipsis',
-                                        whiteSpace: 'nowrap'
+                                        whiteSpace: 'nowrap',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '0.5rem'
                                     }}>
-                                        {videoId}
+                                        {loadingTitles[link] ? (
+                                            <>
+                                                <Loader2 size={14} style={{ animation: 'spin 1s linear infinite' }} />
+                                                <span style={{ color: 'var(--gray)' }}>Carregando...</span>
+                                            </>
+                                        ) : (
+                                            videoTitles[link] || videoId
+                                        )}
                                     </span>
 
                                     {/* Remove button */}

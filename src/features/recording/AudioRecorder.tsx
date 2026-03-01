@@ -339,10 +339,22 @@ export const AudioRecorder: React.FC<AudioRecorderProps> = ({ onAudioCaptured })
                 gap: '0.5rem'
             }}>
                 <span>
-                    {!isRecording && !audioBlob ? "Toque no microfone para comear" : ""}
+                    {!isRecording && !audioBlob ? "Toque no microfone para começar" : ""}
                     {isRecording ? "Fale naturalmente..." : ""}
                     {audioBlob ? "Áudio capturado!" : ""}
                 </span>
+
+                {/* Tip for better storytelling */}
+                {!isRecording && !audioBlob && (
+                    <span style={{
+                        fontSize: '0.8rem',
+                        color: 'var(--gray)',
+                        opacity: 0.8,
+                        marginTop: '0.25rem'
+                    }}>
+                        💡 Inclua uma história ou conceito para um roteiro mais autêntico
+                    </span>
+                )}
 
                 {/* Upload Option - Only show when idle */}
                 {!isRecording && !audioBlob && (

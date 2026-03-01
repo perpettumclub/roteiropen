@@ -1,11 +1,11 @@
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '../../lib/supabase';
 
 // Initialize a client specifically for invoking functions
 // We can use the main client if it's exported, but for safety in this isolated file:
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+// const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+// const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export interface CheckoutResponse {
     id: string;

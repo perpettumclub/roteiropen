@@ -1,0 +1,2893 @@
+Transcrição
+
+00:00
+Fala Devs! Seja bem-vindo a mais uma aula aqui do Experts Club.
+
+00:9.52
+Meu nome é João Bibiano e hoje a gente vai estar entrando num assunto muito massa
+
+00:14.4
+que é como turbinar as nossas aplicações React com o React Query.
+
+00:19.46
+Vamos iniciar?
+
+00:20.98
+Eu preparei aqui para vocês um checklist para que a gente possa se orientar durante a nossa aula.
+
+00:28.06
+E eu gostaria de começar introduzindo para vocês a mim mesmo.
+
+00:32.4
+Essa é a minha primeira aula e eu tenho certeza que vai valer a pena você ficar comigo até o final.
+
+00:37.86
+Meu nome é João Bibiano, eu sou formado em análise e desenvolvimento de sistemas.
+
+00:43.28
+Tenho mais de sete anos trabalhando com software, desenvolvimento de sistemas, tá bom? Tenho mais de sete anos trabalhando com software,
+
+00:46.38
+desenvolvimento de sistemas, tanto desktop quanto web,
+
+00:50.38
+e principalmente web agora nos últimos anos.
+
+00:53.22
+Trabalho em Lisboa, Portugal, sou Senior Software Engineer na Talkdesk.
+
+00:58.42
+E eu queria compartilhar com você que está aqui me assistindo,
+
+01:1.8400000000000034
+caso você queira conhecer um pouco mais sobre o meu trabalho,
+
+01:4.200000000000003
+sobre o conteúdo que eu tenho gerado nas redes sociais, você pode me encontrar no Instagram e
+
+01:10.099999999999994
+no YouTube, onde eu tenho gerado esse conteúdo, beleza? Então, sem mais delongas e para ser direto,
+
+01:17.819999999999993
+eu quero entrar no que nós vamos construir hoje, tá bom? Basicamente, pessoal, o que nós vamos construir hoje é uma aplicação, tá?
+
+01:27.22
+React, utilizando o React Query, que é uma das bibliotecas que vem revolucionando o nosso
+
+01:34.94
+desenvolvimento no front-end, tá bom? E o que nós vamos construir? Nós vamos usar aqui um servidor
+
+01:41.879999999999995
+JSON, tá? Para criar um servidor fake e vamos criar uma mini área
+
+01:46.44
+administrativa para um e-commerce.
+
+01:48.92
+Então, nós vamos ter a possibilidade
+
+01:50.879999999999995
+de listar produtos
+
+01:52.7
+e ver o detalhe
+
+01:54.66
+desses produtos. E antes
+
+01:56.480000000000004
+de entrar aqui mais a um nível técnico,
+
+01:58.519999999999996
+eu quero mostrar para vocês o resultado
+
+02:0.6400000000000006
+que a gente vai ter, tá bom?
+
+02:2.760000000000005
+Como vocês podem ver aqui,
+
+02:4.799999999999997
+não é nada fancy a nível de layout,
+
+02:6.739999999999995
+porque esse não é o intuito da aula,
+
+02:8.659999999999997
+mas o intuito é mostrar o quão o cache do React Query
+
+02:12.599999999999994
+pode turbinar as nossas aplicações.
+
+02:15.379999999999995
+Então, vamos lá.
+
+02:16.28
+A gente vai ter uma lista, que vai ser um componente,
+
+02:19.840000000000003
+chamado Products List.
+
+02:21.819999999999993
+E nessa lista de produtos, nós vamos ter três colunas.
+
+02:25.340000000000003
+O ID, o name e um linkzinho para o chamado Products List. E nessa lista de produtos, nós vamos ter três colunas.
+
+02:29.24000000000001
+O ID, o Name e um linkzinho para o Detail.
+
+02:31.840000000000003
+Então, o usuário vai poder ver essa lista,
+
+02:35.34
+clicar em Detail e acessar os detalhes desse produto caindo nesse componentezinho aqui do lado direito,
+
+02:39.360000000000014
+aonde ele vai poder ver ID, Name, Price, Description
+
+02:44.360000000000014
+e a imagem do produto.
+
+02:46.22
+Beleza? E se vocês
+
+02:48.03999999999999
+repararem aqui, a gente tem a opção
+
+02:50.16
+de voltar para a lista de produtos.
+
+02:52.24000000000001
+Por quê? Porque é aqui
+
+02:54.19999999999999
+que o React Query vai brilhar.
+
+02:56.400000000000006
+Se vocês pararem para pensar,
+
+02:58.400000000000006
+à medida que nós abrirmos
+
+02:59.72
+esse componente, será feita
+
+03:02
+uma requisição para buscar esses
+
+03:3.8400000000000034
+produtos.
+
+03:6.099999999999994
+Porém,
+
+03:8.580000000000013
+o React Query vem resolver o problema de o usuário já
+
+03:10.460000000000008
+carregou a listagem uma vez.
+
+03:12.659999999999997
+Por que eu tenho
+
+03:14.47999999999999
+que novamente esperar o request ser
+
+03:16.419999999999987
+completado se eu já poderia
+
+03:17.879999999999995
+ter esses dados em cache?
+
+03:20.120000000000005
+Tá bom? Então,
+
+03:21.819999999999993
+essa aplicação vai nos mostrar com muita
+
+03:24.039999999999992
+clareza as vantagens do React Query. Então, essa aplicação vai nos mostrar com muita clareza as vantagens do React Query.
+
+03:27.400000000000006
+Então, beleza.
+
+03:29.19999999999999
+Entendido aqui o que nós vamos construir hoje,
+
+03:32.5
+eu quero falar um pouquinho com vocês sobre os requisitos,
+
+03:35.44
+os ambientes e recursos que nós precisamos para conseguir executar com sucesso essa aula.
+
+03:43.099999999999994
+Basicamente, você precisa ter o npm ou yarn instalado no seu
+
+03:47.19999999999999
+computador tá bom o visual Studio Code ou qualquer outro editor editor aqui não vai fazer diferença
+
+03:53.02000000000001
+alguma para nós porém eu recomendo que você usa o visual Studio Code pela facilidade que a gente tem
+
+03:59.25999999999999
+para desenvolver com TypeScript que vai ser a nossa linguagem principal. Eu deixei aqui também, na terceira linha, um carinha aqui chamado Starter.
+
+04:8.47999999999999
+O que é o Starter?
+
+04:9.47999999999999
+O Starter vai ser uma branch no repositório Git,
+
+04:12.800000000000011
+que eu já vou mostrar para vocês,
+
+04:14.159999999999997
+que a gente vai usar para iniciar a nossa aplicação.
+
+04:17.30000000000001
+Para vocês não terem que perder tempo com criação de projeto,
+
+04:20.24000000000001
+configuração de CSS básico, instalação de pacotes,
+
+04:26.839999999999975
+eu já deixei isso pronto e vou explicar para vocês em detalhes o que que eu já fiz nesse Starter tá bom então vamos lá eu tenho que minha
+
+04:32.360000000000014
+abinha aberta do kit e vocês podem reparar que nós temos um repositório aqui que vai estar no
+
+04:38.160000000000025
+link da aula então não se preocupe em copiar o nome dele aqui ele vai estar no link da aula. E nós temos duas branches,
+
+04:46.839999999999975
+a principal, que é a master,
+
+04:49
+tá bom? E a starter,
+
+04:50.98000000000002
+que é aquela que eu quero que vocês façam clone na máquina
+
+04:52.920000000000016
+de vocês para que nós iniciemos.
+
+04:54.75999999999999
+E eu vou fazer isso junto com vocês
+
+04:56.72000000000003
+agora, beleza?
+
+04:58.56
+Aqui tem uma breve descrição, tá?
+
+05:0.7200000000000273
+Do que nós vamos fazer,
+
+05:2.5
+a minha foto muito bonita,
+
+05:4.860000000000014
+o meu nome, e é isso.
+
+05:7.279999999999973
+Então, voltando aqui, explicando os requisitos,
+
+05:10.519999999999982
+vamos fazer o clone desse projeto na nossa máquina.
+
+05:13.920000000000016
+O que eu vou te sugerir?
+
+05:14.839999999999975
+Que você abra o seu terminal, tá bom?
+
+05:17.25999999999999
+E você execute o seguinte comando comigo,
+
+05:20.339999999999975
+git clone, traço, traço, branch,
+
+05:24.480000000000018
+e qual branch que eu quero
+
+05:25.879999999999995
+clonar? O
+
+05:27.75999999999999
+starter. E aí o que você vai
+
+05:30.120000000000005
+fazer? Você vai entrar no git
+
+05:31.639999999999986
+vir aqui em code
+
+05:34
+e copiar a
+
+05:36.01999999999998
+URL do nosso repositório, tá bom?
+
+05:38.72000000000003
+Se você usar SSH
+
+05:40.22000000000003
+você pode copiar essa, se você
+
+05:42.25999999999999
+for usar HTTPS pode usar
+
+05:44.139999999999986
+esta. Então pronto, o meu for usar HTTPS, pode usar esta. Então,
+
+05:46.69999999999999
+pronto, o meu comando
+
+05:48.18000000000001
+está executado. Vou até
+
+05:49.879999999999995
+expandir um pouco aqui para que vocês possam
+
+05:52.10000000000002
+ver a linha completa.
+
+05:54.98000000000002
+git clone
+
+05:55.75999999999999
+traço-traço brandstarter
+
+05:57.379999999999995
+e a URL do repositório.
+
+06:0.45999999999997954
+Vou dar um enter aqui, ele vai
+
+06:2.3000000000000114
+clonar para nós. Muito
+
+06:4.240000000000009
+bem, já clonou.
+
+06:5.579999999999984
+Se eu der um ls aqui, a gente vai ver que ele está aqui.
+
+06:8.339999999999975
+E eu vou abrir agora o meu Visual Studio Code,
+
+06:10.819999999999993
+que já está configurado para abrir nesse projeto.
+
+06:13.620000000000005
+Muito bem.
+
+06:15.180000000000007
+Então, pessoal, como eu disse para vocês,
+
+06:18.74000000000001
+posso fechar o meu terminal agora, não vou utilizá-lo para já.
+
+06:22.95999999999998
+E voltando aqui no Notion, a gente tem o Starter, né?
+
+06:26.879999999999995
+E eu até escrevi aqui o Vite.
+
+06:29.04000000000002
+Por que o Vite, tá?
+
+06:30.279999999999973
+O Vite é um bundler para a gente iniciar as nossas aplicações React.
+
+06:36
+É muito semelhante a Create React App, mas tem uma performance muito melhor.
+
+06:40.339999999999975
+Por isso, esse projeto foi criado e iniciado com o Vite.
+
+06:47.639999999999986
+E, se vocês abrirem aqui o arquivo package.json,
+
+06:52.22000000000003
+vocês podem verificar que nós já temos aqui um comandinho de dev,
+
+06:54.95999999999998
+já temos aqui um comandinho de serve e também um comandinho aqui que vai emular o nosso back-end.
+
+07:0.6000000000000227
+Como que isso vai acontecer?
+
+07:2.6999999999999886
+Eu estou usando aqui uma ferramenta chamada JSON Server
+
+07:6.060000000000002
+Que é uma ferramenta que lê um arquivo JSON e levanta um servidor para nós
+
+07:11.180000000000007
+Deixando nós completamente à vontade para conseguir desenvolver a nossa aplicação
+
+07:16.45999999999998
+Sem dependências externas, sem esperar que outros servidores estejam de pé, beleza?
+
+07:24.779999999999973
+Então vamos lá.
+
+07:26.439999999999998
+Se vocês observarem aqui,
+
+07:28.660000000000025
+o JSON Server está a observar
+
+07:32.120000000000005
+um arquivo que está dentro de serverdb.json.
+
+07:36.660000000000025
+Então, se eu entrar aqui, serverdb.json,
+
+07:40.30000000000001
+vocês podem ver que nós temos aqui um recurso
+
+07:42.54000000000002
+que é os products, que são os nossos products, beleza?
+
+07:46.639999999999986
+Que são aqueles que nós vamos usar para renderizar a nossa lista de produtos.
+
+07:52
+Muito bem.
+
+07:53.360000000000014
+Voltando aqui no Package.json, ele vai iniciar também na porta 3.3.3.3,
+
+07:58.45999999999998
+para ser uma porta específica, não ter conflito com a nossa aplicação web.
+
+08:3.1200000000000045
+E outra coisa interessante, eu defini um delay de 2 mil milissegundos,
+
+08:7.3799999999999955
+2 segundos aqui.
+
+08:9.139999999999986
+Por que eu defini esse delay?
+
+08:11.180000000000007
+Porque é esse delay que vai nos ajudar
+
+08:13.45999999999998
+a ver como o React Query faz as nossas aplicações
+
+08:16.24000000000001
+ficarem muito performáticas.
+
+08:18.439999999999998
+Porque a partir do momento que ele fez a primeira requisição,
+
+08:21.339999999999975
+ele não vai precisar buscar novamente essa informação.
+
+08:24.720000000000027
+Ele pode até
+
+08:25.80000000000001
+revalidar por trás, mas ele não vai
+
+08:28.019999999999982
+precisar esperar para renderizar os dados.
+
+08:30.420000000000016
+Fique tranquilo que a gente já vai abordar
+
+08:32.08000000000004
+isso mais para frente. Beleza?
+
+08:35.25999999999999
+Depois aqui, pessoal,
+
+08:36.25999999999999
+só para finalizar a explicação do package
+
+08:37.91999999999996
+JSON, eu instalei o Axios
+
+08:39.799999999999955
+que a gente vai usar para fazer a
+
+08:41.77999999999997
+busca aqui desses, a requisição HTTP, tá bom?
+
+08:45.539999999999964
+E a nossa grande lib react-query.
+
+08:49.10000000000002
+Muito bem.
+
+08:50.91999999999996
+Então, marcamos aqui como concluídos os nossos requisitos, ambientes e recursos.
+
+08:55.960000000000036
+E antes de a gente colocar aqui a mão no código já,
+
+08:59.639999999999986
+eu quero fazer uma pequena e breve introdução sobre o react-query, tá?
+
+09:3.340000000000032
+Qual que é a filosofia, quais são os recursos e quais são as vantagens.
+
+09:8.519999999999982
+Então, eu entro aqui no site deles, react-query.tennistack.com
+
+09:13.580000000000041
+e vocês podem ver aqui já a principal descrição do site,
+
+09:18.379999999999995
+que é performático e poderosa sincronização de dados para o React, tá?
+
+09:28.559999999999945
+Obtenha, faça cache e atualize dados no seu React e também React Native, olha que legal,
+
+09:30.860000000000014
+sem tocar em nenhum global state.
+
+09:33.41999999999996
+Basicamente, o que o React Queue faz para nós é
+
+09:36.41999999999996
+gerenciar todas as requisições HTTP
+
+09:39.98000000000002
+que nós fazemos nas nossas aplicações.
+
+09:43.139999999999986
+Então, ele consegue cachear, o que é cachear?
+
+09:46.460000000000036
+Armazenar aquilo ali, né?
+
+09:48.08000000000004
+Num cache em memória na nossa aplicação,
+
+09:50.75999999999999
+e a partir desse cache em memória,
+
+09:52.60000000000002
+conseguir renderizar as aplicações instantaneamente,
+
+09:56.120000000000005
+enquanto ele revalida as coisas no servidor.
+
+10:0.15999999999996817
+Beleza?
+
+10:1.2200000000000273
+Então, muito bem.
+
+10:2.82000000000005
+Introduzindo aqui para vocês,
+
+10:28.25999999999999
+a gente pode clicar em Get Started e depois vocês podem ler com mais calma a motivação, o overview, tem muita remover esses requests duplicados e otimizar recursos para você também.
+
+10:30.799999999999955
+Beleza?
+
+10:32.120000000000005
+Muito bem.
+
+10:33.360000000000014
+E só para fechar esse assunto,
+
+10:35.39999999999998
+hoje eu trabalho em uma empresa muito grande,
+
+10:38.10000000000002
+que tem 1.800 desenvolvedores.
+
+10:41.5
+Na verdade, desenvolvedores são menos,
+
+10:43.460000000000036
+mas no total são 1.800 colaboradores
+
+10:46.539999999999964
+e nós usamos
+
+10:48.34000000000003
+React Query por padrão em todas
+
+10:50.299999999999955
+as aplicações. É o React Query
+
+10:52.460000000000036
+que torna as nossas aplicações do front-end
+
+10:54.460000000000036
+muito mais performáticas
+
+10:56.139999999999986
+e economiza recursos ao
+
+10:58.360000000000014
+back-end também, uma vez que
+
+11:0.36000000000001364
+nem sempre é necessário ficar
+
+11:2.240000000000009
+fazendo requisições HTTP
+
+11:3.7999999999999545
+sem necessidade.
+
+11:5.840000000000032
+Beleza?
+
+11:7.279999999999973
+Então, introduzido aqui o React Query, vamos começar com a nossa mão na massa.
+
+11:13.100000000000023
+O que a gente vai fazer?
+
+11:14.580000000000041
+Eu até deixei aqui para vocês.
+
+11:16.200000000000045
+Uma implementação sem a biblioteca, bem rapidinha.
+
+11:19.700000000000045
+E depois, nessa implementação que a gente não usou a biblioteca,
+
+11:24.600000000000023
+eu vou fazer ali um replace no código, a gente vai fazer isso juntos,
+
+11:29.539999999999964
+para ver como o React Key retorna aquela abordagem nossa antiga muito melhor,
+
+11:35.059999999999945
+trazendo diversos benefícios.
+
+11:37.139999999999986
+Beleza?
+
+11:38
+Então, vamos para o código.
+
+11:40.51999999999998
+Vou abrir o meu Visual Studio Code.
+
+11:43.379999999999995
+Muito bem.
+
+11:44.139999999999986
+E aí, pessoal, o que a gente vai iniciar fazendo aqui? Vou abrir o meu Visual Studio Code. Muito bem.
+
+11:48.10000000000002
+E aí, pessoal, o que a gente vai iniciar fazendo aqui?
+
+11:56.65999999999997
+A gente vai, aqui na nossa pasta source, criar um carinha aqui chamado screens.
+
+11:59.799999999999955
+Ou a gente pode chamar de pages, por exemplo, tá bom?
+
+12:3.0399999999999636
+E a gente vai ter duas páginas aqui principais. A gente vai ter Products.
+
+12:6.139999999999986
+E depois dentro de Products nós vamos ter o List.
+
+12:10.659999999999968
+E também vamos ter o Detail.
+
+12:13.799999999999955
+Beleza.
+
+12:16.639999999999986
+Deixa eu só configurar aqui a minha outra telinha.
+
+12:21.82000000000005
+Para não perder a organização aqui com vocês.
+
+12:26.120000000000005
+Muito bem. Então, agora,
+
+12:28.120000000000005
+criado essas duas pastas, eu vou criar
+
+12:29.960000000000036
+os componentes React aqui dentro.
+
+12:31.779999999999973
+O primeiro que a gente vai ter aqui
+
+12:33.24000000000001
+vai ser um carinha chamado index.tsx
+
+12:36.860000000000014
+dentro do detail.
+
+12:38.48000000000002
+Tá bom?
+
+12:39.75999999999999
+E aí, pessoal, por que eu vou chamar
+
+12:42
+esse carinha de index.tsx
+
+12:44.17999999999995
+aqui, né?
+
+12:46.01999999999998
+Porque a gente já está em uma estrutura de pastas organizada.
+
+12:50.460000000000036
+Então, não é necessário a gente ficar criando aqui o nome do arquivo
+
+12:55.700000000000045
+igual ao nome do componente, beleza?
+
+12:58
+Isso é só mesmo uma otimização aqui que a gente pode fazer
+
+13:0.8600000000000136
+de modo a economizar tempo aqui e tornar nossas aplicações mais rápidas.
+
+13:7.039999999999964
+Muito bem.
+
+13:8.059999999999945
+Feito isso, eu vou criar aqui.
+
+13:10.259999999999991
+Eu vou fazer um import do React.
+
+13:12.960000000000036
+Dentro do React, beleza?
+
+13:15.200000000000045
+E vou fazer aqui um export const product detail.
+
+13:21.17999999999995
+E como vocês perceberam, a gente vai usar TypeScript por padrão, tá?
+
+13:25.5
+Eu sempre recomendo que nós usemos TypeScript por padrão
+
+13:28.980000000000018
+por causa do desempenho que a gente tem,
+
+13:31.700000000000045
+da segurança de código que a gente também tem
+
+13:34.960000000000036
+e tudo mais que o TypeScript nos oferece.
+
+13:37.539999999999964
+Fique tranquilo, você nem vai sentir que a gente vai estar usando TypeScript aqui.
+
+13:41.5
+Vai ser bem tranquilo, beleza?
+
+13:43.89999999999998
+Então, agora que a gente tem o nosso componente,
+
+13:46.84000000000003
+vamos aqui iniciar uma funçãozinha chamada fat-product.
+
+13:53.059999999999945
+Vai ser aquela função que a gente vai realmente fazer a requisição
+
+13:56.940000000000055
+para obter os produtos.
+
+14:0.08000000000004093
+Agora, o que a gente precisa quando a gente precisa fazer essas requisições HTTP?
+
+14:5.059999999999945
+Do Axios. E lembrem-se que a gente já quando a gente precisa fazer essas requisições HTTP? Do Axios.
+
+14:6.080000000000041
+E lembrem-se que a gente já tem um Axios instalado aqui.
+
+14:9.759999999999991
+Então, basta importar.
+
+14:12.120000000000005
+A gente vai fazer aqui o import.
+
+14:14.200000000000045
+Axios from Axios.
+
+14:16.960000000000036
+Beleza?
+
+14:17.700000000000045
+E eu só estou com um errinho aqui porque eu não dei um yarn.
+
+14:21.139999999999986
+Beleza?
+
+14:21.519999999999982
+Se você tiver com esse errinho também, só roda um yarn ou um npm install,
+
+14:25.58000000000004
+ele vai instalar as dependências,
+
+14:26.980000000000018
+a gente não vai ter esse problema.
+
+14:28.899999999999977
+Muito bem, erro resolvido,
+
+14:31.539999999999964
+vamos voltar aqui.
+
+14:32.77999999999997
+O que eu vou fazer aqui nesse FAT Product?
+
+14:34.799999999999955
+Eu vou dar um return,
+
+14:36.940000000000055
+axios.get,
+
+14:40.08000000000004
+e para qual URL eu vou fazer esse pedido?
+
+14:43.15999999999997
+Vai ser aqui, http://localhost 2.3333.
+
+14:49.32000000000005
+Por quê?
+
+14:50.039999999999964
+Lembrem-se que o nosso servidor vai iniciar nessa porta.
+
+14:53.639999999999986
+Então, é por esse motivo que a gente vai acessar essa porta direto.
+
+14:57.60000000000002
+Depois, barra products, barra qual é o produto que eu quero acessar.
+
+15:4.2999999999999545
+Lembrem-se que a gente está dentro de detail.
+
+15:6.759999999999991
+Se a gente está dentro de detail,
+
+15:7.980000000000018
+a gente tem que ter aqui um ID.
+
+15:10.039999999999964
+Então, muito bem. Passo um ID aqui,
+
+15:11.879999999999995
+que é um number, e faço uma interpolation
+
+15:14.399999999999977
+aqui para pegar esse ID.
+
+15:16.799999999999955
+Após obter esses dados,
+
+15:18.32000000000005
+eu pego a resposta,
+
+15:21.340000000000032
+response,
+
+15:22.5
+e retorno
+
+15:24.379999999999995
+aqui, response.data.
+
+15:28.32000000000005
+Muito bem.
+
+15:29.360000000000014
+Essa linha aqui vai lá, vai buscar no nosso JSON server esse produto
+
+15:35.15999999999997
+e vai retornar para a nossa aplicação.
+
+15:37.879999999999995
+Feito isso, o que a gente pode fazer?
+
+15:39.940000000000055
+A gente pode criar um estado aqui.
+
+15:41.860000000000014
+Se uma vez que a gente vai ter que buscar esse produto,
+
+15:44.27999999999997
+a gente vai ter que salvar ele em algum lugar
+
+15:45.74000000000001
+para que a gente consiga renderizá-lo na tela.
+
+15:49.77999999999997
+Então, beleza.
+
+15:51.15999999999997
+Vou importar aqui o useState.
+
+15:53.41999999999996
+E esse produto, quando a gente renderizar a primeira vez,
+
+15:56.379999999999995
+ele vai ser undefined.
+
+15:57.75999999999999
+Então, a gente não precisa passar nada aqui dentro.
+
+16:6.159999999999968
+Porém, lembre-se, como a gente está trabalhando com TypeScript aqui É legal a gente tipar, tá bom?
+
+16:13.440000000000055
+Qual vai ser aqui o formato, o shape desse resultado Então, o que eu vou fazer?
+
+16:14.759999999999991
+Aqui dentro da pastinha src, eu vou criar uma pasta chamada types
+
+16:20.480000000000018
+E dentro dessa pasta types, eu vou criar um arquivo iProduct.
+
+16:25.940000000000055
+Por que iProduct, João?
+
+16:27.879999999999995
+Porque a gente vai criar uma interface
+
+16:29.899999999999977
+e eu gosto, nós
+
+16:31.91999999999996
+temos aqui na empresa por padrão,
+
+16:33.82000000000005
+onde nós trabalhamos nos projetos,
+
+16:36.01999999999998
+nomear as interfaces
+
+16:38
+com esse I na frente.
+
+16:39.65999999999997
+Então, eu vou fazer Export, Interface,
+
+16:42.67999999999995
+iProduct
+
+16:43.440000000000055
+e vou determinar quais
+
+16:46.059999999999945
+são os dados e os tipos,
+
+16:48.58000000000004
+beleza? Como que eu faço isso?
+
+16:50.27999999999997
+Eu abro aqui o meu db.json
+
+16:51.879999999999995
+e olha aqui, ó, tomo
+
+16:53.67999999999995
+id, name, price, description
+
+16:55.84000000000003
+e image. Então, vamos lá.
+
+16:58.360000000000014
+O id vai ser um number,
+
+17:1.0599999999999454
+o name
+
+17:1.9800000000000182
+vai ser uma string,
+
+17:4.619999999999891
+depois o price, ali ele tá com uma string Depois o price
+
+17:6.680000000000064
+Ali ele está com uma string, né?
+
+17:10.079999999999927
+Então vamos preservar aqui o formato
+
+17:12.579999999999927
+Vamos aqui, uma description que também é uma string
+
+17:15.6400000000001
+E uma image que também é uma string
+
+17:18.779999999999973
+Beleza
+
+17:19.88000000000011
+Interface criada
+
+17:21.700000000000045
+Já podemos importá-la lá no nosso Product Detail.
+
+17:26.1400000000001
+Então, a gente fala aqui, olha, esse produto vai ser desse tipo aqui.
+
+17:36
+Muito bem.
+
+17:37.57999999999993
+Agora que nós fizemos isso, o que nós temos que fazer aqui?
+
+17:41.27999999999997
+Fazer um return, né?
+
+17:42.33999999999992
+Nós temos um component act act então temos que renderizar
+
+17:45.460000000000036
+aqui aquilo que nós queremos mostrar na tela então eu vou colocar aqui por volta de tudo
+
+17:50.799999999999955
+uma div beleza e já vou dar aqui para essa div uma class name chamada container uma coisinha
+
+18:0.4600000000000364
+aqui que eu não falei para vocês mas o starter já tem um CSS que eu programei para vocês.
+
+18:6.3599999999999
+Como o foco da aula é o
+
+18:7.940000000000055
+React Query e a gente não tem tanto
+
+18:9.940000000000055
+tempo assim, vamos focar naquilo
+
+18:11.960000000000036
+que realmente tem valor e interessa.
+
+18:13.920000000000073
+Mas, caso vocês tenham curiosidade, vocês
+
+18:15.88000000000011
+podem vir aqui dentro do app.css
+
+18:17.8599999999999
+e ver as linhas
+
+18:19.480000000000018
+básicas que eu coloquei de CSS, só para a gente ter uma aplicação um pouquinho mais bonita. Então, beleza.
+
+18:29.779999999999973
+Colocamos aqui o container, que vai ser esse nosso carinha principal.
+
+18:34.1400000000001
+E lembrem-se que, vamos abrir o nosso protótipo.
+
+18:36.48000000000002
+A gente está construindo essa tela de detail.
+
+18:39.83999999999992
+Primeira coisa que a gente vai ter aqui vai ser esse link aqui,
+
+18:41.61999999999989
+voltar para a lista de produtos. Então, vamos criar aqui um A.
+
+18:46.66000000000008
+HF.
+
+18:50.960000000000036
+Eu vou fazer dessa forma aqui.
+
+18:52.74000000000001
+Eu já explico para vocês por quê.
+
+18:57.25999999999999
+E voltar à lista de produtos.
+
+19:1.400000000000091
+Por que eu vou usar um HF aqui com esse símbolo aqui?
+
+19:3.980000000000018
+Porque eu não quero configurar rotas aqui, eu quero usar o state para renderizar
+
+19:6.119999999999891
+condicionalmente os dois. Por isso,
+
+19:8.3599999999999
+a gente vai passar o href
+
+19:9.61999999999989
+com esse cerquilha e
+
+19:11.799999999999955
+no onClick nós vamos usar um
+
+19:14
+callback. Mas não se preocupem, vamos
+
+19:15.839999999999918
+terminar aqui a nossa renderização.
+
+19:18.980000000000018
+Depois que a gente
+
+19:20.220000000000027
+fez aqui o
+
+19:21.559999999999945
+nosso href, vamos colocar o id
+
+19:24.079999999999927
+que vai ser uma div
+
+19:25.720000000000027
+e eu vou dar aqui um class name
+
+19:27.8599999999999
+pra ele de row, ele vai ser uma linha, né?
+
+19:30.1400000000001
+Aqui, ó, é esse carinha aqui.
+
+19:32.24000000000001
+Esse id aqui.
+
+19:34.11999999999989
+E a gente vai ter aqui
+
+19:35.8599999999999
+um label
+
+19:36.460000000000036
+vai ser
+
+19:39.66000000000008
+id dois pontos e vamos
+
+19:41.819999999999936
+ter aqui o product.id
+
+19:44.27999999999997
+que vai ser o nosso produto
+
+19:46.1400000000001
+renderizado, beleza? Ele vai reclamar aqui
+
+19:50.059999999999945
+que, olha, product pode ser undefined e
+
+19:53.460000000000036
+ele tá certo, tá? Então, o que a gente vai
+
+19:55.8599999999999
+fazer? A gente já ajusta isso, vamos só
+
+19:58.98000000000002
+terminar aqui a nossa renderização.
+
+20:0.9600000000000364
+Depois do id, eu vou ter também o name
+
+20:4.079999999999927
+do produto e utilização depois do aí de eu vou ter também o name o produto
+
+20:11.240000000000009
+eu botei aqui o pai e a parte legal do TypeScript pessoal é que vocês vêm que a gente tem um alto
+
+20:21.059999999999945
+complete aqui ó muito massa né depois do price vamos ter aqui a description.
+
+20:30.25999999999999
+Isso. E depois da description
+
+20:32.16000000000008
+vamos ter aqui a image.
+
+20:35.92000000000007
+Vamos fazer a mesma coisa.
+
+20:38.700000000000045
+Muito bem.
+
+20:40.24000000000001
+E a image
+
+20:40.819999999999936
+não vai ser assim, né?
+
+20:44.48000000000002
+Ela tem que ser uma tagzinha específica do HTML, uma image,
+
+20:48.72000000000003
+aonde o source dela, o src, vai ser product.image.
+
+20:53.440000000000055
+Muito bem.
+
+20:55.180000000000064
+E aí vocês podem falar, João, mas a gente está com erro aqui do produto.
+
+20:58.59999999999991
+E é isso que a gente vai resolver agora, tá?
+
+21:1.0199999999999818
+Lembrem-se que a gente criou a nossa função de fat, mas ainda não chamamos ela.
+
+21:4.8599999999999
+Então vamos fazer isso agora.se que a gente criou a nossa função de FET, mas ainda não chamamos ela. Então, vamos fazer isso agora.
+
+21:5.980000000000018
+Como que a gente chama essa função? Através
+
+21:08
+do useEffect.
+
+21:10.420000000000073
+Já tenho aqui o meu
+
+21:12
+useEffect pronto. E eu
+
+21:13.980000000000018
+quero falar assim, cara, quando você montar
+
+21:16.180000000000064
+o componente, o que que
+
+21:18
+você faz pra mim? Você chama
+
+21:20
+o FET product, passando
+
+21:22.220000000000027
+aqui um ID, que a gente vai receber ele de algum lugar. E assim
+
+21:25.980000000000018
+que você finalizar essa requisição,
+
+21:31.319999999999936
+aqui a gente
+
+21:32.07999999999993
+vai receber o data.
+
+21:34.440000000000055
+E o que eu faço? Eu
+
+21:35.90000000000009
+seto aqui
+
+21:37.039999999999964
+esse data no meu estado.
+
+21:40.11999999999989
+Muito bem. Só que
+
+21:41.66000000000008
+é legal a gente mostrar um spinner, né, pessoal?
+
+21:44.039999999999964
+A gente tem que mostrar uma bolinha rodando
+
+21:45.799999999999955
+para o usuário saber que alguma coisa está acontecendo.
+
+21:48.940000000000055
+Por isso que eu vou criar aqui um estado chamado
+
+21:51.200000000000045
+isLoading e setIsLoading.
+
+21:55.33999999999992
+Olha que legal.
+
+21:56.700000000000045
+E esse carinha aqui vai ser um booleano
+
+21:58.40000000000009
+e vai começar a falso.
+
+22:1.2799999999999727
+Muito bem.
+
+22:2.980000000000018
+Então, eu vou iniciar lá true
+
+22:5.319999999999936
+e assim que eu finalizar
+
+22:8.420000000000073
+aqui o processo
+
+22:10.039999999999964
+eu dou um set
+
+22:11.720000000000027
+isLoading a falso, fantástico
+
+22:14.799999999999955
+e agora
+
+22:16.160000000000082
+que nós temos esses estados, o que nós podemos
+
+22:18.40000000000009
+fazer aqui, nós podemos fazer um
+
+22:20.299999999999955
+early return
+
+22:21.779999999999973
+se isLoading ou
+
+22:24.3599999999999
+não product, ou seja early return se isLoading ou não
+
+22:26.440000000000055
+product, ou seja,
+
+22:28.279999999999973
+se eu estou carregando ou não tenho produto,
+
+22:31.11999999999989
+faz um return aqui falando
+
+22:32.440000000000055
+loading product
+
+22:34.01999999999998
+e por causa
+
+22:36.5
+desse early return, a gente já não tem
+
+22:38.40000000000009
+mais os erros lá embaixo, porque a gente
+
+22:40.319999999999936
+garante que o código só
+
+22:42.42000000000007
+vai chegar aqui quando nós
+
+22:44.38000000000011
+tivermos um produto.
+
+22:45.8599999999999
+Muito massa, né?
+
+22:47.74000000000001
+Falta só uma coisinha para a gente finalizar o detail, que é...
+
+22:51.33999999999992
+A gente não quer passar um ID hardcoded, né?
+
+22:53.59999999999991
+Então, a gente vai ter que receber ele por props aqui.
+
+22:56.59999999999991
+Então, eu vou criar aqui um type.
+
+22:59.960000000000036
+Product detail props.
+
+23:3.660000000000082
+Onde eu vou receber um ID number.
+
+23:6.759999999999991
+E aí eu posso fazer aqui assim.
+
+23:8.779999999999973
+Eu falo que eu tenho props.
+
+23:12.1400000000001
+Só que como é um parâmetro só.
+
+23:13.960000000000036
+Eu já posso desestruturar essas props.
+
+23:16.1400000000001
+Então eu abro chaves aqui.
+
+23:17.700000000000045
+E obtenho um ID daqui.
+
+23:18.90000000000009
+E é esse ID que vai vir aqui para dentro.
+
+23:23.1400000000001
+Esse ID que vai vir aqui para dentro.
+
+23:23.440000000000055
+Olha que massa.
+
+23:24.039999999999964
+Olha que massa.
+
+23:32.700000000000045
+E aqui, até por segurança, no nosso UseEffect, a gente pode colocar o ID aqui.
+
+23:33.819999999999936
+Incluí-lo aqui, né?
+
+23:39.09999999999991
+Se bem que não vai ser necessário, porque cada componente que for renderizado vai ser único.
+
+23:41.01999999999998
+Enfim, essa é outra questão.
+
+23:44.72000000000003
+Então, temos aqui o nosso Product Detail pronto.
+
+23:46.1400000000001
+O que vai acontecer aqui?
+
+23:48.680000000000064
+Assim que ele abrir, ele vai receber um ID.
+
+23:50.66000000000008
+Por exemplo, ID 5.
+
+23:54.319999999999936
+Ele vai no nosso servidor, vai buscar essas informações. E com essas informações em mãos, vai atualizar nossa página e vai renderizar o conteúdo.
+
+24:0.7200000000000273
+Bonitinho.
+
+24:1.6600000000000819
+Beleza.
+
+24:3.099999999999909
+O que falta agora?
+
+24:4.839999999999918
+Falta agora a gente criar o nosso list Bora lá
+
+24:7.680000000000064
+porque aqui um index.txt vamos importar aqui o react já sei que vou usar aqui o use state muito bem e export const product list o product list por sua vez não vai receber né nenhum nenhum
+
+24:33.92000000000007
+parâmetro e aqui que que eu vou fazer eu vou voltar no detail e vou aproveitar esse código
+
+24:40.33999999999992
+aqui ó pessoal tanto a função quanto a interface quanto o axis, porque isso vai se repetir.
+
+24:45.700000000000045
+A gente só vai mudar a rota, beleza?
+
+24:48.33999999999992
+Então, aqui, ao invés de a gente pesquisar por id,
+
+24:51.680000000000064
+a gente só vai buscar products.
+
+24:54.319999999999936
+Muito bem.
+
+24:55.559999999999945
+Não precisamos desse argumento
+
+24:57.88000000000011
+e renomeamos a função fetchProducts no plural,
+
+25:1.8199999999999363
+ao invés de estar no singular.
+
+25:4.7999999999999545
+Beleza?
+
+25:5.740000000000009
+Até aqui, nada de novo, né?
+
+25:7.579999999999927
+Só estamos aqui implementando o nosso primeiro modelo
+
+25:10.039999999999964
+para, então, aplicar o React Query dentro de tudo isso.
+
+25:13.200000000000045
+Mas fiquem tranquilos que vai valer muito a pena
+
+25:15.099999999999909
+e vocês vão ficar chocados
+
+25:16.61999999999989
+com a performance que a gente vai ter aqui no final.
+
+25:19.11999999999989
+Beleza?
+
+25:20.3599999999999
+Então, o que eu vou fazer agora, pessoal? Eu vou criar aqui no meu product list o estado.
+
+25:27.74000000000001
+Model product, set products.
+
+25:31.180000000000064
+Vai ser um use state.
+
+25:35.039999999999964
+E ele pode começar com um array vazio, né?
+
+25:37.3599999999999
+E qual vai ser o tipo desse estado?
+
+25:39.24000000000001
+Vai ser um IProduct, só que array.
+
+25:41.22000000000003
+Vai ser uma lista de produtos.
+
+25:41.799999999999955
+Beleza?
+
+25:45.700000000000045
+Posso ir lá no detail e copiar o loading.
+
+25:49.01999999999998
+Porque a gente vai ter também um loading aqui.
+
+25:50.180000000000064
+Beleza?
+
+25:53.8599999999999
+E também posso pegar daqui esse useEffect.
+
+25:56.77999999999997
+Porque ele vai ser bem parecido, né?
+
+25:59.24000000000001
+Então, a gente vai chamar o useEffect.
+
+26:2.2200000000000273
+Vamos chamar a função fatProducts. Sem passar ID nenhum.
+
+26:4.779999999999973
+E assim que obtermos o resultado, a gente atualiza os products passando o data.
+
+26:11.259999999999991
+Muito bem, já temos aqui também a função que faz a requisição.
+
+26:14.579999999999927
+O que falta agora, pessoal? Falta renderizar a nossa tabela.
+
+26:19.420000000000073
+Antes disso, eu quero fazer um if aqui.
+
+26:22.1400000000001
+Se isLoading, o que eu quero fazer um if aqui, ó. Se isLoading que eu quero fazer,
+
+26:26.039999999999964
+eu quero retornar um h1
+
+26:27.799999999999955
+chamado loading
+
+26:29.819999999999936
+products list.
+
+26:32.819999999999936
+Lá aqui, olha, se
+
+26:33.98000000000002
+a gente vai carregando, cara, eu tô carregando os produtos
+
+26:36.299999999999955
+pra ter um feedback.
+
+26:38.3599999999999
+Caso não, eu vou
+
+26:40
+fazer o seguinte. Eu vou
+
+26:41.960000000000036
+retornar aqui uma div
+
+26:43.700000000000045
+chamada
+
+26:45.72000000000003
+com a classe container,
+
+26:47.960000000000036
+e dentro desse container
+
+26:50.27999999999997
+que vai ficar por volta de tudo, vamos
+
+26:51.88000000000011
+voltar lá no nosso desenho,
+
+26:53.799999999999955
+dentro desse container a gente vai
+
+26:56
+ter um titulozinho e vamos ter uma
+
+26:57.940000000000055
+tabela. Olha que legal.
+
+27:0.01999999999998181
+Então, pro nosso título, eu vou
+
+27:1.8800000000001091
+colocar aqui
+
+27:2.519999999999982
+products list e depois vou criar minha tabela. Então, para o nosso título, eu vou colocar aqui Products, Products List.
+
+27:7.519999999999982
+E depois eu vou criar a minha tabela.
+
+27:11.519999999999982
+Eu vou ter uma tabela, vou ter aqui um head.
+
+27:14.559999999999945
+Vou colocar aqui um thead.
+
+27:18.11999999999989
+E na minha linha do cabeçalho, do head,
+
+27:22.059999999999945
+eu vou ter o id, o name
+
+27:25.460000000000036
+e o detail.
+
+27:28.90000000000009
+Basicamente o que a gente colocou
+
+27:30.220000000000027
+aqui. Beleza? Sem novidades
+
+27:32.039999999999964
+aqui. Depois que a gente implementou
+
+27:34.38000000000011
+o thead, eu quero adicionar
+
+27:36
+o thbody.
+
+27:38.539999999999964
+E dentro desse thbody
+
+27:40.27999999999997
+eu quero iterar.
+
+27:42.01999999999998
+Eu quero fazer um map ali dentro
+
+27:43.88000000000011
+desses produtos que eu já obtive, pra
+
+27:45.819999999999936
+renderizar as linhas. Como que eu faço isso?
+
+27:48.48000000000002
+Eu faço product.map,
+
+27:50.74000000000001
+pego daqui de dentro o
+
+27:51.8599999999999
+product, e o que que eu vou
+
+27:53.83999999999992
+renderizar aqui dentro? Vou renderizar uma row,
+
+27:57.16000000000008
+uma tabela, né,
+
+27:58.07999999999993
+um t-row,
+
+27:59.8599999999999
+e na primeira coluna
+
+28:1.8599999999999
+eu vou renderizar product.id,
+
+28:4.460000000000036
+na segunda product.name
+
+28:6.539999999999964
+e na terceira
+
+28:08
+o que a gente vai renderizar?
+
+28:11.799999999999955
+um detail
+
+28:12.660000000000082
+mas o que é isso? isso é um link pra gente
+
+28:14.559999999999945
+clicar, então bora lá
+
+28:15.839999999999918
+bora criar aqui um href
+
+28:17.660000000000082
+a mesma
+
+28:20.420000000000073
+forma que a gente fez
+
+28:21.579999999999927
+chamado detail, muito bem Da mesma forma que a gente fez.
+
+28:27.279999999999973
+Chamado detail.
+
+28:31.160000000000082
+Muito bem, já temos aqui a nossa tabela renderizada.
+
+28:31.88000000000011
+Olha que legal.
+
+28:34.98000000000002
+E aí, pessoal, o que eu vou fazer agora?
+
+28:40.200000000000045
+Eu vou começar a mostrar algumas coisas na tela.
+
+28:43.48000000000002
+A gente fez um monte de código aqui, a gente não sabe se isso tá funcionando. Então, aqui no nosso app.tsx,
+
+28:47.319999999999936
+o que que eu vou fazer?
+
+28:48.539999999999964
+Eu vou importar esses dois
+
+28:49.960000000000036
+componentes.
+
+28:55.22000000000003
+Eu vou importar
+
+28:56.01999999999998
+aqui o pages
+
+28:57.33999999999992
+products detail
+
+28:59.33999999999992
+e vou importar daqui de dentro
+
+29:2.2200000000000273
+o product detail
+
+29:3.519999999999982
+e vou pegar o List.
+
+29:8.88000000000011
+Muito bem.
+
+29:9.839999999999918
+Nossos dois componentes.
+
+29:12
+E só para a gente ver se está tudo bem aqui, se nada está quebrado,
+
+29:15.940000000000055
+eu vou renderizar o Product List.
+
+29:21.88000000000011
+Muito bem.
+
+29:22.839999999999918
+Vamos ver se isso está funcionando.
+
+29:24.339999999999918
+Eu vou abrir aqui o meu terminal no próprio Visual Studio
+
+29:26.75999999999999
+E aí eu tenho que fazer uma coisa
+
+29:28.420000000000073
+A gente depende do servidor
+
+29:30.579999999999927
+Daquele servidor do JSON Server
+
+29:32.319999999999936
+Como que a gente faz?
+
+29:33.819999999999936
+Eu vou abrir dois terminais, um ao lado do outro
+
+29:36.539999999999964
+E vou executar esse comandinho aqui
+
+29:39.319999999999936
+Yarn
+
+29:40.83999999999992
+Server
+
+29:42.180000000000064
+Respond to JSON
+
+29:43.440000000000055
+E olha que louco, nosso servidor já está
+
+29:46.48000000000002
+no ar. Vamos verificar se está
+
+29:48.3599999999999
+retornando bem os produtos?
+
+29:51.07999999999993
+Muito bem.
+
+29:53.559999999999945
+Nosso servidorzinho
+
+29:54.66000000000008
+está funcionando. E agora
+
+29:56.3599999999999
+no meu outro terminal aqui eu vou dar um Yarn
+
+29:58.319999999999936
+dev para subir a nossa aplicação
+
+30:0.35999999999989996
+front-end.
+
+30:2.5
+E loading
+
+30:4.160000000000082
+products list.
+
+30:6.019999999999982
+Temos a nossa lista bonitona.
+
+30:9.220000000000027
+Parabéns
+
+30:9.779999999999973
+para vocês que chegaram até aqui.
+
+30:11.799999999999955
+Muito bem. Agora, pessoal, que nós temos
+
+30:13.839999999999918
+nossa lista bem bonita aqui de produtos,
+
+30:16.279999999999973
+eu quero criar a lógica que
+
+30:17.779999999999973
+redireciona o usuário
+
+30:19.960000000000036
+para o detail. Então, o que
+
+30:21.799999999999955
+eu vou fazer aqui? Eu vou ter aqui um
+
+30:23.720000000000027
+estado
+
+30:24.200000000000045
+chamado product ID. Set product ID. para o detail. Então, o que eu vou fazer aqui? Eu vou ter aqui um estado chamado
+
+30:26.59999999999991
+product ID,
+
+30:28.09999999999991
+set product ID,
+
+30:30.299999999999955
+e é esse estado que vai
+
+30:32
+determinar se a gente
+
+30:34.299999999999955
+vai ter
+
+30:34.92000000000007
+um número ou
+
+30:37.940000000000055
+nulo. Se eu tiver um número,
+
+30:40.680000000000064
+significa que eu tenho
+
+30:42.16000000000008
+que renderizar um detalhe. Então, vamos lá.
+
+30:48.27999999999997
+Product ID é diferente de NULL? Se for, eu quero renderizar o Product Detail, se não, o Product List. Olha que legal.
+
+30:57.940000000000055
+Só que o Product Detail aqui pede para mim um ID, lemam? Então, eu passo aqui para ele o product id.
+
+31:6.019999999999982
+Muito bem.
+
+31:7.8599999999999
+Só que, reparem que ninguém está chamando
+
+31:10.1400000000001
+essa função.
+
+31:12.019999999999982
+Então, a gente vai passar um callback
+
+31:13.960000000000036
+para o product list, e quando
+
+31:16.09999999999991
+a gente clicar no detail,
+
+31:18.180000000000064
+a gente vai atualizar esse estado
+
+31:20.200000000000045
+aqui. Então, eu vou fazer assim,
+
+31:22.220000000000027
+const on
+
+31:23.8599999999999
+product detail, vou criar uma funçãozinha, estado aqui. Então eu vou fazer assim, ó, const on product
+
+31:25.779999999999973
+detail, vou criar uma funçãozinha,
+
+31:29.339999999999918
+vai receber um ID,
+
+31:32.25999999999999
+e o set
+
+31:33.539999999999964
+product ID vai receber esse ID
+
+31:35.98000000000002
+no estado. Muito legal, né?
+
+31:38.24000000000001
+E eu vou passar essa
+
+31:39.88000000000011
+função pra esse componente,
+
+31:41.98000000000002
+pra ele dar esse trigger pra nós.
+
+31:44.40000000000009
+E aqui dentro do products
+
+31:45.98000000000002
+list eu vou criar um
+
+31:47.88000000000011
+type.
+
+31:53.960000000000036
+Exatamente. E aqui
+
+31:55.98000000000002
+eu vou falar que ele é uma função
+
+31:57.59999999999991
+que retorna void,
+
+31:59.799999999999955
+mas que ele recebe, que ele
+
+32:1.6400000000001
+passa lá para trás, um id.
+
+32:4.740000000000009
+E aí eu faço assim, obtenho esse callback aqui,
+
+32:10.900000000000091
+nas minhas props, e lá no href que a gente tem,
+
+32:15.180000000000064
+que a gente deixou preparado aqui, a gente faz o seguinte,
+
+32:17.3599999999999
+on product detail, e eu passo como parâmetro o product ID.
+
+32:21.519999999999982
+Product Detail e eu passo como parâmetro o Product ID.
+
+32:26.09999999999991
+Tcharam!
+
+32:27.3599999999999
+Tcharam!
+
+32:28.24000000000001
+Vamos ver se está funcionando esse detail.
+
+32:29.960000000000036
+Vamos voltar aqui no nosso app.
+
+32:31.25999999999999
+Vamos dar só um F5 para garantir.
+
+32:34.299999999999955
+Vou clicar aqui no primeiro.
+
+32:36.92000000000007
+Loading Product.
+
+32:38.940000000000055
+Carregamos o detalhe do produto.
+
+32:40.66000000000008
+Estamos quase lá, pessoal.
+
+32:42.559999999999945
+A nossa implementação está quase pronta
+
+32:44.200000000000045
+aqui sem o React Query. Só falta um detalhe.
+
+32:46.88000000000011
+Esse voltar a lista de
+
+32:48.09999999999991
+produtos não funciona. Bora
+
+32:49.940000000000055
+programar ele. Da mesma forma que
+
+32:52
+a gente teve um callback
+
+32:53.940000000000055
+aqui para o list, a gente vai ter
+
+32:55.98000000000002
+um callback também para o
+
+32:59.8599999999999
+detail.
+
+33:1.2000000000000455
+E aí o que a gente vai fazer?
+
+33:2.5799999999999272
+A gente vai zerar.
+
+33:7.519999999999982
+Está ali a nulo, né? E aí eu que a gente vai fazer? A gente vai zerar Está ali a nulo, né?
+
+33:9.5
+E aí eu vou fazer assim, ó Vou passar aqui um callbackzinho chamado
+
+33:11.839999999999918
+OnBack
+
+33:12.559999999999945
+Passando ele como argumento
+
+33:15.819999999999936
+E lá dentro da nossa interface
+
+33:17.720000000000027
+Do detail receber
+
+33:20.059999999999945
+Esse
+
+33:21.1400000000001
+Esse argumento
+
+33:24
+Opa, só a Siri aqui estava querendo
+
+33:26.6400000000001
+falar comigo.
+
+33:28.559999999999945
+E agora, eu tenho esse
+
+33:30.440000000000055
+onback aqui como argumento e o que eu posso
+
+33:32.59999999999991
+fazer é chamá-lo
+
+33:34.88000000000011
+aqui.
+
+33:36.559999999999945
+Muito bem. Vamos ver se está funcionando.
+
+33:39.940000000000055
+Vamos voltar.
+
+33:40.940000000000055
+Espera aí.
+
+33:41.51999999999998
+Ok.
+
+33:44.72000000000003
+Vou clicar no número 1.
+
+33:47.3599999999999
+Beleza.
+
+33:48.01999999999998
+Vou voltar a lista de produtos.
+
+33:50.11999999999989
+Não funcionou.
+
+33:51.3599999999999
+Vamos entender por quê.
+
+33:52.83999999999992
+Ah, eu acho que eu não salvei aqui.
+
+33:55.48000000000002
+Pronto.
+
+33:56.01999999999998
+Agora salvei.
+
+33:57.3599999999999
+Vamos tentar.
+
+33:59.01999999999998
+Beleza.
+
+33:59.539999999999964
+Funcionou.
+
+34:0.35999999999989996
+Então, já temos aqui o nosso app funcionando.
+
+34:2.3199999999999363
+Percebam.
+
+34:3.240000000000009
+Eu clico em Detail, ele renderiza o componente filho,
+
+34:7.2999999999999545
+o componente filho executa o request.
+
+34:9.519999999999982
+Vou até aqui abrir para vocês a network, dar um zoomzinho aqui para ficar legal.
+
+34:15.139999999999873
+Vou clicar aqui, vou voltar à lista de produtos.
+
+34:17.960000000000036
+Ele vai lá e faz o request para o product.
+
+34:20.73999999999978
+Eu clico no item 1, vai lá e pede o item 1.
+
+34:24.860000000000127
+E é aqui que o React Key vem clico no item 1. Vai lá e pede o item 1. E é aqui que o
+
+34:25.860000000000127
+React Query vem brilhar, pessoal.
+
+34:27.73999999999978
+A gente vai implementar agora o React Query nesse
+
+34:29.659999999999854
+bolo de código que nós fizemos e vocês vão ficar
+
+34:31.90000000000009
+assustados o quão
+
+34:33.840000000000146
+bom é. Tá bom?
+
+34:35.960000000000036
+Então vamos lá. Eu vou
+
+34:37.38000000000011
+só minimizar aqui meu terminal
+
+34:39.039999999999964
+e começar a implementar com vocês o React
+
+34:41.940000000000055
+Query para otimizar o cache dessa nossa aplicação.
+
+34:46.960000000000036
+A gente começa fazendo o quê?
+
+34:52.559999999999945
+A gente começa indo no componente mais alto que a gente tem, que no caso aqui é esse main.tsx. E importando aqui de dentro do React Query, um carinha chamado QueryClientProvider e um carinha chamado QueryClient.
+
+35:2.1599999999998545
+client provider e um carinha chamado query client.
+
+35:4.519999999999982
+E a gente vai colocar, por volta
+
+35:6.360000000000127
+desse app, o nosso
+
+35:8.139999999999873
+provider.
+
+35:12.699999999999818
+A gente coloca o app
+
+35:14.2800000000002
+aqui dentro, abraça ele aqui
+
+35:16.23999999999978
+e
+
+35:17.659999999999854
+a gente precisa passar aqui
+
+35:20.019999999999982
+um client para ele. Então a gente faz assim,
+
+35:22.11999999999989
+ó.
+
+35:26.639999999999873
+Eu já vou explicar para vocês
+
+35:27.90000000000009
+porque a gente precisa fazer isso.
+
+35:33.340000000000146
+Muito bem.
+
+35:34.76000000000022
+Por que a gente precisa passar
+
+35:35.940000000000055
+esse client para esse provider? Porque nesse
+
+35:38.01999999999998
+client a gente pode fazer configurações
+
+35:39.960000000000036
+globais de cache, como por
+
+35:42
+exemplo, olha, eu quero que o meu
+
+35:43.940000000000055
+cache seja de 2 minutos, eu quero que o meu cache seja de 2 minutos, eu quero que
+
+35:46.26000000000022
+o meu cache seja de 5 minutos
+
+35:48.42000000000007
+e aí ele não vai revalidar
+
+35:50.40000000000009
+as requisições
+
+35:51.51999999999998
+depois desse tempo, só antes
+
+35:54.11999999999989
+desse tempo, só depois
+
+35:55.23999999999978
+beleza?
+
+35:58.2800000000002
+então, agora que a gente já tem
+
+36:0.3400000000001455
+o React Queue configurado e
+
+36:1.8800000000001091
+surpreendam-se, é só isso pra
+
+36:4.119999999999891
+configurar o React Queue, a gente
+
+36:6.019999999999982
+já pode começar a usá-lo.
+
+36:7.940000000000055
+Então, eu vou primeiro implementá-lo aqui no
+
+36:9.940000000000055
+list. Olha lá.
+
+36:12.11999999999989
+O que a gente faz aqui para implementar
+
+36:13.860000000000127
+o React Queue no list?
+
+36:16.159999999999854
+A gente faz um import
+
+36:17.420000000000073
+num carinha chamado useQueue
+
+36:19.820000000000164
+de dentro do React Queue.
+
+36:23.519999999999982
+E aí, até para manter o histórico aqui para vocês.
+
+36:27.199999999999818
+Prestem atenção no que eu vou fazer.
+
+36:30.019999999999982
+Eu vou comentar.
+
+36:31.940000000000055
+Todas essas linhas.
+
+36:34.059999999999945
+Todas.
+
+36:34.59999999999991
+Olha o tanto de código que eu comentei.
+
+36:36.559999999999945
+E vou fazer o seguinte.
+
+36:39.80000000000018
+Invocar esse hook.
+
+36:40.960000000000036
+E esse hook aqui.
+
+36:43.07999999999993
+Vai me dar algumas coisas que eu já vou mostrar para vocês
+
+36:45.63999999999987
+mas antes disso que que ele pede para nós o react-query trabalha com cache e para ele organizar
+
+36:53.440000000000055
+esse cache ele precisa de chaves únicas para o cache e por exemplo para o product list qual que
+
+37:0.2800000000002001
+é a chave única aqui pode ser URL URL? Pode. Um get para products
+
+37:5.5
+só acontece aqui. Então, o que a gente faz?
+
+37:08
+A gente passa um array aqui
+
+37:9.099999999999909
+e a gente chama
+
+37:11.199999999999818
+essa chave, esse key, essa key do
+
+37:13.800000000000182
+cache de products. E como
+
+37:15.88000000000011
+segundo argumento, a gente
+
+37:18
+chama aqui,
+
+37:20.059999999999945
+passa uma função chamada
+
+37:21.960000000000036
+fat products.
+
+37:23.7199999999998
+Só isso, pessoal.
+
+37:28.360000000000127
+Só essa linha vai me dar aqui um carinha chamado data.
+
+37:31.159999999999854
+E um carinha chamado isLoading.
+
+37:33.2199999999998
+O que esse data é?
+
+37:35.840000000000146
+Esse data é o próprio products. Então, eu posso renomear ele aqui para products.
+
+37:38.679999999999836
+Legal.
+
+37:40.13999999999987
+E aqui ele só vai me falar que products pode ser undefined no primeiro render.
+
+37:44.960000000000036
+Então, eu vou falar que, olha,
+
+37:46.059999999999945
+se estiver carregando ou não tiver products...
+
+37:51.2800000000002
+Espera aí.
+
+37:53.2199999999998
+Ah, tá. Desculpem.
+
+37:54.320000000000164
+Eu esqueci o tipo aqui, tá?
+
+37:56.13999999999987
+A gente precisa passar o tipo da mesma forma.
+
+37:59.7199999999998
+E está feito.
+
+38:1.1599999999998545
+E eu substituí 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 linhas de código por uma linha de código.
+
+38:10.139999999999873
+E aí a gente já pode voltar lá na nossa aplicação.
+
+38:13.559999999999945
+E reparem, vou dar um F5 aqui.
+
+38:15.820000000000164
+Primeiro FET, demorou 2 segundos.
+
+38:18.73999999999978
+Vou abrir o detail.
+
+38:20.360000000000127
+Aqui a gente não mexeu ainda, né?
+
+38:22.860000000000127
+Reparem a hora que eu voltar.
+
+38:26.079999999999927
+Instantâneo.
+
+38:26.90000000000009
+Ele não precisou fazer a requisição novamente.
+
+38:30.659999999999854
+Vocês entendem que a gente substituiu 13 linhas de código por uma
+
+38:34.7800000000002
+e ainda conseguimos fazer cache de uma lista gigante de dados,
+
+38:40.07999999999993
+dando uma experiência muito melhor para o usuário.
+
+38:44.059999999999945
+Então, vamos continuar que a coisa não parou por aqui, não.
+
+38:46.69999999999982
+Vamos entrar dentro do detail.
+
+38:49.059999999999945
+E vou comentar esse monte de código.
+
+38:53.26000000000022
+Vou copiar já essa listinha aqui, tá?
+
+38:55.48000000000002
+Que pode adiantar o nosso trabalho.
+
+38:58.92000000000007
+E aqui não vai ser uma lista, né?
+
+39:1.7800000000002
+Vai ser um product só.
+
+39:2.8400000000001455
+Vou importar o useQuery.
+
+39:5.579999999999927
+E aqui tem um detalhe. A chave de cache não pode ser uma lista, vai ser um product só. Vou importar o useQuery. E aqui tem um detalhe.
+
+39:7.320000000000164
+A chave de cache não pode ser products.
+
+39:10.059999999999945
+Ela tem que ser products barra o id do product.
+
+39:17.11999999999989
+Porque o cache é único.
+
+39:18.7199999999998
+A gente tem que tomar cuidado com isso para garantir que o nosso cache fique correto.
+
+39:22.539999999999964
+Tá bom?
+
+39:22.860000000000127
+E aí aqui ao invés de ser fetchproducts, vai ser fatproducts no singular,
+
+39:28.039999999999964
+passando o id para ele.
+
+39:31.079999999999927
+E aqui, ao invés de ser products no singular, no plural, vai ser no singular.
+
+39:35.7800000000002
+Então, de novo, substituí um monte de código por uma linha só.
+
+39:41.039999999999964
+Então, vamos ver agora o que isso deu de resultado para nós.
+
+39:44.01999999999998
+Vou dar um F5 aqui na página.
+
+39:48.179999999999836
+E aí, olha só, eu vou acessar o produto 1.
+
+39:51.48000000000002
+Primeiro loading,
+
+39:52.679999999999836
+tudo bem.
+
+39:53.90000000000009
+Eu vou voltar para a lista.
+
+39:55.820000000000164
+E olha o que vai acontecer quando eu entrar no produto 1.
+
+40:0.40000000000009095
+Instantâneo!
+
+40:1.0399999999999636
+A gente teve aqui
+
+40:1.9200000000000728
+o reaproveitamento de cache.
+
+40:3.900000000000091
+E agora, naqueles itens que já foram
+
+40:7.079999999999927
+cacheados, a gente tem aqui uma velocidade de resposta instantânea. E por que isso é tão
+
+40:14.239999999999782
+importante, pessoal? Porque reparem que otimiza muito o recurso, tá? Aqui a gente ainda está
+
+40:20.519999999999982
+revalidando por trás as requisições. E tem uma ferramenta muito boa para mostrar
+
+40:26.440000000000055
+esse detalhe de revalidação e tudo mais,
+
+40:31.7199999999998
+que é, a gente pode entrar dentro aqui do React Query
+
+40:34.61999999999989
+e pesquisar aqui dentro por DevTools.
+
+40:40.340000000000146
+E aqui dentro desse DevTools, a gente pode copiar
+
+40:43.36000000000013
+esse import aqui, lá no nosso app.
+
+40:48.960000000000036
+No app não, no main.
+
+40:51.63999999999987
+Importamos aqui.
+
+40:53.26000000000022
+E importar essa linha aqui, embaixo aqui do nosso app.
+
+40:58.460000000000036
+E eu vou falar que ele vai vir aberto por padrão.
+
+41:1.6599999999998545
+O que isso vai fazer, pessoal?
+
+41:3.2399999999997817
+Olha que massa.
+
+41:4.119999999999891
+Vou botar na nossa app.
+
+41:6.039999999999964
+O React Query renderiza pra nós
+
+41:8.320000000000164
+aqui um painel,
+
+41:10.260000000000218
+tá? Que vai mostrar
+
+41:11.860000000000127
+quando ele tá com um dado
+
+41:14.059999999999945
+fresco, quando ele tá com um
+
+41:16.09999999999991
+dado aqui que tá em cache, mas
+
+41:18.09999999999991
+não tá tão válido assim,
+
+41:19.960000000000036
+e quando ele tá fazendo fetching.
+
+41:21.960000000000036
+Então eu vou entrar no produto, por exemplo, 2
+
+41:24.059999999999945
+e olha que legal. Ele tá falando E quando ele está fazendo o fetching. Então eu vou entrar no produto, por exemplo, 2.
+
+41:26.11999999999989
+E olha que legal.
+
+41:28.980000000000018
+Ele está falando aqui, produto 2 está stale.
+
+41:30.2800000000002
+Ele já fez a requisição.
+
+41:32.59999999999991
+Eu vou voltar lá para o products 2.
+
+41:34.11999999999989
+Para a lista.
+
+41:37.039999999999964
+E ele revalidou, ficou azulzinho.
+
+41:38.539999999999964
+E já está stale de novo. Eu vou entrar no 2.
+
+41:40.86000000000013
+E vocês vão ver que ele vai estar fetching.
+
+41:42.59999999999991
+Vai ficar azul.
+
+41:44.460000000000036
+Olha lá.
+
+41:47.13999999999987
+entrar no dois e vocês vão ver que ele vai estar fetching vai ficar azul e a lá products2 azul e esteio então essa ferramenta consegue nos mostrar exatamente o que que ele tá fazendo por trás dos
+
+41:53.98000000000002
+panos e nos dá a inteligência necessária para entender como que ele funciona então aqui ó no
+
+42:0.6399999999998727
+products2 a gente pode descer um pouquinho aqui e ver que ele tem o data, os dados salvos
+
+42:6.380000000000109
+dessa requisição
+
+42:7.300000000000182
+que ele tem aqui
+
+42:8.860000000000127
+o cache time, quanto tempo ele vai manter
+
+42:12.260000000000218
+isso em cache, qual que foi a
+
+42:14.340000000000146
+chave que a gente usou
+
+42:15.7800000000002
+para tornar
+
+42:16.7800000000002
+esse request único
+
+42:19.420000000000073
+e muito mais
+
+42:21.5
+então, indo aqui já para o final
+
+42:24.23999999999978
+da nossa live,
+
+42:25.139999999999873
+vamos voltar lá no nosso checklist para verificar se a gente abordou tudo.
+
+42:28.7199999999998
+Já falamos aqui de requisições HTTP,
+
+42:31.019999999999982
+já falamos aqui que a gente pode ter requisições duplicadas,
+
+42:34.679999999999836
+e como a gente pode otimizar.
+
+42:37.039999999999964
+Já implementamos sem o React Query, beleza?
+
+42:40.840000000000146
+E agora, comentamos todo aquele código que foi implementado sem React Query
+
+42:47.2800000000002
+e implementamos com React Query.
+
+42:50.57999999999993
+E chegamos aqui com uma aplicação totalmente performática,
+
+42:55.320000000000164
+inteligente o suficiente para otimizar recursos.
+
+42:57.57999999999993
+Eu vou deixar aqui uma lição de casa para vocês que querem aprender mais
+
+43:1.0399999999999636
+e mergulhar nessa ferramenta.
+
+43:3.7399999999997817
+Se vocês vierem aqui em queries,
+
+43:7.360000000000127
+vocês vão ver que existem vários exemplos
+
+43:10.059999999999945
+que a gente pode configurar.
+
+43:12.159999999999854
+Inclusive aqui embaixo, se eu não me engano,
+
+43:15.800000000000182
+aqui no API reference,
+
+43:17.579999999999927
+se vocês entrarem aqui em use query,
+
+43:19.5
+vocês vão ver o tanto de parâmetros e dados
+
+43:23.460000000000036
+que o próprio React Query nos dá por padrão.
+
+43:26.460000000000036
+Então a gente pode
+
+43:28.079999999999927
+configurar para cada request
+
+43:30.019999999999982
+qual é o tempo do cache,
+
+43:32.19999999999982
+se a gente quer executar aquela query ou não,
+
+43:35.51999999999998
+se a gente quer
+
+43:36.11999999999989
+hidratar, dar dados iniciais
+
+43:38.659999999999854
+para ela.
+
+43:42.340000000000146
+Beleza?
+
+43:44.63999999999987
+E aí a gente também pode configurar
+
+43:46.659999999999854
+aqui
+
+43:47.01999999999998
+hanglers de onError faz alguma
+
+43:50.5
+coisa, onSuccess faz outra
+
+43:52.559999999999945
+coisa e assim por diante
+
+43:54.340000000000146
+explicando também aqui embaixo
+
+43:56.69999999999982
+para que serve cada um
+
+43:58.7199999999998
+desses parâmetros, muito
+
+44:0.5399999999999636
+massa né pessoal, é realmente uma biblioteca
+
+44:3.0599999999999454
+como eu disse para vocês
+
+44:4.8400000000001455
+que vale a pena e deve ser usada hoje nas nossas aplicações React.
+
+44:9.960000000000036
+Ela é um game changer e não tem nada, não tem nenhum contra,
+
+44:15.599999999999909
+ou seja, em usar o React Query, só prós.
+
+44:18.90000000000009
+Por isso, partindo para o encerramento aqui,
+
+44:22.09999999999991
+eu quero agradecer a sua audiência e por você ter assistido essa aula.
+
+44:26.61999999999989
+Espero que você tenha gostado e espero que eu tenha sido capaz de passar para você o quanto o React Query pode turbinar as nossas aplicações
+
+44:36.40000000000009
+e fazer com que elas sejam muito mais performáticas, tá bom?
+
+44:41.01999999999998
+Eu quero também pedir sugestões de conteúdo.
+
+44:43.2800000000002
+Se você gostou desse conteúdo, quer saber mais sobre algum aspecto específico
+
+44:47.5
+Do React Query
+
+44:48.30000000000018
+Manda sugestão para nós
+
+44:50.01999999999998
+Que a gente vai fazer com muito carinho
+
+44:51.98000000000002
+Preparar um conteúdo com muito carinho para vocês
+
+44:54.01999999999998
+E por último
+
+44:55.659999999999854
+Também pedir o seu feedback
+
+44:57.73999999999978
+Se você gostou dessa aula
+
+44:59.13999999999987
+Se tem algo que você acha que pode melhorar
+
+45:1.7399999999997817
+Manda para a gente
+
+45:2.8400000000001455
+E a gente vai trabalhar para sempre estar melhorando aqui para vocês.
+
+45:7.1599999999998545
+Beleza?
+
+45:7.960000000000036
+Então, marcando aqui o checkbox de encerramento
+
+45:10.599999999999909
+e concluindo essa aula com sucesso.
+
+45:14.139999999999873
+Muito obrigado pela sua presença aqui.
+
+45:16.179999999999836
+Te vejo na próxima.
+
+45:17.320000000000164
+Tchau!

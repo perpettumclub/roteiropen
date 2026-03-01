@@ -1,0 +1,104 @@
+{
+    "hero": {
+        "title": "Turn Voice Notes into Viral Scripts",
+        "subtitle": "6-Act AI Framework for Maximum Retention",
+        "description": "Record your raw ideas. Get audience-engineered scripts in seconds.",
+        "cta": "Get Started",
+        "cta_secondary": "See How It Works"
+    },
+    "auth": {
+        "sign_in": "Sign In",
+        "sign_up": "Sign Up",
+        "sign_out": "Sign Out",
+        "email": "Email",
+        "password": "Password",
+        "forgot_password": "Forgot password?",
+        "no_account": "Don't have an account?",
+        "have_account": "Already have an account?"
+    },
+    "paywall": {
+        "title": "Unlock Unlimited Scripts",
+        "subtitle": "One-time annual payment. No recurring charges.",
+        "price_us": "$67/year",
+        "price_label": "Early Access Price",
+        "regular_price": "Regular price: $97",
+        "cta": "Get Lifetime Access",
+        "guarantee": "7-day money-back guarantee",
+        "features": {
+            "unlimited": "Unlimited viral scripts",
+            "hooks": "7 psychological hook variations",
+            "remix": "Video analysis & remix mode",
+            "framework": "Proprietary 6-Act Framework",
+            "support": "Priority support"
+        },
+        "social_proof": {
+            "users": "10,000+ creators worldwide",
+            "scripts": "500,000+ scripts generated",
+            "retention": "Average retention: 68%"
+        }
+    },
+    "dashboard": {
+        "welcome": "Welcome back, {{name}}!",
+        "create_script": "Create New Script",
+        "my_scripts": "My Scripts",
+        "stats": "Statistics",
+        "streak": "{{count}}-day streak! 🔥",
+        "level": "Level {{level}}",
+        "next_badge": "Next badge in {{count}} scripts"
+    },
+    "recording": {
+        "title": "Record Your Idea",
+        "subtitle": "Speak naturally. No script needed.",
+        "recording": "Recording...",
+        "duration": "{{duration}} / 5:00",
+        "start": "Start Recording",
+        "stop": "Stop Recording",
+        "delete": "Delete",
+        "generate": "Generate Script",
+        "tip": "Tip: Just talk like you're explaining to a friend"
+    },
+    "script": {
+        "your_script": "Your Viral Script",
+        "act_1": "Act I: Invasion Hook (0-3s)",
+        "act_2": "Act II: Identification (4-12s)",
+        "act_3": "Act III: Anchoring (13-25s)",
+        "act_4": "Act IV: Rupture (26-35s)",
+        "act_5": "Act V: Action Plan (36-45s)",
+        "act_6": "Act VI: Challenge CTA (46-60s)",
+        "hooks_title": "Alternative Hooks",
+        "copy": "Copy Script",
+        "share": "Share",
+        "remix": "Remix with Video",
+        "copied": "Copied to clipboard!",
+        "generating": "Generating your script..."
+    },
+    "pricing": {
+        "comparison": "Why Hooky?",
+        "vs_audiopen": "AudioPen gives you clean text. Hooky gives you viral scripts.",
+        "vs_manual": "Manual scriptwriting: 2-3 hours. Hooky: 30 seconds.",
+        "roi": "One viral video pays for a lifetime subscription"
+    },
+    "footer": {
+        "tagline": "Built for creators who refuse to sound generic",
+        "product": "Product",
+        "features": "Features",
+        "pricing": "Pricing",
+        "company": "Company",
+        "about": "About",
+        "contact": "Contact",
+        "legal": "Legal",
+        "terms": "Terms of Service",
+        "privacy": "Privacy Policy"
+    },
+    "common": {
+        "loading": "Loading...",
+        "error": "Something went wrong",
+        "retry": "Try again",
+        "cancel": "Cancel",
+        "save": "Save",
+        "close": "Close",
+        "next": "Next",
+        "back": "Back",
+        "or": "or"
+    }
+}

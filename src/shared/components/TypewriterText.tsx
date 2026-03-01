@@ -29,29 +29,33 @@ export const TypewriterText: React.FC<TypewriterTextProps> = ({
         if (!text) return;
 
         let timeoutId: ReturnType<typeof setTimeout>;
+        let intervalId: ReturnType<typeof setInterval>;
 
         // Initial delay
         timeoutId = setTimeout(() => {
             setIsTyping(true);
-            let currentIndex = 0;
+            let currentIndex = 1; // Start at 1 since we'll show text.substring(0, currentIndex)
 
-            const typeInterval = setInterval(() => {
-                if (currentIndex < text.length) {
-                    setDisplayedText(prev => prev + text.charAt(currentIndex));
-                    currentIndex++;
+            // Show first character immediately
+            setDisplayedText(text.substring(0, 1));
+
+            intervalId = setInterval(() => {
+                currentIndex++;
+                if (currentIndex <= text.length) {
+                    setDisplayedText(text.substring(0, currentIndex));
                 } else {
-                    clearInterval(typeInterval);
+                    clearInterval(intervalId);
                     setIsTyping(false);
                     onComplete?.();
                 }
             }, speed);
 
-            // Clean up interval on unmount
-            return () => clearInterval(typeInterval);
-
         }, delay);
 
-        return () => clearTimeout(timeoutId);
+        return () => {
+            clearTimeout(timeoutId);
+            if (intervalId) clearInterval(intervalId);
+        };
     }, [text, delay, speed, onComplete]);
 
     return (

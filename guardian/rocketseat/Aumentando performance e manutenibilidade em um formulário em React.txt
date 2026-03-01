@@ -1,0 +1,3526 @@
+Transcrição
+
+00:00
+Olá pessoal, tudo bem? Antes de começarmos o vídeo, eu gostaria então de me apresentar.
+
+00:11.02
+Eu me chamo Thiago Mendes, atualmente eu atuo como engenheiro de software na Evon.
+
+00:17.54
+A Evon é uma fábrica de software, com um modelo de negócio um pouco diferenciado.
+
+00:22.14
+Então eu trabalho lá. Eu estou inserindo no mercado de TI por volta de 10 anos aproximadamente
+
+00:28.98
+e ao longo desse período aí, desenvolvendo diferentes atividades relacionadas à infraestrutura, redes, análise de sistemas
+
+00:37.78
+e nos últimos anos aí, 4, 5 anos aproximadamente, atuando mais de forma focada como desenvolvedor.
+
+00:47.68
+Bom, legal.
+
+00:48.62
+Depois dessa apresentação inicial, então,
+
+00:51.14
+já temos esse contato,
+
+00:54.92
+eu gostaria, então, de comentar
+
+00:57.54
+o que a gente vai ver nesse vídeo,
+
+00:59.36
+o que a gente vai fazer, o que a gente pretende fazer.
+
+01:2.960000000000001
+E daí, com isso, também, a gente já alinhar as expectativas. Bom, nesse vídeo, então, a gente pretende fazer. E daí com isso também a gente já alinha as expectativas.
+
+01:6.079999999999998
+Bom, nesse vídeo então a gente vai falar um pouco sobre, um pouco não, vai ser o vídeo todo praticamente,
+
+01:11.400000000000006
+a gente vai falar sobre refatoramento de código e voltado especificamente para o React e suas particularidades
+
+01:18.739999999999995
+relacionadas a algumas dificuldades ou limitações do uso de classe para criar componentes e o uso de componentes controlados para implementar formulários.
+
+01:29.64
+Então, a gente vai ter um código onde ele já está implementado um formulário.
+
+01:36.34
+A seguir, a gente já vai passar pelo código e já vai rever como é que está estruturado esse código.
+
+01:41.900000000000006
+Então, a gente vai ter ali esse código implementado com classe,
+
+01:45.84
+e daí com isso a gente vai identificar
+
+01:47.959999999999994
+ali algumas
+
+01:49.68000000000001
+peculiaridades,
+
+01:52.239999999999995
+alguns detalhes
+
+01:53.040000000000006
+relacionados ao fato de
+
+01:55.56
+esse componente estar sendo implementado
+
+01:57.900000000000006
+por classe mesmo.
+
+01:59.72
+Bom, então a gente vai ter,
+
+02:1.9000000000000057
+como eu falei inicialmente, essa aplicação,
+
+02:3.739999999999995
+já com esse formulário implementado,
+
+02:6.3799999999999955
+apesar de ter alguns problemas ali no código especificamente,
+
+02:10.560000000000002
+essa aplicação já vai estar funcional,
+
+02:12.52000000000001
+e daí é interessante a gente ter essa aplicação funcional
+
+02:18.47999999999999
+para que a gente possa verificar problemas relacionados a essa implementação,
+
+02:27.819999999999993
+não somente ao código, mas também relacionados ao desempenho na renderização da página,
+
+02:30.74000000000001
+o que na prática pode ser um problema
+
+02:34.19999999999999
+e gerar uma experiência ruim para o usuário.
+
+02:37.360000000000014
+E também, é claro, voltando para o código,
+
+02:39.80000000000001
+problemas relacionados à manutabilidade desse código.
+
+02:42.56
+E eventuais necessidades de manutenção ou de alteração, né?
+
+02:49.56
+O quão difícil vai ser isso para o desenvolvedor que vai implementar, né?
+
+02:53.25999999999999
+Ou que vai alterar esse código.
+
+02:58.620000000000005
+Bom, aí após a análise desse código problemático,
+
+03:2.680000000000007
+que é o que eu estou comentando até agora,
+
+03:4.5
+a gente vai desenvolver
+
+03:6.060000000000002
+então vai ser mal na massa mesmo né um outro formulário com a mesma funcionalidade porém a
+
+03:11.939999999999998
+gente vai adotar estratégias e técnicas para que a gente possa resolver os problemas encontrados
+
+03:17.340000000000003
+e com isso a gente vai buscar então uma melhora no desempenho, na renderização da página, e eventuais manutenções ou alterações que forem necessárias nesse código,
+
+03:29.319999999999993
+ou aplicando esse processo de refatoração em um código real,
+
+03:32.620000000000005
+possa ser algo mais tranquilo,
+
+03:34.620000000000005
+possa ser algo mais fácil para o desenvolvedor que for atuar.
+
+03:38.599999999999994
+Beleza?
+
+03:39.97999999999999
+Bom, pessoal, para que a gente possa simular esse cenário,
+
+03:43.84
+eu vou falar um pouquinho agora sobre o ambiente, para que a gente possa simular esse cenário, eu vou falar um pouquinho agora sobre o ambiente,
+
+03:47.19999999999999
+para que a gente até possa também estar alinhado,
+
+03:49.19999999999999
+para quem eventualmente for buscar reproduzir também esse cenário no seu setup.
+
+03:55.22
+Então, a gente vai precisar do Node instalado.
+
+03:57.860000000000014
+Atualmente, eu tenho aqui instalado a versão do Node 12.22,
+
+04:2.5200000000000102
+então pode ser essa versão ou posterior.
+
+04:4.860000000000014
+A gente vai precisar de um gerenciador de pacotes. Eu, então pode ser essa versão ou posterior. A gente vai precisar de um
+
+04:5.840000000000003
+gerenciador de pacotes, eu particularmente
+
+04:8.099999999999994
+eu prefiro o Yarn, né?
+
+04:9.740000000000009
+A minha versão aqui é 1.22.10,
+
+04:12.5
+ou se você preferir, pode usar
+
+04:13.860000000000014
+o NPN. O NPN,
+
+04:15.840000000000003
+a versão que eu tenho aqui instalada é 6.14.13,
+
+04:18.620000000000005
+né? Então você pode usar
+
+04:19.720000000000027
+essas versões ou posteriores.
+
+04:31.420000000000016
+A IDE que eu estou utilizando aqui o VS Code, né, e no código é importante comentar, eu vou usar um framework de utilização, uma TRI, e também vou usar aqui para simular um endpoint, enfim, simulando um backend, eu vou usar uma lib chamada JSON Server, para que a gente possa simular o cadastro dos dados desse formulário
+
+04:48.22000000000003
+que eu havia comentado, que já está implementado e que a gente vai implementar refatorado,
+
+04:52.60000000000002
+e também a consulta desses dados cadastrados.
+
+04:58.160000000000025
+Acredito que agora a gente possa começar, já visualizando.
+
+05:2.259999999999991
+Bom pessoal, dando sequência então, ap após essa introdução onde a gente já sabe o
+
+05:10.860000000000014
+que a gente vai ter como um problema como um caso de problema né E qual vai ser a perspectiva aí de
+
+05:17.519999999999982
+resolução que a gente pretende fazer para resolver então a gente agora pode olhar de fato o problema.
+
+05:28.24000000000001
+Essa aplicação aqui já está rodando.
+
+05:32.51999999999998
+A gente pode ver ela rodando aqui.
+
+05:35.25999999999999
+Então estou rodando aqui no localhost, porta 3001.
+
+05:40.95999999999998
+Então basicamente a gente vai ter aqui essa tela inicial,
+
+05:45.51999999999998
+onde eu vou ter aqui todos os registros e formulários, conforme for cadastrando.
+
+05:50.360000000000014
+Aqui eu tenho o meu formulário que ainda não está refatorado.
+
+05:54.06
+Então ele tem esse título aqui, Refactor Reform.
+
+05:56.879999999999995
+A gente vai ver que ele está funcional.
+
+05:59.660000000000025
+Depois a gente já vai fazer um teste na sequência, também avaliar a performance e desempenho dele,
+
+06:3.160000000000025
+por meio do React DevTools.
+
+06:5.699999999999989
+E depois a gente também vai ter aqui o
+
+06:8.139999999999986
+Refactored Forming, que é o formulário
+
+06:10.139999999999986
+que de fato a gente vai implementar nessa aula.
+
+06:12.399999999999977
+Se a gente clicar aqui, nesse momento
+
+06:14.240000000000009
+nada aparece, porque ele de fato
+
+06:16.24000000000001
+não está implementado.
+
+06:18.100000000000023
+Bom, agora que a gente tem essa visão inicial
+
+06:20.279999999999973
+da aplicação
+
+06:21.980000000000018
+que já está funcionando, que está rodando,
+
+06:26.220000000000027
+a gente pode então voltar aqui para o código.
+
+06:31.80000000000001
+E aqui no código, então, a gente vai olhar a estrutura geral.
+
+06:37.339999999999975
+Esse código, essa aplicação, ela foi então criada com o Create React App.
+
+06:43.80000000000001
+Eliminei aqui alguns arquivos que já vêm por padrão,
+
+06:46.30000000000001
+deixei o código um pouco mais limpo,
+
+06:48.72000000000003
+e depois foi criada essa estrutura aqui.
+
+06:56.72000000000003
+A gente tem uma pasta de componentes, onde eu tenho alguns componentes relacionados ao menu,
+
+07:1.420000000000016
+a tela principal, onde a gente vai ter o registro dos formulários, e também aqui o formulário não refatorado, o código problemático,
+
+07:7.759999999999991
+que é o alvo dessa nossa análise inicial.
+
+07:11.240000000000009
+Depois aqui foi implementado também um RUC com o uso do Context API.
+
+07:17.69999999999999
+Esse RUC aqui a gente pode brevemente verificar ele.
+
+07:21.980000000000018
+Ele foi criado, esse RUC especificamente, para que a gente usasse no momento de selecionar
+
+07:29.25999999999999
+lá na aplicação qual tela eu vou renderizar, ao invés de usar uma biblioteca específica para fazer para esse propósito,
+
+07:39.25999999999999
+como é uma aplicação bem pequena e também uma aplicação mais conceitual, experimental, achei que seria
+
+07:47.5
+bacana então a gente usar o Context API também para esse propósito e depois ao longo da aula
+
+07:52.75999999999999
+a gente também vai criar um outro hook para que vai entrar dentro desse processo de refatoração,
+
+07:59.25999999999999
+mas só para que a gente possa entender a estrutura. Depois, então, eu tenho aqui o diretório pages,
+
+08:6.720000000000027
+onde eu tenho esse componente aqui chamado portal,
+
+08:10.980000000000018
+e ele vai estar condicionando qual componente, de fato,
+
+08:14.399999999999977
+ele vai renderizar, de acordo com o que eu tenho selecionado
+
+08:19.139999999999986
+lá no meu hook, no select form.
+
+08:23.74000000000001
+Outro ponto aqui, como estilização global,
+
+08:26.24000000000001
+então eu estou utilizando já o Mativai
+
+08:29.399999999999977
+para poder fazer essa estilização global
+
+08:31.399999999999977
+e os demais estilos também usando esse mesmo firma de estilo.
+
+08:36.5
+Beleza?
+
+08:38.039999999999964
+Então, partindo aqui para a análise do formulário,
+
+08:44.10000000000002
+a gente pode ver o seguinte,
+
+08:45.77999999999997
+a gente tem alguns problemas aqui dentro desse código.
+
+08:51.34000000000003
+Primeiro que a gente tem um formulário com apenas cinco campos.
+
+08:55.10000000000002
+Se a gente for ver o tamanho desse arquivo, nós temos aqui um arquivo com quase 190 linhas.
+
+09:1.9800000000000182
+Então isso está diretamente relacionado com o que eu havia mencionado sobre a manutenibilidade do código.
+
+09:9.100000000000023
+Imagina que um formulário simples como esse,
+
+09:12
+com apenas cinco linhas, ou melhor, cinco campos, tem essas quantidades de linhas,
+
+09:16.700000000000045
+conforme esse formulário for crescendo,
+
+09:19.24000000000001
+esse código aqui também vai ficar extenso, vai ficar grande,
+
+09:23.600000000000023
+se eventualmente eu precisar aplicar algumas regras de condição no formulário,
+
+09:27.82000000000005
+a complexidade tende a aumentar ainda mais,
+
+09:30.360000000000014
+e com isso também dificultando uma manutenção, uma alteração nesse código.
+
+09:42.01999999999998
+Legal.
+
+09:43.08000000000004
+Outro ponto aqui, então, que a gente precisa visualizar
+
+09:45.98000000000002
+relacionado aqui a essa questão do código
+
+09:53.24000000000001
+são problemas relacionados aí
+
+09:56.440000000000055
+de forma concreta
+
+09:59.059999999999945
+então beleza, a gente tem aqui um código
+
+10:1.8600000000000136
+que ele está mal estruturado
+
+10:3.5599999999999454
+que ele tem aqui alguns problemas relacionados ao seu tamanho, divisão de responsabilidades, etc.
+
+10:11.799999999999955
+Mas para que a gente possa justificar uma refatoração desse código,
+
+10:17.17999999999995
+não só pelo código em si, não só pela estrutura do código em si,
+
+10:21.899999999999977
+mas também pelos impactos reais que esse código mal estruturado
+
+10:26.039999999999964
+pode causar, é legal a gente fazer alguns relacionamentos, alguns links com as consequências
+
+10:31.120000000000005
+desse problema.
+
+10:33.65999999999997
+Bom, um deles aqui vai estar diretamente relacionado então com o desempenho.
+
+10:53.22000000000003
+E a gente pode então medir o desempenho desse código, pegando aqui então o React DevTools.
+
+11:6.100000000000023
+Primeiro a gente pode, antes, selecionar o React DevTools de fato, né? E aqui a gente pode habilitar a opção de highlights, para que a gente possa
+
+11:7.980000000000018
+visualizar e ter uma
+
+11:10
+ideia da quantidade de vezes
+
+11:11.879999999999995
+que esse código, que essa página
+
+11:14.059999999999945
+é renderizada, de acordo
+
+11:16.159999999999968
+com
+
+11:16.639999999999986
+as informações que eu vou inserindo
+
+11:19.700000000000045
+nesse formulário, né? Então, por exemplo,
+
+11:22.879999999999995
+ó,
+
+11:23.879999999999995
+uma vez que há um destaque nesse formulário,
+
+11:27.220000000000027
+está acontecendo uma renderização.
+
+11:33.299999999999955
+Se a gente for visualizar,
+
+11:34.65999999999997
+cada caractere que eu insiro aqui nesse formulário
+
+11:38.77999999999997
+é uma nova renderização da página.
+
+11:42.34000000000003
+Então, isso é uma característica
+
+11:43.84000000000003
+da técnica
+
+11:46.25999999999999
+de componente controlado,
+
+11:48.139999999999986
+onde eu estou
+
+11:49.72000000000003
+controlando a inserção
+
+11:51.879999999999995
+de cada carácter dentro desse
+
+11:53.72000000000003
+componente e estou atualizando
+
+11:56.059999999999945
+o estado
+
+11:56.799999999999955
+desse
+
+11:58.01999999999998
+estado.
+
+12:1.759999999999991
+Depois a gente vai ver no código
+
+12:3.240000000000009
+que, na verdade, o estado,
+
+12:8.200000000000045
+a gente tem um único estado dentro desse formulário,
+
+12:12.899999999999977
+que é um objeto, e cada campo desse formulário é um atributo desse objeto, né?
+
+12:16.139999999999986
+Mas, enfim, a cada alteração desse campo,
+
+12:18.100000000000023
+eu estou alterando, então, o atributo desse objeto,
+
+12:20.75999999999999
+que, consequentemente, está alterando o meu estado,
+
+12:25.039999999999964
+com isso gerando uma nova renderização da página. A gente pode também observar e analisar o desempenho por meio do profile. Eu vou atualizar aqui a página,
+
+12:36.799999999999955
+para que a gente possa gravar, criar um profile a partir do momento que eu acessei ele
+
+12:45.27999999999997
+então vejam
+
+12:46.39999999999998
+eu vou iniciar aqui a gravação
+
+12:49.17999999999995
+desse profile
+
+12:50.01999999999998
+a gente pode
+
+12:51.08000000000004
+fazer um cadastro
+
+12:55.34000000000003
+normal
+
+13:7.2000000000000455
+colocando um número qualquer Antes de cadastrar
+
+13:10.840000000000032
+Se a gente parar aqui a gravação
+
+13:12.759999999999991
+A gente pode observar o seguinte
+
+13:15.059999999999945
+Olha só
+
+13:16.519999999999982
+Aqui nesse simples preenchimento do cadastro
+
+13:20.82000000000005
+Eu tive 82 comites
+
+13:23.5
+Então foram 82 vezes em que a minha página foi renderizada.
+
+13:32.22000000000003
+E se a gente observar aqui em cada comit, em cada atualização,
+
+13:35.98000000000002
+nas barras amarelas, onde o custo dessa atualização for maior, o componente que é mais custoso e ele é renderizado é sempre o formulário,
+
+13:52.41999999999996
+ou em boa parte é o formulário.
+
+14:0.6000000000000227
+Então, com isso, a gente tem já uma análise de fato de desempenho onde a gente pode observar
+
+14:7.980000000000018
+uma consequência de forma prática, de forma real. Aqui como experiência de usuário talvez não seja
+
+14:17.340000000000032
+tão perceptível porque esse formulário aqui é pequeno, mas é como eu falei antes, à medida que
+
+14:22.279999999999973
+esse formulário aqui for crescer, for aumentar, pode acontecer de o usuário estar digitando,
+
+14:28.700000000000045
+informando ali, imputando algum dado no campo,
+
+14:31.700000000000045
+e a digitação dele ser mais rápida do que o processo de renderização da página.
+
+14:37.120000000000005
+Então, gerando pequenos travamentos na tela,
+
+14:39.799999999999955
+e com isso gerando uma experiência ruim para o usuário.
+
+14:44.22000000000003
+Onde, certamente, se uma análise desse comportamento for feita
+
+14:48.89999999999998
+da forma como a gente está fazendo aqui com o Profiler,
+
+14:52.120000000000005
+a gente vai observar um comportamento parecido, tendendo a ter o mesmo padrão.
+
+14:58.639999999999986
+Beleza?
+
+14:59.379999999999995
+Depois, assim que a gente implementar o formulário refatorado,
+
+15:4.039999999999964
+a gente pode fazer o mesmo teste, a mesma avaliação,
+
+15:8.17999999999995
+gravando também aqui o profile,
+
+15:9.82000000000005
+e verificar a quantidade de atualizações que houveram
+
+15:16.17999999999995
+na inserção desses dados do formulário.
+
+15:19.41999999999996
+Beleza?
+
+15:21.659999999999968
+Bom,
+
+15:37.059999999999945
+agora é interessante a gente falar quais são os pontos falhos de forma bem pontual desse código.
+
+15:40.82000000000005
+Vamos então aqui voltar para o nosso código.
+
+15:45.89999999999998
+Agora fazendo uma análise um pouco mais detalhada. Primeiro ponto
+
+15:47.98000000000002
+a ser melhorado aqui,
+
+15:50.17999999999995
+a ser refatorado. Se a gente for
+
+15:52
+observar, a gente tem no mesmo
+
+15:54.17999999999995
+código, no mesmo
+
+15:56.08000000000004
+arquivo onde a gente está definindo
+
+15:57.860000000000014
+o componente, a parte de estilização
+
+16:00
+também. Ou seja,
+
+16:1.9800000000000182
+aqui eu já tenho um mesmo arquivo
+
+16:3.8999999999999773
+com diferentes responsabilidades.
+
+16:6.6200000000000045
+Então esse aqui já é um primeiro
+
+16:7.860000000000014
+ponto de melhora
+
+16:10.17999999999995
+que a gente pode identificar
+
+16:11.519999999999982
+isolando toda essa
+
+16:13.720000000000027
+responsabilidade de estilização e
+
+16:15.940000000000055
+removendo aqui da definição
+
+16:18.08000000000004
+do componente.
+
+16:20.200000000000045
+Um outro ponto que a gente pode
+
+16:21.700000000000045
+também identificar aqui
+
+16:23.720000000000027
+é o que eu tinha comentado ali antes, a gente tem um único estado, né, para gerenciar ou para armazenar todas as informações do nosso formulário, né, então com isso, qual a consequência, né, toda vez que a gente for precisar manipular um atributo desse estado eu preciso
+
+16:48.10000000000002
+chamar uma função que vai fazer essa manipulação e para que eu possa identificar qual né atributo
+
+16:57.58000000000004
+qual qual método eu for utilizar então tem que fazer algumas validações e a gente também pode verificar que a medida que os
+
+17:6.900000000000091
+atributos número de atributos desse estado for aumentando a gente também vai ter um aumento aqui
+
+17:12.599999999999909
+de forma vertical dessas funções é de manipulação e também essa função aqui de validação dos campos
+
+17:22.019999999999982
+essa função aqui de validação dos campos também é um outro problema,
+
+17:26.09999999999991
+a gente pode ver aqui que ela tem uma série de ifs e else ifs aninhados, gerando também uma
+
+17:32.5
+complexidade psicomática, o que é algo também bem prejudicial para o nosso código.
+
+17:52
+Outro ponto também que a gente pode verificar aqui, agora já partindo para os componentes mesmo que vão ser renderizados, se a gente for observar, a gente tem cinco campos ali naquele
+
+18:0.5599999999999454
+formulário, onde todos os cinco campos eles têm o mesmo componente, o text field.
+
+18:6.8599999999999
+Então, ele tem aqui
+
+18:7.839999999999918
+uma grid envolvendo ele,
+
+18:9.980000000000018
+e o text field logo abaixo. O que
+
+18:11.920000000000073
+está variando
+
+18:12.779999999999973
+em cada um desses componentes? São apenas
+
+18:16.079999999999927
+as propriedades. Então, a gente
+
+18:18.180000000000064
+tem aqui uma série de
+
+18:20.039999999999964
+componentes que estão sendo duplicados,
+
+18:22.1400000000001
+de fato, código duplicado,
+
+18:24.279999999999973
+onde
+
+18:24.720000000000027
+seria possível reduzir bastante o tamanho desse código
+
+18:30.319999999999936
+e a quantidade de replicação de códigos, renderizando por meio de uma lista
+
+18:37.48000000000002
+que trouxesse as configurações, as propriedades desses componentes.
+
+18:41.83999999999992
+Então, esse é um outro ponto aqui falho,
+
+18:47.59999999999991
+um ponto que não está bacana aqui no código,
+
+18:50.200000000000045
+que a gente vai, depois do processo de refatoração,
+
+18:53.299999999999955
+ter a possibilidade de mudar,
+
+18:56.57999999999993
+de melhorar essa estrutura do código.
+
+18:59.700000000000045
+Um outro ponto também,
+
+19:3.1800000000000637
+que a gente pode ver aqui,
+
+19:7.259999999999991
+são componentes com diferentes responsabilidades e todos expostos aqui na renderização.
+
+19:9.960000000000036
+Por exemplo, aqui a gente tem um avatar,
+
+19:13.8599999999999
+depois a gente tem esse componente aqui, um tipográfico,
+
+19:16.839999999999918
+que vai trazer aqui o título do formulário,
+
+19:19.819999999999936
+e já tudo junto aqui, misturado com o formulário.
+
+19:23.8599999999999
+Então, quer dizer, aqui a gente tem componentes
+
+19:26.039999999999964
+que têm responsabilidades diferentes.
+
+19:27.799999999999955
+Por exemplo, esse grupo de componentes aqui,
+
+19:30.579999999999927
+a gente poderia isolar ele num único componente de header.
+
+19:34.88000000000011
+E com isso também já diminuir aqui a complexidade,
+
+19:37.33999999999992
+o tamanho do código, e até também criando um header,
+
+19:41.59999999999991
+desde que esse header seja flexível a alterações como título, por exemplo,
+
+19:47.059999999999945
+a gente pode também criar um componente de header genérico,
+
+19:51.33999999999992
+e dessa forma reduzir a quantidade de código replicado
+
+19:55.92000000000007
+pela aplicação, pelo projeto.
+
+20:0.9600000000000364
+E o que mais a gente pode apontar aqui?
+
+20:4.240000000000009
+E o outro ponto que eu também já tinha comentado
+
+20:6.2999999999999545
+é o fato de a gente estar utilizando a técnica de componente controlado.
+
+20:10.920000000000073
+Então, a gente pode observar aqui,
+
+20:12.700000000000045
+no onChange, a cada evento, a cada inserção de um caractere no campo do formulário,
+
+20:19.980000000000018
+eu estou chamando então essa função, handleChange.
+
+20:22.819999999999936
+E o que ela faz aqui?
+
+20:25.519999999999982
+Ela vai identificar qual é o campo que eu estou chamando então essa função, handleChange. E o que ela faz aqui? Ela vai identificar qual é o campo que eu estou alterando,
+
+20:28.819999999999936
+vai chamar a função especial de alteração de status, setState,
+
+20:33.799999999999955
+e vai repassar o valor que eu estou alterando
+
+20:37.8599999999999
+para o campo que eu estou digitando ali no formulário.
+
+20:43.11999999999989
+Então, quer dizer, a cada letra, a cada caractere que eu estou inserindo,
+
+20:46.72000000000003
+por exemplo, lá no fistname, né, que ele tem um label name,
+
+20:50.11999999999989
+a cada nome, na verdade, a cada caractere que eu estou inserindo lá no nome,
+
+20:54.48000000000002
+por exemplo, o T, ele vai renderizar o H, ele vai renderizar o I,
+
+20:58.27999999999997
+ele vai renderizar, né, e assim sucessivamente.
+
+21:5.539999999999964
+Então, isso também vai fazer com que o desempenho do formulário,
+
+21:7.819999999999936
+da página em si,
+
+21:9.920000000000073
+seja prejudicado.
+
+21:11.700000000000045
+Um ponto aqui importante e interessante
+
+21:13.940000000000055
+para falar é que
+
+21:15.240000000000009
+não necessariamente usar
+
+21:18.039999999999964
+a técnica de componente controlado
+
+21:19.839999999999918
+é ruim.
+
+21:21.220000000000027
+Isso vai depender de cada
+
+21:23.74000000000001
+cenário, de cada cenário,
+
+21:26.38000000000011
+de cada aplicação,
+
+21:28.5
+da necessidade,
+
+21:30.59999999999991
+enfim, dos dados que precisam ser manipulados
+
+21:32.22000000000003
+e dos estados também que precisam
+
+21:34.460000000000036
+ser manipulados dentro de um
+
+21:36.22000000000003
+formulário. Então pode ter situação que realmente
+
+21:38.40000000000009
+vai ser necessário usar o componente
+
+21:40.48000000000002
+controlado, por N
+
+21:42.16000000000008
+motivos, e tem cenários,
+
+21:44.299999999999955
+situações em que não é uma premissa usar o componente controlado, por N motivos, e tem cenários, situações em que não é uma premissa usar o componente
+
+21:48.059999999999945
+controlado e você então pode usar componentes não controlados, usando a referência mesmo do componente
+
+21:56.90000000000009
+para poder resgatar esses valores que são imputados no formulário. É só fazendo esse adendo mesmo, para que não pareça necessariamente
+
+22:7.119999999999891
+que usar componentes controlados é ruim, mas é uma decisão que precisa ser analisada e com algum
+
+22:13.980000000000018
+critério para que o desempenho na sua aplicação não seja prejudicado. Beleza? Após a gente apontar, então, esses problemas no código, o que seria interessante a gente refatorar?
+
+22:28.539999999999964
+Um ponto inicial, a um e-ver que é interessante refatorar, seria a gente mudar esse componente de classe para função.
+
+22:37.61999999999989
+Por que mudar de classe para função?
+
+22:40.33999999999992
+Um primeiro ponto para simplificar, de fato, o componente, a forma como ele é escrito, a forma como ele é implementado,
+
+22:48.059999999999945
+para usar de uma forma mais fácil os hooks que vão ser criados.
+
+22:56.98000000000002
+Outro ponto também que é interessante usar a função, até por orientação própria mesmo da documentação do React, por exemplo,
+
+23:8.160000000000082
+no momento em que a aplicação for feita, for feito o deploy, a compilação e tal,
+
+23:15.11999999999989
+componentes que são gerados por funções costumam ser até mais performáticos,
+
+23:20.25999999999999
+entre outros motivos.
+
+23:22.559999999999945
+Então, a ideia aqui é a gente converter esse Class Component para
+
+23:27.079999999999927
+Function Component. Depois a gente vai extrair toda essa parte aqui de estilização para um
+
+23:38.059999999999945
+outro arquivo, para uma outra responsabilidade, um arquivo com responsabilidade específica para definir os estilos da página,
+
+23:46.3599999999999
+dos componentes que vão estar associados.
+
+23:51.299999999999955
+Nesse cenário, a gente não vai utilizar o estado para fazer o armazenamento dos dados que vão ser imputados no formulário.
+
+24:1.5399999999999636
+Então, a gente vai remover essa estrutura de estado.
+
+24:4.220000000000027
+no formulário, então a gente vai remover essa estrutura aqui de estado.
+
+24:13
+Outro ponto que a gente vai também refatorar, vamos criar componentes menores com responsabilidades específicas, então basicamente essa estrutura como está aqui,
+
+24:19.38000000000011
+ela vai ser dividida, então a gente vai poder agrupar determinados componentes que fazem parte de um
+
+24:30.5
+contexto, que tem uma responsabilidade, e com isso criar novos componentes, até para que esses novos
+
+24:36.01999999999998
+componentes possam ser utilizados em outras partes da aplicação. A gente também vai criar um componente genérico com a possibilidade de replicação por meio de
+
+24:48.88000000000011
+configuração, é o caso aqui do TextField. Então aqui eu tenho cinco vezes ele sendo repetido
+
+24:56.61999999999989
+nesse formulário, então a ideia é a gente criar um componente onde a gente tenha somente um text field, e ele possa estar inserido dentro de uma lista,
+
+25:6.599999999999909
+e essa lista vai receber uma configuração,
+
+25:10.240000000000009
+uma rede de configuração, e vai replicar esses componentes.
+
+25:14.180000000000064
+Depois isso vai ficar um pouco mais claro à medida que a gente for refaturando,
+
+25:17.6400000000001
+mas esse é um ponto de refaturação interessante.
+
+25:22
+Bom, depois na sequência,
+
+25:24.61999999999989
+a gente vai então criar o arquivo de configuração para representar os campos do formulário.
+
+25:30.299999999999955
+A gente vai abstrair as funções que são responsáveis pelo envio e pela validação.
+
+25:38.299999999999955
+Então, basicamente, essas funções aqui vão deixar de existir.
+
+25:52.38000000000011
+deixar de existir. Para que ocorra a validação, a gente vai utilizar uma LIB específica para registrar o nosso formulário,
+
+25:57.90000000000009
+e daí com isso também usar a referência dos campos do formulário e não mais usar o status.
+
+26:7.740000000000009
+Essa LIB também vai prover uma função específica para enviar os dados, então a gente não vai precisar ter uma função como essa aqui,
+
+26:12.819999999999936
+olhando para cada campo do formulário que vai ser alterado.
+
+26:17.180000000000064
+E depois, por último, a gente vai também usar,
+
+26:20.24000000000001
+ou melhor, a gente vai criar um hook,
+
+26:26.3599999999999
+onde esse hook aqui a gente vai inserir as configurações dos componentes para que essas configurações possam estar compartilhadas na aplicação
+
+26:30.559999999999945
+e eu não precise repassar por diferentes níveis, por propriedades essa configuração.
+
+26:38.25999999999999
+Então essa ideia geral de tudo que vai ser refatorado aqui nesse simples formulário,
+
+26:46.51999999999998
+criando uma estrutura
+
+26:47.700000000000045
+de refactoring
+
+26:50.38000000000011
+ali, para
+
+26:51.440000000000055
+que a gente possa ter um formulário
+
+26:53.83999999999992
+com um melhor
+
+26:56.27999999999997
+desempenho, para o usuário
+
+26:58.24000000000001
+final mesmo, e também para que
+
+27:0.14000000000010004
+a gente possa ter uma melhor experiência para o desenvolvedor
+
+27:2.6400000000001
+que vai
+
+27:3.5799999999999272
+eventualmente
+
+27:5.099999999999909
+alterar ou fazer alguma manutenção desse formulário.
+
+27:9.519999999999982
+Beleza?
+
+27:12.339999999999918
+Bom, com o problema aqui devidamente apresentado, eu acho que a gente pode então partir para
+
+27:19.799999999999955
+a mão na massa mesmo e implementar como vai ficar esse novo formulário já refaturado.
+
+27:28
+O primeiro passo que a gente vai fazer aqui, então, vamos criar uma pasta chamada refactor
+
+27:36.25999999999999
+form. Por que eu estou criando um diretório aqui? Observe que o refactor informe ele não tem um diretório,
+
+27:46.42000000000007
+ele tá aqui direto da raiz
+
+27:48.039999999999964
+do diretório componentes, né?
+
+27:50.01999999999998
+Mas,
+
+27:50.83999999999992
+lembra que a gente havia comentado
+
+27:54
+que a gente vai isolar aqui
+
+27:55.75999999999999
+algumas responsabilidades do código,
+
+27:58.48000000000002
+né? Então, ou seja,
+
+28:0.22000000000002728
+relacionado aqui ao mesmo formulário,
+
+28:2.0399999999999636
+eu vou ter um arquivo que vai definir
+
+28:3.9600000000000364
+o componente em si, Eu vou ter um arquivo que vai definir o componente em si,
+
+28:7.059999999999945
+eu vou ter um arquivo que vai definir o estilo,
+
+28:10.839999999999918
+eu vou ter um outro arquivo que eu vou conter configurações para que eu possa renderizar um componente genérico que vai se replicar.
+
+28:15.059999999999945
+Então, para que eu possa reunir todos esses arquivos
+
+28:17.940000000000055
+dentro de um mesmo contexto do componente,
+
+28:21.480000000000018
+então é interessante usar essa estrutura aqui de diretório
+
+28:25.779999999999973
+dentro do componente para que a gente possa agrupar esses arquivos.
+
+28:29.539999999999964
+Então aqui dentro desse arquivo, que vai conter de fato nosso formulário refatorado,
+
+28:36
+eu vou criar um index.js.
+
+28:48.51999999999998
+aqui eu vou criar um styles.js
+
+28:50.6400000000001
+e aqui também
+
+28:52.77999999999997
+eu vou criar já um
+
+28:54.039999999999964
+config
+
+28:54.940000000000055
+legal
+
+28:58.51999999999998
+então eu já tenho a minha estrutura aqui
+
+29:0.7000000000000455
+basicamente pronta
+
+29:2.119999999999891
+e agora o que eu preciso fazer
+
+29:4.519999999999982
+é de fato implementar esse
+
+29:6.180000000000064
+novo formulário. Para que eu possa ter um ponto de partida aqui, eu vou basicamente copiar, né,
+
+29:15.700000000000045
+todo aquele código aqui do formulário não refatorado dentro do índex aqui do meu formulário
+
+29:23
+refatorado, para que eu de fato vá refatorando.
+
+29:26.38000000000011
+Uma pergunta, por que eu não estou refatorando diretamente aqui nesse cara?
+
+29:31.079999999999927
+Porque a ideia é exatamente a gente, depois que o formulário estiver refatorado,
+
+29:35.6400000000001
+a gente na aplicação ter as duas versões do formulário refatorado e não refatorado,
+
+29:41.299999999999955
+até para que a gente possa fazer um comparativo e verificar se realmente foi efetiva
+
+29:46.01999999999998
+esse processo de refaturamento
+
+29:48.38000000000011
+aliado à questão de
+
+29:53.90000000000009
+desempenho e análise depois do
+
+29:55.98000000000002
+uso da aplicação.
+
+29:58.059999999999945
+Beleza?
+
+30:0.2799999999999727
+Bom,
+
+30:1.8399999999999181
+legal, então foi
+
+30:3.900000000000091
+criada essa estrutura
+
+30:10
+agora sim a gente vai remunerar esse cara aqui
+
+30:16
+depois aqui na sequência a gente pode remover
+
+30:24
+os estados essa função de save, essa função aqui e também essa.
+
+30:33
+Depois, na sequência, então, a gente pode converter de classe para função.
+
+30:48.01999999999998
+Nesse caso aqui eu não preciso ter esse tipo de coisa.
+
+30:51.819999999999936
+Eu também não preciso do método render, né?
+
+30:54.059999999999945
+Só o return mesmo.
+
+31:2.0799999999999272
+Legal?
+
+31:3.8599999999999
+Então, eu já tenho aqui
+
+31:5.940000000000055
+nesse momento
+
+31:6.759999999999991
+o meu
+
+31:10.019999999999982
+formulário já renomeado
+
+31:12.519999999999982
+então agora de fato eu tenho
+
+31:14.059999999999945
+esse componente aqui
+
+31:15.6400000000001
+chamado refactor form
+
+31:17.220000000000027
+ele já não é mais um componente de classe
+
+31:19.819999999999936
+ele é um componente funcional
+
+31:21.3599999999999
+eu não tenho mais
+
+31:24.059999999999945
+os estados aqui para armazenar os valores
+
+31:26.779999999999973
+que vão ser imputados pelo formulário,
+
+31:28.90000000000009
+também não tenho mais as funções para enviar os dados
+
+31:32.559999999999945
+ou para validar e manipular e tudo mais.
+
+31:36.16000000000008
+Beleza?
+
+31:37.51999999999998
+Agora, o que a gente vai fazer aqui?
+
+31:40.559999999999945
+Eu vou basicamente aqui, eu já tenho esse arquivo pronto de styles,
+
+31:47
+porque não é o objetivo principal da nossa aula, então eu já vou trazer ele para cá.
+
+31:52.559999999999945
+O que eu estou fazendo aqui?
+
+31:53.940000000000055
+Eu estou usando então o make styles que é provido pelo material.
+
+31:59.83999999999992
+Então eu estou criando esse estilo aqui, na verdade eu estou gerando um objeto,
+
+32:4.819999999999936
+onde cada atributo desse objeto aqui vai representar como se fosse uma classe do CSS, Então eu estou criando esse estilo aqui, na verdade eu estou gerando um objeto,
+
+32:9.759999999999991
+onde cada atributo desse objeto aqui vai representar como se fosse uma classe do CSS,
+
+32:12.240000000000009
+e aqui os atributos de fato do CSS.
+
+32:20.09999999999991
+Aí depois eu vou poder importar esse estilo aqui dentro do meu componente,
+
+32:26.039999999999964
+e com isso aplicando de acordo com o componente que eu quiser aplicar a determinada classe ou atributo
+
+32:28.039999999999964
+desse objeto.
+
+32:29.960000000000036
+Já que eu tenho o estilo criado,
+
+32:32.299999999999955
+eu posso remover
+
+32:33.01999999999998
+esses componentes
+
+32:36
+que foram criados pelo Startup Company.
+
+32:38.33999999999992
+Posso remover
+
+32:39.07999999999993
+também esses importes, não vou mais utilizar.
+
+32:44.42000000000007
+Observe que aqui a gente teve um erro, eu não vou mais utilizar. Observe que aqui a gente
+
+32:45.960000000000036
+teve um erro, porque eu não tenho mais
+
+32:48.01999999999998
+esse container form,
+
+32:50.09999999999991
+que era um componente utilizado,
+
+32:51.8599999999999
+criado pelo Stereo de Components.
+
+32:54.01999999999998
+A gente pode remover ele aqui.
+
+33:1.7200000000000273
+Depois eu vou ter um outro erro também, que é o
+
+33:3.8199999999999363
+componente form.
+
+33:9.460000000000036
+Então eu vou utilizar um outro erro também, que é o componente form. Então eu vou utilizar o form do HTML.
+
+33:22.75999999999999
+Legal, está resolvido por enquanto. Muito bem, aqui eu também não tenho mais essa função que eu não
+
+33:30.319999999999936
+preciso mais referenciar e você vai mover legal então eu já tenho uma parte aqui de estilos já separada.
+
+33:50.460000000000036
+Eu ainda não tenho ele importado, a tenho ele aqui, então, importado.
+
+34:19.73999999999978
+Bom, lembra que eu comentei no início da aula que a ideia de a gente já ter também o nosso formulário aqui
+
+34:30.73999999999978
+é para que a gente pudesse também ir acompanhando o processo de refatoração
+
+34:37.039999999999964
+e vendo o nosso formulário refatorado sendo construído também de forma visual aqui na tela então para que a gente possa
+
+34:46.48000000000002
+visualizar isso a gente vai
+
+35:5.440000000000055
+criar mais uma condição
+
+35:10.7199999999998
+ele vai validar
+
+35:18.059999999999945
+se eu tenho nesse hook
+
+35:20.340000000000146
+aqui o valor refactor informe
+
+35:22.179999999999836
+esse valor aqui ele é setado
+
+35:24.679999999999836
+por esse menu né a gente
+
+35:28.639999999999873
+pode visualizar aqui no código e aí e aí e aí serve aqui quando eu tenho ali a opção reflete
+
+35:38.659999999999854
+o informe eu tô sentando então reflete né e com esse valor setado então no hook eu vou poder renderizar a um
+
+35:49.539999999999964
+novo componente e a gente tá criando ali que é o componente do formulário refatorado
+
+36:13.599999999999909
+E aí E aí Bem.
+
+36:18.079999999999927
+Legal.
+
+36:21
+Então, eu já tenho essa opção disponível aqui no meu portal.
+
+36:22.800000000000182
+A gente pode voltar lá tela legal agora então já tenho aqui o
+
+36:28.980000000000018
+formulário refatorado na minha tela observa que ele está deslocada também
+
+36:33.73999999999978
+para cima né até o título dele tá escondida atrás do
+
+36:40.179999999999836
+do do render aqui da aplicação. A gente pode visualizar,
+
+36:46.76000000000022
+tendo essa diferença aqui,
+
+36:48.57999999999993
+então, o refactor
+
+36:50.13999999999987
+form, ele continua com o seu, enfim,
+
+36:52.13999999999987
+normal, a gente não alterou ele.
+
+36:55.340000000000146
+O content
+
+36:56.09999999999991
+record, por enquanto, não tem nenhum registro.
+
+36:58.98000000000002
+E agora a gente consegue acessar
+
+37:0.11999999999989086
+aqui por meio da aplicação. Legal.
+
+37:2.599999999999909
+Vamos continuar aqui, então,
+
+37:3.900000000000091
+o nosso processo de refatoração.
+
+37:6.7800000000002
+Depois, o que a gente vai fazer?
+
+37:9.5
+Vamos começar
+
+37:10.460000000000036
+agora a isolar as responsabilidades
+
+37:13.099999999999909
+desse código que está
+
+37:14.519999999999982
+aqui sendo renderizado.
+
+37:16.199999999999818
+Então, o primeiro ponto aqui que a gente pode
+
+37:18.559999999999945
+avaliar e separar
+
+37:20.2199999999998
+é o cabeçalho aqui do nosso formulário,
+
+37:23.079999999999927
+esse header aqui.
+
+37:24.699999999999818
+Para isso, eu vou criar aqui, então, um novo componente. mostrar é o cabeçalho aqui do nosso formulário né esse render aqui para isso
+
+37:26.820000000000164
+e eu vou criar aqui então um novo componente
+
+37:34.38000000000011
+e aí
+
+37:36.440000000000055
+e aí
+
+37:39
+legal o legal é o que agora toda essa parte aqui vou recortar o que você quer ele vai apresentar aqui alguns erros né porque de fato a gente tem que trazer aqui algumas importações
+
+38:14.400000000000091
+aí também a gente já pode pegar essas encurtações
+
+38:25.460000000000036
+código de formulário
+
+38:40.159999999999854
+ainda falta o avatar e ainda faltou voltar
+
+38:48.5
+E aí
+
+38:59.40000000000009
+e ele ainda tá apresentando ele né porque lembrando que quando a gente vai retornar ou melhor renderizar um componente a gente tem que ter um elemento
+
+39:5.519999999999982
+raiz, ou seja, eu não posso ter aqui
+
+39:8.239999999999782
+vários elementos na mesma
+
+39:9.980000000000018
+hierarquia, então por isso a gente pode usar um fragment.
+
+39:17.820000000000164
+Agora sim.
+
+39:27.320000000000164
+Legal. legal bacana, o que eu preciso fazer agora então
+
+39:31.139999999999873
+é importar
+
+39:33.30000000000018
+esse componente que eu acabei de criar
+
+39:35.7199999999998
+para dentro do nosso
+
+39:37.73999999999978
+formulário refatorado
+
+39:39.5
+para que ele possa estar disponível ainda no processo de renderização.
+
+39:53.73999999999978
+Legal.
+
+40:1.3800000000001091
+Bacana, no momento eu não estou passando nenhuma propriedade, né?
+
+40:4.320000000000164
+Esse generic header ainda não
+
+40:7.079999999999927
+está genérico, até porque eu tenho fixado aqui tanto o ícone quanto o título, mas
+
+40:15.079999999999927
+a gente já conseguiu isolar header ainda continua lá, né?
+
+40:30.199999999999818
+E visualmente nada mudou, né?
+
+40:34.159999999999854
+Mas a gente pode ver que o código não quebrou, enfim, está renderizando,
+
+40:39.09999999999991
+continua buscando ali os mesmos componentes, porém agora isolado, né?
+
+40:43.07999999999993
+No componente com responsabilidade específica aqui do header.
+
+40:46.42000000000007
+Beleza?
+
+40:48.460000000000036
+Agora
+
+40:48.960000000000036
+a gente vai
+
+40:51.440000000000055
+refatorar o nosso
+
+40:55.57999999999993
+header genérico
+
+40:56.90000000000009
+e
+
+40:58.69999999999982
+pra isso
+
+41:1.3600000000001273
+eu vou trazer
+
+41:3.9600000000000364
+aqui um outro ícone.
+
+41:5.260000000000218
+Eu tenho ele aqui.
+
+41:8.11999999999989
+Deixa eu só pegar aqui para ficar mais fácil.
+
+41:19.039999999999964
+Legal.
+
+41:19.860000000000127
+O que esses ícones aqui representam?
+
+41:21.559999999999945
+que esses ícones aqui representam?
+
+41:22.320000000000164
+Se a gente for observar aqui,
+
+41:24.139999999999873
+Se a gente for observar aqui,
+
+41:28.539999999999964
+o formulário não refatorado, a gente tem esse ícone
+
+41:30.26000000000022
+aqui, que é esse rostinho aqui
+
+41:32.23999999999978
+com uma carinha triste e tudo mais.
+
+41:34.679999999999836
+Então a ideia é
+
+41:35.88000000000011
+eu tornar
+
+41:38.340000000000146
+o header genérico
+
+41:40.36000000000013
+ao ponto que eu passe
+
+41:42.039999999999964
+uma propriedade para ele selecionar né se eu tiver aqui é determinada
+
+41:50.07999999999993
+propriedade que represente o formulário não refatorado ele traz esse ícone né ou se eu
+
+41:56.320000000000164
+passar uma outra propriedade ele vai trazer um ícone é com uma cor aqui diferente e com o rostinho
+
+42:1.2399999999997817
+também sorrindo feliz e tudo mais mais. Essa é a ideia geral.
+
+42:9.420000000000073
+Então, para isso, a gente vai trazer aqui o props.
+
+42:11.420000000000073
+Esse é o props.
+
+42:15.2800000000002
+Legal.
+
+42:20.480000000000018
+Props.marco. Então, definir o seguinte.
+
+42:31.23999999999978
+Eu vou ter uma propriedade aqui chamada icon.
+
+42:34.23999999999978
+Se o valor dessa propriedade aqui for smile,
+
+42:37.13999999999987
+então eu vou renderizar esse ícone aqui,
+
+42:41.26000000000022
+que é o roxinho sorrindo.
+
+42:50.80000000000018
+E caso não seja a Ismael, eu vou renderizar
+
+43:5.7800000000002
+esse outro ícone aqui que é o rostinho triste e tudo mais. E daí aqui também a gente vai remover esse valor fixo.
+
+43:9.159999999999854
+Vamos inserir uma nova propriedade.
+
+43:12.639999999999873
+Legal.
+
+43:15.5
+Agora sim, o componente está mais genérico.
+
+43:19.199999999999818
+A gente ainda tem uma limitação aqui na quantidade de ícones e tudo mais.
+
+43:21.179999999999836
+Mas ele está mais genérico.
+
+43:23.559999999999945
+Eu posso utilizar ele em diferentes componentes.
+
+43:27.7800000000002
+E adaptando ele, tornando ele flexível por meio de várias propriedades.
+
+43:28.73999999999978
+Legal.
+
+43:30.159999999999854
+Então agora eu vou...
+
+43:34.01999999999998
+Passar aqui as propriedades para ele.
+
+43:46.88000000000011
+E a propriedade vai ser e vai ser
+
+43:50.940000000000055
+legal
+
+44:0.1799999999998363
+se a gente for observar então
+
+44:0.1799999999998363
+legal.
+
+44:3.7399999999997817
+Se a gente for observar,
+
+44:4.139999999999873
+então,
+
+44:9.539999999999964
+bom,
+
+44:11.88000000000011
+ainda não está muito claro a visualização,
+
+44:13.260000000000218
+né, mas a gente,
+
+44:15.579999999999927
+se a gente fosse visualizar aqui pelo projeto da iTunes,
+
+44:19.460000000000036
+vamos ver se a gente pode ver
+
+44:21.460000000000036
+a visualizar.
+
+44:47.559999999999945
+Está aqui. Bom, está aqui A gente já tem o generic header aqui
+
+44:52.159999999999854
+Observe que ele recebeu de fato ali
+
+44:54.7199999999998
+Com o ícone
+
+44:55.820000000000164
+Com propriedade IconSmile
+
+44:58.159999999999854
+E o title RefactoredForm
+
+44:59.92000000000007
+Legal
+
+45:1.0199999999999818
+Então voltando aqui ao código
+
+45:3.7600000000002183
+O nosso Próximo ponto aqui que a gente vai refatorar Legal. Voltando aqui ao código.
+
+45:09
+O nosso próximo ponto que a gente vai refatorar é a importação de fato dos estilos.
+
+45:37
+Legal. E agora, a gente também vai precisar ainda continuar refatorando
+
+45:40.42000000000007
+para que a gente possa passar
+
+45:44.320000000000164
+uma estilização para o nosso componente generic header.
+
+45:54
+Então para isso a gente vai passar aqui o style.
+
+46:11.599999999999909
+Vou passar aqui então
+
+46:15.840000000000146
+esse atributo aqui
+
+46:19.699999999999818
+avatar do objeto styles.
+
+46:21.40000000000009
+Se a gente for olhar aqui o estilo,
+
+46:24.079999999999927
+então basicamente eu tô passando essa
+
+46:26.59999999999991
+utilização aqui para ele beleza e agora a gente pode voltar lá e ele já melhorou um pouquinho
+
+46:37.820000000000164
+aqui a utilização né mas a gente ainda tem alguns problemas aqui a resolver com a textilização. A gente segue aqui então para fazer essa correção.
+
+46:51.13999999999987
+Tá legal.
+
+46:56.19999999999982
+Muito bem. Bacana. O que a gente vai precisar fazer agora, então, depois da sequência?
+
+47:29.920000000000073
+A gente vai, então, agora isolar toda essa parte aqui do código relacionado ao formulário,
+
+47:36.820000000000164
+para que a gente possa ter esse componente de formulário mesmo, também de forma genérica, isolado,
+
+47:40.7800000000002
+para que ele também possa ser reaproveitado em outros pontos da aplicação.
+
+47:43.460000000000036
+Então, a gente vai seguir aqui o mesmo caminho. Legal.
+
+48:15.38000000000011
+Vou fazer aqui as interfeições. Agora vai ter uma série de
+
+48:35.30000000000018
+Importações que a gente vai migrar
+
+48:38.38000000000011
+Para esse componente
+
+48:39.539999999999964
+Legal legal
+
+48:47.42000000000007
+agora o que a gente vai precisar é fazer o caminho inverso
+
+48:51.179999999999836
+então né
+
+48:51.73999999999978
+é importar
+
+49:17.179999999999836
+Agora que a gente importou aqui Então a gente tem
+
+49:30.940000000000055
+Então a gente tem o nosso genérico de forma agora já importado, né?
+
+49:36.40000000000009
+E com isso a gente pode ver que o nosso formulário refatorado reduziu bastante de tamanho, né? Mas isso aqui não é o suficiente, né?
+
+49:38.559999999999945
+Mas é legal que a gente pode ver um progresso dentro desse processo de refatoração.
+
+49:43.63999999999987
+Se a gente for ver aqui, o formulário
+
+49:45.92000000000007
+ele continua funcionando, ainda tem
+
+49:48.01999999999998
+problemas de estilos, como a gente já tinha visto
+
+49:49.92000000000007
+antes, né, mas
+
+49:51.5
+é...
+
+49:54.57999999999993
+nada foi quebrado, né,
+
+49:55.940000000000055
+continua funcionando ainda.
+
+49:59.679999999999836
+Tá, aqui a gente já
+
+50:1.4800000000000182
+visualizou, só voltando aqui pra
+
+50:04
+conferir uma questão de estilo mesmo.
+
+50:9.820000000000164
+Tá, a gente mete aqui tudo ok, tá bacana.
+
+50:19.699999999999818
+E no Refactor Form, tá, legal. Depois a gente vai fazer alguns ajustes aqui também
+
+50:28.639999999999873
+de estilo para dar junto a parte fazer um ajuste de estilo agora
+
+50:34.36000000000013
+o Pedro contém né E aí
+
+51:4.880000000000109
+E aí legal então agora já fica um avatar. Legal.
+
+51:7.260000000000218
+Então agora já fica um pouco mais fácil e melhor também para a gente poder
+
+51:9.079999999999927
+acompanhar a evolução do formulário refatorado.
+
+51:13.38000000000011
+Então agora o estilo já está um pouquinho melhor,
+
+51:15.840000000000146
+ainda faltam alguns detalhes aqui de espaçamento para o estilo,
+
+51:18.40000000000009
+mas a gente já pode visualizar.
+
+51:20.480000000000018
+Então, recapitulando, a gente tem aqui
+
+51:23.09999999999991
+um ambiente onde a gente vai ter os dados do formulário gravado.
+
+51:30.539999999999964
+Aqui a gente continua com o formulário não refatorado funcionando.
+
+51:34.960000000000036
+E agora a gente já tem uma estrutura um pouco melhor, mais visível, desse processo de refatoração.
+
+51:41.2800000000002
+Legal. O que a gente vai precisar fazer agora, então, é de fato trabalhar nesse componente genérico de formulário
+
+51:48.63999999999987
+para que a gente simplesmente não transfira um código ruim de um lado para o outro,
+
+51:54.76000000000022
+mas que a gente de fato resolva e melhore aqui essa implementação.
+
+51:59.51999999999998
+Beleza?
+
+52:1.0599999999999454
+Então, para isso, a gente vai...
+
+52:7.739999999999782
+Tá, já pode começar aqui inserindo as propriedades.
+
+52:13.739999999999782
+Dentro desse cara aqui.
+
+52:20.179999999999836
+Muito bem.
+
+52:27.079999999999927
+Legal.
+
+52:32.059999999999945
+Nesse momento aqui a gente vai passar somente propriedades de classe.
+
+52:39.01999999999998
+A gente já possa resolver ali de estilização.
+
+52:48.51999999999998
+Vamos chamar ele aqui de
+
+52:50.559999999999945
+className
+
+52:51.57999999999993
+form.
+
+52:55.38000000000011
+E vai ter algo muito parecido
+
+52:57.659999999999854
+aqui no botão.
+
+53:4.559999999999945
+A propriedade aqui é do material, a gente pode apagar
+
+53:11.440000000000055
+então
+
+53:13.139999999999873
+agora a gente tem passando aqui como propriedade class name button
+
+53:18.23999999999978
+e o class name form
+
+53:21.5
+aqui dentro do nosso formulário
+
+53:31.139999999999873
+Aqui dentro do nosso formulário refatorado, a gente pode então repassar essas propriedades.
+
+54:8.519999999999982
+Vamos pegar aqui a outra propriedade. Então com isso a gente A a parte de utilização
+
+54:12.900000000000091
+a gente tem ele aqui
+
+54:23.639999999999873
+esse cara aqui não vou precisar ter acabei cortando. Bacana.
+
+54:26.61999999999989
+Voltando aqui.
+
+54:29.320000000000164
+Então, agora sim, a gente já tem toda a estilização completa com os devidos espaçamentos.
+
+54:31.360000000000127
+Beleza?
+
+54:33.059999999999945
+A gente pode voltar aqui.
+
+54:34.460000000000036
+Só melhorar um pouquinho o espaçamento aqui desse botão.
+
+54:51.059999999999945
+Na verdade, já está interessante, podemos deixar desse modo.
+
+54:52.26000000000022
+Tá, legal.
+
+54:56.059999999999945
+Então a gente tem agora esse formulário aqui,
+
+54:59.820000000000164
+pelo menos essa estrutura do React Form em boa medida já refatorada.
+
+55:1.8200000000001637
+Ainda alguns ajustes vão acontecer,
+
+55:7.960000000000036
+mas é basicamente essa estrutura geral, ideal, para esse formulário refatorado.
+
+55:18.340000000000146
+Bom, agora a gente vai de fato trabalhar nesse outro ponto aqui, para refatorar o generic form de fato.
+
+55:21.920000000000073
+Muito bem.
+
+55:27.7199999999998
+Tá, legal.
+
+55:32.340000000000146
+Então, para que a gente possa continuar esse processo de refatoração,
+
+55:38.01999999999998
+eu havia comentado que a gente iria criar esse componente aqui de forma replicável.
+
+55:45.09999999999991
+Então, para que isso seja possível, eu vou extrair todos esses componentes aqui,
+
+55:47.86000000000013
+na verdade, esse conjunto de componentes,
+
+55:49.61999999999989
+o grid e o text field,
+
+55:52.059999999999945
+para um novo componente genérico,
+
+55:54.440000000000055
+para que ele possa ser reutilizado aqui dentro do
+
+55:56
+generic form.
+
+55:57.7800000000002
+Então, essa vai ser a estratégia.
+
+56:1.9400000000000546
+Vou escrever aqui um generic. a gente vai pegar então aqui toda essa
+
+56:34.940000000000055
+e toda essa estrutura aqui a beleza
+
+57:4.099999999999909
+Apresentando uma série de erros, mas também faltam aqui algumas ilustrações. a gente vai precisar copiar esse aqui também. Exatamente. Precisa ter aqui na raiz somente
+
+57:47.039999999999964
+um nível de
+
+57:49.679999999999836
+hierarquia, né?
+
+57:51.2800000000002
+A gente tinha vários aqui no mesmo nível.
+
+57:53.659999999999854
+Então, usando o fragment, a gente resolve esse probleminha.
+
+57:57.320000000000164
+Tá.
+
+57:58.559999999999945
+Vale lembrar que
+
+57:59.61999999999989
+eu não vou ter
+
+58:1.6199999999998909
+toda essa estrutura aqui da forma como tá.
+
+58:3.699999999999818
+Ela vai ser replicada, né?
+
+58:5.320000000000164
+Mas antes de eu replicar...
+
+58:8.039999999999964
+Deixa eu só ajustar aqui a identificação.
+
+58:11.199999999999818
+Tá bacana.
+
+58:13.440000000000055
+Eu vou importar...
+
+58:18.88000000000011
+Esse componente que acabou de ser criado
+
+58:22.579999999999927
+para dentro do componente genérico de formulário.
+
+58:46.63999999999987
+Bacana. Então a gente pode voltar na nossa tela
+
+58:48.940000000000055
+Observe que tudo continua funcionando
+
+58:51.51999999999998
+A diferença é que agora a gente tem
+
+58:57.440000000000055
+Já
+
+58:58.23999999999978
+O código melhor estruturado
+
+59:1.0399999999999636
+Ainda não está totalmente pronto
+
+59:2.5
+Mas ele já está bem melhor estruturado
+
+59:4.1599999999998545
+Então a gente já tem essa estrutura
+
+59:6.300000000000182
+aqui do
+
+59:07
+React Refactory
+
+59:9.960000000000036
+Form já bem enxuta,
+
+59:12.11999999999989
+né? A gente também tem essa
+
+59:13.980000000000018
+estrutura aqui do
+
+59:15.860000000000127
+componente genérico
+
+59:17.980000000000018
+de formulário também já bem
+
+59:19.940000000000055
+enxuta, né? E agora o que
+
+59:21.860000000000127
+falta é a gente melhorar
+
+59:24.039999999999964
+essa estrutura aqui, então,
+
+59:26.039999999999964
+do generic text field
+
+59:27.420000000000073
+para que ele, de fato,
+
+59:30.38000000000011
+seja um componente replicável,
+
+59:32.23999999999978
+né? Que essa é a nossa proposta ali
+
+59:33.940000000000055
+desde o início, beleza?
+
+59:38.2800000000002
+Então, para isso,
+
+59:40.51999999999998
+a gente vai fazer o
+
+59:42.2199999999998
+seguinte.
+
+59:45.2800000000002
+A gente basicamente aqui vai deletar todo esse código aqui duplicado.
+
+01:00:12.139999999999873
+Legal. Agora a gente tem somente ele A gente vai configurar aqui as propriedades
+
+01:00:16.139999999999873
+Por que a gente vai configurar as propriedades?
+
+01:00:20.320000000000164
+Lembrando que como era a proposta
+
+01:00:23.7800000000002
+Esse código aqui vai ser replicado De esse código aqui vai ser replicado.
+
+01:00:27.59999999999991
+De que forma ele vai ser replicado?
+
+01:00:29.519999999999982
+Eu vou passar aqui por propriedades, essa é a proposta, a ideia, um arquivo de configuração.
+
+01:00:36.11999999999989
+Na verdade, um array de configuração.
+
+01:00:39.039999999999964
+Então, a quantidade de posições no array vai ser a quantidade de vezes que esse componente aqui vai ser replicado,
+
+01:00:45.88000000000011
+até porque a gente vai fazer um map aqui em cima desse
+
+01:00:47.940000000000055
+array, a gente vai iterar,
+
+01:00:50
+e a cada iteração
+
+01:00:51.960000000000036
+a gente vai renderizar um novo componente.
+
+01:00:54.73999999999978
+dentro desse
+
+01:00:56.73999999999978
+array de configuração, então
+
+01:00:59.659999999999854
+todos esses elementos aqui de
+
+01:01:1.599999999999909
+propriedade mesmo, dois componentes,
+
+01:01:3.880000000000109
+eles vão ser fornecidos por esse
+
+01:01:6.239999999999782
+arrede de configuração beleza essa é a proposta a gente pode criar uma conta aqui chama ela que
+
+01:01:14.2800000000002
+existe e ela vai receber um arrei e esse arrei aqui vai vir então pela propriedade config, beleza?
+
+01:01:26.659999999999854
+Eu estou usando aqui o spread direito,
+
+01:01:29.5
+para criar então esse array aqui dentro,
+
+01:01:32.88000000000011
+essa configuração dentro desse array config list.
+
+01:01:36.09999999999991
+Legal?
+
+01:01:38.19999999999982
+Agora então,
+
+01:01:39.179999999999836
+a gente pode criar aqui
+
+01:01:42.86000000000013
+um map paraconfig list.
+
+01:01:50.679999999999836
+Esse map aqui eu vou chamar de...
+
+01:01:56
+...
+
+01:01:57
+... agora vamos trazer todo esse código aqui para dentro do map
+
+01:02:10.159999999999854
+e a ideia agora então vai ser que a gente substitua
+
+01:02:23.579999999999927
+todos esses valores aqui que estão fixos, né?
+
+01:02:29.940000000000055
+De acordo com a configuração que vai ser fornecida pela propriedade.
+
+01:02:34.059999999999945
+Beleza?
+
+01:02:36.40000000000009
+Aqui a gente vai precisar informar uma propriedade aqui, né?
+
+01:02:40.539999999999964
+Isso aqui vai ser necessário para o processo de renderização do object mesmo.
+
+01:02:48.559999999999945
+Beleza?
+
+01:02:50.42000000000007
+Legal.
+
+01:02:51.86000000000013
+Agora é interessante também a gente agrupar algumas propriedades
+
+01:03:2.699999999999818
+para que fique mais fácil a visualização mesmo essa propriedade on-chain
+
+01:03:7.920000000000073
+não vai ser necessário a gente vai ficar aqui com as propriedades aqui a de label autocomplete
+
+01:03:14.760000000000218
+name a gente vai precisar aqui também de uma outra propriedade que a gente possa informar qual é o tipo desse campo, pode ser um texto, pode ser um campo de e-mail, de data, enfim,
+
+01:03:32.440000000000055
+a gente coloca essa propriedade para que a gente tenha a possibilidade de passar isso por meio de configuração,
+
+01:03:58.76000000000022
+E também, a gente já vai deixar aqui preparado, é o que não foi visto ainda, mas como eu havia comentado, nós vamos usar então uma biblioteca para poder fazer o registro dos campos no formulário e com isso a gente conseguir manipular o input do formulário, mas para que isso aconteça eu preciso registrar esses campos.
+
+01:04:7.679999999999836
+Então eu vou inserir também aqui dentro das propriedades do TextField
+
+01:04:12.340000000000146
+o objeto de registro desse formulário.
+
+01:04:19.659999999999854
+Mas eu vou por enquanto deixar só esse campo em aberto,
+
+01:04:22.820000000000164
+a gente começa preenchendo aqui de cima e depois a gente chega lá
+
+01:04:25.38000000000011
+e a gente consegue visualizar um pouco melhor.
+
+01:04:31.23999999999978
+Bom, então aqui a gente vai substituir o CFG,
+
+01:04:35.7800000000002
+que a gente pode chamar de XS.
+
+01:04:42.840000000000146
+CFG, a gente pode chamar de SN
+
+01:04:45.340000000000146
+mas é de mesa
+
+01:04:50.80000000000018
+beleza vamos ver todos esses valores fixos para facilitar eu tô insererindo todas essas propriedades aqui
+
+01:05:26.5
+dentro desse array de objetos com o mesmo nome da propriedade do componente.
+
+01:05:35.07999999999993
+Então, isso é uma forma de facilitar o momento de a gente criar o arquivo de configuração agora então
+
+01:05:56.98000000000002
+para que seja possível
+
+01:05:59.7800000000002
+fazer esse registro
+
+01:06:1.3600000000001273
+a gente vai chamar
+
+01:06:3.2600000000002183
+o fichar
+
+01:06:3.900000000000091
+esse
+
+01:06:4.099999999999909
+esse fazer esse registro, a gente vai chamar um register.
+
+01:06:7.099999999999909
+Esse valor aqui, register,
+
+01:06:11.659999999999854
+depois a gente vai ver ali, ele vai ser um valor
+
+01:06:13.860000000000127
+que inicialmente ele vai ser inserido
+
+01:06:15.88000000000011
+vazio, como um objeto vazio,
+
+01:06:18.73999999999978
+dentro do array de objetos
+
+01:06:20.23999999999978
+da configuração.
+
+01:06:22.079999999999927
+E no momento
+
+01:06:24.539999999999964
+que os objetos da configuração e no momento que esse próprio aqui for passado para o generic text field
+
+01:06:32.960000000000036
+antes de eu passar ele, eu vou iterar ele e vou inserir esse objeto logo após eu ter instanciado ali, ter criado, ou melhor, ter importado e ter utilizado a lib para fazer esse registro.
+
+01:06:49.679999999999836
+Mas depois, na prática, visualizando, vai ficar um pouco mais claro isso que eu estou mencionando nesse momento.
+
+01:06:54.61999999999989
+Beleza?
+
+01:06:56.69999999999982
+Legal. Então, eu já tenho essa parte aqui já criada.
+
+01:07:0.23999999999978172
+A gente já criou também a constante config form tá
+
+01:07:10
+é legal
+
+01:07:13.079999999999927
+tá bacana então agora a gente vai precisar é
+
+01:07:18.61999999999989
+voltar aqui o nosso generic form dentro do nosso generic form
+
+01:07:23.440000000000055
+generic form, dentro do nosso generic form,
+
+01:07:28.019999999999982
+agora, a partir dele,
+
+01:07:30.559999999999945
+que a gente vai chamar o generic text field.
+
+01:07:34.2800000000002
+Então, a partir desse cara aqui,
+
+01:07:36.2199999999998
+que eu vou precisar importar o config,
+
+01:07:41
+vai ser algum valor que eu vou precisar importar, manipular,
+
+01:07:43.40000000000009
+aqui dentro dessa função do generic form, beleza? Então, eu vou criarar importar, manipular, né? Aqui dentro dessa função do generic form, beleza?
+
+01:07:47.09999999999991
+Então eu vou criar aqui essa constante.
+
+01:07:51.559999999999945
+Vou chamar ela aqui de conflito.
+
+01:08:0.23999999999978172
+Use conflito.
+
+01:08:3.2199999999998
+Observa que eu estou já chamando um pouco esse Hulk não existe ainda né a gente já vai
+
+01:08:9.7199999999998
+implementar aqui na sequência mas a ideia então é eu passar né esse valor aqui para
+
+01:08:19.68000000000029
+e como propriedade né do do generic textfield beleza antes disso até eu vou fazer o seguinte é
+
+01:08:35.23999999999978
+Ah tá não acho que a gente pode partir então para criação mesmo legal vou partir então para a criação desse cara aqui, até para que a gente possa manter esse erro aqui.
+
+01:08:46.840000000000146
+Pode. Eu vou antes até já importar. legal
+
+01:09:6.3400000000001455
+ó, ele não tem criado aqui ainda
+
+01:09:12.260000000000218
+vou deixar vazio
+
+01:09:14.359999999999673
+por enquanto
+
+01:09:15.039999999999964
+a gente já cria ele
+
+01:09:34.5
+bacana Bacana. Legal.
+
+01:09:35.68000000000029
+Eu já tenho esse Rook aqui criado.
+
+01:09:38.340000000000146
+Como também não é o propósito da nossa aula, a criação do Rook,
+
+01:09:42.600000000000364
+eu já vou disponibilizar ele aqui diretamente,
+
+01:09:45.31999999999971
+mas a ideia basicamente do Rook é a seguinte, eu vou criar então esse contexto,
+
+01:09:54.64000000000033
+a partir desse contexto aqui eu vou criar esse provider, esse provider eu vou depois,
+
+01:10:1.2399999999997817
+na sequência, adicionar aqui no index. O index, ele provê um
+
+01:10:6.300000000000182
+app provider. Esse app
+
+01:10:8.359999999999673
+provider, ele está
+
+01:10:10.140000000000327
+englobando aqui, fazendo
+
+01:10:12.140000000000327
+o wrapper do
+
+01:10:13.800000000000182
+app bar e do portal.
+
+01:10:16.659999999999854
+Então, com isso,
+
+01:10:19.079999999999927
+eu tenho
+
+01:10:19.960000000000036
+esse contexto,
+
+01:10:21.88000000000011
+as informações previdas por esse contexto
+
+01:10:24.100000000000364
+sendo compartilhadas, tanto pelo
+
+01:10:25.76000000000022
+app bar, como portal, e todos os componentes abaixo
+
+01:10:28.88000000000011
+deles. Então essa é a ideia geral, para que eu possa
+
+01:10:31.920000000000073
+compartilhar de uma forma mais fácil
+
+01:10:34.97999999999956
+as informações de configuração. Eu vou ter aqui
+
+01:10:38.02000000000044
+então um status,
+
+01:10:41.159999999999854
+um estado, desculpa, nesse estado aqui
+
+01:10:43.80000000000018
+eu tenho o config form,
+
+01:10:47.02000000000044
+no momento aqui
+
+01:10:48.100000000000364
+eu estou iniciando ele com o array vazio,
+
+01:10:50.80000000000018
+e depois eu também estou
+
+01:10:51.9399999999996
+declarando aqui
+
+01:10:52.69999999999982
+uma função, a config,
+
+01:10:56.61999999999989
+onde eu vou, de fato,
+
+01:10:58.69999999999982
+informar o valor da configuração
+
+01:11:0.7200000000002547
+para que ele, por meio do set
+
+01:11:2.380000000000109
+config form, possa alterar
+
+01:11:4.579999999999927
+esse estado, se esse valor
+
+01:11:7.020000000000437
+que vai estar sendo compartilhado pelos componentes Beleza então aqui dentro do meu provider do
+
+01:11:14.5600000000004
+contexto eu tô disponibilizando aqui com o valor o config form que o valor do estado mesmo né E essa
+
+01:11:21.23999999999978
+função então que vai setar o valor do estado. Beleza?
+
+01:11:29.100000000000364
+Para que eu não esqueça, a gente já pode vir aqui antes.
+
+01:11:38
+Pegar um corte. Legal.
+
+01:12:4.359999999999673
+Bacana. Agora, desse modo,
+
+01:12:7.279999999999745
+eu já tenho também o meu
+
+01:12:10.359999999999673
+hook de configuração
+
+01:12:12.899999999999636
+inserindo aqui na estrutura
+
+01:12:14.859999999999673
+da minha aplicação.
+
+01:12:17.840000000000146
+Muito bem.
+
+01:12:19.11999999999989
+A gente pode voltar, então,
+
+01:12:21.479999999999563
+a refatoração do nosso componente de formulário.
+
+01:12:34.4399999999996
+Agora sim, eu tenho o useConfigForm aqui
+
+01:12:37.81999999999971
+e consigo resgatar esse valor.
+
+01:12:41.19999999999982
+No momento esse valor aqui está vazio. Como eu tinha comentado,
+
+01:12:45.92000000000007
+a gente vai
+
+01:12:46.61999999999989
+criar esse valor aqui,
+
+01:12:50.07999999999993
+o config form
+
+01:12:50.97999999999956
+vazio.
+
+01:12:53.57999999999993
+E depois, na sequência,
+
+01:12:55.720000000000255
+a gente vai conseguir
+
+01:12:56.88000000000011
+setar esse valor. Na verdade,
+
+01:13:01
+a gente já pode até
+
+01:13:1.8400000000001455
+fazer isso agora.
+
+01:13:3.699999999999818
+Se a gente for
+
+01:13:4.5
+voltar aqui para o nosso componente do formulário que está sendo refatorado.
+
+01:13:14.479999999999563
+É a responsabilidade desse componente, então, informar qual estrutura de campos que ele precisa ter e tudo mais, qual estrutura de input.
+
+01:13:27.140000000000327
+estrutura de campos que ele precisa ter e tudo mais, qual a estrutura de input. Desse modo, a gente vai tá pegando o valor né Rook, a gente tá utilizando, consumindo somente
+
+01:14:8.859999999999673
+a função que vai setar o valor no Rook, beleza?
+
+01:14:28.199999999999818
+Agora faltou uma coisa, né?
+
+01:14:33.600000000000364
+Faltou a gente ter o conteúdo dessa configuração para que a gente possa passar para o RUC de configuração.
+
+01:14:37.76000000000022
+E aqui que entra, então, o arquivo de config
+
+01:14:40.279999999999745
+que eu havia criado lá no início,
+
+01:14:42.80000000000018
+quando a gente começou a fazer esse processo de refatoramento.
+
+01:14:45.899999999999636
+Eu já tenho ele aqui pronto, até para facilitar.
+
+01:14:59.039999999999964
+Então, o que consiste aqui esse arquivo de configuração?
+
+01:15:2.5600000000004
+Ele é um array, um array de objetos.
+
+01:15:6.699999999999818
+A gente observa que cada posição desse array, ele vai ter esse objeto.
+
+01:15:13.640000000000327
+E dentro desse objeto, ele vai ter aqui as propriedades de cada componente que vai ser renderizado.
+
+01:15:21.5
+Então, essa é a ideia.
+
+01:15:22.520000000000437
+Eu passo aqui esse array, eu vou fazer um map
+
+01:15:26.079999999999927
+em cima desse array,
+
+01:15:28.0600000000004
+a cada interação do map é renderizado
+
+01:15:30.359999999999673
+um componente, onde
+
+01:15:32.039999999999964
+cada componente renderizado
+
+01:15:33.9399999999996
+vai ter as propriedades
+
+01:15:36.220000000000255
+que estão inseridas aqui nesse
+
+01:15:38.02000000000044
+objeto. Então, quer dizer,
+
+01:15:40.23999999999978
+eu estou, o primeiro componente
+
+01:15:41.9399999999996
+aqui vai ter o id first name,
+
+01:15:44.07999999999993
+o name, o label nome, o segundo ID last name, name last name, sobrenome e por aí vai.
+
+01:15:52.600000000000364
+E aqui a gente também tem aquele objetoio, para que no momento que a gente for utilizar a lib
+
+01:16:9.600000000000364
+para controlar o formulário,
+
+01:16:12.319999999999709
+e de fato criar um objeto fornecido por essa lib,
+
+01:16:15.460000000000036
+a gente passa para esse array que vai estar sendo importado,
+
+01:16:20.539999999999964
+consumido em algum trecho do nosso código.
+
+01:16:22.920000000000073
+Beleza?
+
+01:16:24.039999999999964
+Então aqui a gente já consegue importar ele.
+
+01:16:43.11999999999989
+Legal. Então, agora a gente já tem aqui o arquivo configurado, criado, né? Melhor, o arquivo configurado, não, o arquivo já criado, importado no nosso Refactored Form
+
+01:17:10.760000000000218
+e inserido nessa configuração no hook que a gente acabou de criar para realizar essa configuração, beleza?
+
+01:17:21.68000000000029
+Muito bem.
+
+01:17:27.520000000000437
+Legal.
+
+01:17:32.399999999999636
+Agora a gente vai fazer a criação, ou melhor, a importação
+
+01:17:38.85999999999967
+da nossa biblioteca, que de fato vai manipular, que vai gerenciar os inputs do nosso formulário.
+
+01:17:53.61999999999989
+Beleza?
+
+01:17:55.600000000000364
+Então aqui a gente vai usar...
+
+01:17:58
+Vou colocar ela mais aqui em cima.
+
+01:18:2.699999999999818
+uma uma
+
+01:18:2.819999999999709
+uma
+
+01:18:3.0600000000004
+uma
+
+01:18:3.1400000000003274
+uma
+
+01:18:3.180000000000291
+uma
+
+01:18:3.2200000000002547
+uma
+
+01:18:3.2600000000002183
+uma
+
+01:18:3.2799999999997453
+uma
+
+01:18:3.300000000000182
+uma
+
+01:18:3.319999999999709
+uma
+
+01:18:3.3400000000001455
+uma
+
+01:18:3.380000000000109
+uma
+
+01:18:3.399999999999636
+uma
+
+01:18:3.4200000000000728
+uma
+
+01:18:3.4399999999996
+uma
+
+01:18:3.4600000000000364
+uma
+
+01:18:3.4799999999995634
+uma
+
+01:18:3.5
+uma
+
+01:18:3.5200000000004366
+uma
+
+01:18:3.5399999999999636
+uma
+
+01:18:3.5799999999999272
+uma
+
+01:18:3.600000000000364
+uma
+
+01:18:3.619999999999891
+uma
+
+01:18:3.6599999999998545
+uma
+
+01:18:3.680000000000291
+uma
+
+01:18:3.699999999999818
+uma
+
+01:18:3.7200000000002547
+uma
+
+01:18:3.7399999999997817
+uma
+
+01:18:3.7799999999997453
+uma
+
+01:18:3.800000000000182
+uma
+
+01:18:3.819999999999709
+uma
+
+01:18:3.8599999999996726
+uma
+
+01:18:3.880000000000109
+uma
+
+01:18:3.899999999999636
+uma
+
+01:18:3.9399999999996
+uma
+
+01:18:04
+uma
+
+01:18:5.100000000000364
+uma
+
+01:18:5.119999999999891
+uma
+
+01:18:5.1599999999998545
+uma
+
+01:18:5.180000000000291
+uma
+
+01:18:5.220000000000255
+uma uma Legal.
+
+01:18:31.31999999999971
+A gente vai desestruturar.
+
+01:18:43.720000000000255
+E vai utilizar, então, aqui, alguns elementos desse formato.
+
+01:18:47.220000000000255
+Já esteve.
+
+01:18:49.76000000000022
+O próprio registro, né? Esse aqui é um objeto que o Zform vai disponibilizar.
+
+01:18:53.92000000000007
+E a função que a gente vai utilizar para enviar os dados, né?
+
+01:18:59.4399999999996
+Para persistir esses dados na nossa API,
+
+01:19:5.699999999999818
+no nosso endpoint lá no backend, beleza?
+
+01:19:8.319999999999709
+Legal. Agora,
+
+01:19:10.239999999999782
+entra aquela questão que eu havia comentado.
+
+01:19:13.359999999999673
+Aqui no nosso
+
+01:19:14.319999999999709
+arquivo de configuração,
+
+01:19:16.100000000000364
+voltando nele aqui rapidamente,
+
+01:19:19.420000000000073
+nós estamos passando
+
+01:19:20.420000000000073
+então esse objeto aqui vazio,
+
+01:19:23.199999999999818
+ou seja, se a gente
+
+01:19:24.31999999999971
+só passar desse modo aqui, a gente não vai
+
+01:19:26.100000000000364
+ter os nossos componentes registrados,
+
+01:19:28.420000000000073
+né? Então não vai funcionar
+
+01:19:29.840000000000146
+o input dos dados, o envio dos dados.
+
+01:19:33.81999999999971
+E a gente precisa passar
+
+01:19:35.88000000000011
+de forma dinâmica esse objeto
+
+01:19:38.159999999999854
+aqui, register, pra
+
+01:19:39.779999999999745
+cada iteração dentro
+
+01:19:41.88000000000011
+desse, do componente
+
+01:19:43.52000000000044
+generic task field.
+
+01:19:46.14000000000033
+Então, essa é a ideia.
+
+01:19:49.02000000000044
+Eu vou passar esse cara aqui dentro.
+
+01:19:50.85999999999967
+Só que nesse momento esse cara aqui está vazio.
+
+01:19:55.26000000000022
+Então, para que a gente possa inserir esse valor,
+
+01:20:0.11999999999989086
+após eu criar aqui, usar o useForm, é fazer um map do config form.
+
+01:20:3.100000000000364
+é fazer um map do config form e com esse map
+
+01:20:7.100000000000364
+eu vou inserir a informação desse register aqui do use form
+
+01:20:16.61999999999989
+lá dentro do objeto register do arquivo de configuração
+
+01:20:20.38000000000011
+que estava vazio.
+
+01:20:22.100000000000364
+Beleza?
+
+01:20:23.26000000000022
+Aqui, config.
+
+01:20:37.81999999999971
+a consideração que estava vazio beleza confira o que vai registro aqui vai pedir também o nome do campo no qual ele está registrando.
+
+01:20:54.659999999999854
+Beleza?
+
+01:20:55.68000000000029
+Então, algo importante aqui, né?
+
+01:21:0.7399999999997817
+O nome do campo vai ser necessariamente ali também o nome que eu estou registrando.
+
+01:21:5.960000000000036
+Beleza? Tem essa condição ali no arquivo de configuração,
+
+01:21:9.279999999999745
+uma condição meio implícita.
+
+01:21:11.539999999999964
+Legal. Então agora a gente já tem essa parte aqui criada.
+
+01:21:16.420000000000073
+Agora, o que a gente vai precisar fazer?
+
+01:21:20.199999999999818
+A gente vai precisar criar
+
+01:21:21.600000000000364
+o envio desses dados
+
+01:21:24.779999999999745
+que estão sendo importados no formulário.
+
+01:21:27.11999999999989
+Para isso a gente vai criar aqui então uma função, um submit,
+
+01:21:33.19999999999982
+ela vai receber a função provida pelo useFor.
+
+01:21:41.92000000000007
+Então aqui a gente vai receber os dados do formulário e eu vou chamar aqui uma API. precisa importar ela
+
+01:22:6.100000000000364
+bom
+
+01:22:6.960000000000036
+posso tirar normalmente
+
+01:22:10.180000000000291
+e pronto
+
+01:22:22.539999999999964
+no site
+
+01:22:23.579999999999927
+legal aqui dentro do site a gente tem e aí e aí e aí e aí e aí e aí e aí e aí e aí e aí e aí e aí e aí e aí e aí e aí e aí e aí e aí e aí e aí
+
+01:22:37.64000000000033
+então aqui eu tô mandando esse post é a rota que eu tenho configurada ali, o endpoint que eu tenho configurado se chama form
+
+01:22:48.52000000000044
+e eu vou mandar para esse form o beira. E assim que eu mandar esses dados para o formulário,
+
+01:23:2.5600000000004
+eu vou fazer o seguinte, eu vou recarregar a página para que eu possa ser encaminhado para a página de registro dos meus dados.
+
+01:23:11.460000000000036
+Então, aqui eu vou dar um window, um location, um load.
+
+01:23:20.399999999999636
+Legal.
+
+01:23:21.039999999999964
+Legal.
+
+01:23:35.039999999999964
+Agora então, no meu form, eu vou declarar aqui na propriedade de insalubrítico e vou passar aqui a minha função.
+
+01:23:39.539999999999964
+Beleza?
+
+01:23:43.57999999999993
+Bom. Bom.
+
+01:23:49.659999999999854
+Acredito que com isso aqui já seja suficiente Agora a gente pode fazer aqui
+
+01:23:51.61999999999989
+Um rápido teste
+
+01:23:53.659999999999854
+Observe que
+
+01:23:55.340000000000146
+Nada foi quebrado
+
+01:23:57.220000000000255
+Tudo continua funcionando
+
+01:23:58.720000000000255
+Legal
+
+01:23:59.61999999999989
+Vamos fazer um teste aqui então
+
+01:24:28.23999999999978
+Vamos fazer um teste aqui então Opa! Opa! Opa!
+
+01:24:29
+Opa!
+
+01:24:29.020000000000437
+Opa!
+
+01:24:29.039999999999964
+Opa!
+
+01:24:29.0600000000004
+Opa!
+
+01:24:29.100000000000364
+Opa!
+
+01:24:29.11999999999989
+Opa!
+
+01:24:29.140000000000327
+Opa!
+
+01:24:29.159999999999854
+Opa!
+
+01:24:29.18000000000029
+Opa!
+
+01:24:29.199999999999818
+Opa!
+
+01:24:29.220000000000255
+Opa!
+
+01:24:29.23999999999978
+Opa!
+
+01:24:29.26000000000022
+Opa!
+
+01:24:29.340000000000146
+Opa!
+
+01:24:29.359999999999673
+Opa!
+
+01:24:29.420000000000073
+Opa!
+
+01:24:29.4399999999996
+Opa!
+
+01:24:29.460000000000036
+Opa!
+
+01:24:29.539999999999964
+Opa!
+
+01:24:29.5600000000004
+Opa!
+
+01:24:29.659999999999854
+Opa!
+
+01:24:29.68000000000029
+Opa! Opa Parece que o nosso formulário refatorado não está funcionando.
+
+01:24:47.35999999999967
+A gente pode rever aqui o que pode estar acontecendo de errado.
+
+01:24:51.460000000000036
+Vamos fazer aqui uma rápida revisão.
+
+01:25:15.239999999999782
+aqui no nosso refactor form aparentemente tudo ok aqui foi carregado certo
+
+01:25:19.4399999999996
+aqui parece tudo certo também vamos avaliar aqui então o nosso generic form.
+
+01:25:29.9399999999996
+Bom, generic form a gente está recebendo as propriedades.
+
+01:25:34.81999999999971
+Config form, ok.
+
+01:25:40.31999999999971
+Muito bem.
+
+01:25:43.76000000000022
+Aqui aparentemente tudo certo também.
+
+01:25:48.779999999999745
+Aqui a gente tem o nosso data, api.post.
+
+01:25:54.100000000000364
+Ok.
+
+01:25:56.18000000000029
+Aparentemente aqui tudo certo.
+
+01:26:3.4399999999996
+Vamos avaliar então aqui o nosso text field., ver se faltou aqui algum detalhe.
+
+01:26:9.760000000000218
+Muito bem, id, id também, autocomplete, Type,
+
+01:26:26.600000000000364
+GST,
+
+01:26:30.0600000000004
+aparentemente tudo certo também.
+
+01:26:31.88000000000011
+Bom, vamos fazer um novo teste. Provavelmente foi algum detalhe no momento que foi recarregado o hook, né?
+
+01:26:57.539999999999964
+Então, ele não deve ter carregado ali o valor.
+
+01:27:3.7200000000002547
+A gente pode repetir o teste.
+
+01:27:7.420000000000073
+Vou fazer assim.
+
+01:27:16.76000000000022
+Legal.
+
+01:27:21.840000000000146
+Agora o bacana que a gente pode fazer,
+
+01:27:23.659999999999854
+depois que a gente observou aqui que de fato os dois formulários estão funcionais,
+
+01:27:29.31999999999971
+tanto o formulário não refatorado.
+
+01:27:48.5
+Então aqui a gente vai...
+
+01:28:4.039999999999964
+o e-mail qualquer 9999
+
+01:28:5.760000000000218
+9999
+
+01:28:8.239999999999782
+9999
+
+01:28:8.5600000000004
+qualquer
+
+01:28:11.039999999999964
+só pra gente fazer a gravação, né?
+
+01:28:17.960000000000036
+vou colocar aqui de novo
+
+01:28:20.720000000000255
+tá, vou parar a gravação aqui de novo.
+
+01:28:25.960000000000036
+Tá.
+
+01:28:27.26000000000022
+Parar a gravação.
+
+01:28:30.31999999999971
+Vamos limpar.
+
+01:28:31.300000000000182
+Agora sim,
+
+01:28:34.220000000000255
+vamos gravar aqui o nosso profile.
+
+01:28:39.14000000000033
+João Silva. João Silva.
+
+01:28:43.14000000000033
+João Silva.
+
+01:28:44.64000000000033
+João Silva.
+
+01:28:44.659999999999854
+João Silva.
+
+01:28:44.68000000000029
+João Silva.
+
+01:28:44.69999999999982
+João Silva.
+
+01:28:44.76000000000022
+João Silva.
+
+01:28:44.80000000000018
+João Silva.
+
+01:28:44.81999999999971
+João Silva.
+
+01:28:44.840000000000146
+João Silva.
+
+01:28:44.85999999999967
+João Silva.
+
+01:28:44.88000000000011
+João Silva.
+
+01:28:44.899999999999636
+João Silva.
+
+01:28:44.97999999999956
+João Silva. João Silva. João Silva. João Silva a gente vai ter teve para esse caso aqui então porque foram menos caracteres 70 atualizações gravadas aqui pelo
+
+01:29:6.119999999999891
+profile, novamente a gente
+
+01:29:8.11999999999989
+pode ver aqui nas barras
+
+01:29:10.020000000000437
+amarelas que tem
+
+01:29:11.699999999999818
+um custo maior
+
+01:29:13.020000000000437
+elas são
+
+01:29:16.079999999999927
+então renderizadas aqui
+
+01:29:17.68000000000029
+e esse custo aqui de fato é maior
+
+01:29:20.11999999999989
+para o relatório não
+
+01:29:21.300000000000182
+refatorado, e agora a gente
+
+01:29:24
+pode fazer,
+
+01:29:26.76000000000022
+vamos cadastrar aqui e terminar.
+
+01:29:28.079999999999927
+Legal?
+
+01:29:31.5600000000004
+Vamos limpar ele aqui.
+
+01:29:35.4399999999996
+E agora a gente pode fazer esse mesmo teste para o refactor de fórum.
+
+01:29:42
+A gente tem aqui o João Silva. Legal.
+
+01:30:2.3599999999996726
+Legal.
+
+01:30:2.4399999999996
+legal agora a gente conclui então
+
+01:30:3.1400000000003274
+Agora a gente conclui, então.
+
+01:30:4.4399999999996
+observa que
+
+01:30:5.819999999999709
+no cenário anterior a gente tinha ali
+
+01:30:9.38000000000011
+algo em torno de
+
+01:30:10.960000000000036
+70 ou um pouco mais
+
+01:30:12.979999999999563
+atualizações e aqui
+
+01:30:14.760000000000218
+desse modo a gente tem
+
+01:30:17.020000000000437
+30 atualizações
+
+01:30:19.699999999999818
+a gente pode ver até pela cor do gráfico
+
+01:30:22.300000000000182
+são
+
+01:30:22.720000000000255
+atualizações menos custosas.
+
+01:30:26.9399999999996
+Elas consomem menos tempo para poder fazer a renderização.
+
+01:30:31.31999999999971
+Beleza?
+
+01:30:33.19999999999982
+Bom, pessoal, então essa foi a aula de hoje.
+
+01:30:36.68000000000029
+Essa foi a proposta.
+
+01:30:38.779999999999745
+Apresentar a ideia de refatoração dentro de um contexto do código no React,
+
+01:30:48.720000000000255
+mas especificamente na parte de formulários,
+
+01:30:51.279999999999745
+que é algo muito recorrente de fato em aplicações web.
+
+01:30:55.88000000000011
+Todo esse código repositório vai estar disponível
+
+01:30:59.779999999999745
+no repositório oficial da Rocketseat.
+
+01:31:3.9200000000000728
+E se houver alguma sugestão para um novo conteúdo
+
+01:31:8.279999999999745
+ou eventuais dúvidas que possam ter ficado desse conteúdo que foi repassado,
+
+01:31:12.61999999999989
+eu fico à disposição.
+
+01:31:14.739999999999782
+Então, um forte abraço e até mais.

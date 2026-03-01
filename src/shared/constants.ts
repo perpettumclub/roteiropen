@@ -54,6 +54,16 @@ export const AUDIO_LIMITS = {
     WARNING_DURATION: 240, // 4 minutes
 } as const;
 
+/** Milliseconds in one day (used for date diff calculations) */
+export const MILLISECONDS_PER_DAY = 1_000 * 60 * 60 * 24;
+
+/** Posting consistency goal (total unique days) */
+export const POSTING_GOAL_DAYS = 60;
+
+/** Annual plan price in BRL */
+export const PLAN_PRICE_BRL = 49.90;
+
+
 // =============================================================================
 // API CONFIGURATION
 // =============================================================================
@@ -90,4 +100,6 @@ export const STORAGE_KEYS = {
     PROGRESS: 'hooky_progress_data',
     SCREENSHOTS: 'hooky_screenshots',
     ONBOARDING: 'hooky_onboarding_complete',
+    PENDING_CHECKOUT: 'hooky_pending_checkout',
+    PENDING_LOGIN: 'hooky_pending_login',
 } as const;

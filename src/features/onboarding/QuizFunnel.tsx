@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, Star, TrendingUp, Users, Zap, CheckCircle, Sparkles } from 'lucide-react';
+import { useGlobalStats } from '../../shared/hooks/useGlobalStats';
 
 interface QuizFunnelProps {
     onComplete: (profile: CreatorProfile) => void;
@@ -87,7 +88,7 @@ const QUESTIONS: Question[] = [
         id: 'growth_projection',
         type: 'growth-chart',
         question: 'Hooky acelera seu crescimento',
-        subtitle: 'Projeção baseada em dados reais de +2.341 criadores',
+        subtitle: 'Projeção baseada em dados reais de +{{CREATORS}} criadores',
     },
     // 6. Trust screen
     {
@@ -163,7 +164,7 @@ const QUESTIONS: Question[] = [
         id: 'social_proof',
         type: 'social-proof',
         question: 'Hooky foi feito para pessoas como você',
-        subtitle: '+2.341 criadores',
+        subtitle: '+{{CREATORS}} criadores',
         testimonials: [
             { name: 'Marina Silva', avatar: '👩‍💼', text: 'Perdi 3h por dia criando roteiros. Agora faço em 15 segundos!', rating: 5 },
             { name: 'Carlos Mendes', avatar: '👨‍💻', text: 'Saí de 2K para 50K seguidores em 4 meses usando o Hooky.', rating: 5 },
@@ -187,7 +188,7 @@ const QUESTIONS: Question[] = [
         id: 'generating',
         type: 'loading',
         question: 'Gerando seu plano personalizado...',
-        subtitle: 'Analisando dados de +2.341 roteiros virais',
+        subtitle: 'Analisando dados de +{{SCRIPTS}} roteiros virais',
     },
 ];
 
@@ -203,8 +204,20 @@ export const QuizFunnel: React.FC<QuizFunnelProps> = ({ onComplete }) => {
     const [answers, setAnswers] = useState<Record<string, string>>({});
     const [loadingProgress, setLoadingProgress] = useState(0);
     const [showResult, setShowResult] = useState(false);
+    const { totalScripts, activeCreators } = useGlobalStats();
 
-    const currentQuestion = QUESTIONS[currentIndex];
+    // Dynamically replace placeholder markers with real stats
+    const questions = useMemo(() =>
+        QUESTIONS.map(q => ({
+            ...q,
+            subtitle: q.subtitle
+                ?.replace('{{CREATORS}}', activeCreators.toLocaleString())
+                ?.replace('{{SCRIPTS}}', totalScripts.toLocaleString())
+        })),
+        [activeCreators, totalScripts]
+    );
+
+    const currentQuestion = questions[currentIndex];
     const progress = ((currentIndex + 1) / QUESTIONS.length) * 100;
 
     // Handle loading screen animation

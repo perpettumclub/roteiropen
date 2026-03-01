@@ -5,7 +5,7 @@
 
 import { transcribeAudio } from './transcription';
 import { generateViralScript, type ViralScriptResult } from './script';
-import { fetchMultipleYouTubeInfo } from './youtube';
+import { fetchMultipleYouTubeInfoWithTranscripts } from './youtube';
 
 export interface PipelineResult {
     transcription: string;
@@ -22,19 +22,19 @@ export async function processAudioToScript(
     youtubeLinks?: string[],
     onProgress?: ProgressCallback
 ): Promise<PipelineResult> {
-    // Fetch YouTube video info if links provided
-    let youtubeReferences: { title: string; author: string }[] = [];
+    // Fetch YouTube video info + transcripts if links provided
+    let youtubeReferences: { title: string; author: string; transcript?: string }[] = [];
 
     if (youtubeLinks && youtubeLinks.length > 0) {
-        onProgress?.('Analisando vídeos de referência...');
-        youtubeReferences = await fetchMultipleYouTubeInfo(youtubeLinks);
+        onProgress?.('Buscando transcrições dos vídeos...');
+        youtubeReferences = await fetchMultipleYouTubeInfoWithTranscripts(youtubeLinks);
     }
 
-    onProgress?.('Transcrevendo áudio...');
+    onProgress?.('Transcrevendo seu áudio...');
     const transcription = await transcribeAudio(audioBlob);
 
     onProgress?.(youtubeReferences.length > 0
-        ? 'Remixando com vídeos virais...'
+        ? 'Remixando com conteúdo dos vídeos...'
         : 'Gerando roteiro viral...'
     );
 

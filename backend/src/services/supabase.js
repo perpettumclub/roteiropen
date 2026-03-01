@@ -1,10 +1,15 @@
 import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_ANON_KEY;
+
+let supabase = null;
 
 if (!supabaseUrl || !supabaseServiceKey) {
-    console.warn('⚠️ Supabase credentials not set. Database operations will fail.');
+    console.warn('⚠️ Supabase credentials not set. Database operations will be skipped.');
+} else {
+    supabase = createClient(supabaseUrl, supabaseServiceKey);
 }
 
-export const supabase = createClient(supabaseUrl, supabaseServiceKey);
+export { supabase };
+

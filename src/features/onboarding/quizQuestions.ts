@@ -106,7 +106,7 @@ export const QUIZ_QUESTIONS: Question[] = [
         id: 'growth_projection',
         type: 'growth-chart',
         question: 'Hooky acelera seu crescimento',
-        subtitle: 'Projeção baseada em dados reais de +2.341 criadores',
+        subtitle: 'Projeção baseada em dados reais de +{{CREATORS}} criadores',
     },
     // 6. Trust screen
     {
@@ -182,7 +182,7 @@ export const QUIZ_QUESTIONS: Question[] = [
         id: 'social_proof',
         type: 'social-proof',
         question: 'Hooky foi feito para pessoas como você',
-        subtitle: '+2.341 criadores',
+        subtitle: '+{{CREATORS}} criadores',
         testimonials: [
             { name: 'Marina Silva', avatar: '👩‍💼', text: 'Perdi 3h por dia criando roteiros. Agora faço em 15 segundos!', rating: 5 },
             { name: 'Carlos Mendes', avatar: '👨‍💻', text: 'Saí de 2K para 50K seguidores em 4 meses usando o Hooky.', rating: 5 },
@@ -206,7 +206,7 @@ export const QUIZ_QUESTIONS: Question[] = [
         id: 'generating',
         type: 'loading',
         question: 'Gerando seu plano personalizado...',
-        subtitle: 'Analisando dados de +2.341 roteiros virais',
+        subtitle: 'Analisando dados de +{{SCRIPTS}} roteiros virais',
     },
 ];
 

@@ -11,8 +11,9 @@ export interface ViralScriptResult {
     hooks: { type: string; text: string; emoji: string }[];
     conflito: string;
     climax: string;
+    storytelling: string;
     solucao: string;
-    cta: string;
+    cta: string | { texto: string; palavra_chave: string; entrega_prometida: string; emoji: string };
     metadata: {
         duration: string;
         tone: string;

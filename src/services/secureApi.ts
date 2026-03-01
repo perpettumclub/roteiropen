@@ -7,18 +7,9 @@
 
 // Para desenvolvimento local, usa a key diretamente
 const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001';
 
-// Log para debug (seguro, não mostra a key toda)
-console.log('🔍 DEBUG ENV:');
-console.log('MODE:', import.meta.env.MODE);
-console.log('DEV:', import.meta.env.DEV);
-console.log('VITE_OPENAI_API_KEY exists:', !!OPENAI_API_KEY);
-if (OPENAI_API_KEY) {
-    console.log('VITE_OPENAI_API_KEY length:', OPENAI_API_KEY.length);
-    console.log('VITE_OPENAI_API_KEY prefix:', OPENAI_API_KEY.substring(0, 7));
-} else {
-    console.warn('⚠️ VITE_OPENAI_API_KEY is undefined!');
-}
+
 
 // Base URL para as funções serverless
 const API_BASE = '/api';
@@ -44,7 +35,7 @@ async function blobToBase64(blob: Blob): Promise<string> {
 export async function transcribeAudio(audioBlob: Blob): Promise<string> {
     // Se tem API key local, usa diretamente
     if (OPENAI_API_KEY) {
-        console.log('🔑 Using direct OpenAI API call');
+
 
         const formData = new FormData();
         formData.append('file', audioBlob, 'recording.webm');
@@ -63,11 +54,12 @@ export async function transcribeAudio(audioBlob: Blob): Promise<string> {
         }
 
         const data = await response.json();
+
         return data.text;
     }
 
     // Sem API key local, tenta serverless (produção)
-    console.log('🔒 Using serverless function (Production Mode)');
+
 
     // Check if we are actually allowed to use serverless (only in non-dev or if configured)
     // For now, let's try it but warn if it fails
@@ -92,58 +84,190 @@ export async function transcribeAudio(audioBlob: Blob): Promise<string> {
 }
 
 /**
- * Extrai problema e solução da transcrição
+ * Extrai problema e solução da transcrição usando IA
  */
 export async function extractProblemSolution(transcription: string): Promise<{
     problem: string;
     solution: string;
 }> {
-    return {
-        problem: transcription.slice(0, 100) + '...',
-        solution: 'Insight extraído da sua ideia',
-    };
+    // Se não tem API key, retorna fallback
+    if (!OPENAI_API_KEY) {
+        console.warn('⚠️ No OpenAI API key - using fallback extraction');
+        return {
+            problem: transcription,
+            solution: 'Solução baseada na sua ideia',
+        };
+    }
+
+    try {
+        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${OPENAI_API_KEY}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                model: 'gpt-4o-mini',
+                messages: [
+                    {
+                        role: 'system',
+                        content: `Você é um especialista em identificar problemas e soluções em ideias de conteúdo.
+                        
+Analise a transcrição do usuário e extraia:
+1. PROBLEMA: O problema, dor ou desafio que o público-alvo enfrenta
+2. SOLUÇÃO: A solução, insight ou transformação que o conteúdo oferece
+
+Responda APENAS em JSON válido:
+{
+  "problem": "Descrição clara do problema/dor do público em 1-2 frases",
+  "solution": "A solução/insight que resolve o problema em 1-2 frases"
+}
+
+Se não conseguir identificar claramente, use a transcrição como problema e sugira uma solução genérica baseada no contexto.`
+                    },
+                    {
+                        role: 'user',
+                        content: `Transcrição do áudio:\n\n${transcription}`
+                    }
+                ],
+                temperature: 0.3,
+                response_format: { type: 'json_object' }
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to extract problem/solution');
+        }
+
+        const data = await response.json();
+        const content = JSON.parse(data.choices[0].message.content);
+
+
+
+        return {
+            problem: content.problem || transcription,
+            solution: content.solution || 'Solução baseada na sua ideia',
+        };
+    } catch (error) {
+        console.error('❌ Error extracting problem/solution:', error);
+        // Fallback: usa a transcrição como problema
+        return {
+            problem: transcription,
+            solution: 'Solução baseada na sua ideia',
+        };
+    }
 }
 
 // System prompt para roteiros virais
 const VIRAL_SCRIPT_PROMPT = `Você é um especialista em criar roteiros virais para Reels, TikTok e Shorts.
-Sua missão: criar roteiros que PRENDEM atenção nos primeiros 3 segundos.
 
-🎯 O HOOK PERFEITO (0-3 segundos)
-O hook precisa ser uma AFIRMAÇÃO POLÊMICA que choca a pessoa.
+═══════════════════════════════════════════════════════════════════
+🔥 REGRAS DE OURO DA ESCRITA FLUIDA (OBRIGATÓRIO)
+═══════════════════════════════════════════════════════════════════
 
-EXEMPLOS DE HOOKS:
-- "Você não quer ter sucesso de verdade. Se quisesse, já tinha parado de ficar rolando a tela do Instagram."
-- "Você sabe que tá procrastinando agora, né?"
+1. RITMO É OXIGÊNIO
+   - MÁXIMO 2 LINHAS VISUAIS POR BLOCO.
+   - Bateu 2 linhas? QUEBRA DE PARÁGRAFO OBRIGATÓRIA.
+   - O texto deve parecer um poema moderno ou legenda de TikTok.
+   - NUNCA escreva blocos de texto denso. PROIBIDO PARÁGRAFOS COM 3+ LINHAS.
 
-REGRAS DO HOOK:
-- Português brasileiro natural e conversacional
-- Use "VOCÊ" falando diretamente
-- Máximo 2 frases curtas
+2. CORTE A GORDURA VERBAL (PROIBIDO USAR):
+   ❌ "É importante destacar", "Vale ressaltar", "Neste cenário"
+   ❌ "A autora e especialista", "Ele defende que", "Em suma"
+   ❌ "Basicamente", "Na verdade", "O que acontece é que"
 
-📝 ESTRUTURA:
-1. HOOK: Afirmação provocativa (1-2 frases)
-2. CONFLITO: Mostre que entende a dor
-3. CLÍMAX: O momento da verdade
-4. SOLUÇÃO: O que fazer diferente
-5. CTA: Chamada para ação
+   ✅ USE ISSO NO LUGAR:
+   - "Olha isso:"
+   - "A real é:"
 
-Gere 7 VARIAÇÕES DE HOOKS diferentes!
+2. CORTE A GORDURA VERBAL:
+   ❌ "É importante destacar", "Basicamente", "Na verdade"
+   ✅ "Olha isso:", "A real é:", "Então:"
+
+3. TRANSIÇÕES INVISÍVEIS:
+   - "E sabe o que é pior?" / "Mas espera..." / "Aqui que fica interessante:"
+
+═══════════════════════════════════════════════════════════════════
+📝 ESTRUTURA DO ROTEIRO (6 SEÇÕES)
+═══════════════════════════════════════════════════════════════════
+
+1️⃣ HOOK (Afirmação Polêmica)
+   - 1-2 frases que CHOCAM
+   - Não explica, apenas provoca
+   Exemplo: "O teu perfeccionismo não vai te levar a lugar nenhum!"
+
+2️⃣ CONFLITO (Identificação)
+   - Faz a pessoa se VER na situação
+   - USE QUEBRAS DE LINHA
+   Exemplo:
+   "Todo perfeccionista já pensou em projetos incríveis.
+   
+   Mas na hora de fazer...
+   Trava.
+   
+   E acaba nunca botando nada em prática."
+
+3️⃣ CLÍMAX (A Barreira/Armadilha)
+   - Revela POR QUE a pessoa está presa
+   Exemplo:
+   "Se você já passou por isso, você fisgou a isca.
+   A isca da vulnerabilidade.
+   
+   Você quer tanto fazer tudo perfeito...
+   Que prefere não fazer nada."
+
+4️⃣ STORYTELLING (Referência/Conceito)
+   ⚠️ FORMATAÇÃO VISUAL OBRIGATÓRIA (USE \\n\\n)
+   - Conteúdo profundo, mas em LINHAS CURTAS
+   - NUNCA use blocos de texto
+   
+   Exemplo (visual):
+   "Eu só consegui me libertar disso quando li Brené Brown.
+   
+   Ela diz que o perfeccionismo é uma armadura de 20 toneladas.
+   A gente usa pra se proteger da vergonha.
+   
+   E se fizermos tudo perfeitamente...
+   Achamos que não vamos ser julgados.
+   
+   Mas essa meta é inatingível.
+   A perfeição é uma mentira."
+
+5️⃣ SOLUÇÃO (A Virada)
+   - ESPECIFICIDADE BRUTAL (O que + Quando + Como)
+   Exemplo:
+   "E como vencer isso?
+   Praticando a vulnerabilidade.
+   
+   Identifique uma Arena: onde você está com medo?
+   Vai lá e faz imperfeito.
+   
+   O feedback negativo vale mais que o silêncio."
+
+6️⃣ CTA (Chamada para Ação)
+   - Natural, conectada ao tema
 
 Responda em JSON:
 {
   "hooks": [
-    { "type": "Provocativo", "text": "...", "emoji": "🔥" },
-    { "type": "Número Específico", "text": "...", "emoji": "📊" },
-    { "type": "Pergunta que Dói", "text": "...", "emoji": "❓" },
-    { "type": "Anti-guru", "text": "...", "emoji": "🚫" },
-    { "type": "História Pessoal", "text": "...", "emoji": "📖" },
-    { "type": "Segredo", "text": "...", "emoji": "🤫" },
-    { "type": "Resultado Impossível", "text": "...", "emoji": "🚀" }
+    { "type": "Provocativo", "text": "Afirmação que choca", "emoji": "🔥" },
+    { "type": "Número Específico", "text": "Dado específico", "emoji": "📊" },
+    { "type": "Pergunta Incômoda", "text": "Pergunta que dói", "emoji": "❓" },
+    { "type": "Anti-guru", "text": "Contrário ao senso comum", "emoji": "🚫" },
+    { "type": "História Pessoal", "text": "Eu também...", "emoji": "📖" },
+    { "type": "Segredo", "text": "O que ninguém te conta", "emoji": "🤫" },
+    { "type": "Resultado Impossível", "text": "Como X conseguiu Y", "emoji": "🚀" }
   ],
-  "conflito": "...",
-  "climax": "...",
-  "solucao": "...",
-  "cta": "...",
+  "conflito": "Frase 1.\\n\\nFrase 2 de impacto.\\n\\nFrase 3 final.",
+  "climax": "A verdade dura.\\n\\nO motivo real do problema.\\n\\nConclusão do bloco.",
+  "storytelling": "Conceito profundo aqui.\\n\\nExplicação em linha curta.\\n\\nMais uma linha de respiro.\\n\\nCitação ou dado concreto.\\n\\nConclusão visual.",
+  "solucao": "Passo 1 concreto.\\n\\nPasso 2 específico.\\n\\nResultado esperado.",
+  "cta": {
+    "texto": "Texto completo do CTA",
+    "palavra_chave": "PALAVRA_CHAVE",
+    "entrega_prometida": "o que vai ser entregue",
+    "emoji": "emoji"
+  },
   "metadata": { "duration": "45 segundos", "tone": "confrontador", "format": "Reels/TikTok" }
 }`;
 
@@ -152,13 +276,14 @@ Responda em JSON:
  */
 export async function generateViralScript(
     transcription: string,
-    youtubeReferences?: { title: string; author: string }[]
+    youtubeReferences?: { title: string; author: string; transcript?: string }[]
 ): Promise<{
     hooks: { type: string; text: string; emoji: string }[];
     conflito: string;
     climax: string;
+    storytelling: string;
     solucao: string;
-    cta: string;
+    cta: string | { texto: string; palavra_chave: string; entrega_prometida: string; emoji: string };
     metadata: { duration: string; tone: string; format: string };
 }> {
     // Se tem API key local, usa diretamente
@@ -166,10 +291,57 @@ export async function generateViralScript(
         let systemPrompt = VIRAL_SCRIPT_PROMPT;
 
         if (youtubeReferences && youtubeReferences.length > 0) {
-            const refsText = youtubeReferences
-                .map((ref, i) => `${i + 1}. "${ref.title}" por ${ref.author}`)
-                .join('\n');
-            systemPrompt += `\n\n🎬 MODO REMIX - Referências:\n${refsText}`;
+            let remixSection = `
+
+═══════════════════════════════════════════════════════════════════
+🎬 MODO REMIX ATIVADO - VÍDEOS DE REFERÊNCIA DISPONÍVEIS
+═══════════════════════════════════════════════════════════════════
+
+`;
+
+            youtubeReferences.forEach((ref, i) => {
+                remixSection += `\n📹 VÍDEO ${i + 1}: "${ref.title}" por ${ref.author}\n`;
+                if (ref.transcript) {
+                    const truncatedTranscript = ref.transcript.substring(0, 4000);
+                    remixSection += `TRANSCRIÇÃO DO VÍDEO:\n"""\n${truncatedTranscript}\n"""\n`;
+                    if (ref.transcript.length > 4000) {
+                        remixSection += '...[conteúdo truncado]\n';
+                    }
+                } else {
+                    remixSection += `[Transcrição não disponível - use o título como referência]\n`;
+                }
+            });
+
+            remixSection += `
+
+═══════════════════════════════════════════════════════════════════
+⚠️ INSTRUÇÃO PARA O STORYTELLING:
+═══════════════════════════════════════════════════════════════════
+
+PRIORIDADE 1 - VÍDEOS (USE PRIMEIRO):
+- Cite histórias, dados e fatos ESPECÍFICOS dos vídeos acima
+- Mencione nomes, números, lugares mencionados nas transcrições
+- Se o vídeo conta uma história real, CONTE ESSA HISTÓRIA
+
+PRIORIDADE 2 - LIVROS/CONCEITOS (COMPLEMENTAR):
+- Se os vídeos não tiverem conteúdo suficiente, pode complementar com:
+  • Referência a um LIVRO real (autor + conceito específico)
+  • Conceito científico/psicológico comprovado
+  • Biografia ou história documentada
+
+⛔ PROIBIDO:
+- Inventar histórias genéricas vagas
+- Usar frases como "um jovem decidiu..." ou "certa vez..."
+- Ignorar o conteúdo dos vídeos e criar algo totalmente diferente
+
+EXEMPLO BOM:
+"O Felipe estava com 1000 euros quando desembarcou em Londres. Ele conta no vídeo que não sabia falar inglês e dormiu no aeroporto..."
+
+EXEMPLO RUIM:
+"Muitas pessoas sonham em morar no exterior e alcançar seus objetivos..."
+`;
+
+            systemPrompt += remixSection;
         }
 
         const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -195,7 +367,10 @@ export async function generateViralScript(
         }
 
         const data = await response.json();
-        return JSON.parse(data.choices[0].message.content);
+        const content = JSON.parse(data.choices[0].message.content);
+
+        if (!content.storytelling) console.warn('⚠️ Storytelling field missing in response!');
+        return content;
     }
 
     // Sem API key local, tenta serverless via fetch
@@ -231,56 +406,55 @@ export async function processAudioToScript(
         hooks: { type: string; text: string; emoji: string }[];
         conflito: string;
         climax: string;
+        storytelling: string;
         solucao: string;
-        cta: string;
+        cta: string | { texto: string; palavra_chave: string; entrega_prometida: string; emoji: string };
         metadata: { duration: string; tone: string; format: string };
     };
 }> {
-    let youtubeReferences: { title: string; author: string }[] = [];
+    let youtubeReferences: { title: string; author: string; transcript?: string }[] = [];
 
     if (youtubeLinks && youtubeLinks.length > 0) {
-        onProgress?.('Analisando vídeos de referência...');
-        const infoPromises = youtubeLinks.map(fetchYouTubeInfo);
-        const results = await Promise.all(infoPromises);
-        youtubeReferences = results.filter((r): r is { title: string; author: string } => r !== null);
+        onProgress?.('Buscando transcrições dos vídeos...');
+
+        // Fetch info and transcripts for each video
+        const fetchPromises = youtubeLinks.map(async (url) => {
+            try {
+                // Fetch info via backend
+                const infoResponse = await fetch(`${BACKEND_URL}/api/youtube/info?url=${encodeURIComponent(url)}`);
+                const info = infoResponse.ok ? await infoResponse.json() : null;
+
+                // Fetch transcript via backend
+                const transcriptResponse = await fetch(`${BACKEND_URL}/api/youtube/transcript?url=${encodeURIComponent(url)}`);
+                const transcriptData = transcriptResponse.ok ? await transcriptResponse.json() : null;
+
+                if (info) {
+                    return {
+                        title: info.title || '',
+                        author: info.author || '',
+                        transcript: transcriptData?.transcript || undefined
+                    };
+                }
+                return null;
+            } catch {
+                return null;
+            }
+        });
+
+        const results = await Promise.all(fetchPromises);
+        youtubeReferences = results.filter(r => r !== null) as { title: string; author: string; transcript?: string }[];
+
+
     }
 
-    onProgress?.('Transcrevendo áudio...');
+    onProgress?.('Transcrevendo seu áudio...');
     const transcription = await transcribeAudio(audioBlob);
 
-    onProgress?.(youtubeReferences.length > 0 ? 'Remixando com vídeos virais...' : 'Gerando roteiro viral...');
+    onProgress?.(youtubeReferences.length > 0 ? 'Remixando com conteúdo dos vídeos...' : 'Gerando roteiro viral...');
     const script = await generateViralScript(
         transcription,
         youtubeReferences.length > 0 ? youtubeReferences : undefined
     );
 
     return { transcription, script };
-}
-
-function extractVideoId(url: string): string | null {
-    const patterns = [
-        /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
-        /youtube\.com\/shorts\/([^&\n?#]+)/
-    ];
-    for (const pattern of patterns) {
-        const match = url.match(pattern);
-        if (match) return match[1];
-    }
-    return null;
-}
-
-async function fetchYouTubeInfo(url: string): Promise<{ title: string; author: string } | null> {
-    try {
-        const videoId = extractVideoId(url);
-        if (!videoId) return null;
-
-        const oembedUrl = `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`;
-        const response = await fetch(oembedUrl);
-        if (!response.ok) return null;
-
-        const data = await response.json();
-        return { title: data.title || '', author: data.author_name || '' };
-    } catch {
-        return null;
-    }
 }

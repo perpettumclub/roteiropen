@@ -1,0 +1,1349 @@
+00:00
+Olá a todos e bem-vindos, eu sou o Alex, eu sou arquiteto na Back4App, sou desenvolvedor iOS, tanto nativo em Swift e Objective-C,
+
+00:28.54
+quanto em React Native.
+
+00:30.42
+E hoje nós vamos aprender a fazer um chat em real-time,
+
+00:34.04
+em React Native para iOS, com o auxílio do Parse.
+
+00:38.64
+Então, aqui eu tenho o meu simulador,
+
+00:40.98
+é basicamente essa interface que nós vamos construir.
+
+00:44.2
+Eu vou digitar uma nova mensagem aqui.
+
+00:47.96
+Quando eu clico em send, ela aparece aqui
+
+00:49.84
+e agora nós vamos integrar isso aqui
+
+00:51.82
+com o parse. Eu tenho
+
+00:53.82
+aqui uma aplicação parse
+
+00:55.92
+que eu criei, ela é uma aplicação nova, então
+
+00:57.86
+só tem as duas classes que o
+
+00:59.74
+parse cria por conveniência.
+
+01:2.200000000000003
+Eu não vou criar uma classe
+
+01:3.9399999999999977
+visualmente, eu vou criar programaticamente
+
+01:6.760000000000005
+para vocês entenderem como é que funciona. Então, a primeira coisa que nós vamos precisar
+
+01:11.019999999999996
+é uma IDE. Hoje eu vou utilizar o Visual Studio Code, eu estou na última versão.
+
+01:16.92
+Se vocês forem desenvolver para iOS, vocês vão precisar de um Mac, infelizmente é necessário,
+
+01:23.959999999999994
+ou se você tiver uma máquina um pouquinho mais forte,
+
+01:26.700000000000003
+você pode rodar utilizando uma virtual machine.
+
+01:29.92
+Existem algumas virtual machines de Mac disponíveis, você pode rodar.
+
+01:34.519999999999996
+E você vai precisar também do Node.js instalado, React Native instalado,
+
+01:41.34
+tudo isso configurado e rodando.
+
+01:43.28
+Tá joia?
+
+01:44.36
+Então vamos começar.
+
+01:46.260000000000005
+Bom, eu vou utilizar um componente pronto para a gente construir esse chat.
+
+01:50.36
+O componente é esse aqui, React Native Gifted Chat.
+
+01:54.400000000000006
+Vocês podem encontrá-lo aqui no GitHub do Farid Safi.
+
+01:58.5
+Se vocês descerem, tem a interface criada e alguns códigos de exemplo.
+
+02:3.5
+tem a interface criada e alguns códigos de exemplo.
+
+02:10.060000000000002
+No nosso template que nós disponibilizamos aqui no Templates Back4App React Native JS Chat,
+
+02:11.52000000000001
+já está com tudo instalado.
+
+02:13.860000000000014
+Então você pode vir aqui, clicar nesse botão.
+
+02:20
+Aqui você vai ter a string para clonar o projeto, ou você pode fazer o download do zip.
+
+02:23.80000000000001
+Se você fizer o download ou clonar, depois que você abrir esse arquivo,
+
+02:28.400000000000006
+você vai terminar com essa estrutura aberta no seu Visual Studio Code.
+
+02:35.94
+E aqui dentro nós temos dois, abrir esse arquivo, e aqui dentro o JS e o chat JS.
+
+02:39.78
+Aqui no app JS é onde eu vou configurar o parse.
+
+02:46.879999999999995
+E embora no nosso template ele já esteja pronto, como cada um de vocês vai criar seu próprio aplicativo,
+
+02:49.97999999999999
+é necessário você completar duas informações aqui dentro.
+
+02:53.400000000000006
+A primeira é o App ID e a segunda a JavaScript Key.
+
+03:1.960000000000008
+Esses dados estão aqui no Parse Dashboard, se vocês descerem até App Settings, Security and Keys, e aqui vocês vão encontrar Application ID, que eu vou copiar e colar aqui,
+
+03:9.919999999999987
+e também a minha JavaScript Key, que eu vou copiar e colar aqui.
+
+03:16.78
+Vou salvar, e nesse ponto a minha aplicação já está pronta para trabalhar com o Parse.
+
+03:22.340000000000003
+a aplicação já está pronta para trabalhar com o parse.
+
+03:28.97999999999999
+Agora, dentro do chat.js, eu vou apagar o código que está aqui,
+
+03:30.120000000000005
+porque é um código exemplo, e nós vamos simplesmente voltar lá no GitHub do Farid Safi,
+
+03:37.97999999999999
+descer, e aqui embaixo nós temos um exemplo funcional
+
+03:41.22
+desse código para essa interface.
+
+03:45.22
+Então, eu vou copiar e colar aqui dentro salvar eu vou utilizando e arne para
+
+03:51.879999999999995
+fazer o depósito então tudo que eu preciso de estar e ar e os quando clicar
+
+03:57.28
+em que ele vai compilar o meu binário trazer o meu simulador
+
+04:5.02000000000001
+com o chat
+
+04:6.840000000000003
+funcionando. Essa daqui é a versão antiga, ele ainda
+
+04:8.719999999999999
+está buildando aqui.
+
+04:16.720000000000027
+Uma vez que ele tiver
+
+04:18.180000000000007
+buildado com sucesso,
+
+04:21.75999999999999
+ele vai ser
+
+04:22.720000000000027
+reinstalado no meu simulador e vai abrir.
+
+04:27.399999999999977
+Essas mensagens são default, então a partir desse momento eu já tenho uma interface gráfica de chat funcionando.
+
+04:33.75999999999999
+Então, teste, 1, 2, 3.
+
+04:36.120000000000005
+Eu clico em acende, teste 1, 2, 3, aparece aqui.
+
+04:40.139999999999986
+Então, bom, a primeira parte dessa aplicação vai ser como nós salvamos essas mensagens para o Parse.
+
+04:47.69999999999999
+Então lembrem, a minha aplicação aqui está completamente vazia.
+
+04:52.860000000000014
+Eu só tenho as classes que o Parse criou automaticamente.
+
+04:55.89999999999998
+Para criar uma nova classe aqui, dentro desse onSend é onde ele gerencia as mensagens da interface gráfica.
+
+05:6.060000000000002
+E é exatamente aqui que eu vou setar a minha integração com o parse.
+
+05:11.420000000000016
+Eu vou começar declarando uma variável chamada message.
+
+05:15.680000000000007
+Const message igual.
+
+05:17.95999999999998
+E eu vou estender a parse class, a classe do parse,
+
+05:22.25999999999999
+a parse class, a classe do parse,
+
+05:22.5
+que eu quero instanciar lá no meu parse dashboard.
+
+05:24.680000000000007
+que eu quero instanciar lá no meu parse dashboard.
+
+05:29.639999999999986
+Então, parse.object.extend.
+
+05:33.75999999999999
+E aqui eu vou passar como parâmetro o nome da classe que eu quero que apareça lá no parse dashboard.
+
+05:35.68000000000001
+O nome que eu digitar ali é o nome que vai aparecer aqui no meu database browser.
+
+05:39.18000000000001
+Então, message.
+
+05:42.139999999999986
+Por convenção, nós chamamos classes com uppercase e propriedades com lowercase.
+
+05:50.45999999999998
+Vou instanciar um novo objeto dessa classe.
+
+05:54.360000000000014
+Então, a...
+
+06:9.399999999999977
+E agora, notem que eu não precisei prototipar nada, desenhar nada,
+
+06:13.560000000000002
+eu saio simplesmente adicionando as propriedades que eu quero,
+
+06:14.899999999999977
+com os tipos que eu quero, o par ser inteligente o suficiente para compreender esses tipos de dado
+
+06:20.439999999999998
+e salvá-los para mim.
+
+06:22.30000000000001
+Então, por exemplo,
+
+06:28.100000000000023
+ponto 7. 7 é como eu sete uma propriedade eu passo entre aspas o nome da propriedade eu quero e passo o valor que
+
+06:38.5
+eu quero nesse caso um tema de teste
+
+06:40.839999999999975
+vamos chamar de teste.
+
+06:45.620000000000005
+Uma vez que eu setei a minha propriedade,
+
+06:48.95999999999998
+eu posso vir aqui e message.save.
+
+06:51.620000000000005
+Salvar.
+
+07:06
+Renovar o meu iOS. E aí E aí E aí E aí E aí
+
+07:08
+E aí
+
+07:10
+E aí
+
+07:12
+E aí
+
+07:14
+E aí
+
+07:16
+E aí
+
+07:18
+E aí
+
+07:20
+E aí
+
+07:22
+E aí
+
+07:24
+E aí E aí Aqui eu vou digitar uma string diferente de teste,
+
+07:25.80000000000001
+porque eu quero mostrar que o que ele vai gravar é o teste.
+
+07:28.779999999999973
+Então, vamos colocar aqui, minha casa.
+
+07:32.72000000000003
+Sente.
+
+07:34.5
+Enviado, e se eu voltar no meu parse dashboard,
+
+07:37.25999999999999
+eu preciso dar um refresh nesse momento,
+
+07:39.139999999999986
+porque ele precisa fazer um reload nos esquemas das minhas classes.
+
+07:41.89999999999998
+Então, refresh. reload nos esquemas das minhas classes. Refresh.
+
+07:56.579999999999984
+E aqui está a minha classe message, com N maiúsculo, como eu criei.
+
+07:59.51999999999998
+Se eu clicar nela, aqui está o meu content.
+
+08:1.6399999999999864
+O parse identificou que é uma string,
+
+08:4.680000000000007
+porque o valor que eu passei aqui é uma string.
+
+08:7.060000000000002
+Se eu passar um número, ele entende como um número.
+
+08:9.160000000000025
+Se eu passar um boolean, ele entende como um boolean.
+
+08:13.420000000000016
+E a partir do que o primeiro objeto é criado, ele continua validando os próximos.
+
+08:17.639999999999986
+Então, se eu salvar o primeiro como string e tentar salvar o segundo como boolean,
+
+08:25.339999999999975
+ele vai entender que eu quero salvar como string, porque o primeiro foi salvo dessa forma, e vai dizer que eu não posso salvar porque ele está esperando uma string. Mas, enfim, eu digitei minha casa e ele apareceu o teste,
+
+08:28.5
+porque é o valor que eu passei aqui.
+
+08:30.80000000000001
+Agora, eu vou apagar esse registro que eu criei.
+
+08:33
+Aqui, delete, disroll.
+
+08:37.039999999999964
+Yes, minha classe está vazia.
+
+08:38.89999999999998
+Ela continua criada, ela só está sem objetos agora porque eu acabei de apagar,
+
+08:45.27999999999997
+mas toda a estrutura dela ainda está no esquema.
+
+08:50.799999999999955
+E agora nós vamos pegar essa mensagem da variável messages que vem do componente de chat e gravar o que for escrito dela para o parse.
+
+08:57.01999999999998
+Então eu vou remover aqui o meu teste.
+
+08:59.41999999999996
+E a estrutura que esse componente utiliza é a seguinte.
+
+09:2.8999999999999773
+que esse componente utiliza é a seguinte,
+
+09:3.2000000000000455
+Messages.
+
+09:3.67999999999995
+messages,
+
+09:8.980000000000018
+isso vem com um array,
+
+09:11.100000000000023
+então eu vou pegar o array de posição zero,
+
+09:13.840000000000032
+e ele tem uma propriedade chamada text.
+
+09:17.360000000000014
+O text é exatamente o que eu vou digitar aqui nessa caixinha.
+
+09:20.539999999999964
+Voltando no Visual Studio,
+
+09:22.200000000000045
+vou salvar,
+
+09:24.840000000000032
+e aí eu acho, Estou voltando para o meu Visual Studio, vou salvar. E aí, iOS. Vou colocar um texto qualquer, testando minha primeira mensagem.
+
+10:01
+Sende.
+
+10:2.5
+Se eu voltar aqui no meu Chrome, dessa vez, como meu esquema permanece inalterado,
+
+10:9.720000000000027
+eu não preciso fazer refresh na tela.
+
+10:12.519999999999982
+Eu posso simplesmente clicar nesse botão aqui e ele vai fazer um refresh apenas nos registros.
+
+10:18.159999999999968
+E testando minha primeira mensagem.
+
+10:20.460000000000036
+Notem que automaticamente o Parse preenche algumas propriedades para mim que são muito úteis.
+
+10:25.860000000000014
+O Object ID é único por objeto dentro de uma mesma database,
+
+10:29.960000000000036
+então você pode usar esse dado como se fosse uma primary key em um banco relacional,
+
+10:36.25999999999999
+e você pode também utilizar esse dado para fazer referências entre classes.
+
+10:42.639999999999986
+Então você consegue, mesmo em uma database não relacional,
+
+10:46.360000000000014
+e a propósito nós
+
+10:47.879999999999995
+utilizamos MongoDB como default aqui
+
+10:49.82000000000005
+no Back4App, que é uma database não
+
+10:51.74000000000001
+relacional, você consegue
+
+10:53.539999999999964
+atingir comportamentos de database
+
+10:55.379999999999995
+relacional se você
+
+10:57.32000000000005
+identificar o Object ID
+
+10:59.39999999999998
+através desses relacionamentos
+
+11:1.7200000000000273
+e utilizá-lo
+
+11:3.5399999999999636
+para trazer dados de outras classes conectadas.
+
+11:6.720000000000027
+CreatedAt é um timestamp,
+
+11:8.559999999999945
+ele é criado inicialmente quando o registro é criado,
+
+11:12
+e depois ele não é mudado,
+
+11:13.240000000000009
+então se você precisar ordenar por ordem de criação,
+
+11:16.460000000000036
+isso vem pronto para você.
+
+11:19.08000000000004
+UpdatedAt é o último momento em que esse objeto sofreu algum update,
+
+11:25.139999999999986
+então se você precisar ordenar por ordem de alteração,
+
+11:28.980000000000018
+você também já tem esse dado disponível.
+
+11:31.539999999999964
+E a CL significa Access Control List.
+
+11:35.200000000000045
+Ele é a possibilidade de um determinado usuário ou grupo
+
+11:39
+ler ou escrever um determinado objeto dentro da sua database.
+
+11:43.27999999999997
+Então, a nossa granularidade vai no nível de
+
+11:45.91999999999996
+objeto. Se você tiver, por exemplo,
+
+11:47.89999999999998
+uma classe inteira onde os usuários podem
+
+11:49.879999999999995
+ler um único objeto lá dentro que você não
+
+11:51.860000000000014
+quer que seja lido, você consegue atingir
+
+11:53.98000000000002
+esse comportamento através de ACL.
+
+11:56.10000000000002
+Então, é muito fácil você desenhar
+
+11:58.08000000000004
+aplicações extremamente
+
+12:0.13999999999998636
+seguras quando você conta com
+
+12:1.9600000000000364
+esse tipo de granularidade para a segurança
+
+12:4.17999999999995
+de leitura e escrita.
+
+12:6.3799999999999955
+Então, bom, agora o nosso chat
+
+12:8.159999999999968
+já está gravando no Parse.
+
+12:10.019999999999982
+De novo, notem que eu não precisei prototipar
+
+12:12.17999999999995
+a classe, desenhar a classe, fazer absolutamente
+
+12:14.100000000000023
+nada. Eu simplesmente instanciei
+
+12:16.200000000000045
+a classe com o nome que eu queria,
+
+12:18.600000000000023
+setei as propriedades
+
+12:19.899999999999977
+com os tipos corretos e mandei salvar. O Parse resolveu isso tudo para mim, ele trabalha de forma assíncrona,
+
+12:26.360000000000014
+ele faz todas as validações de dados,
+
+12:28.5
+dos tipos de dados que eu enviei para serem salvos,
+
+12:31.700000000000045
+e isso simplesmente funciona.
+
+12:33.58000000000004
+E para cada uma dessas classes que eu crio,
+
+12:36.82000000000005
+o Parse cria automaticamente endpoints para inserção,
+
+12:40.200000000000045
+deleção, consulta e alteração dos dados.
+
+12:46.39999999999998
+Então, se eu precisar, por exemplo, expor isso numa API,
+
+12:51.24000000000001
+o Parse cobre isso tudo para mim sem nenhum tipo de interferência minha.
+
+12:53.15999999999997
+Ele cria tudo automaticamente.
+
+12:57.84000000000003
+E também é muito interessante porque ele é 100% compatível com GraphQL e também 100% compliant com Relay.
+
+13:1.67999999999995
+Então, os formatos mais modernos de arquitetura e de transferência de dados
+
+13:6.899999999999977
+estão cobertos aqui no Parse.
+
+13:8.659999999999968
+Você não precisa se preocupar com absolutamente nada,
+
+13:11.379999999999995
+você só cria suas classes, seja graficamente, seja programaticamente,
+
+13:15.460000000000036
+e todos esses tipos de formas de endpoints, de comunicação,
+
+13:20.039999999999964
+de validação de dados, de segurança, de escalabilidade,
+
+13:22.860000000000014
+estão todos cobertos para você.
+
+13:25.120000000000005
+Tá bom? Então, bom, é isso.
+
+13:26.720000000000027
+Isso encerra a nossa primeira parte desse tutorial,
+
+13:30.700000000000045
+que é como eu gravaria uma mensagem vindo do nosso cliente.
+
+13:35.200000000000045
+Agora vamos para a segunda parte,
+
+13:36.700000000000045
+que é pegar a resposta que vem do servidor para o cliente.
+
+13:39.960000000000036
+Para isso, nós vamos usar um recurso do Parse muito legal,
+
+13:43.34000000000003
+chamado Live Queries.
+
+13:45.15999999999997
+Live Queries são essencialmente WebSockets e eles permitem que você entregue dados em tempo real para os seus clientes.
+
+13:53.15999999999997
+Então, sem que você tenha que fazer uma série de queries que consultem o servidor de tempos em tempos,
+
+13:58.74000000000001
+verificando se existe uma mensagem para aquele device,
+
+14:1.4600000000000364
+o que você faz é implementar live queries e toda vez que
+
+14:5.460000000000036
+um novo dado for inserido,
+
+14:8.299999999999955
+alterado ou deletado na sua database,
+
+14:10.759999999999991
+se a sua classe
+
+14:12.139999999999986
+estiver subscrita para utilizar live queries,
+
+14:14.539999999999964
+os devices vão receber uma notificação
+
+14:16.32000000000005
+através do live queries
+
+14:19.659999999999968
+e você pode dar uma ação nessa notificação,
+
+14:21.799999999999955
+por exemplo, mostrar a mensagem no device.
+
+14:24.08000000000004
+Para ativar live queries, nós vamos vir aqui em Server Settings,
+
+14:32
+descer até Server URL and Live Query,
+
+14:35.700000000000045
+e a primeira coisa que eu preciso fazer é ativar um subdomínio no Backfire App
+
+14:43.39999999999998
+de forma que eu possa acessar de forma única essa minha aplicação.
+
+14:49.72000000000003
+Então, quando eu clicar, ele já vai tentar completar para mim com uma sugestão.
+
+14:53.51999999999998
+Eu vou deixar essa sugestão, mas você pode colocar aqui qualquer nome que você quiser.
+
+14:57.799999999999955
+A única coisa que você precisa lembrar é que, como nomes de subdomínios são únicos, tem que ver se já não foi utilizado o nome que você gostaria.
+
+15:6.960000000000036
+Mas nesse caso eu acredito que não.
+
+15:10.059999999999945
+Nós temos alguns domínios que você pode escolher.
+
+15:11.82000000000005
+Hoje está disponível só b4.io,
+
+15:14.419999999999959
+mas eu vou aceitar a sugestão que ele está me dando.
+
+15:16.779999999999973
+E uma vez que eu ativo o subdomínio,
+
+15:18.440000000000055
+eu posso também ativar LiveQuery. Eu posso então subscrever as classes que eu quero que trabalhem com Live Queries. Se eu tiver 10, 20, 30 classes e eu quiser que só uma trabalhe com Live Queries,
+
+15:29.559999999999945
+eu só preciso vir aqui, marcar a que eu quero e salvar.
+
+15:37.32000000000005
+Pronto, agora esse aplicativo está pronto para trabalhar com Live Queries.
+
+15:41.32000000000005
+Eu vou voltar aqui para o meu Core, para a minha Message.
+
+15:54.360000000000014
+Voltando aqui para o meu Visual Studio Code, eu tenho aqui o hook useEffect, que é executado apenas uma vez.
+
+16:6.559999999999945
+E aqui dentro eu vou colocar o código de Live Queries. Eu quero colocá-lo aqui dentro porque eu preciso subscrever na minha classe. Se eu colocasse ele aqui fora, por exemplo, toda vez que esse componente fosse chamado,
+
+16:7.860000000000014
+eu ia criar uma nova subscrição.
+
+16:12.740000000000009
+E aí, toda vez que uma nova mensagem fosse criada, eu ia receber o número de subscrições que eu tenho.
+
+16:16.559999999999945
+Então, se eu tiver duas subscrições,
+
+16:18.779999999999973
+eu criei uma mensagem, eu recebo dois avisos.
+
+16:21.019999999999982
+Se eu criar dez subscrições,
+
+16:22.779999999999973
+eu recebo uma mensagem, eu recebo dez avisos. Se eu criar 10 subscrições, eu recebo uma mensagem, eu recebo 10 avisos. Eu quero
+
+16:26.019999999999982
+receber um aviso só a cada nova mensagem
+
+16:28
+criada. Então, eu vou
+
+16:29.840000000000032
+apagar esse primeiro
+
+16:31.899999999999977
+bloco de set messages. Esses set
+
+16:33.98000000000002
+messages, basicamente o que ele faz é
+
+16:35.91999999999996
+colocar esse hello developer
+
+16:37.27999999999997
+aqui no exemplo do chat.
+
+16:40.27999999999997
+Então, vou salvar.
+
+16:42.32000000000005
+E aqui dentro, nós vamos começar
+
+16:44.10000000000002
+instanciando o client de live query. Então, vou salvar. E aqui dentro, nós vamos começar instanciando o client de LiveQuery.
+
+16:48.25999999999999
+Então, let client igual new parse.livequeryclient.
+
+17:4.059999999999945
+E esse LiveQuery client, ele recebe um objeto com algumas propriedades que eu preciso setar.
+
+17:10.160000000000082
+A primeira dela é Application ID.
+
+17:15.220000000000027
+Onde eu vou setar o meu App ID, que está lá no Parts Dashboard.
+
+17:19.11999999999989
+Então, de volta ao Chrome.
+
+17:22.11999999999989
+App Settings.
+
+17:24.160000000000082
+Security Inquis. App Settings. Security Keys.
+
+17:25.8599999999999
+Application ID.
+
+17:29.539999999999964
+Virgula.
+
+17:31.019999999999982
+Depois eu preciso colocar Server URL.
+
+17:33.88000000000011
+E aqui eu vou colocar a URL que eu coloquei no meu Live Queries.
+
+17:41.01999999999998
+Server Settings.
+
+17:43.72000000000003
+Server URL.
+
+17:54.33999999999992
+e aqui tem um pequeno detalhe, como eu vou trabalhar com WebSockets, eu preciso colocar WSS 2.2 barras.
+
+17:58.680000000000064
+Como se eu estivesse trabalhando com HTTPS, eu colocaria HTTPS 2.2 barras,
+
+18:2.8199999999999363
+aqui vai ficar wss dois pontos
+
+18:6.1400000000001
+barra barra
+
+18:8.079999999999927
+eu poderia escrever tudo junto, mas eu gosto
+
+18:10.039999999999964
+pessoalmente de separar isso
+
+18:11.88000000000011
+em duas strings
+
+18:13.819999999999936
+e aí eu coloco meu domínio
+
+18:15.420000000000073
+então é esse cara aqui, ponto
+
+18:17.25999999999999
+b4a.io
+
+18:19.3599999999999
+vírgula
+
+18:21.88000000000011
+por último, minha javascript
+
+18:24.660000000000082
+e novamente é uma string que eu vou pegar aqui no app settings
+
+18:30.61999999999989
+security in keys, JavaScript key
+
+18:32.72000000000003
+o client está instanciado
+
+18:38.11999999999989
+agora eu só preciso mandar
+
+18:40.299999999999955
+abrir a conexão
+
+18:41.42000000000007
+client.open
+
+18:43.11999999999989
+agora eu já estou subscrito na minha classe mandar abrir a conexão. Então, client.open.
+
+18:45.940000000000055
+E pronto.
+
+18:48.16000000000008
+Agora, eu já estou subscrito na minha classe, porque eu configurei
+
+18:50.38000000000011
+isso lá no
+
+18:51.51999999999998
+dashboard do Back4App. Aqui eu
+
+18:54.01999999999998
+coloquei os dados e abri a minha conexão.
+
+18:56.200000000000045
+Agora eu preciso começar a escutar
+
+18:58.22000000000003
+essas conexões. Mas eu não quero
+
+18:59.90000000000009
+escutar tudo que aconteceu na classe.
+
+19:2.240000000000009
+Eu quero pegar somente o último
+
+19:3.9400000000000546
+registro que aconteceu.
+
+19:5.880000000000109
+Para isso, a gente vai usar uma parseQuery,
+
+19:8.1400000000001
+que é uma query que roda em uma classe parse.
+
+19:10.799999999999955
+Então, let query igual new parse.query.
+
+19:15.900000000000091
+E aqui eu passo como parâmetro o nome da classe
+
+19:19.90000000000009
+onde eu quero executar essa query.
+
+19:22.24000000000001
+No meu caso, a classe é message.
+
+19:29.579999999999927
+E agora eu posso usar essa minha query
+
+19:32.74000000000001
+para acertar os parâmetros de busca.
+
+19:34.799999999999955
+Então, query.ascending,
+
+19:38.59999999999991
+porque eu vou filtrar de forma ascendente,
+
+19:41.66000000000008
+baseado no meu parâmetro createdAt.
+
+19:44.61999999999989
+Eu quero pegar sempre o último
+
+19:46.24000000000001
+registro. Então, é o que foi criado
+
+19:48.16000000000008
+por último. Então, de forma
+
+19:50.059999999999945
+ascendente,
+
+19:52.77999999999997
+at.
+
+19:56.039999999999964
+E eu também preciso dizer quantos
+
+19:58.07999999999993
+registros eu quero. O Quartzy, por default,
+
+20:0.2400000000000091
+traz 100 registros. Eu posso setar esse
+
+20:2.0599999999999454
+número para qualquer
+
+20:3.0399999999999636
+número que eu desejar.
+
+20:5.980000000000018
+Mas, como eu só estou interessado em um
+
+20:7.759999999999991
+registro que seja o último, então
+
+20:9.480000000000018
+query.limit
+
+20:10.940000000000055
+um registro.
+
+20:13.900000000000091
+Agora,
+
+20:14.460000000000036
+eu preciso criar
+
+20:16.559999999999945
+a minha subscrição nessa
+
+20:18.480000000000018
+query aqui. Então,
+
+20:20.1400000000001
+let subscription
+
+20:21.779999999999973
+igual client.subscribe
+
+20:27.700000000000045
+e vou subscrever na minha query.
+
+20:39.940000000000055
+Salvei.
+
+20:42.01999999999998
+E agora que eu tenho a minha subscrição criada
+
+20:44.77999999999997
+rodando em cima da minha query,
+
+20:46.40000000000009
+que busca no meu parse dentro da classe que eu escolhi,
+
+20:50.27999999999997
+eu preciso dizer quando que eu quero que essa subscription me alerte.
+
+20:54.799999999999955
+Então, subscription.on.
+
+20:59.5
+E esse parâmetro .on, ele suporta algumas strings diferentes.
+
+21:7.440000000000055
+Eu estou interessado em novos registros,
+
+21:9.220000000000027
+então eu vou colocar aqui
+
+21:10.240000000000009
+create. Eu poderia, por exemplo,
+
+21:12.960000000000036
+colocar delete se eu quisesse
+
+21:14.519999999999982
+que meu código fosse executado
+
+21:16.819999999999936
+quando alguém deleta um registro, por exemplo.
+
+21:21.5
+E quando essa
+
+21:22.74000000000001
+subscription rodar, eu vou
+
+21:24.980000000000018
+receber um objeto do parse também como parâmetro.
+
+21:27.720000000000027
+Então, message parse.
+
+21:30.700000000000045
+Com esse objeto, eu vou passar uma arrow function para ele,
+
+21:35.66000000000008
+onde eu vou codar o que eu quero que aconteça com esse objeto.
+
+21:39.42000000000007
+O que eu quero que aconteça quando eu receber uma nova mensagem lá no parse dashboard,
+
+21:43.059999999999945
+é que ela apareça aqui no meu chat. E aqui nós já
+
+21:48.059999999999945
+temos um código criado
+
+21:49.72000000000003
+na linha 29, que chama um método
+
+21:55.77999999999997
+chamado setMessages, que faz exatamente isso. Ele adiciona uma mensagem
+
+22:0.05999999999994543
+na timeline do chat.
+
+22:3.7799999999999727
+Então eu vou usar esse mesmo método,
+
+22:5.599999999999909
+vou só copiar ele daqui,
+
+22:7.6400000000001
+e colocar ele aqui dentro.
+
+22:9.400000000000091
+E aqui tem algumas coisinhas que a gente vai precisar mudar.
+
+22:12.759999999999991
+Eu preciso dizer exatamente o que eu vou colocar.
+
+22:18.3599999999999
+Porque aqui, nesse caso,
+
+22:19.960000000000036
+ele está pegando o que eu digitei lá na caixinha de texto do chat.
+
+22:25.5
+E não é isso que eu quero.
+
+22:26.38000000000011
+Eu quero setar o texto com o que vier do parse.
+
+22:30.579999999999927
+Então, para isso, eu vou criar um objetinho aqui.
+
+22:34.61999999999989
+Eu digo JSON.
+
+22:35.940000000000055
+E esse formato está disponível lá no GitHub do componente do chat.
+
+22:41.11999999999989
+E ele tem algumas propriedades que a gente precisa setar.
+
+22:44.98000000000002
+A primeira delas é underline ID. e ele tem algumas propriedades que a gente precisa setar.
+
+22:46.98000000000002
+A primeira delas é underline id.
+
+22:53.440000000000055
+E esse cara vai ser o id único de uma determinada mensagem dentro do seu chat.
+
+22:57.039999999999964
+O parse tem o nosso object id.
+
+23:0.22000000000002728
+Eu posso usar esse object id para ser o id único.
+
+23:4.519999999999982
+Então, message parse.id. Depois, eu preciso setar o meu texto então text eu
+
+23:12.900000000000091
+vou colocar nessa de parça para ler uma propriedade eu uso mais do get e digo
+
+23:19.480000000000018
+qual propriedade que eu quero ler então nessa, mestre, vou para comment.
+
+23:32.25999999999999
+Eu preciso colocar um created at também, porque quando eu estiver rodando no chat,
+
+23:35.1400000000001
+ele vai colocar esse pequeno campinho aqui.
+
+23:49.38000000000011
+Essa é uma propriedade chamada created at, e eu vou colocar a data do momento que eu recebi a mensagem no device,
+
+23:50.22000000000003
+não do servidor.
+
+23:53.460000000000036
+Então, new date.
+
+23:57.48000000000002
+Por último, mas não menos importante,
+
+24:5.039999999999964
+eu preciso dizer quem é o usuário que vai gerar essa mensagem para mim.
+
+24:7.019999999999982
+Esse é um parâmetro chamado user.
+
+24:10.579999999999927
+E também é um objeto de ison.
+
+24:13.279999999999973
+O user recebe três propriedades.
+
+24:15.11999999999989
+Uma é underline ID também.
+
+24:17.420000000000073
+E também é um ID único.
+
+24:19.680000000000064
+Como eu vou trabalhar só com um usuário nesse caso,
+
+24:21.24000000000001
+eu vou colocar um texto qualquer. Então, 1, 2, 3, 4, 5.
+
+24:24.38000000000011
+Se você fosse utilizar mais
+
+24:26.039999999999964
+de um usuário, você poderia, por exemplo, usar
+
+24:27.88000000000011
+o Object ID do usuário
+
+24:30.1400000000001
+em questão.
+
+24:32.42000000000007
+Depois, eu preciso colocar um name
+
+24:33.940000000000055
+para ele.
+
+24:39.40000000000009
+E, por último, é um opcional, eu posso colocar
+
+24:41.83999999999992
+um avatar.
+
+24:45.90000000000009
+O avatar, eu tenho aqui o endereço do logotipo da Back4App.
+
+24:54.319999999999936
+Salvei.
+
+24:55.59999999999991
+Outro vídeo no final.
+
+25:1.5399999999999636
+IAR, iOS. E, IOS.
+
+25:14.819999999999936
+Opa, perdão.
+
+25:20.200000000000045
+Eu coloquei todo esse objeto aqui, mas eu coloquei dentro do método errado.
+
+25:24.819999999999936
+Eu coloquei ele aqui no on send da caixa de chat.
+
+25:26.5
+Esse cara não é para estar aqui.
+
+25:31.019999999999982
+Esse cara é para estar aqui.
+
+25:53.960000000000036
+Agora sim. Lidando a aplicação Lidando a aplicação
+
+25:54.07999999999993
+Agora eu estou com o meu chat aqui
+
+26:8.460000000000036
+Notem que ele já não colocou o Hello Developer
+
+26:10.38000000000011
+Que era o default
+
+26:11.240000000000009
+Vamos puxar essa janela um pouquinho para cá
+
+26:13.980000000000018
+Para nós conseguimos ver ambos ao mesmo tempo
+
+26:16.779999999999973
+Meu simulador está ali
+
+26:19.440000000000055
+Eu vou criar uma nova mensagem
+
+26:21.38000000000011
+Testando, 1, 2, 3
+
+26:24.680000000000064
+E olha lá Toda vez que eu criar um novo objeto Eu vou criar uma nova mensagem. Testando. Um, dois, três.
+
+26:26.980000000000018
+E olha lá.
+
+26:30.61999999999989
+Toda vez que eu criar um novo objeto aqui no parse,
+
+26:34.40000000000009
+o meu simulador, ou no caso, se você estiver desenvolvendo para um device,
+
+26:37.3599999999999
+vai automaticamente receber uma notificação, vai entender que eu estou procurando por métodos de criação na minha query, que roda na classe message,
+
+26:47.559999999999945
+vai trazer um único objeto, que é o último a ser criado,
+
+26:51.700000000000045
+e vai pintar na tela para mim.
+
+26:53.559999999999945
+Então, o que nós aprendemos até aqui?
+
+26:57.77999999999997
+Que é extremamente simples você construir um chat
+
+27:1.0399999999999636
+e integração com real-time database, ou database de tempo real,
+
+27:6.539999999999964
+se você utilizar Parse nos seus projetos.
+
+27:09
+É uma forma extremamente segura,
+
+27:11.680000000000064
+simples de utilizar, escalável e tolerante a erros
+
+27:15.240000000000009
+que você pode rodar de forma gratuita.
+
+27:17.480000000000018
+Então, eu convido a todos vocês a conhecerem o Back4App e o Parse,
+
+27:22.440000000000055
+porque nós temos uma estatística interna que diz que as pessoas que usam Parse
+
+27:25.90000000000009
+vindo de outros frameworks,
+
+27:27.579999999999927
+produzem até 33% menos código
+
+27:30.38000000000011
+para atingir as mesmas funcionalidades.
+
+27:32.74000000000001
+O que quer dizer?
+
+27:33.460000000000036
+Que seus projetos podem ser até 33% mais rápidos
+
+27:36.51999999999998
+e mais baratos,
+
+27:37.72000000000003
+porque você não precisa produzir código
+
+27:39.42000000000007
+e depois você não precisa nem dar manutenção no código
+
+27:41.6400000000001
+que você deixou de produzir.
+
+27:47.48000000000002
+O Parse é utilizado em mais de 2 milhões de aplicações ao redor do mundo,
+
+27:50.33999999999992
+está vivo e forte desde a sua criação,
+
+27:55.61999999999989
+é completamente gratuito e é extremamente robusto. Então, não existe motivo para você não conhecer essa tecnologia
+
+27:58.960000000000036
+e colocar no seu projeto React Native,
+
+28:1.740000000000009
+porque ele casa muito bem com a praticidade que o React Native traz.
+
+28:5.980000000000018
+Alex Kuzmenkovski, no meu e-mail, alex.back4app.com, ou no site do Back4App.
+
+28:12.019999999999982
+Nós vamos ficar muito felizes em ajudar vocês.
+
+28:14.700000000000045
+Espero que tenham gostado. Até a próxima!

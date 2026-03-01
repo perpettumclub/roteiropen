@@ -1,0 +1,169 @@
+{
+  "version": "1.0",
+  "description": "Contrato de arquitetura do projeto. A IA deve ler e seguir este arquivo antes de criar qualquer estrutura.",
+  "ai_instructions": "Leia este arquivo inteiro antes de criar ou mover qualquer arquivo. Nunca desvie desta estrutura sem aprovação explícita.",
+
+  "project": {
+    "name": "DEFINA AQUI",
+    "type": "DEFINA AQUI: api | web | fullstack | cli | lib",
+    "language": "DEFINA AQUI: typescript | python | etc",
+    "runtime": "DEFINA AQUI: node | python | etc"
+  },
+
+  "structure": {
+    "src/": {
+      "purpose": "Todo código fonte da aplicação",
+      "modules/": {
+        "purpose": "Domínios de negócio. Cada domínio é uma pasta isolada.",
+        "rule": "Um módulo não importa de outro módulo diretamente. Comunicação via shared/ ou eventos.",
+        "example_module/": {
+          "controller.ts": "Recebe request, valida input, chama service, retorna response. Zero lógica de negócio.",
+          "service.ts": "Toda a lógica de negócio. Não conhece HTTP, não conhece banco diretamente.",
+          "repository.ts": "Único ponto de acesso ao banco para este domínio.",
+          "schema.ts": "Validação de entrada (Zod, Joi, Pydantic, etc)",
+          "types.ts": "Tipos e interfaces deste domínio",
+          "module.test.ts": "Testes do módulo"
+        }
+      },
+      "shared/": {
+        "purpose": "Código genuinamente reutilizável entre módulos",
+        "rule": "Só entra aqui o que é usado em 2+ módulos. Dúvida? Deixa no módulo.",
+        "utils/": "Funções puras, sem side effects, sem dependências externas",
+        "middlewares/": "Middlewares HTTP reutilizáveis",
+        "errors/": "Classes de erro customizadas da aplicação",
+        "types/": "Tipos globais da aplicação"
+      },
+      "infra/": {
+        "purpose": "Detalhes de implementação externos. O resto do código não sabe que estes existem.",
+        "rule": "Módulos NUNCA importam de infra diretamente. Usam interfaces definidas em shared/.",
+        "database/": "Configuração de conexão, migrations, seeds",
+        "cache/": "Configuração Redis ou similar",
+        "queue/": "Configuração de filas",
+        "email/": "Configuração de envio de email",
+        "storage/": "Configuração de armazenamento de arquivos"
+      },
+      "config/": {
+        "purpose": "Configurações, constantes e variáveis de ambiente",
+        "env.ts": "Valida e exporta variáveis de ambiente. NUNCA acesse process.env fora daqui.",
+        "constants.ts": "Constantes da aplicação (não mágicas)"
+      }
+    },
+    "tests/": {
+      "purpose": "Testes de integração e e2e. Testes unitários ficam ao lado do módulo.",
+      "integration/": "Testa a integração entre módulos",
+      "e2e/": "Testa fluxos completos da aplicação"
+    }
+  },
+
+  "naming_conventions": {
+    "files": {
+      "rule": "kebab-case para arquivos, exceto componentes React que são PascalCase",
+      "examples": {
+        "good": ["user-service.ts", "get-user-by-id.ts", "UserCard.tsx"],
+        "bad": ["userService.ts", "GetUserById.ts", "usercard.tsx"]
+      }
+    },
+    "functions": {
+      "rule": "camelCase, sempre verbos que descrevem a ação e o retorno",
+      "examples": {
+        "good": ["getUserById", "calculateOrderTotal", "validateEmailFormat", "isUserAdmin"],
+        "bad": ["user", "getUser", "process", "handle", "data", "doStuff"]
+      }
+    },
+    "variables": {
+      "rule": "camelCase descritivo. Booleanos com prefixo is/has/can/should",
+      "examples": {
+        "good": ["activeUsers", "invoiceTotal", "isEmailValid", "hasPermission"],
+        "bad": ["data", "result", "temp", "arr", "obj", "val", "x"]
+      }
+    },
+    "constants": {
+      "rule": "UPPER_SNAKE_CASE",
+      "examples": {
+        "good": ["MAX_RETRY_ATTEMPTS", "API_BASE_URL", "SESSION_TIMEOUT_MS"],
+        "bad": ["maxRetry", "apiUrl", "timeout"]
+      }
+    }
+  },
+
+  "hard_limits": {
+    "description": "Limites que, se ultrapassados, exigem refatoração antes de continuar",
+    "file_lines": {
+      "limit": 300,
+      "action": "Quebre em módulos menores"
+    },
+    "function_lines": {
+      "limit": 30,
+      "action": "Extraia responsabilidades para funções menores"
+    },
+    "function_params": {
+      "limit": 3,
+      "action": "Agrupe em objeto com tipo definido"
+    },
+    "nesting_levels": {
+      "limit": 3,
+      "action": "Use early return ou extraia lógica"
+    },
+    "code_duplication": {
+      "limit": "qualquer duplicação",
+      "action": "Extraia para shared/ imediatamente"
+    }
+  },
+
+  "security_rules": {
+    "description": "Regras inegociáveis de segurança",
+    "rules": [
+      "Toda entrada de usuário é validada com schema antes de qualquer processamento",
+      "Variáveis de ambiente NUNCA hardcoded. Sempre via config/env.ts",
+      "Banco de dados NUNCA acessível do frontend ou de rotas públicas sem auth",
+      "Queries parametrizadas obrigatórias. Concatenação de SQL é proibida",
+      "Logs nunca expõem: passwords, tokens, dados pessoais sensíveis",
+      "Autenticação e autorização verificadas no backend, não só no frontend",
+      "Princípio do menor privilégio em todas as permissões de banco e storage"
+    ]
+  },
+
+  "patterns": {
+    "error_handling": {
+      "rule": "Erros explícitos e úteis. Nunca swallow silencioso.",
+      "good": "throw new UserNotFoundError(`User ${userId} not found`)",
+      "bad": "catch(e) { console.log(e) } ou catch(e) {}"
+    },
+    "async": {
+      "rule": "Sempre async/await. Nunca .then().catch() encadeado",
+      "rule_2": "Sempre trate o caso de erro explicitamente"
+    },
+    "imports": {
+      "rule": "Imports absolutos com alias configurado. Sem ../../../../",
+      "good": "@/modules/user/user-service",
+      "bad": "../../../modules/user/user-service"
+    }
+  },
+
+  "forbidden": {
+    "description": "Padrões proibidos neste projeto",
+    "patterns": [
+      "any em TypeScript sem comentário justificando",
+      "Lógica de negócio em componentes de UI",
+      "Acesso direto ao banco fora de repositories",
+      "process.env fora de config/env.ts",
+      "Código comentado (dead code) — delete e confie no git",
+      "Arquivos de documentação .md criados automaticamente sem pedido",
+      "Nomes genéricos: data, result, temp, info, obj, item, val",
+      "Funções que fazem mais de uma coisa"
+    ]
+  },
+
+  "ai_workflow": {
+    "description": "Fluxo obrigatório para a IA antes de qualquer tarefa",
+    "steps": [
+      "1. Ler a estrutura atual do projeto (ls, find)",
+      "2. Identificar padrões existentes nos arquivos relevantes",
+      "3. Verificar se já existe código similar para reutilizar",
+      "4. Verificar os hard_limits e security_rules",
+      "5. Só então escrever código, seguindo os padrões encontrados",
+      "6. Após escrever, revisar contra forbidden e hard_limits",
+      "7. Reportar decisões de arquitetura, não explicar linha por linha"
+    ]
+  }
+}

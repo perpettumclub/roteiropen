@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { MILLISECONDS_PER_DAY } from '../shared/constants';
 
 const STORAGE_KEY = 'hooky_screenshots';
 
@@ -42,7 +43,7 @@ export const useReminders = () => {
         // 2. Check if > 7 days
         const now = new Date();
         const diffTime = Math.abs(now.getTime() - lastDate.getTime());
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        const diffDays = Math.ceil(diffTime / MILLISECONDS_PER_DAY);
 
         if (diffDays > 7) {
             // Trigger Notification

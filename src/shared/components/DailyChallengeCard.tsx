@@ -5,19 +5,20 @@ import { useUser } from '../context/UserContext';
 import { generateDailyChallenge, type DailyChallengePrompt } from '../services';
 
 export const DailyChallengeCard: React.FC = () => {
-    const { activityLog, creatorProfile } = useUser();
+    const { activityLog, creatorProfile, fetchDailyChallenge, saveDailyChallenge, completeDailyChallenge } = useUser() as any;
     const [challenge, setChallenge] = useState<DailyChallengePrompt | null>(null);
 
     // Load or generate challenge for the day
     useEffect(() => {
         const loadChallenge = async () => {
-            const today = new Date().toDateString();
-            const storageKey = `hooky_daily_challenge_${today}`;
+            const todayDate = new Date();
+            const dateStr = todayDate.toLocaleDateString('en-CA'); // YYYY-MM-DD
 
-            // 1. Try to get from local storage (cache)
-            const cached = localStorage.getItem(storageKey);
-            if (cached) {
-                setChallenge(JSON.parse(cached));
+            // 1. Try to get from DB
+            const dbChallenge = await fetchDailyChallenge(dateStr);
+
+            if (dbChallenge) {
+                setChallenge(dbChallenge.content);
                 return;
             }
 
@@ -27,16 +28,18 @@ export const DailyChallengeCard: React.FC = () => {
 
             try {
                 const newChallenge = await generateDailyChallenge(niche);
-                localStorage.setItem(storageKey, JSON.stringify(newChallenge));
+                // Save to DB
+                await saveDailyChallenge(newChallenge, dateStr);
                 setChallenge(newChallenge);
             } catch (error) {
                 console.error('Failed to generate challenge:', error);
                 // Fallback hardcoded
-                setChallenge({
+                const fallback = {
                     title: "Desafio Criativo",
                     description: "Crie um vídeo rápido testando um novo ângulo.",
                     difficulty: "Fácil"
-                });
+                };
+                setChallenge(fallback);
             }
         };
 
@@ -52,6 +55,10 @@ export const DailyChallengeCard: React.FC = () => {
     useEffect(() => {
         if (hasCreatedToday) {
             setIsCompleted(true);
+            // Mark as complete in DB too
+            const todayDate = new Date();
+            const dateStr = todayDate.toLocaleDateString('en-CA');
+            completeDailyChallenge(dateStr);
         }
     }, [hasCreatedToday]);
 

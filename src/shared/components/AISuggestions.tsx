@@ -37,7 +37,7 @@ export const AISuggestions: React.FC<AISuggestionsProps> = ({ onSuggestionClick 
                 id: 'morning',
                 icon: <Sparkles size={20} />,
                 title: 'Bom dia, criador! ☀️',
-                description: 'Manhã é o melhor horário para engajamento. Crie um roteiro agora!',
+                description: 'Manhã é o melhor horário para engajamento. Poste seu conteúdo agora!',
                 action: 'Criar roteiro matinal',
                 color: '#F59E0B'
             });
@@ -49,7 +49,7 @@ export const AISuggestions: React.FC<AISuggestionsProps> = ({ onSuggestionClick 
                 id: 'start_streak',
                 icon: <TrendingUp size={20} />,
                 title: 'Comece sua sequência! 🔥',
-                description: 'Crie hoje e inicie um streak de consistência.',
+                description: 'Poste hoje e inicie um streak de consistência.',
                 color: '#EF4444'
             });
         } else if (currentStreak > 0 && currentStreak < 7) {
@@ -69,7 +69,7 @@ export const AISuggestions: React.FC<AISuggestionsProps> = ({ onSuggestionClick 
                 id: 'weekly_close',
                 icon: <Clock size={20} />,
                 title: `Quase lá! 🎯`,
-                description: `Faltam apenas ${remaining} roteiros para bater sua meta semanal.`,
+                description: `Faltam apenas ${remaining} postagens para bater sua meta semanal.`,
                 color: '#10B981'
             });
         }
@@ -120,10 +120,10 @@ export const AISuggestions: React.FC<AISuggestionsProps> = ({ onSuggestionClick 
         // Volume-based suggestions
         if (totalScriptsCreated === 0) {
             suggestions.push({
-                id: 'first_script',
+                id: 'first_post',
                 icon: <Sparkles size={20} />,
-                title: 'Crie seu primeiro roteiro!',
-                description: 'Grave qualquer ideia - a mágica acontece depois.',
+                title: 'Registre sua primeira postagem!',
+                description: 'Poste qualquer conteúdo e registre aqui - a consistência começa agora.',
                 color: '#6366F1'
             });
         } else if (totalScriptsCreated >= 10 && totalScriptsCreated < 50) {
@@ -131,7 +131,7 @@ export const AISuggestions: React.FC<AISuggestionsProps> = ({ onSuggestionClick 
                 id: 'volume_tip',
                 icon: <TrendingUp size={20} />,
                 title: 'Você está evoluindo! 📈',
-                description: `${totalScriptsCreated} roteiros criados. Os melhores criadores fazem 50+ por mês.`,
+                description: `${totalScriptsCreated} dias postando. Os melhores criadores postam 20+ dias por mês.`,
                 color: '#3B82F6'
             });
         }

@@ -42,10 +42,8 @@ export type AppState =
     | 'error';
 
 export interface AppStateData {
-    // Current state
     state: AppState;
 
-    // Data
     script: ViralScript | null;
     error: string | null;
     capturedAudio: Blob | null;
@@ -57,33 +55,32 @@ export interface AppStateData {
 }
 
 export interface AppStateActions {
-    // Navigation
     startFlow: () => void;
     handleStartRecording: () => void;
     handleReset: () => void;
     handleViewDashboard: () => void;
     handleShareComplete: () => void;
 
-    // Auth
+
     handleAuthSuccess: () => void;
     handleUpgrade: () => void;
     setShowPaywall: (show: boolean) => void;
 
-    // Quiz
+
     handleQuizComplete: (profile: CreatorProfile) => void;
 
-    // Recording
+
     handleAudioCaptured: (blob: Blob) => Promise<void>;
 
-    // Confirmation
+
     handleConfirmProblemSolution: (problem: string, solution: string) => void;
 
-    // Remix
+
     handleSkipRemix: () => void;
     handleConfirmRemix: () => void;
     setYoutubeLinks: (links: string[]) => void;
 
-    // Direct state control
+
     setState: (state: AppState) => void;
 }
 
@@ -92,22 +89,21 @@ export interface AppStateActions {
 // =============================================================================
 
 export function useAppState(): AppStateData & AppStateActions {
-    // State
     const [state, setState] = useState<AppState>('idle');
     const [script, setScript] = useState<ViralScript | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [showPaywall, setShowPaywall] = useState(false);
 
-    // Remix flow
+
     const [capturedAudio, setCapturedAudio] = useState<Blob | null>(null);
     const [youtubeLinks, setYoutubeLinks] = useState<string[]>([]);
 
-    // Confirmation flow
+
     const [transcription, setTranscription] = useState<string>('');
     const [confirmedProblem, setConfirmedProblem] = useState<string>('');
     const [confirmedSolution, setConfirmedSolution] = useState<string>('');
 
-    // External state
+
     const {
         hasCompletedQuiz,
         freeScriptsRemaining,
@@ -126,7 +122,7 @@ export function useAppState(): AppStateData & AppStateActions {
     // EFFECTS
     // ==========================================================================
 
-    // Check auth and streak on mount
+
     useEffect(() => {
         if (authLoading) return;
 
@@ -266,9 +262,10 @@ export function useAppState(): AppStateData & AppStateActions {
             const viralScript: ViralScript = {
                 hooks: result.script.hooks,
                 selectedHookIndex: 0,
-                conflito: result.script.conflito,
-                climax: result.script.climax,
-                solucao: result.script.solucao,
+                contexto: result.script.conflito,
+                ruptura: result.script.climax,
+                conceito: result.script.storytelling,
+                plano: result.script.solucao,
                 cta: result.script.cta,
                 metadata: {
                     duration: result.script.metadata.duration,
@@ -310,7 +307,6 @@ export function useAppState(): AppStateData & AppStateActions {
     // ==========================================================================
 
     return {
-        // State
         state,
         script,
         error,
@@ -321,7 +317,7 @@ export function useAppState(): AppStateData & AppStateActions {
         confirmedSolution,
         showPaywall,
 
-        // Actions
+
         startFlow,
         handleStartRecording,
         handleReset,

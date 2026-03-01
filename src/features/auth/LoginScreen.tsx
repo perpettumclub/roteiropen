@@ -6,11 +6,10 @@ import { useAuth } from './AuthContext';
 
 interface AuthScreenProps {
     onSuccess: () => void;
-    onSwitchToSignUp: () => void;
     onForgotPassword: () => void;
 }
 
-export function LoginScreen({ onSuccess, onSwitchToSignUp, onForgotPassword }: AuthScreenProps) {
+export function LoginScreen({ onSuccess, onForgotPassword }: AuthScreenProps) {
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
     const [showEmailLogin, setShowEmailLogin] = useState(false);
@@ -25,8 +24,20 @@ export function LoginScreen({ onSuccess, onSwitchToSignUp, onForgotPassword }: A
     const handleGoogleLogin = async () => {
         setError(null);
         setLoading(true);
+        // Marcar que é um login (não cadastro) para o App.tsx saber após OAuth redirect
+        localStorage.setItem('hooky_pending_login', 'true');
+        // LIMPEZA CRÍTICA: Se o usuário clicou em LOGIN, ele NÃO quer ir pro checkout de cadastro
+        localStorage.removeItem('hooky_pending_checkout');
+
+        // ISOLAMENTO: Flag específica para QUEM CLICOU NO BOTÃO DE LOGIN
+        // Isso avisa o AppRouter para pular a Landing Page apenas neste caso
+        localStorage.setItem('hooky_skip_landing', 'true');
+
+        // Volta para o padrão (origin), o "Fiscal de Trânsito" (Landing) decidirá o destino
+        // baseando-se no perfil do usuário (Onboarding, Quiz, etc)
         const { error } = await signInWithGoogle();
         if (error) {
+            localStorage.removeItem('hooky_pending_login');
             setError('Erro ao conectar com Google. Tente novamente.');
             setLoading(false);
         }
@@ -39,6 +50,9 @@ export function LoginScreen({ onSuccess, onSwitchToSignUp, onForgotPassword }: A
         setEmailNotConfirmed(false);
         setResendSuccess(false);
         setLoading(true);
+
+        // LIMPEZA CRÍTICA: Login explícito remove intenção de checkout pendente
+        localStorage.removeItem('hooky_pending_checkout');
 
         const { error } = await signIn(email, password);
 
@@ -327,28 +341,6 @@ export function LoginScreen({ onSuccess, onSwitchToSignUp, onForgotPassword }: A
                 </motion.form>
             )}
 
-            <div style={{
-                marginTop: '1.5rem',
-                paddingTop: '1.5rem',
-                borderTop: '1px solid #e5e7eb'
-            }}>
-                <span style={{ color: 'var(--gray)', fontSize: '0.9rem' }}>
-                    Não tem conta?{' '}
-                </span>
-                <button
-                    onClick={onSwitchToSignUp}
-                    style={{
-                        background: 'none',
-                        border: 'none',
-                        color: 'var(--primary)',
-                        fontSize: '0.9rem',
-                        fontWeight: 600,
-                        cursor: 'pointer'
-                    }}
-                >
-                    Criar conta grátis
-                </button>
-            </div>
         </motion.div>
     );
 }

@@ -20,7 +20,7 @@ export const ReferralCard: React.FC<ReferralCardProps> = ({ compact = false }) =
         setReferralCode(code);
     }, []);
 
-    const referralLink = `https://hookr.ai?ref=${referralCode}`;
+    const referralLink = `https://hookyai.com.br?ref=${referralCode}`;
 
     const handleCopy = () => {
         navigator.clipboard.writeText(referralLink);

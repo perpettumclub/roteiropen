@@ -6,13 +6,19 @@ interface StreakDisplayProps {
     currentStreak: number;
     scriptsRemaining?: number;
     isPremium?: boolean;
+    subscriptionStatus?: string; // 'trialing' | 'active' | etc
+    trialDaysLeft?: number;
 }
 
 export const StreakDisplay: React.FC<StreakDisplayProps> = ({
     currentStreak,
     scriptsRemaining,
-    isPremium
+    isPremium,
+    subscriptionStatus,
+    trialDaysLeft
 }) => {
+    const isTrial = subscriptionStatus === 'trialing';
+
     return (
         <motion.div
             initial={{ opacity: 0, y: -10 }}
@@ -26,29 +32,6 @@ export const StreakDisplay: React.FC<StreakDisplayProps> = ({
                 zIndex: 100
             }}
         >
-            {/* Streak Counter */}
-            {currentStreak > 0 && (
-                <motion.div
-                    animate={{ scale: [1, 1.05, 1] }}
-                    transition={{ repeat: Infinity, duration: 2 }}
-                    style={{
-                        background: 'linear-gradient(135deg, #FF6B6B, #FF8E53)',
-                        color: 'white',
-                        padding: '0.5rem 1rem',
-                        borderRadius: '30px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.4rem',
-                        fontSize: '0.9rem',
-                        fontWeight: 600,
-                        boxShadow: '0 4px 15px -5px rgba(255,107,107,0.5)'
-                    }}
-                >
-                    <Flame size={18} />
-                    {currentStreak} {currentStreak === 1 ? 'dia' : 'dias'}
-                </motion.div>
-            )}
-
             {/* Free Scripts Remaining */}
             {!isPremium && scriptsRemaining !== undefined && (
                 <div style={{
@@ -76,8 +59,31 @@ export const StreakDisplay: React.FC<StreakDisplayProps> = ({
                 </div>
             )}
 
-            {/* Premium Badge */}
-            {isPremium && (
+            {/* Trial Badge — dias restantes do teste */}
+            {isPremium && isTrial && (
+                <motion.div
+                    animate={{ scale: [1, 1.05, 1] }}
+                    transition={{ repeat: Infinity, duration: 2 }}
+                    style={{
+                        background: 'linear-gradient(135deg, #FF6B6B, #FF8E53)',
+                        color: 'white',
+                        padding: '0.5rem 1rem',
+                        borderRadius: '30px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.4rem',
+                        fontSize: '0.9rem',
+                        fontWeight: 600,
+                        boxShadow: '0 4px 15px -5px rgba(255,107,107,0.5)'
+                    }}
+                >
+                    <Flame size={18} />
+                    {trialDaysLeft !== undefined ? `${trialDaysLeft}d restante${trialDaysLeft !== 1 ? 's' : ''}` : '3d'}
+                </motion.div>
+            )}
+
+            {/* Premium Badge — só depois do pagamento */}
+            {isPremium && !isTrial && (
                 <div style={{
                     background: 'linear-gradient(135deg, #FFD93D, #FF6B6B)',
                     color: 'white',

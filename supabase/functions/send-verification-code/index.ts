@@ -1,5 +1,5 @@
 // supabase/functions/send-verification-code/index.ts
-// Edge Function para enviar código de verificação de email
+// Edge Function para enviar código de verificação de email via Resend
 
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
@@ -68,6 +68,49 @@ Deno.serve(async (req) => {
             )
         }
 
+        const emailHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f9f9f9; margin: 0; padding: 40px 0; }
+        .container { max-width: 440px; margin: 0 auto; background-color: #ffffff; border-radius: 20px; padding: 48px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); border: 1px solid #eeeeee; }
+        .logo { margin-bottom: 36px; text-align: left; }
+        .title { font-size: 22px; font-weight: 600; color: #333333; margin-bottom: 28px; }
+        .text { font-size: 15px; line-height: 22px; color: #333333; margin-bottom: 24px; }
+        .code-box { background-color: #f5f5f7; border: 1px solid #e5e7eb; border-radius: 8px; padding: 24px; text-align: center; margin-bottom: 24px; }
+        .code { font-size: 38px; font-weight: 400; letter-spacing: 4px; color: #111111; }
+        .footer-text { font-size: 14px; color: #333333; line-height: 20px; }
+        .powered { text-align: left; margin-top: 24px; font-size: 11px; color: #9ca3af; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 28px;">🎤</span>
+                <span style="font-size: 20px; font-weight: 700; color: #FF6B6B;">Hooky</span>
+            </div>
+        </div>
+        <h1 class="title">Confirme seu email</h1>
+        <p class="text">
+            Olá,<br><br>
+            Use o código abaixo para confirmar seu email e acessar o Hooky:
+        </p>
+        <div class="code-box">
+            <span class="code">${code}</span>
+        </div>
+        <p class="footer-text">
+            Este código expira em 10 minutos.<br><br>
+            Se você não solicitou este código, pode ignorar este email.
+        </p>
+        <div class="powered">
+            Powered by <span style="font-weight: 700; color: #FF6B6B; margin-left: 2px;">Hooky</span>
+        </div>
+    </div>
+</body>
+</html>`
+
         const emailResponse = await fetch('https://api.resend.com/emails', {
             method: 'POST',
             headers: {
@@ -75,23 +118,10 @@ Deno.serve(async (req) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                from: 'Hooky <noreply@hooky.ai>',
+                from: 'Hooky <noreply@hookyai.com.br>',
                 to: email,
                 subject: 'Seu código de verificação - Hooky',
-                html: `
-          <div style="font-family: Arial, sans-serif; max-width: 400px; margin: 0 auto; padding: 20px;">
-            <div style="text-align: center; margin-bottom: 20px;">
-              <h1 style="color: #1f1f1f; font-size: 24px;">🔐 Hooky</h1>
-            </div>
-            <p style="color: #666; font-size: 16px;">Olá!</p>
-            <p style="color: #666; font-size: 16px;">Seu código de verificação é:</p>
-            <div style="background: #f5f5f5; border-radius: 12px; padding: 20px; text-align: center; margin: 20px 0;">
-              <span style="font-size: 32px; font-weight: bold; letter-spacing: 8px; color: #1f1f1f;">${code}</span>
-            </div>
-            <p style="color: #999; font-size: 14px;">Este código expira em 10 minutos.</p>
-            <p style="color: #999; font-size: 14px;">Se você não solicitou este código, ignore este email.</p>
-          </div>
-        `,
+                html: emailHtml,
             }),
         })
 
@@ -103,6 +133,8 @@ Deno.serve(async (req) => {
                 { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
             )
         }
+
+        console.log(`✅ Email sent to ${email}`)
 
         return new Response(
             JSON.stringify({ success: true, message: 'Código enviado para seu email' }),
@@ -117,3 +149,4 @@ Deno.serve(async (req) => {
         )
     }
 })
+

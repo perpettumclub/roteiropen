@@ -10,14 +10,14 @@ interface ShareUnlockProps {
 
 export const ShareUnlock: React.FC<ShareUnlockProps> = ({ reward, onShare, onClose }) => {
     const handleShare = async () => {
-        const shareText = `🔥 Acabei de criar um roteiro viral em 15 segundos com Hooky!\n\nÉ tipo ter um ghostwriter de Reels no bolso. Experimenta:\n\nhooky.app`;
+        const shareText = `🔥 Acabei de criar um roteiro viral em 15 segundos com Hooky!\n\nÉ tipo ter um ghostwriter de Reels no bolso. Experimenta:\n\nhookyai.com.br`;
 
         if (navigator.share) {
             try {
                 await navigator.share({
                     title: 'Hooky - Roteiros Virais com IA',
                     text: shareText,
-                    url: 'https://hookr.ai'
+                    url: 'https://hookyai.com.br'
                 });
                 onShare();
             } catch (err) {
@@ -25,7 +25,7 @@ export const ShareUnlock: React.FC<ShareUnlockProps> = ({ reward, onShare, onClo
             }
         } else {
             // Fallback: copy to clipboard
-            await navigator.clipboard.writeText(shareText + '\n\nhttps://hookr.ai');
+            await navigator.clipboard.writeText(shareText + '\n\nhttps://hookyai.com.br');
             onShare();
         }
     };

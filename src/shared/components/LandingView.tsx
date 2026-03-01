@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Mic, Sparkles, Share2, TrendingUp, Zap, Brain, Users } from 'lucide-react';
+import { Mic, Sparkles, Share2, TrendingUp, Zap, Brain, Users, LogIn } from 'lucide-react';
+import { useGlobalStats } from '../hooks/useGlobalStats';
 
 interface LandingViewProps {
     onStart: () => void;
+    onLogin?: () => void;
 }
 
 // Animated counter hook for social proof
@@ -32,9 +34,10 @@ const useAnimatedCounter = (target: number, duration: number = 2000) => {
     return count;
 };
 
-export const LandingView: React.FC<LandingViewProps> = ({ onStart }) => {
-    const scriptsCount = useAnimatedCounter(12847, 2000);
-    const creatorsCount = useAnimatedCounter(2341, 1800);
+export const LandingView: React.FC<LandingViewProps> = ({ onStart, onLogin }) => {
+    const { totalScripts, activeCreators } = useGlobalStats();
+    const scriptsCount = useAnimatedCounter(totalScripts, 2000);
+    const creatorsCount = useAnimatedCounter(activeCreators, 1800);
 
     const features = [
         {
@@ -56,6 +59,40 @@ export const LandingView: React.FC<LandingViewProps> = ({ onStart }) => {
 
     return (
         <div className="landing-view" style={{ width: '100%', maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
+
+            {/* LOGIN BUTTON - Top Right */}
+            {onLogin && (
+                <motion.button
+                    onClick={onLogin}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    style={{
+                        position: 'fixed',
+                        top: '1.5rem',
+                        right: '1.5rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                        padding: '0.75rem 1.25rem',
+                        borderRadius: '50px',
+                        background: 'rgba(255,255,255,0.9)',
+                        backdropFilter: 'blur(10px)',
+                        border: '1px solid rgba(0,0,0,0.1)',
+                        color: 'var(--dark)',
+                        fontSize: '0.9rem',
+                        fontWeight: 600,
+                        cursor: 'pointer',
+                        boxShadow: '0 4px 15px rgba(0,0,0,0.08)',
+                        zIndex: 100
+                    }}
+                >
+                    <LogIn size={18} />
+                    Entrar
+                </motion.button>
+            )}
 
             {/* HERO SECTION */}
             <motion.div
@@ -103,10 +140,11 @@ export const LandingView: React.FC<LandingViewProps> = ({ onStart }) => {
                 <h1 style={{
                     fontSize: 'clamp(3.5rem, 8vw, 6.5rem)',
                     marginBottom: '1.5rem',
-                    lineHeight: 1,
+                    lineHeight: 1.2,
                     fontFamily: 'var(--font-display)',
                     color: 'var(--primary)',
-                    textShadow: '0 10px 30px rgba(0,0,0,0.05)'
+                    textShadow: '0 10px 30px rgba(0,0,0,0.05)',
+                    paddingBottom: '0.1em'
                 }}
                 >
                     <span className="text-gradient">Hooky</span>
@@ -166,24 +204,35 @@ export const LandingView: React.FC<LandingViewProps> = ({ onStart }) => {
                 >
                     {/* Avatar Stack */}
                     <div style={{ display: 'flex', marginRight: '0.25rem' }}>
-                        {['🧑‍💻', '👩‍🎤', '🧔', '👩‍💼', '🧑‍🎨'].map((emoji, i) => (
+                        {[
+                            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=faces',
+                            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=faces',
+                            'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=faces',
+                            'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=faces',
+                            'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=faces'
+                        ].map((photoUrl, i) => (
                             <div
                                 key={i}
                                 style={{
                                     width: '32px',
                                     height: '32px',
                                     borderRadius: '50%',
-                                    background: 'linear-gradient(135deg, #FFE66D 0%, #FF6B6B 100%)',
                                     border: '2px solid white',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    fontSize: '0.9rem',
                                     marginLeft: i > 0 ? '-8px' : '0',
-                                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                                    overflow: 'hidden',
+                                    background: '#f0f0f0'
                                 }}
                             >
-                                {emoji}
+                                <img
+                                    src={photoUrl}
+                                    alt={`Creator ${i + 1}`}
+                                    style={{
+                                        width: '100%',
+                                        height: '100%',
+                                        objectFit: 'cover'
+                                    }}
+                                />
                             </div>
                         ))}
                     </div>

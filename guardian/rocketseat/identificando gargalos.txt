@@ -1,0 +1,2920 @@
+Transcrição
+
+00:00
+Me fala aí, quantas vezes você já se viu nessa situação onde você tem um app e você se acaba
+
+00:11.88
+perguntando nossa, o app é tão grande, tão pesado, tá tão devagar, não sei nem por onde começar,
+
+00:17.4
+ou até mesmo, eu até sei aplicar algumas técnicas de performance, mas eu não sei como medir isso.
+
+00:25.38
+Então, eu não sei se realmente eu estou fazendo efeito ou não, se elas estão surtindo efeito ou não.
+
+00:30.5
+Então, se você já passou por alguma dessas situações, sabe que, primeiro, é extremamente comum lidar com performance.
+
+00:38.18
+É uma coisa bem difícil e complicada, mas eu tenho uma boa notícia para você.
+
+00:41.86
+Se você já passou por essa situação, provavelmente essa aula aqui é feita pra você
+
+00:46.52
+Então, olha só galera
+
+00:48.1
+Eu
+
+00:48.44
+É
+
+00:49.98
+Tava bem curioso pra trazer aqui
+
+00:53.34
+Um estilo de aula um pouco diferente
+
+00:55.06
+Eu acho que vocês vão gostar bastante
+
+00:56.44
+Então se você tá aqui querendo saber
+
+00:59.22
+Como é que você melhora sua aplicação
+
+01:0.5600000000000023
+Como é que faz isso passo a passo
+
+01:2.020000000000003
+Integrando assim na aplicação
+
+01:4.400000000000006
+Como se fosse pra produção hoje é seu dia de sorte, que essa aula aqui hoje é feita
+
+01:8.819999999999993
+para você, beleza?
+
+01:10.239999999999995
+Então, galera, como é que vocês estão?
+
+01:12.959999999999994
+Eu espero que esteja todo mundo bem, sejam bem-vindos mais uma vez aqui a mais uma aula
+
+01:17.64
+do Experts Club.
+
+01:19.92
+Meu nome é Victor Alencar, como vocês já sabem, Eu sou desenvolvedor sênior, com vários anos de carreira.
+
+01:26.64
+Eu sou viciado em performance, eu adoro aplicações, eu adoro web, eu adoro codar.
+
+01:30.120000000000005
+Eu hoje trabalho e vivo aqui em Berlim, na Alemanha, certo?
+
+01:35.06
+E hoje eu tô aqui trazendo mais uma vez um conteúdo super legal
+
+01:39.81999999999999
+que eu passei bastante tempo trabalhando pra trazer para vocês, então eu estou mega animado,
+
+01:45.519999999999996
+eu acho que a aula de hoje vai ser iradíssima.
+
+01:48.34
+Então, o que eu quero trazer hoje para vocês é justamente esse como lidar com performance,
+
+01:54.519999999999996
+principalmente em um aplicativo um pouco mais parecido com o concurso de produção, certo?
+
+01:58.739999999999995
+E a gente vai fazer isso passo a passo juntos.
+
+02:0.5600000000000023
+Então, a gente vai pegar um app do zero, que eu criei aqui, a gente vai fazer análise de performance, a gente vai
+
+02:6.180000000000007
+trabalhar os conceitos
+
+02:7.900000000000006
+de performance que a gente já viu em outros vídeos e
+
+02:9.819999999999993
+outras técnicas que eu quero trazer pra esse vídeo
+
+02:12
+e a gente vai aplicar todos eles hoje,
+
+02:13.960000000000008
+beleza? Então sim,
+
+02:16.47999999999999
+só pra gente
+
+02:17.24000000000001
+iniciar de forma
+
+02:19.840000000000003
+correta, mais uma vez eu tô mega feliz que você
+
+02:21.939999999999998
+tá aqui, muito obrigado por ter escolhido essa aula é
+
+02:25.159999999999997
+eu fico muito feliz de estar aqui hoje no time
+
+02:27.939999999999998
+do Experts Club, isso pra mim
+
+02:30.19999999999999
+é uma honra estar aqui e meu compromisso é levar
+
+02:32
+você pro próximo nível, beleza? Então vamos lá, qual dá
+
+02:34.03999999999999
+galera, mas, antes de mais nada
+
+02:36.19999999999999
+deixa eu pedir um negócio aqui pra você, tá certo?
+
+02:39.19999999999999
+Então
+
+02:39.46000000000001
+primeira coisa que eu queria que vocês fizessem Me segue lá nas redes sociais Tá certo? Então
+
+02:45.900000000000006
+Vou deixar aqui meu Instagram
+
+02:47.41999999999999
+Se você quiser trocar ideia comigo, eu tô sempre lá
+
+02:49.84
+Criando enquete, compartilhando
+
+02:51.75999999999999
+Coisas com a galera
+
+02:53
+Tem um pouco de fotografia também
+
+02:55.379999999999995
+Mas se você quiser tirar dúvidas sobre código
+
+02:58.360000000000014
+E falar comigo de uma forma direta, que é o melhor lugar
+
+03:0.3199999999999932
+Me segue no LinkedIn
+
+03:1.759999999999991
+Certo? Porque é sempre bom ter uma conexão
+
+03:4.199999999999989
+Então eu vou postar
+
+03:6.0800000000000125
+bastante coisa no LinkedIn também, então se você não quiser perder, por favor, me siga lá. E me segue
+
+03:10.919999999999987
+na Twitch, porque agora eu tô bem, tô streamando junto com outros experts aqui, com outras pessoas
+
+03:17.30000000000001
+maravilhosas, então se você quiser ver, assim, uma conversa mais contraída, algo que não é muito tanto,
+
+03:22.580000000000013
+código de produção, me segue lá, beleza?
+
+03:30.97999999999999
+Então vamos lá, galera. Já queria iniciar aqui dizendo que eu tava morrendo de saudade de vocês.
+
+03:37.44
+Faz um tempo aí que eu tava tentando trazer um vídeo com bastante conteúdo, com bastante coisa legal pra mostrar pra vocês e hoje a gente vai fazer isso, beleza? Então assim, como já dei o
+
+03:42.25999999999999
+spoiler no começo, hoje a gente vai estar trabalhando com performance.
+
+03:45.28
+Nossa, eu ouvi demais o feedback de vocês, todo mundo pedindo,
+
+03:48.80000000000001
+Vitor, eu quero mais aula de performance, Vitor, eu quero entender como é que mexe no profiling,
+
+03:53.139999999999986
+Vitor, eu quero saber como é que eu entendo se um componente renderizou ou não o React.
+
+03:58.620000000000005
+Então, galera, não se preocupa, está aqui o vídeo, hoje a gente vai fazer tudo isso junto, beleza?
+
+04:6.819999999999993
+Então eu vou aqui mostrar pra vocês rapidamente como é que tá a nossa aplicação, certo?
+
+04:15.719999999999999
+Hoje eu trouxe pra vocês aqui, eu criei um aplicativo de viagens,
+
+04:21.279999999999973
+que é algo que eu acho muito interessante, então eu criei aqui um aplicativo básico que nele a gente vai aprender a monitorar performance,
+
+04:25.519999999999982
+a entender gargalos, aplicar técnicas de melhoria de performance
+
+04:29.420000000000016
+e estruturar a aplicação de uma forma que a gente consiga melhorar a nossa performance, tá certo?
+
+04:35.77999999999997
+Então hoje a gente vai aprender bastante coisa.
+
+04:38.160000000000025
+No final dessa aula, o que você vai poder aprender é surreal.
+
+04:41.920000000000016
+A gente vai aprender a lidar com o Cold Splitting, como é o que que é, como é que funciona por detrás dos planos.
+
+04:47
+A gente vai aprender a lidar com o code splitting para dividir nossos código em chunks menores. A gente vai aprender a analisar a nossa performance no DevTools, como vocês estão vendo aqui.
+
+04:57
+Ver quais são os garragalos de performance, ver como é que a gente pode lidar com eles, ver quando a gente na verdade tem que parar para não fazer o vende e essa é a gente vai lidar com a diferença entre classes e
+
+05:8.980000000000018
+componentes né vamos ver aqui na prática como é que
+
+05:12.240000000000009
+isso funciona ea gente vai analisar o nosso mando sai na nossa aplicação do
+
+05:17.279999999999973
+começo ao fim a gente vai melhorar isso bastante ea gente também vai bater um
+
+05:22.060000000000002
+pouquinho ali nos web o que é algo que eu vinha querendo trazer pra vocês e que eu acho
+
+05:26.360000000000014
+que vai agregar muito no conhecimento de vocês, então, beleza?
+
+05:28.939999999999998
+Vamos lá, eu vou mostrar aqui a estrutura
+
+05:30.25999999999999
+da aplicação, vou começar com isso.
+
+05:35.10000000000002
+Essa estrutura é uma estrutura muito
+
+05:36.39999999999998
+simples, bem convencional, basicamente a maioria dos meus
+
+05:38.379999999999995
+projetos eu começo com ela, a gente tem aqui na nossa pasta
+
+05:40.44
+src a nossa parte de componentes onde tem todos os componentes da nossa aplicação Zinha beleza deixa eu botar aplicação aqui do lado para ficar mais fácil da gente ver aqui a nossa aplicação e o código mesmo, beleza?
+
+06:11.399999999999977
+Então aqui a gente tem os nossos componentes, alguns componentes, a gente tem a pasta de hooks,
+
+06:14.720000000000027
+onde a gente está colocando todos os hooks que a gente está compartilhando na nossa aplicação.
+
+06:19.779999999999973
+Aqui a gente tem algumas imagens, né?
+
+06:21.54000000000002
+Porque eu queria trazer elas aqui somente para visualização, então a gente não está trabalhando com API ainda.
+
+06:28.80000000000001
+A gente tem as nossas páginas, que são basicamente as nossas rotas aqui que eu vou estar mostrando rapidamente.
+
+06:34.18000000000001
+Alguns utilitários, a gente vai entrar neles aqui já para o final da aula, que é quando a gente for criar o nosso WebWorkers e tudo mais, isso aqui é bem, bem legal. E por fim é um aplicativo Create React App normal com algumas rotas e
+
+06:46.18000000000001
+com algumas funções aqui.
+
+06:48.379999999999995
+Beleza? Então a gente tem essa
+
+06:50.18000000000001
+página que serve como
+
+06:51.54000000000002
+a nossa página inicial da aplicação. Ela vai estar
+
+06:54.120000000000005
+mostrando pra gente detalhes
+
+06:56.420000000000016
+bastante importantes, coisas que são bem relevantes
+
+06:58.44
+para o usuário já.
+
+07:0.36000000000001364
+Pra quem quer fazer uma viagem, pra quem quer
+
+07:2.420000000000016
+fazer uma caminhada
+
+07:4.480000000000018
+como tá aqui,
+
+07:7.759999999999991
+essa para mim eu considero a página mais importante na nossa aplicação,
+
+07:10.899999999999977
+porque é ela que vai liderar todos os call to actions,
+
+07:13.699999999999989
+então é isso que eu queria mostrar primeiro para o usuário.
+
+07:15.04000000000002
+E por que eu estou dizendo isso?
+
+07:19.519999999999982
+Porque a gente vai entender basicamente como dividir a nossa aplicação e como mostrar as coisas mais importantes no começo,
+
+07:21.54000000000002
+para que a gente possa depois conseguir quebrar
+
+07:26.879999999999995
+a aplicação de uma maneira que faça sentido para o usuário final.
+
+07:32.25999999999999
+Aqui a gente tem a nossa página de busca, onde a gente tem várias cidades.
+
+07:37.74000000000001
+Isso aqui foi extremamente intencional, então essa página aqui a gente pode buscar cidades Eu estou renderizando imagens aleatórias aqui
+
+07:48.120000000000005
+Pegando do OnePlesh
+
+07:49.94
+De acordo com o nome que eu coloquei aqui para buscar
+
+07:52.81999999999999
+Por isso que as imagens vão mudar durante a aula inteira
+
+07:56.620000000000005
+Mas isso é bem intencional
+
+07:58
+Eu queria deixar um componente um pouco mais complexo
+
+07:59.60000000000002
+A gente pode selecionar
+
+08:0.6000000000000227
+A gente pode estar limpando a seleção aqui
+
+08:2.519999999999982
+E a gente pode estar forçando um refresh na página, tá certo?
+
+08:5.980000000000018
+Então, se eu apertar aqui, a gente fez um refresh na página.
+
+08:8.139999999999986
+Então, vocês podem ver essa lista gigantesca.
+
+08:11.339999999999975
+Por enquanto, eu estou carregando
+
+08:12.379999999999995
+só 100 itens de cada vez,
+
+08:14.720000000000027
+mas eu tenho mais de
+
+08:16.019999999999982
+10 mil itens nessa listagem,
+
+08:18.379999999999995
+beleza? Por último,
+
+08:20.30000000000001
+a gente tem a nossa parte de account,
+
+08:27.639999999999986
+aqui, onde tem algumas informações importantes do usuário basicamente quantos anos de conta ele tem dentro da nossa
+
+08:29.980000000000018
+aplicação, quais são
+
+08:31.279999999999973
+os destinos que ele já explorou
+
+08:33.559999999999945
+a gente tem aqui um botão muito importante, que é o botão
+
+08:36.01999999999998
+de exportar
+
+08:38
+dados, né, e isso vai ser
+
+08:40.039999999999964
+bem legal porque aqui a gente vai trabalhar
+
+08:41.58000000000004
+com parceria de código
+
+08:43.960000000000036
+e como
+
+08:45.22000000000003
+fazer a melhoria de muitas aplicações principalmente de dashboard ou
+
+08:48.460000000000036
+aplicações que têm gdpr já implementado é você vai ter que implementar uma forma
+
+08:55.460000000000036
+de exportar os dados do usuário e às vezes a gente tem que pegar alguns dados
+
+08:58.299999999999955
+que estão dentro da nossa aplicação converter para outro formato e depois
+
+09:3.1000000000000227
+exportar eles beleza então é basicamente esse é o nosso overview da aplicação converter isso para outro formato e depois exportar eles beleza então basicamente
+
+09:7.440000000000055
+esse é o nosso overview da aplicação a gente vai começar a trabalhar com ela tá certo vou só me
+
+09:13.379999999999995
+hidrata aqui essa gente iniciar a beleza então vamos lá, galera. Vamos nessa. Vamos tentar entender o que está acontecendo aqui.
+
+09:27.360000000000014
+Então eu sempre gosto de iniciar a minha aplicação fazendo uma análise de como é que ela está no momento, certo?
+
+09:36.51999999999998
+Eu coloquei no nosso Packers.json aqui um script para que a gente rodasse esse Create React App Bundle Analyzer,
+
+09:48.360000000000014
+que é um pacote que a gente está listando aqui nas nossas dependências, certo?
+
+09:52.059999999999945
+E o que ele faz? Ele cria uma visualização de todas as dependências
+
+09:55.84000000000003
+e de como projetar nesse exato momento.
+
+09:58.5
+Então vamos rodar ele aqui.
+
+10:1.919999999999959
+Então eu vou rodar ele, o que ele vai fazer? Ele vai criar um build,
+
+10:7.740000000000009
+e nesse build ele vai analisar o nosso source maps E com ele ele vai montar uma árvore de visualização para que a gente possa entender
+
+10:11.799999999999955
+Como é que estão as nossas dependências e o nosso bundle size, beleza?
+
+10:47
+Então show de bola, ele tá aqui terminando de compilar os nossos arquivos e ele vai abrir o nosso analisar
+
+11:07
+e vai contar abrir aqui eu já tinha rodado essa tese que antes e a gente pode dar uma olhada nisso aqui já. Eu vou deixar ele rodando aqui por enquanto e aí se vier uma nova versão a gente já vem no browser.
+
+11:12
+Mas para agilizar as coisas eu já tinha rodado aqui offline, beleza?
+
+11:15
+Então essa é a nossa aplicação e meu Deus, olha só o que está acontecendo.
+
+11:20
+A primeira coisa que a gente vê é que o nosso chunk aqui, né, do main chunk, ele tá gigantesco, né, ele tem 84... opa, subiu aqui.
+
+11:31.159999999999968
+Beleza.
+
+11:32.22000000000003
+E o nosso chunk aqui, ele tem 84kbytes, né.
+
+11:37.72000000000003
+Com o gzip ele fica menor, claro, o gzip é a parte de compressão, mas mesmo assim ele tá um pouco grande e a gente vê que uma das coisas horríveis que tem aqui seria esse
+
+11:45.879999999999995
+series.json, que é o nosso
+
+11:47.82000000000005
+arquivo de onde
+
+11:50.10000000000002
+a gente tá pegando todas as cidades que tá na nossa
+
+11:51.91999999999996
+página de busca, beleza? Mas não só isso,
+
+11:54.10000000000002
+ele tá... nós temos dependências
+
+11:56.25999999999999
+bem grandes aqui,
+
+11:57.98000000000002
+nosso chunks aqui tá gigantesco,
+
+12:0.12000000000000455
+né? Então a gente vai dar
+
+12:02
+uma melhorada. Como vocês podem ver, não está o ideal E a gente pode estar melhorando isso
+
+12:9.259999999999991
+A segunda coisa que eu gosto de fazer
+
+12:10.519999999999982
+A gente vai vir aqui
+
+12:11.879999999999995
+Antes de mais nada
+
+12:13.5
+E a gente vai
+
+12:15.940000000000055
+Eu vou colocar aqui agora
+
+12:20
+Para eu carregar
+
+12:21.899999999999977
+Eu vou fazer um throttling aqui do meu network
+
+12:27.24000000000001
+Botar como se fosse uma conexão 3G bem devagar
+
+12:31.08000000000004
+E eu vou fazer um profile, né?
+
+12:34.60000000000002
+Então eu vou chegar aqui e eu vou
+
+12:36.200000000000045
+Recarregar nossa aplicação pra ver o que que tá acontecendo, né? acontecendo né
+
+12:59.58000000000004
+tá então basicamente eu tive de deixa eu limpar aqui o cache para ter uma leitura um pouco melhor
+
+13:1.9600000000000364
+o prefeito Perfeito. E aí
+
+13:33.620000000000005
+Ah tá o que a gente percebe já de cara é que a nossa performance está muito a desejar né a gente vê aqui que só os chances em JavaScript que eu acabei de carregar eles demoraram para
+
+13:38.65999999999997
+caramba né o nosso bando ele tá gigantesco então é o mente aqui que demorou 16 segundos para carregar isso é
+
+13:46.960000000000036
+absurdo isso é um absurdo então a gente pode estar melhorando certo não não existe fórmula mágica mas
+
+13:52.77999999999997
+a gente pode estar atacando isso primeiro tá certo então acho que eu vou eu acho que eu vou fazer isso
+
+13:56.440000000000055
+beleza deixou um parque é o que tá demorando agora pra carregar suas imagens, o que eu também, né, por
+
+14:8.620000000000005
+enquanto não é nem tão importante, porque no mundo ideal a gente teria imagens vindas de um API e
+
+14:14.419999999999959
+tudo mais, mas eu acho que a parte dos chunks a gente pode lidar com ele agora. Então, a primeira
+
+14:19.139999999999986
+coisa que eu gosto de fazer é separar meus módulos, certo? Então, aqui o que a gente vai estar utilizando,
+
+14:26.779999999999973
+como você pode ver,
+
+14:29
+vai ser transformar esse chunk gigante
+
+14:30.899999999999977
+que a gente tem em chunks menores
+
+14:32.98000000000002
+pra que a gente possa carregar
+
+14:34.460000000000036
+mais rápido, tá certo?
+
+14:36.879999999999995
+Então, deixa eu fazer logo uma coisa aqui.
+
+14:38.799999999999955
+Primeira coisa que a gente vai fazer, a gente vai utilizar
+
+14:40.60000000000002
+o React
+
+14:42.700000000000045
+Lazy aqui pra carregar
+
+14:44.639999999999986
+essas nossas rotas é então o que posso
+
+14:47.559999999999945
+fazer eu posso dizer que por exemplo te dei que é esse garoto aqui ele vai ser
+
+14:57.65999999999997
+vai ser importado do react.lazy e ele recebe uma função e nessa função aqui eu vou ter um import
+
+15:16.519999999999982
+nesse import eu vou colocar meu path que vai ser exatamente esse path aqui tá certo e qual é a diferença a diferença é que agora ele vai vir de forma assíncrona né então vou quebrar em
+
+15:23.879999999999995
+chunks menores e por que que isso é importante
+
+15:26.24000000000001
+porque o browser consegue carregar mais código de forma mais eficiente mas a gente não vai parar só
+
+15:31.039999999999964
+aí tá certo deixa eu vim aqui fazer o mesmo para as outras páginas tá certo então vamos
+
+15:36.91999999999996
+descer daí aqui para search e agora vou fazer a mesma coisa para o nosso account tá bom
+
+15:51.22000000000003
+para o nosso acampo tá bom perfeito tá só de fazer isso a gente a quebrou nosso código em partes menores e olha que coisa legal a gente vem aqui tá tudo funcionando do mesmo jeito que antes mas
+
+15:56.98000000000002
+serviu ali que tem um loading né e a gente vai falar sobre isso agora então vamos dar uma olhada
+
+16:3.340000000000032
+o que aconteceu só da gente está quebrando esse nosso código em partes menores.
+
+16:9.039999999999964
+Vamos carregar as mesmas coisas aqui.
+
+16:17.039999999999964
+Deixa eu fazer o throttling aqui no 3G slow, como a gente estava fazendo no outro, para ser justo.
+
+16:31.700000000000045
+como a gente tá fazendo outro pra ser justo né mas olha só que legal é já de cara a experiência é outra né bastante performance e aqui você vê que eu tenho um arquivo chamado tchudei e na verdade ele vem como JavaScript, né? E nós temos os chunks aqui, 1 e 0.
+
+16:48.41999999999996
+Tá.
+
+16:49.74000000000001
+Então, a gente já melhorou um pouco a nossa performance,
+
+16:52.860000000000014
+muito irado,
+
+16:54.10000000000002
+mas a gente pode estar levando isso um pouco além.
+
+16:56.299999999999955
+Então, uma coisa que eu quero mostrar para vocês,
+
+16:57.960000000000036
+provavelmente muita gente não sabe,
+
+16:59.98000000000002
+são os Magic Comments do Webpack.
+
+17:2.759999999999991
+Mas o que raios é Magic Comments?
+
+17:4.619999999999891
+Então, a primeira coisa que eu queria fazer,
+
+17:6.220000000000027
+eu queria melhorar a experiência dos desenvolvedores aqui
+
+17:10.200000000000045
+e nomear o meu chunk.
+
+17:14.220000000000027
+Porque você viu aqui, o problema agora ele vem como 0.chunk e 1.check.
+
+17:17.90000000000009
+Eu não sei o que é isso.
+
+17:18.59999999999991
+Eu quero saber qual é o componente que ele está carregando aqui.
+
+17:21.579999999999927
+Então, o que a gente pode fazer, e isso é muito irado porque é muito simples, mas muito poderoso,
+
+17:26.5
+é colocar alguns Magic Comments
+
+17:28.019999999999982
+nos nossos imports. Então,
+
+17:30.3599999999999
+se você quiser saber mais, eu vou deixar
+
+17:32.09999999999991
+até depois o link aqui da documentação
+
+17:34.59999999999991
+do Webpack, que ele tem uma lista
+
+17:36.27999999999997
+grande dos Magic Comments que você pode
+
+17:38.200000000000045
+colocar, mas olha uma coisa que a gente pode fazer. A primeira coisa
+
+17:40.22000000000003
+que a gente pode fazer éar o nosso chanque então só o que eu preciso fazer
+
+17:45.16000000000008
+colocar um comentário nesse caso webpack chanque nem né E aqui eu vou colocar a gente vem aqui
+
+17:53.07999999999993
+today e eu vou fazer a mesma coisa para os outros chanques né então e nesse comentário eu vou dizer qual é o nome do
+
+18:6.5
+chanque
+
+18:17.24000000000001
+beleza nesse aqui vai ser a causa
+
+18:21
+oi calma
+
+18:32.3599999999999
+o show de bola então vamos dar um refresh aqui vamos carregar novamente nossa aplicação certo
+
+18:37.440000000000055
+e vamos ver o que que vai acontecer agora E aí e olha só que legal eu tenho um chanque agora que o nome dele é de dei
+
+18:48.83999999999992
+chance ou seja acabei de nomear esse aqui é basicamente vai vai ser cache das coisas
+
+18:53.88000000000011
+que a gente tinha feito antes e se eu vim aqui por exemplo agora deixa eu dar uma
+
+18:58.75999999999999
+pesquisa aqui se eu vim aqui no meu account Olha só irado, carreguei um chunk com o nome account e as dpdc dele
+
+19:6.240000000000009
+então carreguei esse vendor
+
+19:7.920000000000073
+e agora tá tudo
+
+19:9.839999999999918
+separadinho
+
+19:11.900000000000091
+bonitinho, massa, irado
+
+19:13.559999999999945
+só que tem um porém
+
+19:15.519999999999982
+como você viu agora, a nossa experiência
+
+19:17.980000000000018
+do usuário mudou um pouco, certo?
+
+19:19.90000000000009
+então quando eu mudo de uma tela pra outra
+
+19:21.940000000000055
+eu vejo esse loading
+
+19:22.980000000000018
+e assim se for uma tela pra outra, eu vejo esse loading. E, assim, se
+
+19:26.1400000000001
+for uma tela que nem, por exemplo, essa de Search,
+
+19:28.180000000000064
+e eu estiver numa
+
+19:29.019999999999982
+experiência devagar,
+
+19:31.779999999999973
+não é tão legal assim. Então,
+
+19:34.200000000000045
+como é que a gente pode levantar, levar
+
+19:36.039999999999964
+isso pra um
+
+19:38.07999999999993
+passo além? Como é que a gente pode melhorar essa experiência
+
+19:40.11999999999989
+um pouco mais? Então,
+
+19:42.1400000000001
+uma das duas coisas que a gente pode fazer
+
+19:43.8599999999999
+é o quê? A gente pode fazer é o que
+
+19:45.819999999999936
+a gente pode usar outro médico e como é chamado prefet certo então vou vir aqui e vou colocar
+
+19:52.66000000000008
+prefet e o que que esse prefet faz basicamente que a gente vai fazer a gente vai falar para o
+
+19:59.059999999999945
+browser olha assim que você terminar de carregar a página inicial assim que você terminar de distanciar
+
+20:4.240000000000009
+o JavaScript carrega essas dependências.
+
+20:6.7999999999999545
+Isso é bastante útil para dependências que a gente sabe que vai precisar lá na frente, mas a gente quer paralelizar,
+
+20:12.240000000000009
+ou seja, a gente quer dividir ela em chunks menores para que o browser consiga carregar mais coisas em paralelo, tá certo?
+
+20:18.160000000000082
+Então essa é a maior diferença. Antes a gente tinha um chunk bem gigantão, que a gente ia ter que usar a mesma threadzinha ali pra fazer
+
+20:26.200000000000045
+o download dele. Agora a gente
+
+20:28.160000000000082
+tá criando arquivos menores que podem
+
+20:29.779999999999973
+ser feitos em paralelo e a gente tá só dizendo
+
+20:32.09999999999991
+olha browser, assim que você terminar de trabalhar
+
+20:34.039999999999964
+carrega esses caras imediatamente.
+
+20:36.11999999999989
+Então se eu colocar aqui
+
+20:37.07999999999993
+o nosso prefetch true
+
+20:40.22000000000003
+eu vou mostrar pra vocês a diferença.
+
+20:48.83999999999992
+Certo? eu vou mostrar pra vocês a diferença vamos cá agora vou aqui ainda continuando na conexão devagar vou
+
+20:57.61999999999989
+recarregar meus tchanx certo o refresh da minha página E olha o que vai acontecer Olha só que maravilha
+
+21:14.180000000000064
+Deixa eu botar aqui
+
+21:15.400000000000091
+Para ele filtrar as suas chunks
+
+21:17.180000000000064
+Deixa eu de bola
+
+21:20.660000000000082
+Olha só, ele carregou da página inicial
+
+21:22.799999999999955
+O nosso today
+
+21:23.61999999999989
+Ele carregou o nosso account e carregou o nosso search
+
+21:26.88000000000011
+Então se
+
+21:28.539999999999964
+Assim que eu
+
+21:29.720000000000027
+Acionar uma tela
+
+21:31.61999999999989
+Esse código já está em cache
+
+21:34.1400000000001
+Certo? Então isso aqui você vai ver
+
+21:36.299999999999955
+A diferença, se eu desabilitar o cache
+
+21:38.1400000000001
+É como se eu estivesse carregando duas vezes
+
+21:39.59999999999991
+Porque quando eu entrar na tela
+
+21:42.61999999999989
+Como o webpack não fez cache
+
+21:44.940000000000055
+O browser não fez cache,
+
+21:48.42000000000007
+o browser não fez cache, na verdade, desse arquivo, ele vai tentar carregar de novo,
+
+21:51.440000000000055
+mas aqui, como eu fiz um prefetch, ou seja, eu já carreguei ele,
+
+21:54.200000000000045
+joguei para dentro do meu cache, quando eu entrar na minha tela,
+
+21:58.51999999999998
+eu vou ter essa sensação de carregamento, ela vai ser muito mais rápida.
+
+22:1.8199999999999363
+Eu não vou precisar esperar para que o browser carregue tudo porque o search chunk aqui ele vai vir aqui com o meu prefet
+
+22:5.980000000000018
+cache, ou seja
+
+22:7.559999999999945
+eu já tenho esse arquivo cacheado dentro do browser, a demora
+
+22:9.940000000000055
+ali é justamente só de chegar
+
+22:11.38000000000011
+pegar esse arquivo dentro do meu cache e
+
+22:13.819999999999936
+instanciar ele na minha memória
+
+22:15.079999999999927
+então com
+
+22:17.579999999999927
+o meu account do mesmo jeito
+
+22:19.660000000000082
+certo? quando eu
+
+22:21.6400000000001
+fizer o prefet dele aqui
+
+22:23.819999999999936
+ele já fica dentro do cache e uma vez que eu carrego esses
+
+22:27.61999999999989
+arquivos eles é e eles já ficam só no browser então posso navegar com ele eles aqui e foram
+
+22:37.90000000000009
+bem mais mais tranquilo bem mais rápido certo então tanto faz eu vim para cá onde para te
+
+22:42.799999999999955
+dei para search e já vão tá aqui já salvos no meu cache, beleza?
+
+22:47.24000000000001
+Então, na próxima vez que eu vier aqui, se eu recarregar eles, mesma coisa.
+
+22:52.3599999999999
+Tudo que for chunk, ele vai ser pré-carregado para que o browser consiga agilizar essa tarefa para a gente, beleza?
+
+22:59.24000000000001
+Então, aqui como vocês podem ver, eles já vieram agora do cache, já vieram do not modified, né? Então a experiência vai ser bem mais rápida, vai ser bem mais snap, beleza?
+
+23:10.160000000000082
+Show de bola.
+
+23:11.579999999999927
+Então, o primeiro passo que a gente conseguiu fazer com sucesso,
+
+23:16
+a gente veio aqui, identificou áreas da nossa aplicação que a gente podia estar quebrando em chunks menores.
+
+23:22.700000000000045
+A gente pode até dar uma olhada no nosso analyzer aqui, né?
+
+23:28.079999999999927
+Como é que essas dependências
+
+23:30.200000000000045
+agora estão sendo carregadas
+
+23:31.480000000000018
+e qual foi a diferença que criou o nosso bundle final.
+
+23:35.25999999999999
+Mas eu fiquei
+
+23:36.180000000000064
+bem satisfeito.
+
+23:38.01999999999998
+Com pouco código a gente já conseguiu melhorar
+
+23:40.559999999999945
+o carregamento da nossa
+
+23:42.38000000000011
+aplicação bastante e a gente já pode
+
+23:44.5
+passar para o próximo problema,
+
+23:46.24000000000001
+beleza? Então, agora, assim que terminar aqui de subir o source maps, eu vou querer atacar essa
+
+23:57.16000000000008
+página de search, porque eu acredito que tem vários gaps de performance aqui que a gente pode estar
+
+24:1.9600000000000364
+trabalhando e é uma oportunidade para mostrar para vocês não só como analisar a nossa performance dentro do DevTools
+
+24:9.660000000000082
+como também usar as abas de profile de componentes lá do React, beleza?
+
+24:15.3599999999999
+Então vamos só dar uma olhada aqui rapidão como é que está a nossa análise, está em 93%
+
+24:22.5
+ele já vai abrir o browser pra gente
+
+24:27.24000000000001
+show de bola olha só que legal já tá um pouco diferente da
+
+24:31.519999999999982
+que a gente tinha anteriormente porque agora a gente tem
+
+24:34.16000000000008
+tímpanos menores né? A gente tinha eh o nosso né? E agora
+
+24:40.940000000000055
+tudo que é importante pra gente que na verdade o o nosso Today, ele tá bem menor, certo?
+
+24:47
+Então se a gente vem aqui, cada chunk agora tem, sei lá, 5, 6kbytes, tem o account, deixa eu ver se eu acho outro aqui.
+
+24:56.059999999999945
+Tem o nosso static, tem as nossas dependências iniciais, mas as nossas páginas elas estão menores então nosso today que é a primeira página que a gente carrega na verdade
+
+25:6.119999999999891
+é em vez de a gente carregar os nossos 85kbytes a gente tá carregando 5 então essa é uma diferença bem grande
+
+25:15.38000000000011
+bem notória principalmente em internet mas quando você tiver uma conexão um pouco mais devagar tá certo
+
+25:22.059999999999945
+vamos lá então a próxima coisa que eu
+
+25:25.160000000000082
+quero fazer agora é vim aqui analisar o que tem de errado nesse nesse caminho
+
+25:30.799999999999955
+que vamos dar uma olhada no nosso código ver o que está acontecendo tá eu vim
+
+25:34.16000000000008
+aqui vou fechar
+
+25:39.680000000000064
+eles vão dar uma olhada no nosso search, ver o que está acontecendo com ele.
+
+25:49.22000000000003
+Olha só.
+
+25:55.680000000000064
+Nosso search está puxando todos os itens dessa minha busca.
+
+26:3.3599999999999
+Nessa função getItems, passando o meu valor do input, ou seja, ele está passandoando quer para esse carinha aqui ele tá dividindo esses itens
+
+26:6.660000000000082
+em de 100 em 100 ou seja o máximo que eu carrego aqui na nossa viu é sem eu tô basicamente pegando
+
+26:13.980000000000018
+todas as próprias aqui repassando ela os nossos inputs e eu tenho o nosso botão aqui de render
+
+26:20.40000000000009
+que na verdade é a dica se você quiser criar um hook para forçar o render, né?
+
+26:28.420000000000073
+Tem esse snippet aqui que vai estar no nosso repositório, então você pode reutilizar ele.
+
+26:32.42000000000007
+Ele é bastante útil, principalmente quando a gente está desenvolvendo,
+
+26:36.039999999999964
+que é basicamente eu setando um reducer e fazendo uma soma dentro dele.
+
+26:42.180000000000064
+Então esse aqui é um truquezinho para você fazer um
+
+26:45.57999999999993
+trigo de um grande você forçar o seu componente renderizar novamente ele está
+
+26:50.799999999999955
+usando esse look aqui nessa nessa setinha
+
+26:56.24000000000001
+oi e eu tô fazendo o sete sete então vamos dar uma olhada no nosso menu que
+
+27:0.44000000000005457
+esse cara que carrega tudo, tá certo? Então, no menu aqui,
+
+27:8.240000000000009
+a gente tem um menu que tá renderizando um URL e tá passando todas as próprias
+
+27:10.1400000000001
+pra esse cara chamar de list item.
+
+27:12.700000000000045
+E dentro desse list item,
+
+27:14.1400000000001
+eu tenho esse search results.
+
+27:16.59999999999991
+Beleza. Vamos analisar
+
+27:18.319999999999936
+esse list item. Basicamente é um
+
+27:20.079999999999927
+li, que ele tá fazendo
+
+27:22.220000000000027
+uma
+
+27:22.74000000000001
+distinção se ele tá selecionado não isso é para quando a gente
+
+27:28.75999999999999
+selecionar esse tem aqui o nosso texto ele fica bold e a nossa seleção fica aqui tá bom
+
+27:35.07999999999993
+Oi e nós temos o nosso search result que é basicamente componente que como eu falei para
+
+27:40.799999999999955
+você está pegando algumas imagens do umete tá carregando aqui tá certo então vamos
+
+27:47.74000000000001
+dar uma olhada porque eu sinto algum coisa mel nesse cara de como é que tá performance dele tá
+
+27:53.98000000000002
+certo então para isso a gente vai vir aqui vai abrir o nosso a nossa performance aqui e eu vou
+
+28:0.6800000000000637
+fazer eu vou colocar um troco lindo na nossa CPU de seis ou seja eu tô na bem devagar
+
+28:8.940000000000055
+para que a gente possa ter uma noção do que que tá acontecendo aqui tá certo então que eu vou fazer
+
+28:13.799999999999955
+eu vou começar a pesquisar e é E aí e já de cara eu vejo aqui a UI está bem devagar, então você viu ali que eu digitei e só depois o input vai aparecer.
+
+28:29.220000000000027
+E eu vou parar aqui.
+
+28:34.16000000000008
+A gente vai coletar algumas informações de como é que está a parte de performance.
+
+28:40.24000000000001
+E meu Deus, vamos lá.
+
+28:42.059999999999945
+Então essa parte inicial aqui basicamente toda toda vida eu acho que é um bug
+
+28:46.24000000000001
+não deve tudo mas basicamente sempre tem mas olha só que aconteceu se a gente for
+
+28:50.559999999999945
+aqui nas imagens aqui que a gente começou a dizer pro react que a gente queria fazer
+
+28:56.680000000000064
+alguma coisa né então vamos aqui nossa folha tem alguns alguns alguns que frames aqui bem devagar.
+
+29:8.440000000000055
+E aqui a gente consegue ver que renderizou Fortaleza e que teve uma task gigantesca aqui de carregamento, tá certo?
+
+29:16.90000000000009
+Eu vou aumentar um pouquinho aqui a timeline pra que fique mais visível.
+
+29:23.180000000000064
+Mas vamos dar uma olhada nisso aqui vamos ver o que a gente pode fazer das
+
+29:27.440000000000055
+coisas que a gente conhece tá eu vou ter que diminuir aqui só pra gente poder enxergar
+
+29:31.480000000000018
+um pouco mais embaixo mas olha só ele tá rodando várias e várias tasks tá certo algumas
+
+29:36.98000000000002
+delas você conhece algumas não então vou pegar as que eu já conheço aqui e eu vou atacar elas e olha só opa hum é interessante a gente tem um teste do match
+
+29:50.440000000000055
+Sorter que tá fazendo vários ridos aqui e que ela tá parte partindo do meu get items tá certo
+
+29:58.059999999999945
+então ela tá demorando para caramba e eu acho que isso aqui é é uma possibilidade de performance tá certo então vocês podem vir aqui
+
+30:9.11999999999989
+esse é um e esse esse gráfico que tá mostrando aqui essa função ela tava sendo bem espessa e
+
+30:17.559999999999945
+ela tá sendo repetida aqui então e esse sorte aí tá nos aqui tá terrível. Basicamente, a gente tá carregando itens de novo, de novo, de novo, de novo.
+
+30:27.799999999999955
+Então, vamos dar uma olhadinha nesse aqui.
+
+30:31.75999999999999
+Por sinal, a gente tá utilizando um lib aqui chamado Downshift,
+
+30:36.09999999999991
+que é criado pelo Can't See Dots,
+
+30:38.98000000000002
+que é fantástico também se você quiser.
+
+30:41.57999999999993
+Ele fala muito de performance.
+
+30:42.440000000000055
+Alguma das coisas que eu vou apresentar nessa aula veio diretamente inspirado das aulas dele dos tutoriais dele
+
+30:48.460000000000036
+então vamos dar uma olhadinha aqui nesse e na que a gente está utilizando para chamar essas
+
+30:58.90000000000009
+próprias e tudo mais certo então é uma das coisas que eu vejo, vamos vir aqui no nosso search, uma das primeiras coisas que eu vejo é esse getItems aqui, ele deve estar fazendo mais coisas do que ele deveria, tá certo?
+
+31:13.1400000000001
+Então, vamos dar uma olhada nisso. O que ele está fazendo? Ele está filtrando todos os itens e está chamando essa função matchSort. a gente tem esse dia e som gigante de cidades né que tem aqui vamos ver quantos tá tem mil entre
+
+31:30.61999999999989
+isso é algo bem pesado não vou salvar ele é então qual o problema a gente mesmo que a nossa a gente
+
+31:38.180000000000064
+não esteja utilizando nosso caso a gente está renderizando esse cara de novo de novo de novo
+
+31:43.22000000000003
+de novo de novo de novo e está sendo
+
+31:45.819999999999936
+bem complicado como essa lista lista estática uma das coisas que eu vejo que a gente pode utilizar
+
+31:50.98000000000002
+aqui para melhorar nossa performance é exatamente uma das técnicas já mostrei em outro vídeo meu que
+
+31:56.5
+a gente utilizar mesmo mais então aqui eu vejo que é o utilizar a gente é o lugar perfeito pra gente utilizar o useMemo. Beleza? Então a gente vai fazer
+
+32:6.019999999999982
+isso.
+
+32:8.420000000000073
+Eu vou pegar essa
+
+32:9.5
+getItems e eu vou
+
+32:11.460000000000036
+jogar ela dentro do nosso hook.
+
+32:24.579999999999927
+Show. show
+
+32:25.09999999999991
+show
+
+32:25.11999999999989
+show
+
+32:25.1400000000001
+show
+
+32:25.160000000000082
+show
+
+32:25.180000000000064
+show
+
+32:25.200000000000045
+show
+
+32:25.220000000000027
+show
+
+32:25.24000000000001
+show
+
+32:25.25999999999999
+show
+
+32:25.279999999999973
+show
+
+32:25.299999999999955
+show
+
+32:25.319999999999936
+show
+
+32:25.339999999999918
+show
+
+32:25.3599999999999
+show
+
+32:25.38000000000011
+show
+
+32:25.40000000000009
+show
+
+32:25.420000000000073
+show
+
+32:25.440000000000055
+show
+
+32:25.460000000000036
+show
+
+32:25.480000000000018
+show
+
+32:25.5
+show
+
+32:25.519999999999982
+show
+
+32:25.539999999999964
+show
+
+32:25.579999999999927
+show
+
+32:25.59999999999991
+show
+
+32:25.61999999999989
+show
+
+32:25.6400000000001
+show
+
+32:25.660000000000082
+show
+
+32:25.680000000000064
+show
+
+32:25.700000000000045
+show
+
+32:25.720000000000027
+show
+
+32:25.74000000000001
+show
+
+32:25.779999999999973
+show
+
+32:26.059999999999945
+show
+
+32:26.079999999999927
+show
+
+32:26.09999999999991
+show
+
+32:26.11999999999989
+show
+
+32:26.1400000000001
+show
+
+32:26.180000000000064
+show
+
+32:26.200000000000045
+show
+
+32:26.220000000000027
+show show o que a gente quer traquear aqui, no caso,
+
+32:46.11999999999989
+o que vai ser modificado.
+
+32:49.27999999999997
+E, na verdade,
+
+32:51.3599999999999
+ele vai vir
+
+32:51.960000000000036
+aqui fora.
+
+32:52.940000000000055
+Não é...
+
+32:55.66000000000008
+Então,
+
+32:57.40000000000009
+o que a gente vai fazer aqui? A gente vai tentar
+
+32:58.940000000000055
+agora memoizar essa função de
+
+33:0.8199999999999363
+getAllItems. Por quê? Porque eu sei que a minha lista
+
+33:2.980000000000018
+estática não vai ser modificada.
+
+33:4.980000000000018
+Então, eu posso dizer, olha, só carrega, só renderiza esse cara de novo essa função de getAllItems, por quê? Porque eu sei que a minha lista estática não vai ser modificada,
+
+33:9.160000000000082
+então eu posso dizer, olha, só renderiza esse cara de novo se o meu input vale mudar.
+
+33:11.420000000000073
+Então, o ReactUseMemo aqui, ele vai verificar a qualidade referencial
+
+33:16.319999999999936
+dessa função e se nada for mudado, ele não vai computar novamente.
+
+33:20.579999999999927
+Vamos dar uma olhada se isso ajudou a nossa performance, beleza?
+
+33:27.5
+Então, eu vou vir aqui vou limpar e aí eu vou começar a fazer profile novamente não sei que você não dá
+
+33:48.72000000000003
+Tá, não sei se deu pra perceber no vídeo Porque já tem um lag do vídeo em si
+
+33:51.200000000000045
+Mas
+
+33:52.440000000000055
+Deu uma boa melhorada na UI
+
+33:55.539999999999964
+Então vamos dar uma olhada aqui
+
+33:58.66000000000008
+A gente tem várias e várias e várias funções aqui
+
+34:2.0399999999999636
+Estante chamada
+
+34:6.7000000000000455
+E eu não consigo
+
+34:8.059999999999945
+eu não consigo
+
+34:10.460000000000036
+nem mais achar aonde é que
+
+34:12.2800000000002
+está a nossa função
+
+34:13.639999999999873
+de getItems.
+
+34:19.2800000000002
+A gente obliterou
+
+34:20.840000000000146
+essa função.
+
+34:22.420000000000073
+Show de bola.
+
+34:25.519999999999982
+Ela deve estar um pouco mais pra cá.
+
+34:32.90000000000009
+Tá, eu não tô nem conseguindo achar ela.
+
+34:35.19999999999982
+Com certeza ela deve estar por aqui.
+
+34:37.039999999999964
+Vou dar só mais uma chance aqui dela aparecer.
+
+34:41
+Aliás, eu acredito que ela vai estar
+
+34:43.36000000000013
+bem por aqui.
+
+34:57.57999999999993
+Tá, tudo bom.
+
+34:59.51999999999998
+Então, a gente...
+
+35:0.4800000000000182
+Eu não consigo mais nem achar ela aqui dentro do nosso profile.
+
+35:4.300000000000182
+O que acabou de acontecer é que a gente meio que
+
+35:7.320000000000164
+Removeu aqui essa parte de lag
+
+35:12.019999999999982
+Uma das coisas que estão ocasionando o maior problema na verdade
+
+35:15.360000000000127
+É esse shift de layout que a gente está tendo
+
+35:17.920000000000073
+Mas se você for parar para pensar, por exemplo, se eu vier aqui
+
+35:20.579999999999927
+A gente não consegue mais nem enxergar Onde é que tá o match sorter
+
+35:25.23999999999978
+Porque ele não tá sendo mais
+
+35:27.23999999999978
+Tão chamado
+
+35:28.960000000000036
+Então se pá ele deve tá dentro de uma
+
+35:30.860000000000127
+De um hook aqui
+
+35:33.36000000000013
+Então
+
+35:37.340000000000146
+Já é uma melhoria boa de performance
+
+35:40.820000000000164
+A gente já consegue ver aqui que
+
+35:42.48000000000002
+Deu uma melhorada boa
+
+35:43.960000000000036
+A performance ainda tá ruim mas a
+
+35:46.30000000000018
+gente vai começar a melhorar ainda mais agora certo o show de bola já é usou mesmo aqui é pra
+
+35:56.38000000000011
+aliviar um pouco do nosso aí temos aqui é outra coisa que eu acho que seria interessante vamos dar uma olhada agora no nosso profile vamos lá que está acontecendo aqui eu vou eu acho que esses itens estão
+
+36:12.960000000000036
+renderizando demais então a gente vai começar aqui o nosso profile que eu vou fazer vou
+
+36:16.980000000000018
+forçar o render aqui sem mudar nada vamos ver o que acontece então ao clicar aqui automaticamente eu forcei
+
+36:25.460000000000036
+esse cara a renderizar de novo
+
+36:27.420000000000073
+e olha o que está acontecendo
+
+36:30.2800000000002
+nossa, acho que
+
+36:33.98000000000002
+isso é um bug, mas beleza
+
+36:34.840000000000146
+eu tenho uma lista de itens
+
+36:37.960000000000036
+aqui e todos eles estão sendo renderizados
+
+36:40.11999999999989
+de novo, de novo, de novo
+
+36:40.98000000000002
+e deixa eu fazer
+
+36:43.2199999999998
+outro
+
+36:44.2199999999998
+deixa eu ver aqui de novo vou limpar o meu
+
+36:48.40000000000009
+profile vou começar a capturar novamente né de chover aqui só reiniciar aqui não
+
+36:58.179999999999836
+deve tudo porque está um pouco bugado
+
+37:24
+o show de bola. Então, vamos vir aqui.
+
+37:31.960000000000036
+E a gente vai começar a coletar dados de profile novamente.
+
+37:35.440000000000055
+E dessa vez eu vou simplesmente vir aqui.
+
+37:38.30000000000018
+Fortaleza.
+
+37:40.340000000000146
+Vou limpar.
+
+37:42.440000000000055
+Voltei.
+
+37:43.98000000000002
+Olha só que loucura.
+
+37:47.940000000000055
+Alguns desses itens, eles não mudaram como você viu, por exemplo, a minha pesquisa, eu, sim, eu criei um render
+
+37:51.940000000000055
+novamente, porque eu mudei a pesquisa, mas quando eu voltei pro resultado inicial, ele não era pra
+
+37:55.960000000000036
+estar renderizando novamente, esses dados já estavam computados, né?
+
+38:0.8200000000001637
+Mas mesmo assim, se você for olhar aqui, ó,
+
+38:8.059999999999945
+nossos itens na lista, eles estão sendo renderizados de novo, de novo, de novo Isso não é legal
+
+38:9.179999999999836
+Então eu acho que tem uma maneira fácil aqui
+
+38:11.38000000000011
+De a gente corrigir isso
+
+38:12.659999999999854
+Sem quebrar o banco
+
+38:14.980000000000018
+A gente aplicar
+
+38:17.579999999999927
+Outra técnica que eu também ensinei em outro vídeo meu
+
+38:20.039999999999964
+Se você está com os
+
+38:21.59999999999991
+Eu falei das diferenças do use callback
+
+38:23.920000000000073
+Para o use memo
+
+38:24.559999999999945
+E aqui a gente
+
+38:27.26000000000022
+vai utilizar de uma forma bem interessante então vamos lá e deixa eu só e aqui é
+
+38:51.19999999999982
+bom então o que que a gente vai fazer a gente vai pegar aqui e a gente vai e agora a gente vai vem aqui dentro do nosso sorte tá certo vamos aqui no menu que esse cara tá realizando e eu queria
+
+38:58.539999999999964
+testar uma coisa a gente vai criar uma versão memoized do nosso SearchResults, tá certo? Então vamos lá
+
+39:5.360000000000127
+A primeira coisa que a gente vai fazer é
+
+39:18.940000000000055
+Memoized
+
+39:19.460000000000036
+SearchResults
+
+39:20.09999999999991
+É igual
+
+39:21.73999999999978
+React Memo
+
+39:23.88000000000011
+Não é o UseMemo E a gente vai passar esse componente e o que que
+
+39:29.420000000000073
+ele vai fazer porque que eu tô utilizando ele qual é o benefício então a gente vai estar utilizando
+
+39:36.5
+ele aqui tá certo e a ideia é que quando esse componente não for modificado quando essas prop
+
+39:43.80000000000018
+deles não mudarem é eu
+
+39:45.57999999999993
+não precisar renderizar novamente tá certo então vamos olhar o que é que
+
+39:49.30000000000018
+isso realmente fez a gente vai vir aqui já vou carregar aqui de novo para
+
+39:55.960000000000036
+garantir ea gente vai fazer um profile novamente então aqui mesma coisa eu vou vir aqui Fortaleza eu vou limpar minha seleção
+
+40:7.079999999999927
+vou parar o profile e olha a diferença olha a diferença isso aqui é muito louco só de você
+
+40:15.760000000000218
+declarar que aquele componente vai ser memorizado Olha só que massa e nenhum deles renderizou
+
+40:23.61999999999989
+novamente quando a gente voltou para o nosso estado inicial.
+
+40:25.860000000000127
+Então aqui, esse aqui é o resultado da minha pesquisa.
+
+40:29.820000000000164
+Mas quando eu volto para a tela inicial, olha só, não foi renderizado novamente.
+
+40:34.440000000000055
+Isso aqui é um alívio grande de performance, principalmente no Olista que tem centenas de itens.
+
+40:40.940000000000055
+Agora eu queria discutir uma coisa rapidão com vocês.
+
+40:46
+Será que a gente consegue ir além né porque teoricamente eu não tô mudando
+
+40:49.539999999999964
+nenhum zíper né então eu poderia na verdade eu poderia vir aqui no meu
+
+40:55.659999999999854
+profile e ter tudo memorizado né porque essa lista ela não tá mudando e ela só
+
+41:0.7800000000002001
+vai realmente mudar quando eu venho aqui, por exemplo, e selecionar algum desse item, né?
+
+41:6.400000000000091
+Então, daria, Victor, para ir além?
+
+41:10.88000000000011
+Daria, mas vamos lá.
+
+41:13.739999999999782
+Se eu viesse aqui e, na verdade, eu não utilizasse esse componente,
+
+41:19.59999999999991
+o que eu poderia fazer?
+
+41:20.38000000000011
+Eu poderia dizer que eu teria aqui o o item ponto nem por exemplo e o que eu
+
+41:29.840000000000146
+ia fazer eu vou criar uma versão memoized do meu menu
+
+41:33.440000000000055
+então eu vou até exportar ele assim
+
+41:56.840000000000146
+tá bom?
+
+41:58.440000000000055
+e eu vou fazer basicamente a mesma coisa
+
+42:0.5
+pra minha lista tá
+
+42:11.699999999999818
+e olha o que eu vou
+
+42:14.099999999999909
+fazer diferente aqui, eu vou usar esse
+
+42:16.079999999999927
+MemoizeListItem aqui
+
+42:17.800000000000182
+beleza, e no meu
+
+42:21.980000000000018
+search eu vou puxar
+
+42:24.139999999999873
+o meu Mem mais de menu
+
+42:30.59999999999991
+tá bom é aqui olha só agora as coisas mudaram um pouco agora a nossa eo iphone
+
+42:41.01999999999998
+um pouco afetado mas olha só o que acontece aqui agora. Se eu vier aqui e
+
+42:46.059999999999945
+pesquisar,
+
+42:49.440000000000055
+limpar e voltar,
+
+42:53.679999999999836
+olha só.
+
+42:55.76000000000022
+Basicamente
+
+42:56.19999999999982
+nem o item da minha lista foi
+
+42:58.320000000000164
+modificado. Quando eu pesquisei,
+
+43:0.42000000000007276
+somente o item que eu pesquisei,
+
+43:3.1399999999998727
+que no caso foi Fortaleza,
+
+43:6.179999999999836
+foi renderizado novamente, e quando eu volte pra letragem inicial, nada mudou
+
+43:8.320000000000164
+só esse item aqui
+
+43:9.579999999999927
+e o meu search bar, porque o meu search bar
+
+43:12.579999999999927
+foi limpado
+
+43:13.7800000000002
+então isso aqui é um grande
+
+43:16.38000000000011
+performance absurdo
+
+43:17.920000000000073
+então, Vitor, por que você não faz isso?
+
+43:20.519999999999982
+então, tem um pequeno probleminha aqui que como eu falei
+
+43:22.480000000000018
+a nossa UI foi afetada
+
+43:24.09999999999991
+então poderia ir essa família poderia chegar aqui tentar bolar um jeito pra
+
+43:31.039999999999964
+modificar um pouco a nossa pra cabeça aqui mas eu queria mostrar a vocês um
+
+43:35.76000000000022
+pouco da limitação aqui é eu não vou conseguir fazer isso dessa forma porque
+
+43:41.960000000000036
+o nosso sócio resolve a um item um pouco complexo
+
+43:45.23999999999978
+então como ele não retorna um nome por exemplo o toda vida que o react memo
+
+43:52.460000000000036
+entrar nessa função de ss que ele vai utilizar como é qualidade referencial
+
+43:57.2199999999998
+não vai ser o mesmo e por isso que eu não tenho esse resultado final então se
+
+44:2.380000000000109
+fosse uma aplicação que até o 100% de controle com certeza faria se eu tiver lidando com isso em produção bem a
+
+44:8.159999999999854
+maneira que eu vejo isso é a gente já deu uma melhorada muito boa aqui na nossa
+
+44:12.11999999999989
+performance então a gente vai continuar com ela e depois a gente poderia ir mais
+
+44:16.199999999999818
+a fundo então pra não fazer over engineer a gente vai ficar com a nossa primeira
+
+44:19.980000000000018
+opção aqui tá certo se você quiser é para quem quiser voltar deixando o link também
+
+44:26.179999999999836
+na descrição do vídeo mostrando um comparativo muito legal de das limitações do Memo eyes e
+
+44:33.059999999999945
+algumas técnicas para você sair dela mas por enquanto aqui a gente vai ficar só com o nosso
+
+44:39.38000000000011
+mesmo tá bom então é isso vamos voltar aqui para o nosso search. E beleza, show de bola, a gente já deu uma melhorada muito boa aqui na nossa performance.
+
+44:49.2800000000002
+Então, olha só o que a gente já fez.
+
+44:51.13999999999987
+A gente já dividiu o código, a gente já usou técnicas de Memoize para livrar mais ainda.
+
+44:58
+O que está faltando agora?
+
+44:59.320000000000164
+Então, outra coisa muito rápida e importante que a gente pode fazer é verificar se a gente tem classes que não precisam ser classes, tá certo?
+
+45:12
+Então vamos dar uma olhadinha aqui. Eu tenho essa navbar.
+
+45:16.019999999999982
+E olha só, eu estou usando o component do react e classe.
+
+45:20.960000000000036
+Então a primeira coisa que eu vou fazer é transformar esse cara em uma função.
+
+45:22.019999999999982
+classe. Então a primeira coisa que eu vou fazer é transformar esse cara
+
+45:23.639999999999873
+em uma função.
+
+45:26.179999999999836
+Mas Vitor, qual é a diferença?
+
+45:27.7199999999998
+É pra me chegar e
+
+45:29.23999999999978
+mudar tudo? Não.
+
+45:31.7199999999998
+Aqui a minha intenção é muito importante
+
+45:34.059999999999945
+é diminuir o bundle size.
+
+45:35.960000000000036
+Então, o que eu quero dizer
+
+45:38.059999999999945
+com isso? Vamos lá. Eu tenho um exemplo aqui pronto
+
+45:39.840000000000146
+pra vocês. Basicamente,
+
+45:41.7800000000002
+esse é um componente que eu peguei da documentação do React,
+
+45:46.320000000000164
+que fala de droopper Components e de High Water Components.
+
+45:47.7800000000002
+E olha só que interessante.
+
+45:50.01999999999998
+Eu não sei se você sabe, classe não é normal no JavaScript. A gente precisa
+
+45:51.659999999999854
+compilar, né, o nosso código,
+
+45:54.2800000000002
+transpilar com o Babel, na verdade,
+
+45:56.19999999999982
+pra transformar isso em
+
+45:58.13999999999987
+um código que consiga ser
+
+46:0.15999999999985448
+lido pelo browser. Classes não são nativos do JavaScript né então a gente tem ali a herança de
+
+46:5.639999999999873
+protótipo que é um pouco diferente então para isso toda vida que você usar classe no seu código Olha
+
+46:11.519999999999982
+o que que vai acabar acontecendo o Babel ele vai acabar transformando seu código e mais código
+
+46:18.11999999999989
+ainda para fazer isso funcionar então ele vai adicionar esse o ver seu código, isso pode ser ruim. Então, olha só, essa classe aqui, super simples,
+
+46:26.920000000000073
+alguns métodos apenas,
+
+46:28.2199999999998
+tá com 4.7kbytes,
+
+46:30.38000000000011
+tá certo? Eu fiz
+
+46:32.11999999999989
+a versão de...
+
+46:35.539999999999964
+a versão funcional dessa classe,
+
+46:38.5
+utilizando hooks, e olha só,
+
+46:40.90000000000009
+é o mesmo código,
+
+46:42.320000000000164
+mas eu diminuo pela metade,
+
+46:44.940000000000055
+no lugar de 4.77 eu tenho 2.4
+
+46:48
+kbytes né então é absurdo aqui ainda tem assim algum overload aqui porque eu estou
+
+46:55
+fazendo uso de algumas funções que elas não são nativas do javascript né a gente
+
+47:0.3200000000001637
+tem o rooks aqui então o babel precisa interpretar isso mas a gente tem um ganho no nosso bando sai de quase 50% só de fazer essa transformação então todo o código que eu vejo de
+
+47:11.400000000000091
+classe que não precisa ser classe no caso da nossa nave bar eu gosto de mudar ele para que a gente
+
+47:16.26000000000022
+tem um bando sai menor no final das contas então vamos lá vamos fazer isso então vou dar um export nessa const e a o ganha até bem rápido né
+
+47:30.800000000000182
+e no caso aqui o meu nave bar vai ser apenas uma função normal e essa função ela vai retornar
+
+47:40.88000000000011
+e esse meu componente como não tô fazendo mais nenhuma
+
+47:46.48000000000002
+e esse meu componente como não tô fazendo mais nenhuma é
+
+47:53.61999999999989
+e eu verificação em cima disso eu posso simplesmente deletar aqui vou voltar aqui vamos olhar a nossa aplicação agora a gente tem que dizer que como não não tem mais um
+
+48:00
+de forro o Xbox de for aqui eu vou mudar no é onde eu estou importando a nave bar, só dizer que ele vai
+
+48:8.300000000000182
+pegar esse cara
+
+48:10.179999999999836
+que chama nave bar
+
+48:11.039999999999964
+beleza
+
+48:17.519999999999982
+e pronto
+
+48:19.23999999999978
+esse pequeno passo pode
+
+48:21.2199999999998
+diminuir o seu bundle size consideravelmente
+
+48:23.800000000000182
+principalmente se você tiver uma aplicação grande e legada,
+
+48:26.88000000000011
+onde tenha muita classe, né?
+
+48:30.079999999999927
+No caso, por exemplo, hoje no meu trabalho, eu passo bastante parte do meu tempo.
+
+48:33.320000000000164
+Sempre que eu vejo um arquivo desse, eu converto,
+
+48:36.679999999999836
+porque o ganho no bundle size é considerável, tá certo?
+
+48:40.320000000000164
+Então, vamos lá.
+
+48:41.69999999999982
+Partindo desse princípio agora, a gente terminou aqui o nosso search, terminou a nossa parte do today, vamos partir para o nosso account, porque tem muita coisa interessante aqui que a gente pode estar fazendo, tá certo?
+
+48:52.76000000000022
+Então, a primeira coisa que eu queria mostrar para vocês é uma das coisas que a gente tem que analisar aqui, por exemplo, vamos dar uma olhada aqui no nosso bundle size
+
+49:6.239999999999782
+uma das coisas que eu vi logo de cara me deixou super assustado esse momento de essa aqui
+
+49:13.139999999999873
+gigantesco gigantesco é esse me assusta muito e eu vi que uma das únicas telas na verdade que a
+
+49:21.659999999999854
+gente está utilizando é no account tá certo então o que que a gente tá utilizando é no acalme tá certo então o que
+
+49:27.61999999999989
+que a gente pode fazer vamos dar uma analisada como é que tá essa página Ah tá bom então olha só
+
+49:36.23999999999978
+e essa página tá a priori bem simples mas eu tô usando um momento aqui, né? E olha só, isso aqui, por favor, não faça isso se você não realmente precisar,
+
+49:48.2199999999998
+mas a gente acaba importando o moment inteiro
+
+49:53.40000000000009
+só para dar essa informação para o usuário
+
+49:57.840000000000146
+de que a conta dele foi criada há cinco anos atrás.
+
+50:1.9800000000000182
+Não parece tão legal assim, né?
+
+50:3.9400000000000546
+Então assim, aqui é um ponto de melhoria que a gente pode estar trabalhando.
+
+50:8.679999999999836
+E a gente vai fazer isso agora.
+
+50:9.860000000000127
+Então, assim, não sei se vocês conhecem, mas eu uso vários sites que me ajudam a me
+
+50:15.559999999999945
+livrar dessas dependências.
+
+50:17.579999999999927
+Então, por exemplo, se fosse um projeto antigo que eu tivesse usando jQueryery existe um site chamado e o ai não me de querida tá certo que ele vai te ajudar a se
+
+50:30.920000000000073
+livrar do jquery basicamente você vai pesquisar aqui coisas que você faria de ele vai dar
+
+50:35.59999999999991
+alternativas e por para nossa sorte existe um e o mais não é de momento
+
+50:54.340000000000146
+que é que vai te ajudar a se livrar de dependências como o momento de rias que são bastante é difundido mas são bastante pesadas também então eu já tinha dado uma olhada aqui mas eu acredito que a gente
+
+51:0.5199999999999818
+pode estar utilizando uma alternativa um pouco melhor, certo?
+
+51:5.800000000000182
+Eu sei que o dateNFS é bem menor do que o moment,
+
+51:9.699999999999818
+e a gente pode estar talvez substituindo um pelo outro.
+
+51:13.2199999999998
+Vamos dar só uma olhada aqui na documentação.
+
+51:14.840000000000146
+Eu vou botar from...
+
+51:17.980000000000018
+Olha só, timeFromNow, é exatamente o que eu estava procurando.
+
+51:25.179999999999836
+Então, eu posso ter várias alternativas com outras dependências, né?
+
+51:29.7800000000002
+Mas eu acho bastante legal essa aqui do datefns, que basicamente me dá a mesma informação.
+
+51:39.26000000000022
+Então, vamos lá.
+
+51:40.440000000000055
+Eu já tenho essa dependência instalada no meu projeto, e olha o que eu vou fazer.
+
+51:44.30000000000018
+Eu vou agora modificar o código.
+
+51:48.159999999999854
+Vamos lá.
+
+51:49.80000000000018
+Aqui eu tenho um moment, né?
+
+51:51.13999999999987
+Então eu vou vir aqui, vou fazer o equivalente usando o dateNFS, FNS.
+
+51:58.76000000000022
+Então aqui seria só formato é uma questão e a gente passa a data né que eu vou transformar essa data
+
+52:10.079999999999927
+aqui você um dia de e basicamente o que eu aqui eu vou colocar
+
+52:26.920000000000073
+o comparativo, que seria esse from now
+
+52:29.340000000000146
+que vai ser o meu
+
+52:30.320000000000164
+new
+
+52:31.420000000000073
+date
+
+52:34.36000000000013
+e ele recebe um terceiro
+
+52:37.2199999999998
+argumento que é o sufixo
+
+52:38.92000000000007
+então a gente vai
+
+52:40.11999999999989
+colocar ele aqui
+
+52:42.57999999999993
+opa
+
+52:44.57999999999993
+addSuffix colocar ele aqui opa add suffix
+
+52:49.940000000000055
+true, perfeito
+
+52:51.86000000000013
+e agora a gente vai vir aqui
+
+52:54.19999999999982
+vai remover o moment, eu vou colocar
+
+52:56.11999999999989
+esse cara no lugar do moment
+
+52:57.40000000000009
+deletar esse espaço aqui
+
+53:0.2199999999997999
+que foi criado pelo player
+
+53:1.9800000000000182
+deixa ele bom, nada mudou pro meu usuário, e agora eu vou aqui que foi criado pelo player
+
+53:10.5
+bom o usuário e agora eu vim aqui eu vou deletar o momento vou até esse cara que não utilizando o show de bola e eu vou analisar as
+
+53:17.09999999999991
+dependências mais uma vez agora vamos lá ver se eu consegui diminuir um pouco essa
+
+53:24
+bagunça
+
+53:37.80000000000018
+e enquanto ele tá rodando aqui eu queria mostrar para vocês o nosso próximo passo eu não mostrei ainda mais tem uma coisa muito horrível nessa tela tem uma função aqui que ela tá pesando muito então se a gente clicar aqui download personal
+
+53:48.69999999999982
+data eu literalmente travo a minha e uai né se eu vim aqui em performance e colocar um troco de seis
+
+53:56.92000000000007
+vezes se eu clicar aqui eu não consigo clicar em mais nada até que essa função seja resolvida. Então é isso que a gente vai estar atacando em seguida.
+
+54:6.199999999999818
+Beleza?
+
+54:7.699999999999818
+Então ele está buildando aqui.
+
+54:10.800000000000182
+Enquanto ele está buildando, eu vou mostrar um pouco desse código aqui para vocês.
+
+54:15.460000000000036
+Deixa eu vir aqui e ver como é que está pronto.
+
+54:17.639999999999873
+Olha só o que está acontecendo.
+
+54:19.460000000000036
+Então para esse carinha aqui, o que a gente está fazendo?
+
+54:25.7199999999998
+A gente tem um gerador de CSV,
+
+54:29.199999999999818
+tá certo?
+
+54:30.800000000000182
+Que está criando vários headers
+
+54:32.30000000000018
+aqui,
+
+54:34.09999999999991
+criando uma estrutura CSV. Imagina só
+
+54:36.059999999999945
+que você recebe essa estrutura e você tem que
+
+54:37.960000000000036
+exportar como JSON.
+
+54:41.059999999999945
+Eu criei um parcer
+
+54:42.09999999999991
+de CSV para JSON,
+
+54:43.820000000000164
+também super simples. A gente não precisa se preocupar com ele.
+
+54:49.2199999999998
+E no final ele vai dar um log do result, beleza?
+
+54:54.98000000000002
+Mas essa função aqui está sendo extremamente pesada e eu vou já mostrar o porquê.
+
+54:59.2199999999998
+Antes de mais nada, vamos olhar aqui o nosso...
+
+55:01
+E olha a diferença, eu vou mostrar aqui para vocês. olhar aqui o nosso nosso nosso
+
+55:5.119999999999891
+e olha a diferença, eu vou mostrar aqui pra vocês
+
+55:7.760000000000218
+em roxo eu tinha esse
+
+55:9.900000000000091
+moment.js
+
+55:11.440000000000055
+gigantesco aqui
+
+55:12.900000000000091
+quando eu parti pro date.nfs
+
+55:15.320000000000164
+as nossas
+
+55:18.09999999999991
+dpds diminuíram consideravelmente
+
+55:20.2800000000002
+então a gente já melhorou
+
+55:21.90000000000009
+a nossa aplicação bastante
+
+55:22.860000000000127
+beleza
+
+55:24.320000000000164
+voltando aqui pro nosso
+
+55:27.019999999999982
+Último item aqui
+
+55:29.300000000000182
+Né
+
+55:31.179999999999836
+Eu queria mostrar pra vocês
+
+55:33.440000000000055
+Uma das técnicas que eu tenho utilizado
+
+55:34.940000000000055
+Que é a gente utilizar
+
+55:37
+WebWorkers, tá certo
+
+55:38.659999999999854
+Então vamos lá
+
+55:39.840000000000146
+A gente viu aqui que esse botão
+
+55:42.940000000000055
+Ele tá travando a nossa aplicação
+
+55:44.340000000000146
+Por que ele tá travando a nossa aplicação?
+
+55:46.63999999999987
+Primeiro, a gente tem que entender que o JavaScript é single thread, tá certo?
+
+55:51.90000000000009
+Então, quando eu venho aqui e peço para ele exportar meus dados, o que está acontecendo?
+
+55:58.07999999999993
+Essa task está demandando tanto poder de processamento que toda a minha UI ela tá travando,
+
+56:5.2199999999998
+entendeu? Então eu não consigo fazer nada porque todo o resto
+
+56:8.340000000000146
+ele funciona na mesma então como cê consegue ver aqui, né?
+
+56:12.659999999999854
+Todo meu eh seu se tivesse uma animação aqui, tudo ele ia tá
+
+56:19.980000000000018
+rodando nessa mesma e tudo estaria bem devagar porque eu
+
+56:24.420000000000073
+tô utilizando muito, muito da cpu e tá simplesmente consumir a minha thread
+
+56:29.420000000000073
+inteira uma das saídas nesses casos seria você utilizar o webworker
+
+56:34.340000000000146
+então eu vou estar utilizando esse carinha aqui que é do criador do preact
+
+56:40.340000000000146
+que é o workanize
+
+56:41.80000000000018
+React que é o organize é
+
+56:46.23999999999978
+opa
+
+56:52.30000000000018
+isso
+
+56:57.13999999999987
+que a gente vai
+
+57:0.09999999999990905
+tá usando
+
+57:1.9400000000000546
+vai tá usando ele como dependência
+
+57:4.239999999999782
+deixa eu botar só o Organize Loader aqui, o bom dele é que a gente consegue basicamente transformar qualquer pacote do webpack aliás, qualquer pacote
+
+57:25.039999999999964
+do nosso
+
+57:27.7199999999998
+da nossa aplicação
+
+57:29.2800000000002
+em um export
+
+57:31.539999999999964
+que pode ser usado dentro de um webworker
+
+57:33.30000000000018
+isso é fantástico, antes tinha um boilerplate
+
+57:35
+gigantesco, né, como você pode ver aqui
+
+57:37.73999999999978
+e agora a gente pode
+
+57:39.059999999999945
+fazer um import dentro do módulo utilizando
+
+57:41.36000000000013
+o webpack pra rodar já
+
+57:43.26000000000022
+esse código dentro do webworker
+
+57:44.80000000000018
+isso é mentirado, então vamos vamos lá vamos mudar o nosso código para isso
+
+57:48.159999999999854
+então a primeira coisa que a gente vai ter de fazer aqui eu vou eu criei uma
+
+57:53.38000000000011
+versão dessa função aqui eu chamo ela de worker
+
+57:57.51999999999998
+então basicamente eu isolei essa função ela continua do mesmo jeito ela continua
+
+58:1.9600000000000364
+fazendo login no nosso result aqui se você for olhar o que que ele tá logando no final a gente tem 50 mil resultados né E é por isso que é tão
+
+58:13.61999999999989
+pesado mas eu somente isso por ter essa função aqui e agora dentro do nosso account que que eu
+
+58:22.2800000000002
+vou fazer eu vou tá utilizando as tá um pouco diferente para fazer
+
+58:25.2199999999998
+um corte desse desse o que então olha só bom então eu chamei o meu organize loader e eu tô passando
+
+58:37.820000000000164
+aqui o path desse meu código vocês acabaram de ver e como é que isso funciona agora em ao invés de ter essa função
+
+58:50.440000000000055
+e aqui é eu posso chegar e eu posso é
+
+58:59.059999999999945
+e eu posso puxar essa função de dentro de um webworker então vou fazer isso então com
+
+59:04
+puxar essa função de dentro de um web worker então vou fazer isso então com é
+
+59:8.099999999999909
+eu vou chamar de vou pegar essa função do meu
+
+59:13.559999999999945
+é um clique o que é justamente a função que a gente
+
+59:17.800000000000182
+está exportando aqui vai ser igual meu worker
+
+59:21.40000000000009
+e tá certo vou puxar de dentro do meu work
+
+59:25.61999999999989
+tá certo
+
+59:26.76000000000022
+e agora essa função ela vai me retornar
+
+59:29.679999999999836
+uma promise, então a gente vai ter que usar
+
+59:31.420000000000073
+o async weight
+
+59:32.320000000000164
+dessa forma aqui
+
+59:35.179999999999836
+beleza, então a única coisa
+
+59:37.73999999999978
+que eu vou fazer, eu vou criar essa função
+
+59:39.51999999999998
+o
+
+59:40.320000000000164
+processesData e
+
+59:43.320000000000164
+eu vou jogar ele dentro do tryCatch
+
+59:45.940000000000055
+eu vou chamar ele aqui
+
+59:47.57999999999993
+e dentro do meu
+
+59:49.69999999999982
+clique ele já está chamando a função porque eu coloquei o mesmo nome
+
+59:52.679999999999836
+vamos ver o que aconteceu
+
+59:54.92000000000007
+agora
+
+59:55.440000000000055
+se eu vier aqui
+
+59:59.61999999999989
+e clicar no nosso download
+
+01:00:2.5799999999999272
+ele está dizendo que um clique não éixa vamos dar só uma olhada aqui E aí E aí E aí E aí E aí E aí E aí E aí E aí E aí E aí E aí E aí E aí E aí E aí E aí E aí
+
+01:00:33.11999999999989
+o show de bola é faltou aqui instanciar o work então se eu vim aqui com vocês estão vendo a
+
+01:00:41.179999999999836
+nossa performance ela tá. Seis Olha que legal Olha o que que vai acontecer
+
+01:00:46
+agora vou limpar aqui carregar vou vir aqui carregando o personal data e imediatamente eu
+
+01:00:52.30000000000018
+consigo entrar em outra água eu consigo voltar para o meu account aqui é porque porque eu acabei
+
+01:01:0.6199999999998909
+de pegar toda a complexidade dessa parte do meu código, né, de todo o poder de processamento que eu ia ter de utilizar dentro da minha main thread,
+
+01:01:8.820000000000164
+e eu acabei de criar uma thread separada pra rodar só esse processo, tá certo?
+
+01:01:13.920000000000073
+Então, olha só, agora a gente viu aqui uma, no lugar do teu é só a nossa main thread, né, deixa eu fechar, deixa eu minimizar esses carinhas aqui,
+
+01:01:26.539999999999964
+a gente tem entretanto deixa eu fechar deixa eu minimizar esse carinho aqui no lugar de a gente tem só nossa mentira de que tava sendo bloqueada inteiramente né agora tudo que tava sendo bloqueado
+
+01:01:33.559999999999945
+daquela função a gente jogou para dentro de um outro e a gente consegue trabalhar com essa peça
+
+01:01:38.23999999999978
+de forma em paralelo então a gente tá usando o poder de multi cores aqui do nosso nosso processador
+
+01:01:45.40000000000009
+trabalhando com multi threads no javascript
+
+01:01:47.76000000000022
+isso é fantástico vocês viram isso ajuda a liberar a main thread para interações
+
+01:01:53.92000000000007
+como essa por exemplo eu posso clicar no botão desse e ter um load ou ter alguma
+
+01:01:57.440000000000055
+animação falando que está carregando e eu posso mudar de outras páginas enquanto
+
+01:02:0.9400000000000546
+é aquele é enquanto essa ação ainda está sendo desempenhada.
+
+01:02:6.440000000000055
+Por que isso não é tão comum?
+
+01:02:8.059999999999945
+De novo, tudo tem um custo.
+
+01:02:10.099999999999909
+Então, quando eu crio muitas threads,
+
+01:02:12.079999999999927
+eu acabo aumentando justamente parte de memória,
+
+01:02:15.460000000000036
+consumo de memória,
+
+01:02:16.300000000000182
+e tem uma coisa muito importante,
+
+01:02:17.539999999999964
+que é como essas threads se conversam.
+
+01:02:19.139999999999873
+Então, não é simplesmente
+
+01:02:20.480000000000018
+eu não quero lidar com essa task aqui,
+
+01:02:23.5
+eu vou jogá-la para outra thread,
+
+01:02:26.300000000000182
+simplesmente ah eu não quero lidar com essa tese que que eu vou jogar ela para outra trade porque é as três tem que conversar via esse emissão de eventos e tudo mais então você eventualmente você
+
+01:02:32.7800000000002
+pode é cair em exemplo um pouco mais complexo que não são tão adequados mas nesse caso como
+
+01:02:40.57999999999993
+a gente tá fazendo essa essa ação tá bem encapsulada e ela consegue rodar numa thread separada sem problema,
+
+01:02:46.2199999999998
+a gente vai utilizar esse carinha assim, tá bom?
+
+01:02:49.38000000000011
+Então se você quiser saber mais, esse aqui é o projeto, eu vou também estar deixando esse link no projeto,
+
+01:02:54.88000000000011
+no GitHub que a gente vai estar utilizando aqui, no repositório que a gente vai estar utilizando para essa aplicação.
+
+01:02:59.76000000000022
+E por fim, para dar um toque final aqui no nosso projeto, eu vou dar uma olhadinha aqui, principalmente se você estiver utilizando o Tailwind, né?
+
+01:03:13.480000000000018
+Tem uma coisa importante para quando você for performance, é você por muita gente, que o T-Winds tem essa função aqui de purge,
+
+01:03:29.980000000000018
+que basicamente a gente cria um regex aqui, basicamente,
+
+01:03:37.01999999999998
+de quais arquivos eu vou analisar para eliminar o CSS que eu não estou utilizando no final.
+
+01:03:44.23999999999978
+Então aqui, basicamente, o T-Winds, eu estou usando ele pra prototipação e tudo,
+
+01:03:48.5
+mas tem outras técnicas pra CSS, né?
+
+01:03:50.48000000000002
+O que eu acho importante não é a ferramenta em si,
+
+01:03:52.23999999999978
+é a técnica de você se lembrar de eliminar não só o código que você não está utilizando,
+
+01:03:58.659999999999854
+mas também o CSS que você não está utilizando no final das contas,
+
+01:04:3.519999999999982
+porque isso pode trazer
+
+01:04:5.760000000000218
+melhorias profundas no seu bundle size,
+
+01:04:8.460000000000036
+tá certo? Então vamos aqui
+
+01:04:10.059999999999945
+e uma das coisas que eu vou fazer agora
+
+01:04:12.440000000000055
+eu vou salvar
+
+01:04:13.7199999999998
+e eu vou dar um build. E aí
+
+01:04:42.48000000000002
+Oi e nesse vídeo a gente vai ver já no webpack aqui com os chunks e com o resultado que o Webpack traz pra gente,
+
+01:04:47.539999999999964
+qual vai ser a melhoria desse purge, né?
+
+01:04:50.48000000000002
+Então quando a gente vai fazendo o build e o Tailwind remover o CSS que não tá sendo utilizado,
+
+01:04:58.460000000000036
+a gente vai poder ver ali mais ou menos o quanto a gente economizou, beleza?
+
+01:05:50.039999999999964
+Enquanto ele tá aquiregando aqui, galera, então queria dar só aqui, fazer uma revisão com vocês.
+
+01:05:53.98000000000002
+Então, olha, a gente hoje tocou em vários assuntos, né?
+
+01:06:1.3400000000001455
+Então eu trouxe aqui esse vídeo um pouco diferente pra vocês, porque eu queria mesmo mostrar como é mais ou menos esse meu processo de pensar como é que eu pego a aplicação e eu tento destrinchar ela para melhorar
+
+01:06:5.460000000000036
+a performance de forma contínua esse aqui foi o nosso primeiro contato a gente pode ir a fundo
+
+01:06:9.480000000000018
+em várias outras coisas essa aplicação que se não tem várias outras melhores que a gente poderia
+
+01:06:13.019999999999982
+tá fazendo nela mas como vídeo já tá um pouco grande a gente vai provavelmente se vocês gostaram
+
+01:06:18.659999999999854
+se vocês mandaram o feedback de vocês com certeza vai ter uma segunda aula, ou uma terceira, ou uma quarta, né? Então, existem várias técnicas de você lidar com isso,
+
+01:06:28.460000000000036
+e o que eu queria mostrar pra vocês hoje era basicamente isso,
+
+01:06:30.800000000000182
+como melhorar a performance sem ter de escovar beat,
+
+01:06:36.13999999999987
+sem fazer overengineer, né?
+
+01:06:37.559999999999945
+De forma, utilizando essas técnicas que a gente tá aprendendo,
+
+01:06:40.460000000000036
+porque basicamente tudo que eu tô mostrando aqui,
+
+01:06:42.76000000000022
+também você pode tirar isso das
+
+01:06:46.07999999999993
+outras aulas que eu dei, né, mostrando hooks
+
+01:06:48.059999999999945
+e tudo mais, e
+
+01:06:49.7800000000002
+como fazer
+
+01:06:52.2800000000002
+essa melhoria na aplicação com uma aplicação
+
+01:06:53.940000000000055
+um pouco mais, assim, complexa,
+
+01:06:56.320000000000164
+algo um pouco mais parecido ali
+
+01:06:58.07999999999993
+com coisas que você vai achar em produção.
+
+01:07:0.4800000000000182
+Então, essa era a ideia,
+
+01:07:2.019999999999982
+então a gente, olha, a gente lidou com o code splitting,
+
+01:07:4.300000000000182
+a gente usou hooks para melhorar a memorização dos nossos componentes,
+
+01:07:9.11999999999989
+a gente modificou classes para componentes para melhorar o nosso bundle size, a gente fez análise do nosso bundle size da aplicação do começo ao fim,
+
+01:07:17.699999999999818
+melhorando isso, removendo dependências e tudo mais, e por fim a gente implementou até web WebWorkers para melhorar a performance de algumas tasks que estavam bem pesadas ali na nossa
+
+01:07:26.7199999999998
+main thread, né?
+
+01:07:28.320000000000164
+Como você pode ver aqui, o nosso
+
+01:07:30.40000000000009
+deixa eu ver o dia que está o CSS
+
+01:07:34.7800000000002
+ele removeu aqui
+
+01:07:36.7800000000002
+parte do nosso CSS
+
+01:07:38
+né?
+
+01:07:40.48000000000002
+Então, no final a gente teve
+
+01:07:42.76000000000022
+um ganho aqui interessante
+
+01:07:44.92000000000007
+e como eu falei para vocês Então, no final a gente teve um ganho aqui interessante.
+
+01:07:53.19999999999982
+E como eu falei para vocês, o ideal é que essas melhorias sejam sempre contínuas,
+
+01:07:58.820000000000164
+que você sempre vá atacando ali, entendendo os gaps da sua aplicação e atacando eles de forma inteligente para que você consiga melhorar a sua performance de forma incremental.
+
+01:08:4.1599999999998545
+Você não precisa
+
+01:08:5.2199999999998
+fazer tudo no começo da aplicação
+
+01:08:8.260000000000218
+mas
+
+01:08:9.739999999999782
+essas abordagens eu acho que fazem a maior
+
+01:08:11.860000000000127
+diferença e são coisas que geralmente
+
+01:08:13.800000000000182
+a gente usa no dia a dia, eu uso bastante
+
+01:08:15.900000000000091
+essas técnicas no meu trabalho também
+
+01:08:17.960000000000036
+então eu espero que vocês tenham gostado
+
+01:08:20.220000000000255
+eu espero que vocês tenham aprendido algo de novo
+
+01:08:22.140000000000327
+comenta aí
+
+01:08:23.23999999999978
+na nossa
+
+01:08:24.88000000000011
+cachinha do discord
+
+01:08:26.899999999999636
+o que mais você quer aprender, me diz se você curtiu
+
+01:08:29.9399999999996
+me diz o que você acha que faltou
+
+01:08:31.399999999999636
+tem várias coisas que eu queria trazer pra essa aula, mas não deu tempo
+
+01:08:33.76000000000022
+por exemplo, tem o
+
+01:08:35.81999999999971
+a gente poderia ter olhado aqui no
+
+01:08:37.57999999999993
+Chrome também
+
+01:08:38.42000000000007
+a parte de coverage
+
+01:08:41.18000000000029
+eu quero fazer um vídeo só de coverage
+
+01:08:43.399999999999636
+que é mostrar
+
+01:08:44.81999999999971
+como lidar com o código que a gente não está a parte de coverage, que é um, eu quero fazer um vídeo só de coverage, que é mostrar, é,
+
+01:08:47.80000000000018
+como lidar com o código que a gente não tá sendo utilizado, né, como melhorar ali o tree shake da nossa aplicação,
+
+01:08:53.18000000000029
+pra de fato, é, carregar apenas o código que a gente precisa, né, então, como a gente analisa,
+
+01:08:59.57999999999993
+como é que a gente verifica isso aqui, então, vocês podem ver aqui, ó, que tem a parte de usage aqui,
+
+01:09:9.079999999999927
+e qual é o código carregado versus qual é o código que foi realmente utilizado pela página.
+
+01:09:15.699999999999818
+Então várias outras coisas eu queria trazer pra vocês, porém eu dependo muito do feedback de vocês, né.
+
+01:09:22.199999999999818
+Então galera, mais uma vez, se você tiver qualquer dúvida, se você tiver qualquer questão,
+
+01:09:25.140000000000327
+manda aí no Discord, fala comigo.
+
+01:09:29.100000000000364
+A gente tá aqui pra... a gente tá junto aqui, você e a gente vai aprender junto.
+
+01:09:33.5
+Vamos todo mundo conseguir chegar no nosso próximo nível, que esse é o meu objetivo principal.
+
+01:09:36.68000000000029
+Eu espero que você tenha curtido a aula, me fala aí do que você gostou.
+
+01:09:42.460000000000036
+E é isso, pessoal. Muito obrigado por mais essa aula. Valeu, falou.

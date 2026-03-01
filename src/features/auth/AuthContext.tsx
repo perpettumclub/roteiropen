@@ -9,7 +9,7 @@ interface AuthContextType {
     signIn: (email: string, password: string) => Promise<{ error: Error | null }>;
     signUp: (email: string, password: string, name?: string) => Promise<{ error: Error | null }>;
     signOut: () => Promise<void>;
-    signInWithGoogle: () => Promise<{ error: Error | null }>;
+    signInWithGoogle: (redirectPath?: string) => Promise<{ error: Error | null }>;
     resetPassword: (email: string) => Promise<{ error: Error | null }>;
     resendConfirmationEmail: (email: string) => Promise<{ error: Error | null }>;
     sendVerificationCode: (email: string) => Promise<{ error: Error | null }>;
@@ -24,33 +24,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Handle email confirmation callback - Supabase redirects with tokens in URL hash
-        const handleEmailConfirmation = async () => {
-            const hashParams = new URLSearchParams(window.location.hash.substring(1));
-            const accessToken = hashParams.get('access_token');
-            const refreshToken = hashParams.get('refresh_token');
-            const type = hashParams.get('type');
-
-            // If this is an email confirmation callback
-            if (accessToken && (type === 'signup' || type === 'email')) {
-                console.log('✅ Email confirmation detected, processing...');
-                // Clear the hash from URL to prevent re-processing
-                window.history.replaceState(null, '', window.location.pathname);
-
-                // The session will be automatically picked up by onAuthStateChange
-                // but we need to explicitly set it if tokens are in URL
-                if (refreshToken) {
-                    await supabase.auth.setSession({
-                        access_token: accessToken,
-                        refresh_token: refreshToken,
-                    });
-                }
-            }
-        };
-
-        handleEmailConfirmation();
-
-        // Get initial session
+        // Initialize session
         supabase.auth.getSession().then(({ data: { session } }) => {
             setSession(session);
             setUser(session?.user ?? null);
@@ -60,7 +34,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         // Listen for auth changes
         const { data: { subscription } } = supabase.auth.onAuthStateChange(
             async (_event, session) => {
-                console.log('🔄 Auth state changed:', _event);
+
+
                 setSession(session);
                 setUser(session?.user ?? null);
                 setLoading(false);
@@ -80,12 +55,15 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     };
 
     const signUp = async (email: string, password: string, name?: string) => {
+        const affiliateCode = localStorage.getItem('roteiropen_affiliate');
+
         const { error } = await supabase.auth.signUp({
             email,
             password,
             options: {
                 data: {
                     full_name: name,
+                    ...(affiliateCode ? { affiliate_code: affiliateCode } : {}),
                 },
                 emailRedirectTo: window.location.origin, // Explicitly redirect to current origin after confirmation
             },
@@ -94,14 +72,28 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     };
 
     const signOut = async () => {
-        await supabase.auth.signOut();
+        try {
+            await supabase.auth.signOut();
+        } catch (error) {
+            console.error('Error signing out:', error);
+        } finally {
+            // Limpeza geral para garantir privacidade
+            localStorage.clear(); // Remove flags de checkout, steps, etc.
+            setUser(null);
+            setSession(null);
+            window.location.href = '/';
+        }
     };
 
-    const signInWithGoogle = async () => {
+    const signInWithGoogle = async (redirectPath?: string) => {
+        const redirectTo = redirectPath
+            ? `${window.location.origin}${redirectPath}`
+            : window.location.origin;
+
         const { error } = await supabase.auth.signInWithOAuth({
             provider: 'google',
             options: {
-                redirectTo: window.location.origin,
+                redirectTo,
             },
         });
         return { error: error as Error | null };
