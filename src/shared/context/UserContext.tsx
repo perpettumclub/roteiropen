@@ -363,13 +363,18 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
         // 2. Persist to Database (Background)
         try {
+            // ALWAYS record an anonymous event for global count (scripts created)
+            await supabase
+                .from('anonymous_stats')
+                .insert({ event_type: 'script_created' });
+
             const { data: { session } } = await supabase.auth.getSession();
             if (session?.user) {
                 const { data: savedScript, error } = await supabase
-                    .from('frequency_scripts') // Atualizado para nome único
+                    .from('frequency_scripts')
                     .insert({
                         user_id: session.user.id,
-                        content: JSON.stringify(script), // Serializar o objeto script
+                        content: JSON.stringify(script),
                         niche,
                         is_favorite: false,
                         created_at: todayISO
@@ -379,7 +384,6 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
                 if (error) throw error;
 
-                // Atualizar ID temporário com o real do banco
                 if (savedScript) {
                     setState(prev => ({
                         ...prev,
@@ -389,7 +393,6 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             }
         } catch (error) {
             console.error('Erro ao salvar no Supabase:', error);
-            // Opcional: Reverter estado ou mostrar erro
         }
 
         // --- SECRET BADGES LOGIC ---

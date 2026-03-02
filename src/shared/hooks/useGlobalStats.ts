@@ -28,28 +28,33 @@ export const useGlobalStats = (): GlobalStats => {
     useEffect(() => {
         const fetchStats = async () => {
             try {
-                // 1. Count total scripts created
+                // 1. Count total scripts created (Real Users)
                 const { count: scriptsCount, error: scriptsError } = await supabase
                     .from('frequency_scripts')
                     .select('*', { count: 'exact', head: true });
 
-                // 2. Count unique creators (distinct user_ids who created scripts)
-                // Using frequency_scripts instead of profiles to avoid RLS issues for anonymous visitors
+                // 2. Count anonymous scripts created
+                const { count: anonCount, error: anonError } = await supabase
+                    .from('anonymous_stats')
+                    .select('*', { count: 'exact', head: true });
+
+                // 3. Count unique creators (distinct user_ids who created scripts)
                 const { data: usersData, error: usersError } = await supabase
                     .from('frequency_scripts')
                     .select('user_id');
 
                 let uniqueUsers = 0;
                 if (usersData && !usersError) {
-                    const uniqueUserIds = new Set(usersData.map((r: any) => r.user_id)); // any: Supabase aggregation row not typed
+                    const uniqueUserIds = new Set(usersData.map((r: any) => r.user_id));
                     uniqueUsers = uniqueUserIds.size;
                 }
 
                 if (scriptsError) console.error('Error fetching scripts count:', scriptsError);
+                if (anonError) console.error('Error fetching anonymous count:', anonError);
                 if (usersError) console.error('Error fetching users count:', usersError);
 
                 setStats({
-                    totalScripts: BASE_SCRIPTS + (scriptsCount || 0),
+                    totalScripts: BASE_SCRIPTS + (scriptsCount || 0) + (anonCount || 0),
                     activeCreators: BASE_CREATORS + uniqueUsers,
                     isLoading: false
                 });
