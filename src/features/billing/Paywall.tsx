@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, X, ArrowRight, Clock, Bell, CreditCard } from 'lucide-react';
+import { Check, X, ArrowRight, Clock, Bell, CreditCard, Users } from 'lucide-react';
+import { useGlobalStats } from '../../shared/hooks/useGlobalStats';
 
 interface PaywallProps {
     onUpgrade: () => void;
@@ -11,16 +12,21 @@ interface PaywallProps {
 type Tab = 'hook' | 'trial' | 'promo';
 
 export const Paywall: React.FC<PaywallProps> = ({ onUpgrade, onClose, isRequired = true }) => {
-    const [currentTab, setCurrentTab] = useState<Tab>('hook');
+    const { activeCreators } = useGlobalStats();
+
+    // Lotes Logic
+    const isFirstBatch = activeCreators <= 100;
+    const currentBatchLimit = isFirstBatch ? 100 : 1000;
+    const currentBatchNumber = isFirstBatch ? 1 : 2;
 
     // Pricing with anchor
-    const ORIGINAL_PRICE = 119.99; // R$9.99/month * 12
-    const ANNUAL_PRICE = 49.99;
+    const ORIGINAL_PRICE = 119.99;
+    const ANNUAL_PRICE = isFirstBatch ? 49.99 : 67.00;
     const MONTHLY_EQUIVALENT = (ANNUAL_PRICE / 12).toFixed(2);
     const DISCOUNT_PERCENT = Math.round((1 - ANNUAL_PRICE / ORIGINAL_PRICE) * 100);
 
     // Exit promo
-    const PROMO_PRICE = 29.99;
+    const PROMO_PRICE = isFirstBatch ? 29.99 : 39.99;
 
     const handleClose = () => {
         if (isRequired) {
@@ -162,25 +168,45 @@ export const Paywall: React.FC<PaywallProps> = ({ onUpgrade, onClose, isRequired
 
                             {/* Price Anchor */}
                             <div style={{
-                                background: 'rgba(0,0,0,0.03)',
+                                background: 'rgba(255,107,107,0.05)',
                                 padding: '1.5rem',
                                 borderRadius: '20px',
-                                marginBottom: '1.5rem'
+                                marginBottom: '1.5rem',
+                                border: '1px solid rgba(255,107,107,0.1)'
                             }}>
+                                {/* Batch Badge */}
+                                <div style={{
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: '0.4rem',
+                                    background: 'var(--primary)',
+                                    color: 'white',
+                                    padding: '0.25rem 0.75rem',
+                                    borderRadius: '50px',
+                                    fontSize: '0.75rem',
+                                    fontWeight: 700,
+                                    marginBottom: '0.75rem',
+                                    textTransform: 'uppercase',
+                                    letterSpacing: '0.05em'
+                                }}>
+                                    <Users size={12} />
+                                    Lote {currentBatchNumber}: {activeCreators}/{currentBatchLimit} vagas
+                                </div>
+
                                 <div style={{
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
                                     gap: '0.75rem',
-                                    marginBottom: '0.5rem'
+                                    marginBottom: '0.25rem'
                                 }}>
                                     <span style={{
-                                        fontSize: '1.5rem',
+                                        fontSize: '1.2rem',
                                         color: 'var(--gray)',
                                         textDecoration: 'line-through',
                                         opacity: 0.6
                                     }}>
-                                        R$ {ORIGINAL_PRICE.toFixed(2)}/ano
+                                        R$ {ORIGINAL_PRICE.toFixed(2)}
                                     </span>
                                 </div>
                                 <div style={{
