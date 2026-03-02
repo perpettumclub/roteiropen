@@ -22,7 +22,7 @@ export const Paywall: React.FC<PaywallProps> = ({ onUpgrade, onClose, isRequired
 
     // Pricing with anchor
     const ORIGINAL_PRICE = 119.99;
-    const ANNUAL_PRICE = isFirstBatch ? 49.99 : 67.00;
+    const ANNUAL_PRICE = isFirstBatch ? 49.00 : 67.00;
     const MONTHLY_EQUIVALENT = (ANNUAL_PRICE / 12).toFixed(2);
     const DISCOUNT_PERCENT = Math.round((1 - ANNUAL_PRICE / ORIGINAL_PRICE) * 100);
 

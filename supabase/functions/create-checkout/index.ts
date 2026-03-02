@@ -16,8 +16,8 @@ const corsHeaders = {
 }
 
 // Pricing tiers
-const PRICE_EARLY = 49.90;   // Primeiros 100 assinantes
-const PRICE_NORMAL = 67.90;  // A partir do 101º
+const PRICE_EARLY = 49.00;   // Primeiros 100 assinantes
+const PRICE_NORMAL = 67.00;  // A partir do 101º
 const MAX_EARLY_SUBS = 100;
 
 serve(async (req) => {
