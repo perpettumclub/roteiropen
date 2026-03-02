@@ -12,6 +12,7 @@ interface PaywallProps {
 type Tab = 'hook' | 'trial' | 'promo';
 
 export const Paywall: React.FC<PaywallProps> = ({ onUpgrade, onClose, isRequired = true }) => {
+    const [currentTab, setCurrentTab] = useState<Tab>('hook');
     const { activeCreators } = useGlobalStats();
 
     // Lotes Logic
