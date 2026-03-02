@@ -28,36 +28,22 @@ export const useGlobalStats = (): GlobalStats => {
     useEffect(() => {
         const fetchStats = async () => {
             try {
-                // 1. Count total scripts created (Real Users)
-                const { count: scriptsCount, error: scriptsError } = await supabase
-                    .from('frequency_scripts')
-                    .select('*', { count: 'exact', head: true });
+                // Call the secure RPC function to get global totals
+                // This bypasses RLS for counting purposes only
+                const { data, error } = await supabase.rpc('get_global_script_stats');
 
-                // 2. Count anonymous scripts created
-                const { count: anonCount, error: anonError } = await supabase
-                    .from('anonymous_stats')
-                    .select('*', { count: 'exact', head: true });
-
-                // 3. Count unique creators (distinct user_ids who created scripts)
-                const { data: usersData, error: usersError } = await supabase
-                    .from('frequency_scripts')
-                    .select('user_id');
-
-                let uniqueUsers = 0;
-                if (usersData && !usersError) {
-                    const uniqueUserIds = new Set(usersData.map((r: any) => r.user_id));
-                    uniqueUsers = uniqueUserIds.size;
+                if (error) {
+                    console.error('Error fetching global stats via RPC:', error);
+                    throw error;
                 }
 
-                if (scriptsError) console.error('Error fetching scripts count:', scriptsError);
-                if (anonError) console.error('Error fetching anonymous count:', anonError);
-                if (usersError) console.error('Error fetching users count:', usersError);
-
-                setStats({
-                    totalScripts: BASE_SCRIPTS + (scriptsCount || 0) + (anonCount || 0),
-                    activeCreators: BASE_CREATORS + uniqueUsers,
-                    isLoading: false
-                });
+                if (data) {
+                    setStats({
+                        totalScripts: BASE_SCRIPTS + (data.total_scripts || 0),
+                        activeCreators: BASE_CREATORS + (data.total_creators || 0),
+                        isLoading: false
+                    });
+                }
 
 
 
