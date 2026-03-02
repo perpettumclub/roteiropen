@@ -167,7 +167,7 @@ const QUESTIONS: Question[] = [
         subtitle: '+{{CREATORS}} criadores',
         testimonials: [
             { name: 'Marina Silva', avatar: '👩‍💼', text: 'Perdi 3h por dia criando roteiros. Agora faço em 15 segundos!', rating: 5 },
-            { name: 'Carlos Mendes', avatar: '👨‍💻', text: 'Finalmente saí da inércia. O primeiro roteiro que gerei já deu 3x mais engajamento do que eu costumava ter!', rating: 5 },
+            { name: 'Carlos Mendes', avatar: '👨‍💻', text: 'O primeiro roteiro que gerei já deu 3x mais engajamento do que eu costumava ter!', rating: 5 },
             { name: 'Bruna Costa', avatar: '👩‍🎨', text: 'Melhor investimento que fiz para meu negócio.', rating: 5 },
         ]
     },
