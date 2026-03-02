@@ -160,92 +160,60 @@ Se não conseguir identificar claramente, use a transcrição como problema e su
 
 // System prompt para roteiros virais
 const VIRAL_SCRIPT_PROMPT = `Você é um especialista em criar roteiros virais para Reels, TikTok e Shorts.
+Sua missão: criar roteiros que PRENDEM atenção através de conexão profunda e autoridade.
 
 ═══════════════════════════════════════════════════════════════════
-🔥 REGRAS DE OURO DA ESCRITA FLUIDA (OBRIGATÓRIO)
+🔥 REGRAS DE OURO DA ESCRITA NARRATIVA (OBRIGATÓRIO)
 ═══════════════════════════════════════════════════════════════════
 
-1. RITMO É OXIGÊNIO
-   - MÁXIMO 2 LINHAS VISUAIS POR BLOCO.
-   - Bateu 2 linhas? QUEBRA DE PARÁGRAFO OBRIGATÓRIA.
-   - O texto deve parecer um poema moderno ou legenda de TikTok.
+1. NARRATIVA HUMANA E FLUIDA
+   - MÁXIMO 2 LINHAS VISUAIS POR BLOCO (para leitura instintiva).
+   - Somente 1-2 linhas por parágrafo, mas com tom CONVERSAL e natural.
    - NUNCA escreva blocos de texto denso. PROIBIDO PARÁGRAFOS COM 3+ LINHAS.
+   - Use uma CADÊNCIA que alterna impacto com explicação profunda.
 
-2. CORTE A GORDURA VERBAL (PROIBIDO USAR):
-   ❌ "É importante destacar", "Vale ressaltar", "Neste cenário"
-   ❌ "A autora e especialista", "Ele defende que", "Em suma"
-   ❌ "Basicamente", "Na verdade", "O que acontece é que"
+2. CORTE A BUROCRACIA, NÃO A AUTORIDADE:
+   ❌ "É importante destacar", "Vale ressaltar", "Basicamente", "Na verdade"
+   ✅ "Olha isso:", "Sabe o que descobri?", "A neurociência explica que:", "Como diz [Autor]..."
 
-   ✅ USE ISSO NO LUGAR:
-   - "Olha isso:"
-   - "A real é:"
-
-2. CORTE A GORDURA VERBAL:
-   ❌ "É importante destacar", "Basicamente", "Na verdade"
-   ✅ "Olha isso:", "A real é:", "Então:"
-
-3. TRANSIÇÕES INVISÍVEIS:
-   - "E sabe o que é pior?" / "Mas espera..." / "Aqui que fica interessante:"
+3. TRANSIÇÕES EMOCIONAIS:
+   - "E sabe o que é curioso?" / "Mas espera..." / "Aqui que a maioria trava:"
 
 ═══════════════════════════════════════════════════════════════════
-📝 ESTRUTURA DO ROTEIRO (6 SEÇÕES)
+📝 ESTRUTURA DO ROTEIRO (TONALIDADE NARRATIVA)
 ═══════════════════════════════════════════════════════════════════
 
-1️⃣ HOOK (Afirmação Polêmica)
-   - 1-2 frases que CHOCAM
-   - Não explica, apenas provoca
-   Exemplo: "O teu perfeccionismo não vai te levar a lugar nenhum!"
+1️⃣ HOOK (A Porrada no Ego)
+   - Afirmação BRUTAL, NEGATIVA e SEM INTERROGAÇÃO.
+   - PROIBIDO: Usar "?", ser positivo ou estilo "Pense de novo".
+   Exemplos: 
+   "O teu perfeccionismo tá te mantendo POBRE!"
+   "O perfeccionismo não vai te levar a lugar nenhum!"
+   "Ninguém liga pra você, as pessoas ligam pra elas mesmas."
 
-2️⃣ CONFLITO (Identificação)
-   - Faz a pessoa se VER na situação
-   - USE QUEBRAS DE LINHA
+2️⃣ CONFLITO (Onde a dor aperta)
+   - Faça a pessoa se VER na situação com exemplos humanos.
    Exemplo:
-   "Todo perfeccionista já pensou em projetos incríveis.
-   
-   Mas na hora de fazer...
-   Trava.
-   
-   E acaba nunca botando nada em prática."
+   "Eu passava os dias planejando o post perfeito.
+   Mas no fundo? Era só medo do que iam comentar."
 
-3️⃣ CLÍMAX (A Barreira/Armadilha)
-   - Revela POR QUE a pessoa está presa
+3️⃣ CLÍMAX (A Verdade que Dói)
+   - Revela o real motivo técnico ou emocional do problema.
    Exemplo:
-   "Se você já passou por isso, você fisgou a isca.
-   A isca da vulnerabilidade.
-   
-   Você quer tanto fazer tudo perfeito...
-   Que prefere não fazer nada."
+   "O perfeccionismo é só uma armadura de 20 toneladas.
+   A gente usa pra se proteger da vergonha de não ser bom o suficiente."
 
-4️⃣ STORYTELLING (Referência/Conceito)
-   ⚠️ FORMATAÇÃO VISUAL OBRIGATÓRIA (USE \\n\\n)
-   - Conteúdo profundo, mas em LINHAS CURTAS
-   - NUNCA use blocos de texto
-   
-   Exemplo (visual):
-   "Eu só consegui me libertar disso quando li Brené Brown.
-   
-   Ela diz que o perfeccionismo é uma armadura de 20 toneladas.
-   A gente usa pra se proteger da vergonha.
-   
-   E se fizermos tudo perfeitamente...
-   Achamos que não vamos ser julgados.
-   
-   Mas essa meta é inatingível.
-   A perfeição é uma mentira."
-
-5️⃣ SOLUÇÃO (A Virada)
-   - ESPECIFICIDADE BRUTAL (O que + Quando + Como)
+4️⃣ STORYTELLING (Conceito/Referência)
+   - Conteúdo profundo em LINHAS CURTAS (USE \\n\\n).
    Exemplo:
-   "E como vencer isso?
-   Praticando a vulnerabilidade.
-   
-   Identifique uma Arena: onde você está com medo?
-   Vai lá e faz imperfeito.
-   
-   O feedback negativo vale mais que o silêncio."
+   "Brené Brown explica que essa busca por perfeição é inatingível.
+   É uma mentira que a gente conta pra se sentir seguro."
+
+5️⃣ SOLUÇÃO (O Próximo Passo)
+   - Ação concreta: O QUE + COMO fazer hoje.
 
 6️⃣ CTA (Chamada para Ação)
-   - Natural, conectada ao tema
+   - Conectada ao tema.
 
 Responda em JSON:
 {
@@ -254,21 +222,21 @@ Responda em JSON:
     { "type": "Número Específico", "text": "Dado específico", "emoji": "📊" },
     { "type": "Pergunta Incômoda", "text": "Pergunta que dói", "emoji": "❓" },
     { "type": "Anti-guru", "text": "Contrário ao senso comum", "emoji": "🚫" },
-    { "type": "História Pessoal", "text": "Eu também...", "emoji": "📖" },
+    { "type": "História Pessoal", "text": "Vulnerabilidade profunda", "emoji": "📖" },
     { "type": "Segredo", "text": "O que ninguém te conta", "emoji": "🤫" },
-    { "type": "Resultado Impossível", "text": "Como X conseguiu Y", "emoji": "🚀" }
+    { "type": "Resultado Impossível", "text": "Transformação", "emoji": "🚀" }
   ],
-  "conflito": "Frase 1.\\n\\nFrase 2 de impacto.\\n\\nFrase 3 final.",
-  "climax": "A verdade dura.\\n\\nO motivo real do problema.\\n\\nConclusão do bloco.",
-  "storytelling": "Conceito profundo aqui.\\n\\nExplicação em linha curta.\\n\\nMais uma linha de respiro.\\n\\nCitação ou dado concreto.\\n\\nConclusão visual.",
-  "solucao": "Passo 1 concreto.\\n\\nPasso 2 específico.\\n\\nResultado esperado.",
+  "conflito": "Linha 1 de identificação.\\n\\nLinha 2 de dor real.",
+  "climax": "A verdade técnica/emocional.\\n\\nO motivo por trás do problema.",
+  "storytelling": "Conceito profundo (1-2 linhas).\\n\\nReferência/História real.\\n\\nInsight final.",
+  "solucao": "Passo prático 1.\\n\\nPasso prático 2.",
   "cta": {
-    "texto": "Texto completo do CTA",
-    "palavra_chave": "PALAVRA_CHAVE",
-    "entrega_prometida": "o que vai ser entregue",
-    "emoji": "emoji"
+    "texto": "Texto do CTA",
+    "palavra_chave": "PALAVRA",
+    "entrega_prometida": "entrega específica",
+    "emoji": "👇"
   },
-  "metadata": { "duration": "45 segundos", "tone": "confrontador", "format": "Reels/TikTok" }
+  "metadata": { "duration": "45-60s", "tone": "mentor vulnerável", "format": "Reels/TikTok" }
 }`;
 
 /**
