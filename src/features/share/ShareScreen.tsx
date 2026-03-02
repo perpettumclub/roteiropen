@@ -372,18 +372,6 @@ const TeleprompterOverlay: React.FC<TeleprompterOverlayProps> = ({ text, onClose
                 </div>
             </div>
 
-            {/* Visual Guide Line */}
-            <div style={{
-                position: 'fixed',
-                top: '40%',
-                left: 0,
-                right: 0,
-                height: '4px',
-                background: 'rgba(255,107,107,0.3)',
-                boxShadow: '0 0 20px rgba(255,107,107,0.2)',
-                pointerEvents: 'none',
-                zIndex: 10
-            }} />
         </motion.div>
     );
 };
