@@ -168,11 +168,11 @@ export const Paywall: React.FC<PaywallProps> = ({ onUpgrade, onClose, isRequired
 
                             {/* Price Anchor */}
                             <div style={{
-                                background: 'rgba(255,107,107,0.05)',
+                                background: 'rgba(0,0,0,0.03)',
                                 padding: '1.5rem',
                                 borderRadius: '20px',
                                 marginBottom: '1.5rem',
-                                border: '1px solid rgba(255,107,107,0.1)'
+                                position: 'relative'
                             }}>
                                 {/* Batch Badge */}
                                 <div style={{
@@ -181,15 +181,14 @@ export const Paywall: React.FC<PaywallProps> = ({ onUpgrade, onClose, isRequired
                                     gap: '0.4rem',
                                     background: 'var(--primary)',
                                     color: 'white',
-                                    padding: '0.25rem 0.75rem',
+                                    padding: '0.2rem 0.6rem',
                                     borderRadius: '50px',
-                                    fontSize: '0.75rem',
+                                    fontSize: '0.7rem',
                                     fontWeight: 700,
                                     marginBottom: '0.75rem',
-                                    textTransform: 'uppercase',
-                                    letterSpacing: '0.05em'
+                                    textTransform: 'uppercase'
                                 }}>
-                                    <Users size={12} />
+                                    <Users size={10} />
                                     Lote {currentBatchNumber}: {activeCreators}/{currentBatchLimit} vagas
                                 </div>
 
@@ -198,15 +197,15 @@ export const Paywall: React.FC<PaywallProps> = ({ onUpgrade, onClose, isRequired
                                     alignItems: 'center',
                                     justifyContent: 'center',
                                     gap: '0.75rem',
-                                    marginBottom: '0.25rem'
+                                    marginBottom: '0.5rem'
                                 }}>
                                     <span style={{
-                                        fontSize: '1.2rem',
+                                        fontSize: '1.5rem',
                                         color: 'var(--gray)',
                                         textDecoration: 'line-through',
                                         opacity: 0.6
                                     }}>
-                                        R$ {ORIGINAL_PRICE.toFixed(2)}
+                                        R$ {ORIGINAL_PRICE.toFixed(2)}/ano
                                     </span>
                                 </div>
                                 <div style={{
