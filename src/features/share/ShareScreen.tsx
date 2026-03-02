@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Copy, Instagram, MessageCircle, X, ArrowRight, Monitor, Smartphone, Check } from 'lucide-react';
+import { Copy, X, ArrowRight, Monitor, Smartphone, Check } from 'lucide-react';
 
 interface ShareScreenProps {
     scriptContent: string;
@@ -11,7 +11,6 @@ interface ShareScreenProps {
 export const ShareScreen: React.FC<ShareScreenProps> = ({ scriptContent, onShare, onSkip }) => {
     const [copied, setCopied] = useState(false);
     const [showTeleprompter, setShowTeleprompter] = useState(false);
-    const [scrollSpeed, setScrollSpeed] = useState(2); // 1-5
 
     const handleCopyClean = async () => {
         // Clean text: only the script sections, no metadata or watermarks
