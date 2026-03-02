@@ -166,7 +166,7 @@ const QUESTIONS: Question[] = [
         question: 'Hooky foi feito para pessoas como você',
         subtitle: '+{{CREATORS}} criadores',
         testimonials: [
-            { name: 'Marina Silva', avatar: '👩‍💼', text: 'Perdi 3h por dia criando roteiros. Agora faço em 15 segundos!', rating: 5 },
+            { name: 'Débora Silva', avatar: '👩‍💼', text: 'Perdi 3h por dia criando roteiros. Agora faço em 15 segundos!', rating: 5 },
             { name: 'Carlos Mendes', avatar: '👨‍💻', text: 'O primeiro roteiro que gerei já deu 3x mais engajamento!', rating: 5 },
             { name: 'Bruna Costa', avatar: '👩‍🎨', text: 'Melhor investimento que fiz para meu negócio.', rating: 5 },
         ]
