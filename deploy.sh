@@ -23,4 +23,4 @@ echo -e "${GREEN}4. Ajustando permissões...${NC}"
 sudo chown -R www-data:www-data dist/
 
 echo -e "${GREEN}✅ DEPLOY CONCLUÍDO COM SUCESSO!${NC}"
-echo "Seu site já deve estar atualizado em usehooky.com"
+echo "Seu site já deve estar atualizado em hookyai.com.br"
