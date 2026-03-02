@@ -205,11 +205,11 @@ export const LandingView: React.FC<LandingViewProps> = ({ onStart, onLogin }) =>
                     {/* Avatar Stack */}
                     <div style={{ display: 'flex', marginRight: '0.25rem' }}>
                         {[
-                            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=faces',
-                            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=faces',
-                            'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=faces',
-                            'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=faces',
-                            'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=faces'
+                            '/images/avatars/avatar_1.png',
+                            '/images/avatars/avatar_4.png',
+                            '/images/avatars/avatar_2.png',
+                            '/images/avatars/avatar_3.png',
+                            '/images/avatars/avatar_5.png'
                         ].map((photoUrl, i) => (
                             <div
                                 key={i}
