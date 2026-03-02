@@ -11,6 +11,17 @@ interface ShareScreenProps {
 export const ShareScreen: React.FC<ShareScreenProps> = ({ scriptContent, onShare, onSkip }) => {
     const [copied, setCopied] = useState(false);
     const [showTeleprompter, setShowTeleprompter] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
 
     const handleCopyClean = async () => {
         // Clean text: only the script sections, no metadata or watermarks
@@ -60,8 +71,8 @@ export const ShareScreen: React.FC<ShareScreenProps> = ({ scriptContent, onShare
                     style={{
                         maxWidth: '420px',
                         width: '100%',
-                        padding: '2.5rem',
-                        borderRadius: '32px',
+                        padding: isMobile ? '1.5rem' : '2.5rem',
+                        borderRadius: isMobile ? '24px' : '32px',
                         textAlign: 'center',
                         position: 'relative'
                     }}
@@ -93,8 +104,8 @@ export const ShareScreen: React.FC<ShareScreenProps> = ({ scriptContent, onShare
                         }}
                         transition={{ duration: 0.5 }}
                         style={{
-                            fontSize: '4rem',
-                            marginBottom: '1.5rem'
+                            fontSize: isMobile ? '3rem' : '4rem',
+                            marginBottom: isMobile ? '1rem' : '1.5rem'
                         }}
                     >
                         🎉
@@ -102,18 +113,18 @@ export const ShareScreen: React.FC<ShareScreenProps> = ({ scriptContent, onShare
 
                     <h2 style={{
                         fontFamily: 'var(--font-display)',
-                        fontSize: '1.8rem',
+                        fontSize: isMobile ? '1.5rem' : '1.8rem',
                         color: 'var(--dark)',
-                        marginBottom: '0.5rem'
+                        marginBottom: isMobile ? '0.25rem' : '0.5rem'
                     }}>
                         Roteiro pronto!
                     </h2>
 
                     <p style={{
                         color: 'var(--gray)',
-                        fontSize: '1rem',
-                        marginBottom: '2rem',
-                        lineHeight: 1.6
+                        fontSize: isMobile ? '0.9rem' : '1rem',
+                        marginBottom: isMobile ? '1.5rem' : '2rem',
+                        lineHeight: 1.5
                     }}>
                         Seu roteiro foi otimizado pela IA. Agora é só escolher como você quer gravar.
                     </p>
@@ -134,20 +145,20 @@ export const ShareScreen: React.FC<ShareScreenProps> = ({ scriptContent, onShare
                                 background: copied ? 'var(--success)' : 'linear-gradient(135deg, #833AB4, #FD1D1D, #F77737)',
                                 color: 'white',
                                 border: 'none',
-                                padding: '1rem 1.5rem',
-                                borderRadius: '16px',
-                                fontSize: '1rem',
-                                fontWeight: 600,
+                                padding: isMobile ? '0.85rem 1rem' : '1rem 1.5rem',
+                                borderRadius: isMobile ? '14px' : '16px',
+                                fontSize: isMobile ? '0.95rem' : '1rem',
+                                fontWeight: 700,
                                 cursor: 'pointer',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 gap: '0.75rem',
                                 boxShadow: '0 8px 20px -5px rgba(253, 29, 29, 0.4)',
-                                transition: 'background 0.3s ease'
+                                transition: 'all 0.3s ease'
                             }}
                         >
-                            {copied ? <Check size={22} /> : <Copy size={22} />}
+                            {copied ? <Check size={isMobile ? 20 : 22} /> : <Copy size={isMobile ? 20 : 22} />}
                             {copied ? 'Copiado!' : 'Copiar Roteiro Limpo'}
                         </motion.button>
 
@@ -160,9 +171,9 @@ export const ShareScreen: React.FC<ShareScreenProps> = ({ scriptContent, onShare
                                 background: 'var(--dark)',
                                 color: 'white',
                                 border: 'none',
-                                padding: '1rem 1.5rem',
-                                borderRadius: '16px',
-                                fontSize: '1rem',
+                                padding: isMobile ? '0.85rem 1rem' : '1rem 1.5rem',
+                                borderRadius: isMobile ? '14px' : '16px',
+                                fontSize: isMobile ? '0.95rem' : '1rem',
                                 fontWeight: 600,
                                 cursor: 'pointer',
                                 display: 'flex',
@@ -172,7 +183,7 @@ export const ShareScreen: React.FC<ShareScreenProps> = ({ scriptContent, onShare
                                 boxShadow: '0 8px 20px -5px rgba(0,0,0,0.2)'
                             }}
                         >
-                            <Monitor size={22} />
+                            <Monitor size={isMobile ? 20 : 22} />
                             Abrir Teleprompter
                         </motion.button>
 
@@ -185,9 +196,9 @@ export const ShareScreen: React.FC<ShareScreenProps> = ({ scriptContent, onShare
                                 background: '#25D366',
                                 color: 'white',
                                 border: 'none',
-                                padding: '1rem 1.5rem',
-                                borderRadius: '16px',
-                                fontSize: '1rem',
+                                padding: isMobile ? '0.85rem 1rem' : '1rem 1.5rem',
+                                borderRadius: isMobile ? '14px' : '16px',
+                                fontSize: isMobile ? '0.95rem' : '1rem',
                                 fontWeight: 600,
                                 cursor: 'pointer',
                                 display: 'flex',
@@ -197,7 +208,7 @@ export const ShareScreen: React.FC<ShareScreenProps> = ({ scriptContent, onShare
                                 boxShadow: '0 8px 20px -5px rgba(37, 211, 102, 0.4)'
                             }}
                         >
-                            <Smartphone size={22} />
+                            <Smartphone size={isMobile ? 20 : 22} />
                             Mandar para meu Celular
                         </motion.button>
                     </div>
