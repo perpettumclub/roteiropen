@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabase';
 
 // Base offsets - numbers start from here and grow as real users join
-const BASE_SCRIPTS = 487;
-const BASE_CREATORS = 56;
+const BASE_SCRIPTS = 0;
+const BASE_CREATORS = 0;
 
 interface GlobalStats {
     totalScripts: number;
