@@ -11,8 +11,8 @@ BEGIN
   -- 1. Apenas roteiros reais de usuários autenticados
   SELECT COUNT(*) INTO scripts_count FROM public.frequency_scripts;
 
-  -- 2. Todos os criadores únicos que geraram ao menos 1 roteiro (freemium + pagantes)
-  SELECT COUNT(DISTINCT user_id) INTO creators_count FROM public.frequency_scripts;
+  -- 2. Todos que ativaram o freemium ou pagaram — qualquer registro em subscriptions
+  SELECT COUNT(DISTINCT user_id) INTO creators_count FROM public.subscriptions;
 
   RETURN json_build_object(
     'total_scripts', scripts_count,
