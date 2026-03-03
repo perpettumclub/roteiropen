@@ -12,6 +12,7 @@ export interface PostMeta {
     description: string
     date: string
     readingTime: string
+    thumbnail?: string
 }
 
 export interface Post extends PostMeta {
