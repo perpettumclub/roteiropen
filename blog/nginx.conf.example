@@ -1,0 +1,14 @@
+# Configuração Nginx — Blog Hooky AI em /blog
+# Adicione este bloco dentro do seu server {} existente no Nginx
+
+location /blog {
+    alias /var/www/hooky/blog/out;
+    index index.html;
+    try_files $uri $uri.html $uri/index.html =404;
+}
+
+# Comandos para aplicar na VPS:
+# sudo nano /etc/nginx/sites-available/hooky
+# (adicionar o bloco acima dentro de server {})
+# sudo nginx -t
+# sudo systemctl reload nginx
