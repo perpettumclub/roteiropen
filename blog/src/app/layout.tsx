@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   },
   description: 'Aprenda a criar roteiros virais para TikTok, Reels e Shorts. Estratégias, templates e dicas de criadores que faturam com conteúdo.',
   metadataBase: new URL('https://hookyai.com.br'),
+  icons: {
+    icon: '/blog/favicon.png',
+    apple: '/blog/favicon.png',
+  },
   openGraph: {
     siteName: 'Hooky AI Blog',
     locale: 'pt_BR',
