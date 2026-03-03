@@ -97,7 +97,7 @@ const DEFAULT_STATE: UserState = {
     user: null,
     hasCompletedQuiz: false,
     creatorProfile: null,
-    freeScriptsRemaining: 3,
+    freeScriptsRemaining: 0,
     totalScriptsCreated: 0,
     scripts: [],
     currentStreak: 0,
@@ -266,7 +266,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
                 .single();
 
             if (profileArgs) {
-                const limit = profileArgs.free_scripts_limit || 3;
+                const limit = profileArgs.free_scripts_limit || 0;
                 const used = profileArgs.free_scripts_used || 0;
                 setState(prev => ({
                     ...prev,
@@ -625,14 +625,14 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const checkSubscription = async (userId: string) => {
 
         try {
-            // 1. Check for Lifetime Access (Tier) in Profiles
+            // Apenas hooky_pro libera o App — desafio_45 usa checkout externo
             const { data: profileData, error: _profileError } = await supabase
                 .from('profiles')
                 .select('tier')
                 .eq('id', userId)
                 .single();
 
-            if (profileData && profileData.tier === 'desafio_45') {
+            if (profileData && profileData.tier === 'hooky_pro') {
 
                 setState(prev => ({
                     ...prev,

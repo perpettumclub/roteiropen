@@ -17,8 +17,8 @@ CREATE TABLE IF NOT EXISTS subscriptions (
 );
 
 -- Índice para consultas rápidas
-CREATE INDEX idx_subscriptions_user_id ON subscriptions(user_id);
-CREATE INDEX idx_subscriptions_status ON subscriptions(status);
+CREATE INDEX IF NOT EXISTS idx_subscriptions_user_id ON subscriptions(user_id);
+CREATE INDEX IF NOT EXISTS idx_subscriptions_status ON subscriptions(status);
 
 -- RLS (Row Level Security)
 ALTER TABLE subscriptions ENABLE ROW LEVEL SECURITY;

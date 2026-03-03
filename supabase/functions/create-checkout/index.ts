@@ -112,13 +112,8 @@ serve(async (req) => {
       auto_renew: true
     }, { onConflict: 'user_id' });
 
-    // 6. Liberar acesso imediato (trial ativo)
-    await supabase.auth.admin.updateUserById(user_id, {
-      user_metadata: { tier: 'hooky_pro' }
-    });
-    await supabase.from('profiles').update({ tier: 'hooky_pro' }).eq('id', user_id);
-
-    console.log(`🎉 Trial started for user ${user_id}, access granted`);
+    // Acesso NÃO é liberado aqui — somente o webhook (status 'authorized') concede hooky_pro
+    console.log(`⏳ Trial registered for user ${user_id}, awaiting webhook confirmation`);
 
     return new Response(
       JSON.stringify({

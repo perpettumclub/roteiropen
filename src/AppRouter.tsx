@@ -44,10 +44,10 @@ const RequireAuth = () => {
 };
 
 const RequireSubscription = () => {
-    const { user } = useAuth();
-    const { isPremium, freeScriptsRemaining, hasCompletedQuiz } = useUser();
+    const { isPremium, freeScriptsRemaining } = useUser();
 
-    const canAccess = isPremium || freeScriptsRemaining > 0 || (hasCompletedQuiz && !!user);
+    // Sem bypass de quiz — acesso exige assinatura ou scripts reais
+    const canAccess = isPremium || freeScriptsRemaining > 0;
 
     if (!canAccess) {
         return <Navigate to="/paywall" replace />;
