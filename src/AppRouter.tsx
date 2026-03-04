@@ -21,6 +21,7 @@ import { ResultPage } from './pages/ResultPage';
 import { SharePage } from './pages/SharePage';
 
 import { ChallengeVSL } from './pages/ChallengeVSL';
+import AdminInvitePage from './pages/AdminInvitePage';
 
 // Shared
 import { StreakDisplay, BadgeNotification, useUser } from './shared';
@@ -215,6 +216,9 @@ export const AppRouter = () => {
 
 
             </Route>
+
+            {/* Admin — apenas DEV */}
+            {import.meta.env.DEV && <Route path="/admin" element={<AdminInvitePage />} />}
 
             {/* Fallback */}
             <Route path="*" element={<Navigate to="/" replace />} />

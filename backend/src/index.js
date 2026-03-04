@@ -15,6 +15,7 @@ const startServer = async () => {
     const { default: knowledgeRoutes } = await import('./routes/knowledge.js');
     const { default: paymentRoutes } = await import('./routes/payment.js');
     const { default: couponRoutes } = await import('./routes/coupon.js');
+    const { default: adminRoutes } = await import('./routes/admin.js');
 
     const app = express();
     const PORT = process.env.PORT || 3001;
@@ -39,6 +40,7 @@ const startServer = async () => {
     app.use('/api/knowledge', knowledgeRoutes);
     app.use('/api/payment', paymentRoutes);
     app.use('/api/coupon', couponRoutes);
+    app.use('/api/admin', adminRoutes);
 
     // Error handler
     app.use((err, req, res, next) => {
