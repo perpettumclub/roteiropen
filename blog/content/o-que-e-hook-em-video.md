@@ -1,6 +1,6 @@
 ---
-title: "Hook em Vídeo: O Que É e Como Criar Hooks Que Prendem do Primeiro Segundo"
-description: "Descubra o que é hook em vídeo, por que ele decide tudo no Reels e TikTok e como criar hooks irresistíveis com exemplos reais de Hormozi, Gary Vee e Matt Gray."
+title: "Hooks Para Vídeos: O Que São e Como Criar Ganchos Que Prendem do Primeiro Segundo"
+description: "Descubra o que são hooks para vídeos, por que eles decidem tudo no Reels e TikTok e como criar ganchos irresistíveis com exemplos reais de Hormozi, Gary Vee e Matt Gray."
 date: "2026-03-04"
 readingTime: "12 min"
 thumbnail: "/blog/hook-em-video-retencao-algoritmo.png"
@@ -13,7 +13,7 @@ E aí ele não vai a lugar nenhum.
 
 Na maioria dos casos, o problema não está no conteúdo. Está no que vem antes dele: o **hook em vídeo**.
 
-Neste guia você vai entender o que é hook em vídeo, por que ele é o elemento mais decisivo de qualquer Reel ou TikTok — e como criar hooks que param o scroll e prendem o espectador do primeiro ao último segundo.
+Neste guia você vai entender o que são hooks para vídeos, por que eles são o elemento mais decisivo de qualquer Reel ou TikTok — e como criar ganchos que param o scroll e prendem o espectador do primeiro ao último segundo.
 
 ![Algoritmo de retenção: usuários passam 1,7 segundo por conteúdo antes de rolar o feed](/blog/hook-em-video-retencao-algoritmo.png)
 
@@ -21,7 +21,7 @@ Neste guia você vai entender o que é hook em vídeo, por que ele é o elemento
 
 ## Neste artigo
 
-- [O que é hook em vídeo](#o-que-e-hook)
+- [O que são hooks para vídeos](#o-que-e-hook)
 - [Por que os primeiros 3 segundos decidem tudo](#por-que-decide-tudo)
 - [Gancho bom vs. gancho ruim: a diferença na prática](#bom-vs-ruim)
 - [Os 3 tipos de hook em vídeo](#3-tipos-de-hook)
@@ -31,19 +31,19 @@ Neste guia você vai entender o que é hook em vídeo, por que ele é o elemento
 - [Ganchos prontos por nicho](#por-nicho)
 - [Erros que destroem o hook](#erros)
 - [Hook para Reels vs TikTok](#plataformas)
-- [Perguntas frequentes sobre hook em vídeo](#faq)
+- [Perguntas frequentes sobre hooks para vídeos](#faq)
 
 ---
 
-## O Que É Hook em Vídeo {#o-que-e-hook}
+## O Que São Hooks Para Vídeos {#o-que-e-hook}
 
-Hook em vídeo é o gancho do conteúdo.
+Hooks para vídeos são os ganchos do conteúdo.
 
-São os primeiros 1 a 3 segundos — a frase, a imagem ou a ação que decide se o espectador vai continuar assistindo ou passar para o próximo vídeo.
+São os primeiros 1 a 3 segundos de qualquer conteúdo — a frase, a imagem ou a ação que decide se o espectador vai continuar assistindo ou passar para o próximo vídeo.
 
 O nome vem do inglês *to hook*, que significa fisgar. Um bom hook fisga o espectador exatamente no momento em que o dedo está prestes a deslizar a tela.
 
-Um hook em vídeo pode ser:
+Um hook para vídeo pode ser:
 
 - **Uma frase falada** — o que você diz nos primeiros segundos.
 - **Um elemento visual** — imagem, cena ou resultado que aparece imediatamente na tela.
@@ -52,7 +52,7 @@ Um hook em vídeo pode ser:
 
 O hook não é a introdução. Não é onde você se apresenta. Não é onde você explica o que vai acontecer.
 
-É onde o espectador decide ficar — ou ir embora.
+É onde o espectador decide ficar — ou ir embora. Sem um gancho forte, o melhor conteúdo do mundo não chega a quem deveria.
 
 ---
 
@@ -592,11 +592,11 @@ Sem página em branco. Sem travamento criativo. Só você gravando com confianç
 
 ---
 
-## Perguntas Frequentes Sobre Hook em Vídeo {#faq}
+## Perguntas Frequentes Sobre Hooks Para Vídeos {#faq}
 
-### O que é hook em vídeo de forma simples?
+### O que são hooks para vídeos de forma simples?
 
-Hook em vídeo é o gancho dos primeiros 1 a 3 segundos de um conteúdo. É o elemento — frase falada, imagem ou texto na tela — que decide se o espectador vai continuar assistindo ou passar para o próximo vídeo. Sem um gancho forte, nem o melhor conteúdo alcança o público que merece.
+Hooks para vídeos são os ganchos dos primeiros 1 a 3 segundos de um conteúdo. São o elemento — frase falada, imagem ou texto na tela — que decide se o espectador vai continuar assistindo ou passar para o próximo. Sem um gancho forte, nem o melhor conteúdo alcança o público que merece.
 
 ### Qual é o tamanho ideal de um hook para vídeo?
 
@@ -606,7 +606,7 @@ Um gancho eficaz tem entre 1 e 3 segundos. Em palavras, isso equivale a 1 frase 
 
 Não. A introdução é onde você apresenta o tema do vídeo. O gancho é o que vem antes — é o que faz o espectador querer ouvir a introdução. Em muitos vídeos virais não existe introdução: o conteúdo começa pelo gancho e vai direto ao assunto.
 
-### Como saber se meu hook em vídeo está funcionando?
+### Como saber se meu hook para vídeo está funcionando?
 
 Acompanhe a taxa de retenção dos primeiros 3 segundos nos insights do Instagram ou TikTok. Se mais de 70% dos espectadores chegam ao segundo 5, o gancho está funcionando. Se a queda acontece antes disso, precisa ser revisto.
 
@@ -614,7 +614,7 @@ Acompanhe a taxa de retenção dos primeiros 3 segundos nos insights do Instagra
 
 Para quem ainda está construindo audiência, o gancho de identificação tende a funcionar melhor. Ele não depende de autoridade prévia — depende apenas de conhecer as dores do público com profundidade. Quanto mais específica a dor nomeada, mais forte o gancho.
 
-### Posso usar IA para criar hooks para vídeo?
+### Posso usar IA para criar hooks para vídeos?
 
 Sim. Ferramentas como o [Hooky AI](https://hookyai.com.br) identificam o ponto mais forte de uma ideia falada e transformam em gancho estruturado em segundos. Isso não substitui sua voz — elimina o tempo que você gastaria travado antes de gravar.
 
