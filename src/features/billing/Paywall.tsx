@@ -398,7 +398,7 @@ export const Paywall: React.FC<PaywallProps> = ({ onUpgrade, onClose, isRequired
                                 }}>
                                     <div style={{ fontSize: '0.8rem', color: 'var(--gray)' }}>Mensal</div>
                                     <div style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--dark)' }}>
-                                        R$ 19,99<span style={{ fontSize: '0.8rem' }}>/mês</span>
+                                        R$ 9,99<span style={{ fontSize: '0.8rem' }}>/mês</span>
                                     </div>
                                 </div>
                                 <div style={{
