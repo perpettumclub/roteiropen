@@ -41,6 +41,7 @@ const AdminAffiliatesPage: React.FC = () => {
     const [tab, setTab] = useState<'create' | 'list'>('create');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [customCode, setCustomCode] = useState('');
     const [commission, setCommission] = useState(20);
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState<{ success?: boolean; affiliate?: Affiliate & { link: string }; error?: string } | null>(null);
@@ -75,11 +76,11 @@ const AdminAffiliatesPage: React.FC = () => {
             const res = await fetch(API, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email, commission_percent: commission }),
+                body: JSON.stringify({ name, email, commission_percent: commission, ...(customCode.trim() ? { code: customCode.trim() } : {}) }),
             });
             const data = await res.json();
             setResult(data);
-            if (data.success) { setName(''); setEmail(''); setCommission(20); }
+            if (data.success) { setName(''); setEmail(''); setCommission(20); setCustomCode(''); }
         } catch {
             setResult({ error: 'Erro ao conectar com o backend' });
         } finally {
@@ -121,7 +122,7 @@ const AdminAffiliatesPage: React.FC = () => {
 
     return (
         <div style={{ minHeight: '100vh', background: '#f9f9f9', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', padding: '32px 16px' }}>
-            <div style={{ maxWidth: 600, margin: '0 auto', background: '#fff', borderRadius: 20, padding: 40, boxShadow: '0 2px 16px rgba(0,0,0,0.08)', border: '1px solid #eee' }}>
+            <div style={{ maxWidth: 440, margin: '0 auto', background: '#fff', borderRadius: 20, padding: 40, boxShadow: '0 2px 16px rgba(0,0,0,0.08)', border: '1px solid #eee' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 28 }}>
                     <span style={{ fontSize: 28 }}>🤝</span>
                     <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#111' }}>Admin — Afiliados</h1>
@@ -140,6 +141,9 @@ const AdminAffiliatesPage: React.FC = () => {
 
                         <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#333', marginBottom: 6 }}>Email</label>
                         <input style={inp} type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="afiliado@email.com" required />
+
+                        <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#333', marginBottom: 6 }}>Código do link <span style={{ color: '#aaa', fontWeight: 400 }}>(opcional — gerado automático se vazio)</span></label>
+                        <input style={inp} value={customCode} onChange={e => setCustomCode(e.target.value.toLowerCase().replace(/[^a-z0-9]/g, ''))} placeholder="Ex: felipe20" />
 
                         <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#333', marginBottom: 6 }}>Comissão (%)</label>
                         <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginBottom: 16 }}>

@@ -18,18 +18,20 @@ const getSupabase = () => {
 router.post('/', async (req, res) => {
     if (!isLocal(req)) return res.status(403).json({ error: 'Acesso negado — apenas local' });
 
-    const { name, email, commission_percent = 20 } = req.body;
+    const { name, email, commission_percent = 20, code: customCode } = req.body;
     if (!name || !email) return res.status(400).json({ error: 'Nome e email obrigatórios' });
 
     const supabase = getSupabase();
 
     try {
-        const code = name
-            .toLowerCase()
-            .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-            .replace(/[^a-z0-9]/g, '')
-            .slice(0, 10)
-            + Math.random().toString(36).slice(2, 5).toUpperCase();
+        const code = customCode?.trim() || (
+            name
+                .toLowerCase()
+                .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+                .replace(/[^a-z0-9]/g, '')
+                .slice(0, 10)
+            + Math.random().toString(36).slice(2, 5).toUpperCase()
+        );
 
         const affiliateLink = `https://hookyai.com.br/?ref=${code}`;
 
