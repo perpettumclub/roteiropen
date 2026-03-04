@@ -16,6 +16,7 @@ const startServer = async () => {
     const { default: paymentRoutes } = await import('./routes/payment.js');
     const { default: couponRoutes } = await import('./routes/coupon.js');
     const { default: adminRoutes } = await import('./routes/admin.js');
+    const { default: affiliatesRoutes } = await import('./routes/affiliates.js');
 
     const app = express();
     const PORT = process.env.PORT || 3001;
@@ -41,6 +42,7 @@ const startServer = async () => {
     app.use('/api/payment', paymentRoutes);
     app.use('/api/coupon', couponRoutes);
     app.use('/api/admin', adminRoutes);
+    app.use('/api/affiliates', affiliatesRoutes);
 
     // Error handler
     app.use((err, req, res, next) => {
