@@ -69,13 +69,14 @@ router.get('/', async (req, res) => {
 router.patch('/:id', async (req, res) => {
     if (!isLocal(req)) return res.status(403).json({ error: 'Acesso negado — apenas local' });
 
-    const { commission_percent, is_active } = req.body;
+    const { commission_percent, is_active, code } = req.body;
     const supabase = getSupabase();
 
     try {
         const updates = {};
         if (commission_percent !== undefined) updates.commission_percent = commission_percent;
         if (is_active !== undefined) updates.is_active = is_active;
+        if (code !== undefined) updates.code = code;
 
         const { data, error } = await supabase
             .from('affiliates')
