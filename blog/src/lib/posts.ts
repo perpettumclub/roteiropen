@@ -44,7 +44,7 @@ export async function getPostBySlug(slug: string): Promise<Post> {
     const contentHtml = processed
         .toString()
         .replace(
-            /<(h[1-6])>(.*?)\s*\{#([^}]+)\}(.*?)<\/h[1-6]>/gs,
+            /<(h[1-6])>([^<]*?)\s*\{#([^}]+)\}([^<]*?)<\/h[1-6]>/g,
             '<$1 id="$3">$2$4</$1>'
         )
 
