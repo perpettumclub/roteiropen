@@ -14,7 +14,7 @@ const AdminInvitePage: React.FC = () => {
         setResult(null);
 
         try {
-            const res = await fetch('http://localhost:3001/api/admin/magic-link', {
+            const res = await fetch('http://localhost:3002/api/admin/magic-link', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, name }),
