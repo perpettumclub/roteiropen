@@ -576,19 +576,21 @@ Os princípios são os mesmos. Mas há diferenças importantes entre as platafor
 
 ---
 
-## Crie Seu Próximo Gancho em 15 Segundos
+## Você Sabe o Que Quer Falar. O Problema É Colocar Para Fora.
 
-Saber criar ganchos é uma habilidade. Mas a barreira que a maioria dos criadores enfrenta não é falta de conhecimento — é falta de tempo para estruturar a ideia certa antes de gravar.
+Escrever roteiro do zero leva mais tempo do que gravar o vídeo. A página em branco trava. A ideia estava clara na cabeça — mas quando senta para escrever, some.
 
-Você sabe o que quer falar. Mas quando abre o aplicativo e a câmera está esperando, trava.
+Alguns criadores pagam copywriter para resolver isso. Outros ficam horas reescrevendo a abertura. Outros simplesmente não postam.
 
-O [Hooky AI](https://hookyai.com.br) foi criado exatamente para isso.
+Existe outro caminho.
 
-Você fala sua ideia bagunçada por 30 segundos. A IA identifica o ouro, cria o gancho e estrutura o roteiro completo — em menos de 15 segundos.
+Com o [Hooky AI](https://hookyai.com.br), você não escreve nada. Você liga o celular, fala sua ideia confusa por 30 segundos como se estivesse explicando para um amigo — e em menos de 15 segundos recebe o gancho estruturado e o roteiro completo, pronto para gravar.
 
-Sem página em branco. Sem travamento criativo. Só você gravando com confiança.
+Sem reformular. Sem página em branco. Sem depender de inspiração.
 
-**[Transforme sua próxima ideia em roteiro agora — é grátis para começar](https://hookyai.com.br)**
+Só você, sua ideia, e o roteiro na mão.
+
+**[Teste grátis agora — sua próxima ideia vira roteiro em 15 segundos](https://hookyai.com.br)**
 
 ---
 
@@ -616,7 +618,11 @@ Para quem ainda está construindo audiência, o gancho de identificação tende 
 
 ### Posso usar IA para criar hooks para vídeos?
 
-Sim. Ferramentas como o [Hooky AI](https://hookyai.com.br) identificam o ponto mais forte de uma ideia falada e transformam em gancho estruturado em segundos. Isso não substitui sua voz — elimina o tempo que você gastaria travado antes de gravar.
+Sim — e é exatamente aí que a IA faz mais diferença. A parte mais difícil de criar um gancho não é saber a teoria. É transformar uma ideia bagunçada em palavras que prendem nos primeiros segundos.
+
+O [Hooky AI](https://hookyai.com.br) funciona de um jeito diferente de qualquer ferramenta de escrita: você não digita nada. Você grava um áudio de 30 segundos falando sua ideia do jeito que vier — confuso, sem estrutura, só o pensamento bruto. A IA identifica o melhor ângulo, constrói o gancho e entrega o roteiro completo em menos de 15 segundos.
+
+Não substitui sua voz nem sua perspectiva. Elimina a parte que trava — e deixa você gravar com confiança.
 
 ### Qual a diferença entre hook para Reels e hook para TikTok?
 
