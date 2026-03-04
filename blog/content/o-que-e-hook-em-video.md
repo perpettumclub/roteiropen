@@ -1,19 +1,19 @@
 ---
-title: "Hooks Para Vídeos: O Que São e Como Criar Ganchos Que Prendem do Primeiro Segundo"
+title: "Hooks Para Vídeos: O Que São e Como Criar Ganchos Que Prendem no Primeiro Segundo"
 description: "Descubra o que são hooks para vídeos, por que eles decidem tudo no Reels e TikTok e como criar ganchos irresistíveis com exemplos reais de Hormozi, Gary Vee e Matt Gray."
 date: "2026-03-04"
 readingTime: "12 min"
 thumbnail: "/blog/hook-em-video-retencao-algoritmo.png"
-keywords: "o que é hook em vídeo, hook para reels, hook para tiktok, como criar hook, tipos de hook, hook de vídeo exemplos, gancho para vídeo, retenção de vídeo"
+keywords: "o que é um hook para vídeo, hook para reels, hook para tiktok, como criar hook, tipos de hook, hook de vídeo exemplos, gancho para vídeo, retenção de vídeo"
 ---
 
 Você grava um vídeo incrível. A informação é boa, a edição está caprichada, o áudio está limpo.
 
 E aí ele não vai a lugar nenhum.
 
-Na maioria dos casos, o problema não está no conteúdo. Está no que vem antes dele: o **hook em vídeo**.
+Na maioria dos casos, o problema não está no conteúdo. Está no que vem antes dele: o **gancho**.
 
-Neste guia você vai entender o que são hooks para vídeos, por que eles são o elemento mais decisivo de qualquer Reel ou TikTok — e como criar ganchos que param o scroll e prendem o espectador do primeiro ao último segundo.
+Neste guia você vai entender o que são hooks para vídeos, por que eles são o elemento mais decisivo de qualquer Reel ou TikTok — e como criar ganchos que param o scroll e prendem o espectador **no primeiro ao último segundo**.
 
 ![Algoritmo de retenção: usuários passam 1,7 segundo por conteúdo antes de rolar o feed](/blog/hook-em-video-retencao-algoritmo.png)
 
@@ -24,7 +24,7 @@ Neste guia você vai entender o que são hooks para vídeos, por que eles são o
 - [O que são hooks para vídeos](#o-que-e-hook)
 - [Por que os primeiros 3 segundos decidem tudo](#por-que-decide-tudo)
 - [Gancho bom vs. gancho ruim: a diferença na prática](#bom-vs-ruim)
-- [Os 3 tipos de hook em vídeo](#3-tipos-de-hook)
+- [Os 3 tipos de gancho para vídeo](#3-tipos-de-hook)
 - [Os 8 formatos que mais convertem](#8-formatos)
 - [O que os maiores criadores do mundo fazem de diferente](#maiores-criadores)
 - [Como criar um hook do zero em 5 minutos](#como-criar)
@@ -142,11 +142,11 @@ Nada ensina mais rápido que ver o contraste lado a lado.
 
 ---
 
-## Os 3 Tipos de Hook em Vídeo {#3-tipos-de-hook}
+## Os 3 Tipos de Gancho Para Vídeo {#3-tipos-de-hook}
 
 Existem três categorias principais. Os vídeos de maior retenção costumam combinar dois ou três ao mesmo tempo.
 
-![Os três tipos de hook em vídeo: fala, visual e texto sobreposto combinados para máxima retenção](/blog/hook-video-3-tipos-fala-visual-texto.png)
+![Os três tipos de gancho para vídeo: fala, visual e legenda sobrepostos para máxima retenção](/blog/hook-video-3-tipos-fala-visual-texto.png)
 
 ### Gancho de Fala
 
@@ -388,7 +388,7 @@ Desmontando: número que para o scroll + três objeções derrubadas em sequênc
 
 Processo prático. Funciona para qualquer tema, qualquer nicho.
 
-![Processo de cinco passos para criar um hook em vídeo do zero](/blog/hook-como-criar-5-passos.png)
+![Processo de cinco passos para criar um gancho para vídeo do zero](/blog/hook-como-criar-5-passos.png)
 
 ### Passo 1: Identifique o ouro do seu vídeo
 
