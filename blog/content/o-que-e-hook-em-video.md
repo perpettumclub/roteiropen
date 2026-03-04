@@ -162,7 +162,7 @@ Um gancho de fala eficaz começa no meio da história, faz uma afirmação forte
 
 Pode ser o resultado final de um processo, uma cena de impacto, um antes-e-depois ou qualquer elemento que crie curiosidade imediata.
 
-O gancho visual é **obrigatório** — não opcional. Mais de 50% dos espectadores no TikTok e Reels assistem sem som. Se o visual não prende sozinho, você já perdeu metade da audiência antes de abrir a boca.
+O gancho visual é **obrigatório** — não opcional. Mais de 50% dos espectadores no [TikTok](https://www.tiktok.com) e [Reels](https://www.instagram.com/reels/) assistem sem som. Se o visual não prende sozinho, você já perdeu metade da audiência antes de abrir a boca.
 
 ### Gancho de Legenda Sobreposta
 
@@ -170,7 +170,7 @@ O gancho visual é **obrigatório** — não opcional. Mais de 50% dos espectado
 
 Funciona como manchete de jornal: curta, direta, cria urgência ou curiosidade suficiente para o espectador ligar o som — ou continuar assistindo sem ele.
 
-Alex Hormozi é o criador mais estudado nessa técnica. Ele usa legendas em maiúsculas, palavras-chave em cores contrastantes, sincronizadas com a fala — tudo para não perder quem assiste sem áudio.
+[Alex Hormozi](https://www.instagram.com/AlexHormozi/) é o criador mais estudado nessa técnica. Ele usa legendas em maiúsculas, palavras-chave em cores contrastantes, sincronizadas com a fala — tudo para não perder quem assiste sem áudio.
 
 ---
 
@@ -307,7 +307,7 @@ Três criadores. Três estilos completamente diferentes. Um princípio em comum:
 
 ### Alex Hormozi — A Fórmula da Especificidade
 
-Hormozi tem mais de 5 milhões de seguidores no Instagram, com Reels que consistentemente passam de 1 milhão de visualizações. O padrão dos ganchos dele segue uma lógica clara.
+[Alex Hormozi](https://www.instagram.com/AlexHormozi/) tem mais de 5 milhões de seguidores no Instagram, com Reels que consistentemente passam de 1 milhão de visualizações. O padrão dos ganchos dele segue uma lógica clara.
 
 **Regra 1 — Fala + legenda sobreposta simultâneos.** Ele nunca depende só da voz. Cada palavra aparece como legenda sincronizada — maiúsculas, palavras-chave em cores contrastantes.
 
@@ -324,7 +324,7 @@ Desmontando: promessa direta + número específico (3 lições) + custo do conhe
 
 ### Gary Vaynerchuk — A Arte da Provocação Direta
 
-Gary Vee não otimiza ganchos no sentido técnico. Ele *é* o gancho. Mas para quem não o conhece, ele usa padrões específicos:
+[Gary Vaynerchuk](https://www.instagram.com/garyvee/) não otimiza ganchos no sentido técnico. Ele *é* o gancho. Mas para quem não o conhece, ele usa padrões específicos:
 
 **Padrão 1 — Afirmação contra o senso comum:**
 > *"A 'TikTokização' das redes sociais é uma oportunidade enorme para quem está aqui agora."*
@@ -342,7 +342,7 @@ Quem se encaixa, para imediatamente. Quem não se encaixa, fica curioso para sab
 
 ### Matt Gray — Sistema Que Gera Ganchos em Escala
 
-Matt Gray tem quase 1 milhão de seguidores no Instagram e mais de 2,7 milhões combinados. A diferença dele não está em um gancho específico — está no **sistema** que gera ganchos consistentemente.
+[Matt Gray](https://www.instagram.com/matthgray/) tem quase 1 milhão de seguidores no Instagram e mais de 2,7 milhões combinados. A diferença dele não está em um gancho específico — está no **sistema** que gera ganchos consistentemente.
 
 O sistema dele começa com uma ideia crua — geralmente uma frase de abertura forte — e transforma isso em múltiplas peças de conteúdo para diferentes plataformas.
 
@@ -359,7 +359,7 @@ Duas frases. A primeira faz o espectador concordar. A segunda faz ele querer sab
 
 ### Jun Yuh — Engenharia de Conteúdo Aplicada ao Gancho
 
-Jun Yuh tem mais de 5 milhões de seguidores no Instagram e 8 milhões combinados nas plataformas — construídos sem câmera cara, sem estúdio, sendo estudante universitário. Co-fundou o Creator College ensinando criadores a crescer com sistema, não com sorte.
+[Jun Yuh](https://www.instagram.com/jun_yuh/) tem mais de 5 milhões de seguidores no Instagram e 8 milhões combinados nas plataformas — construídos sem câmera cara, sem estúdio, sendo estudante universitário. Co-fundou o Creator College ensinando criadores a crescer com sistema, não com sorte.
 
 **O método Gancho-História-Visuais:**
 
@@ -568,9 +568,9 @@ Os princípios são os mesmos. Mas há diferenças importantes entre as platafor
 
 ![Comparação de ganchos entre Instagram Reels e TikTok: métricas e formatos que funcionam em cada plataforma](/blog/hook-reels-vs-tiktok-diferencas.png)
 
-**Instagram Reels:** o texto sobreposto tem mais peso. O algoritmo prioriza compartilhamentos por mensagem direta. Ganchos que geram a reação *"isso é você"* — e fazem o espectador marcar alguém — performam excepcionalmente bem.
+**[Instagram Reels](https://www.instagram.com/reels/):** o texto sobreposto tem mais peso. O algoritmo prioriza compartilhamentos por mensagem direta. Ganchos que geram a reação *"isso é você"* — e fazem o espectador marcar alguém — performam excepcionalmente bem.
 
-**TikTok:** o algoritmo distribui para novos públicos com mais agressividade. Ganchos de curiosidade e polêmica tendem a performar melhor porque o TikTok expõe seu vídeo para quem nunca te viu.
+**[TikTok](https://www.tiktok.com):** o algoritmo distribui para novos públicos com mais agressividade. Ganchos de curiosidade e polêmica tendem a performar melhor porque o TikTok expõe seu vídeo para quem nunca te viu.
 
 **O que funciona nas duas:** gancho de identificação. Quando a dor é específica o suficiente, ela para o scroll em qualquer plataforma, em qualquer tamanho de conta.
 
