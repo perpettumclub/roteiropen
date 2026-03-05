@@ -71,7 +71,7 @@ export default async function ArticlePage({ params }: Props) {
                     Grave sua ideia por 30 segundos. Hooky transforma em um roteiro viral pronto para gravar.
                 </p>
                 <a
-                    href="https://hookyai.com.br"
+                    href="/"
                     style={{
                         display: 'inline-block',
                         background: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%)',

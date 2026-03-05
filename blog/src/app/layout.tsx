@@ -1,21 +1,83 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import Script from 'next/script'
 
 export const metadata: Metadata = {
-  title: {
-    default: 'Blog — Hooky AI | Roteiros Virais com IA',
-    template: '%s | Blog Hooky AI',
-  },
-  description: 'Aprenda a criar roteiros virais para TikTok, Reels e Shorts. Estratégias, templates e dicas de criadores que faturam com conteúdo.',
+  title: 'Hooky AI — Roteiros Virais com IA para TikTok e Reels',
+  description: 'Hooky transforma suas ideias bagunçadas em roteiros virais estruturados em segundos. Grave 30 segundos de voz e nossa IA entrega um roteiro pronto para TikTok, Reels e Shorts. Usado por +500 criadores.',
+  keywords: 'roteiro viral, IA para criadores, roteiro para reels, roteiro para tiktok, roteiro para shorts, inteligência artificial criadores de conteúdo, hooky ai',
+  authors: [{ name: 'Hooky AI' }],
+  robots: 'index, follow',
   metadataBase: new URL('https://hookyai.com.br'),
-  icons: {
-    icon: '/blog/favicon.png',
-    apple: '/blog/favicon.png',
+  alternates: {
+    canonical: 'https://hookyai.com.br',
+    languages: { 'pt-BR': 'https://hookyai.com.br' },
   },
+  icons: {
+    icon: '/hooky-ai.png',
+    apple: '/hooky-ai.png',
+  },
+  manifest: '/manifest.json',
   openGraph: {
-    siteName: 'Hooky AI Blog',
-    locale: 'pt_BR',
     type: 'website',
+    siteName: 'Hooky AI',
+    title: 'Hooky AI — Roteiros Virais com IA para TikTok e Reels',
+    description: 'Grave uma ideia bagunçada por 30 segundos. A Hooky transforma em um roteiro viral estruturado para TikTok, Reels e Shorts. Experimente agora.',
+    url: 'https://hookyai.com.br',
+    images: [{
+      url: 'https://hookyai.com.br/miniatura_hooky.png',
+      width: 1200,
+      height: 630,
+      alt: 'Hooky AI — Transforme ideias em roteiros virais em segundos',
+    }],
+    locale: 'pt_BR',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@hookyai',
+    title: 'Hooky AI — Roteiros Virais com IA',
+    description: 'Grave 30 segundos de voz. Receba um roteiro viral pronto para TikTok, Reels e Shorts. Usado por +500 criadores.',
+    images: [{
+      url: 'https://hookyai.com.br/miniatura_hooky.png',
+      alt: 'Hooky AI — Transforme ideias em roteiros virais',
+    }],
+  },
+  other: {
+    'theme-color': '#FF6B6B',
+    'mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-status-bar-style': 'black-translucent',
+    'apple-mobile-web-app-title': 'Hooky AI',
+  },
+}
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Hooky AI',
+  url: 'https://hookyai.com.br',
+  logo: 'https://hookyai.com.br/favicon.png',
+  image: 'https://hookyai.com.br/miniatura_hooky.png',
+  description: 'Hooky transforma ideias bagunçadas em roteiros virais estruturados em segundos usando inteligência artificial. Para criadores de conteúdo no TikTok, Reels e YouTube Shorts.',
+  applicationCategory: 'ProductivityApplication',
+  operatingSystem: 'Web, iOS, Android',
+  inLanguage: 'pt-BR',
+  offers: {
+    '@type': 'Offer',
+    price: '67.00',
+    priceCurrency: 'BRL',
+    priceValidUntil: '2026-12-31',
+    availability: 'https://schema.org/InStock',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.9',
+    reviewCount: '500',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Hooky AI',
+    url: 'https://hookyai.com.br',
   },
 }
 
@@ -23,40 +85,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-BR">
       <body>
-        <header style={{
-          borderBottom: '1px solid rgba(255,255,255,0.5)',
-          background: 'rgba(255,255,255,0.7)',
-          backdropFilter: 'blur(16px)',
-          position: 'sticky',
-          top: 0,
-          zIndex: 100,
-        }}>
-          <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 24px' }}>
-            <a href="https://hookyai.com.br" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
-              <span style={{ fontFamily: 'var(--font-display)', fontSize: '28px', color: 'var(--primary)', lineHeight: 1 }}>Hooky</span>
-              <span style={{ fontSize: '13px', color: 'var(--gray)', fontFamily: 'var(--font-body)', fontWeight: 500 }}>Blog</span>
-            </a>
-            <a
-              href="https://hookyai.com.br"
-              style={{
-                background: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%)',
-                color: '#fff',
-                padding: '10px 20px',
-                borderRadius: '100px',
-                fontSize: '14px',
-                fontWeight: 600,
-                fontFamily: 'var(--font-body)',
-                boxShadow: 'var(--shadow-colored)',
-              }}
-            >
-              Criar Roteiro Grátis →
-            </a>
-          </div>
-        </header>
-        <main>{children}</main>
-        <footer style={{ textAlign: 'center', padding: '48px 24px', color: 'var(--gray)', fontSize: '14px', fontFamily: 'var(--font-body)' }}>
-          <p>© 2026 Hooky AI · <a href="https://hookyai.com.br">hookyai.com.br</a></p>
-        </footer>
+        {children}
+        <Script
+          id="schema-org"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </body>
     </html>
   )

@@ -9,7 +9,7 @@ interface Props {
 
 export function ArticleCard({ post }: Props) {
     return (
-        <Link href={`/${post.slug}`} style={{ textDecoration: 'none' }}>
+        <Link href={`/blog/${post.slug}`} style={{ textDecoration: 'none' }}>
             <article
                 className="glass-card"
                 style={{ overflow: 'hidden', cursor: 'pointer', transition: 'transform 0.2s ease, box-shadow 0.2s ease' }}
