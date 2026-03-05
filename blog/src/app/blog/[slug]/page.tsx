@@ -17,17 +17,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     if (!post) return {}
 
     return {
-        title: post.title,
+        title: 'Hooky AI — Roteiros Virais com IA para TikTok e Reels',
         description: post.description,
         openGraph: {
-            title: post.title,
+            title: 'Hooky AI — Roteiros Virais com IA para TikTok e Reels',
             description: post.description,
             url: `https://hookyai.com.br/blog/${slug}`,
             images: [{ url: 'https://hookyai.com.br/miniatura_hooky.png', width: 1200, height: 630 }],
         },
         twitter: {
             card: 'summary_large_image',
-            title: post.title,
+            title: 'Hooky AI — Roteiros Virais com IA para TikTok e Reels',
             description: post.description,
             images: ['https://hookyai.com.br/miniatura_hooky.png'],
         },

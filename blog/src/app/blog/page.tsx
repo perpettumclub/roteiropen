@@ -1,12 +1,6 @@
 import { getAllPosts } from '@/lib/posts'
 import { ArticleCard } from '@/components/ArticleCard'
 import type { Metadata } from 'next'
-
-export const metadata: Metadata = {
-    title: 'Blog — Hooky AI | Roteiros Virais com IA',
-    description: 'Aprenda a criar roteiros virais para TikTok, Reels e Shorts. Estratégias e templates dos maiores criadores.',
-}
-
 export default function BlogPage() {
     const posts = getAllPosts()
 
