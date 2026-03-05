@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Script from 'next/script'
 
+const GA_ID = 'G-NEEY5J0LGF'
+
 export const metadata: Metadata = {
   title: 'Hooky AI — Roteiros Virais com IA para TikTok e Reels',
   description: 'Hooky transforma suas ideias bagunçadas em roteiros virais estruturados em segundos. Grave 30 segundos de voz e nossa IA entrega um roteiro pronto para TikTok, Reels e Shorts. Usado por +500 criadores.',
@@ -85,6 +87,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-BR">
       <body>
+        {/* Google Analytics */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_ID}');
+          `}
+        </Script>
         {children}
         <Script
           id="schema-org"
