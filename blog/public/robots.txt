@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hookyai.com.br/sitemap.xml
