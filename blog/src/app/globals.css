@@ -21,7 +21,9 @@
   --shadow-colored: 0 20px 40px -10px rgba(255, 107, 107, 0.3);
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -35,7 +37,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-display);
   font-weight: 400;
   letter-spacing: -0.02em;
@@ -75,4 +82,14 @@ img {
   max-width: 800px;
   margin: 0 auto;
   padding: 0 24px;
+}
+
+.why-us-container {
+  padding: 4rem 2rem;
+}
+
+@media (max-width: 768px) {
+  .why-us-container {
+    padding: 4rem 1rem !important;
+  }
 }

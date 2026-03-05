@@ -326,10 +326,10 @@ export default function LandingPage() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
+        className="why-us-container"
         style={{
           background: 'var(--dark)',
           color: 'white',
-          padding: '4rem 2rem',
           borderRadius: '32px',
           boxShadow: 'var(--shadow-lg)'
         }}
