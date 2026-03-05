@@ -74,7 +74,7 @@ export default function LandingPage() {
   ]
 
   return (
-    <div className="landing-view" style={{ width: '100%', maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
+    <div className="landing-view" style={{ width: '100%', maxWidth: '1000px', margin: '0 auto', textAlign: 'center', padding: '0 1rem' }}>
 
       {/* LOGIN BUTTON - Top Right */}
       <motion.button
