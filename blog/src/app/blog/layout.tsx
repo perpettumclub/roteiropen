@@ -1,12 +1,5 @@
 import type { Metadata } from 'next'
 
-export const metadata: Metadata = {
-    title: {
-        default: 'Blog — Hooky AI | Roteiros Virais com IA',
-        template: '%s | Blog Hooky AI',
-    },
-    description: 'Aprenda a criar roteiros virais para TikTok, Reels e Shorts. Estratégias, templates e dicas de criadores que faturam com conteúdo.',
-}
 
 export default function BlogLayout({ children }: { children: React.ReactNode }) {
     return (
