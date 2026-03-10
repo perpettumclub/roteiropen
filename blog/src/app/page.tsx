@@ -4,6 +4,10 @@ import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Mic, Sparkles, Share2, TrendingUp, Zap, Brain, Users, LogIn } from 'lucide-react'
 import { useGlobalStats } from '@/hooks/useGlobalStats'
+import '@vidstack/react/player/styles/default/theme.css'
+import '@vidstack/react/player/styles/default/layouts/video.css'
+import { MediaPlayer, MediaProvider } from '@vidstack/react'
+import { defaultLayoutIcons, DefaultVideoLayout } from '@vidstack/react/player/layouts/default'
 
 const useAnimatedCounter = (target: number, duration: number = 2000) => {
   const [count, setCount] = useState(0)
@@ -302,18 +306,19 @@ export default function LandingPage() {
           aspectRatio: '16/9',
           position: 'relative',
           border: '8px solid rgba(255, 255, 255, 0.5)',
-        }}>
-          <video
-            width="100%"
-            height="100%"
-            controls
+          '--video-brand': 'var(--primary)'
+        } as React.CSSProperties}>
+          <MediaPlayer
+            title="Veja o Hooky em Ação"
+            src="https://seu-link-de-video-aqui.mp4"
             poster="/miniatura_hooky.png"
-            style={{ objectFit: 'cover', display: 'block' }}
+            playsInline
+            crossOrigin
+            style={{ width: '100%', height: '100%', aspectRatio: '16/9' }}
           >
-            {/* 👇 Substitua esse link pelo URL real do seu vídeo de vendas (MP4) na nuvem 👇 */}
-            <source src="https://seu-link-de-video-aqui.mp4" type="video/mp4" />
-            Seu navegador não suporta vídeos HTML5.
-          </video>
+            <MediaProvider />
+            <DefaultVideoLayout icons={defaultLayoutIcons} />
+          </MediaPlayer>
         </div>
       </motion.div>
 

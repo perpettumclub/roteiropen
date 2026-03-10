@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.98.0",
+    "@vidstack/react": "^0.6.15",
     "framer-motion": "^12.35.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.577.0",
