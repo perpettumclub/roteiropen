@@ -1,0 +1,27 @@
+# Projeto: Lívia (Smart Sites SaaS)
+
+A Lívia é uma plataforma de "Agentes de Voz" para pequenas empresas. O modelo de negócio é: **Site Premium (Setup) + Agente Inteligente (Recorrência de R$ 295/mês)**.
+
+## 1. O Fluxo de Conversão (User Experience)
+1.  **Site do Cliente**: Um site lindo com um botão de destaque: "Falar com Orçamento (Voz)".
+2.  **Redirecionamento**: O link leva para `livia.com.br/@nome-da-empresa`.
+3.  **Ambiente da Lívia**: Uma página ultra-focada, minimalista, onde a IA (Lívia) interage por áudio/voz com o lead.
+4.  **Entrega**: A IA qualifica o lead e envia o resumo + anexos direto para o WhatsApp do empresário.
+
+## 2. Diferenciais Competitivos
+*   **Velocidade**: Sem preencher formulários chatos. O lead fala o que quer.
+*   **Qualificação**: A IA separa "curiosos" de "compradores" antes de chegar no WhatsApp do dono.
+*   **Setup Rápido**: O empresário não precisa configurar fluxos complexos, apenas o destino do WhatsApp.
+
+## 3. Estrutura Técnica (SaaS Multi-tenant)
+*   **Dynamic Routing**: `/app/[username]/page.tsx` para renderizar o agente específico de cada empresa.
+*   **Base de Dados (Supabase)**: Tabela de `tenants` (configurações da empresa, prompts, whatsapp_destino) e `leads` (áudios, transcrições).
+*   **Voz & IA**:
+    *   Transcrição: OpenAI Whisper.
+    *   Prompt Engineering: Instruções específicas por nicho (Construção, Saúde, etc).
+
+## 4. Próximos Passos (MVP)
+1.  [ ] **Protótipo da Página do Agente**: Criar o layout da `/app/[username]` (Agente Lívia).
+2.  [ ] **Lógica de Conexão**: Criar o hook que busca as configs da empresa pelo `@username`.
+3.  [ ] **Integração de Áudio**: Implementar gravador de voz e envio para API de IA.
+&ec=GAZAGQ)

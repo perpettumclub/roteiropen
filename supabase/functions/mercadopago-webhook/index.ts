@@ -20,16 +20,67 @@ Deno.serve(async (req) => {
     }
 
     try {
-        // Initialize Supabase Admin
+        // Parse Webhook Header para validação de assinatura
+        const signature = req.headers.get('x-signature');
+        const requestId = req.headers.get('x-request-id');
+        const mpSecret = Deno.env.get('MP_WEBHOOK_SECRET');
+
+        // Parse da URL e parametros padrão
+        const url = new URL(req.url);
+        const topic = url.searchParams.get('topic') || url.searchParams.get('type');
+        const id = url.searchParams.get('id') || url.searchParams.get('data.id');
+
+        // Validação estrita de assinatura (Spoofing Protection)
+        if (mpSecret && signature && id) {
+            // x-signature tem o formato: ts=123456,v1=abcdefg
+            const tsMatch = signature.match(/ts=([^,]+)/);
+            const v1Match = signature.match(/v1=([^,]+)/);
+
+            if (tsMatch && v1Match) {
+                const ts = tsMatch[1];
+                const receivedHash = v1Match[1];
+
+                const manifest = `id:${id};request-id:${requestId};ts:${ts};`;
+
+                // Usando Deno.crypto para criar HMAC SHA256
+                const encoder = new TextEncoder();
+                const key = await crypto.subtle.importKey(
+                    "raw",
+                    encoder.encode(mpSecret),
+                    { name: "HMAC", hash: "SHA-256" },
+                    false,
+                    ["sign"]
+                );
+
+                const signatureBuffer = await crypto.subtle.sign(
+                    "HMAC",
+                    key,
+                    encoder.encode(manifest)
+                );
+
+                // Convert buffer to hex string manually
+                const hashArray = Array.from(new Uint8Array(signatureBuffer));
+                const computedHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+                if (computedHash !== receivedHash) {
+                    console.error('🚨 Invalid Webhook Signature detected. Possible spoofing attack.');
+                    return new Response(JSON.stringify({ error: 'Invalid signature' }), {
+                        status: 401,
+                        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+                    });
+                }
+            } else {
+                console.warn('⚠️ Webhook missing required signature parts.');
+            }
+        } else if (!signature && Deno.env.get('DENO_ENV') !== 'development') {
+            console.warn('⚠️ Webhook received without x-signature in production-like environment.');
+        }
+
+        // Initialize Supabase Admin AFTER validation
         const supabaseAdmin = createClient(
             Deno.env.get('SUPABASE_URL') ?? '',
             Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
         )
-
-        // Parse Webhook
-        const url = new URL(req.url);
-        const topic = url.searchParams.get('topic') || url.searchParams.get('type');
-        const id = url.searchParams.get('id') || url.searchParams.get('data.id');
 
         // Se veio JSON no body
         let payload: any = {};
@@ -56,7 +107,7 @@ Deno.serve(async (req) => {
 
         return new Response(JSON.stringify({ message: 'Ignored' }), { status: 200 });
 
-    } catch (error) {
+    } catch (error: any) {
         console.error('❌ Webhook Error:', error);
         return new Response(JSON.stringify({ error: error.message }), {
             headers: { ...corsHeaders, 'Content-Type': 'application/json' },
