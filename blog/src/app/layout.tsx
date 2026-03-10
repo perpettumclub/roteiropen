@@ -16,8 +16,8 @@ export const metadata: Metadata = {
     languages: { 'pt-BR': 'https://hookyai.com.br' },
   },
   icons: {
-    icon: '/hooky-ai.png',
-    apple: '/hooky-ai.png',
+    icon: '/favicon.png',
+    apple: '/favicon.png',
   },
   manifest: '/manifest.json',
   openGraph: {
