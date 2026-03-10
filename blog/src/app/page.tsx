@@ -272,6 +272,51 @@ export default function LandingPage() {
         </motion.div>
       </motion.div>
 
+      {/* DEMO VIDEO SECTION */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+        style={{
+          width: '100%',
+          maxWidth: '800px',
+          margin: '0 auto 6rem auto',
+          textAlign: 'center'
+        }}
+      >
+        <h2 style={{
+          fontSize: '2.5rem',
+          marginBottom: '2rem',
+          fontFamily: 'var(--font-display)',
+          color: 'var(--dark)'
+        }}>
+          Veja o Hooky em ação
+        </h2>
+
+        <div style={{
+          borderRadius: '24px',
+          overflow: 'hidden',
+          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+          background: '#000',
+          aspectRatio: '16/9',
+          position: 'relative',
+          border: '8px solid rgba(255, 255, 255, 0.5)',
+        }}>
+          <video
+            width="100%"
+            height="100%"
+            controls
+            poster="/miniatura_hooky.png"
+            style={{ objectFit: 'cover', display: 'block' }}
+          >
+            {/* 👇 Substitua esse link pelo URL real do seu vídeo de vendas (MP4) na nuvem 👇 */}
+            <source src="https://seu-link-de-video-aqui.mp4" type="video/mp4" />
+            Seu navegador não suporta vídeos HTML5.
+          </video>
+        </div>
+      </motion.div>
+
       {/* HOW IT WORKS */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
